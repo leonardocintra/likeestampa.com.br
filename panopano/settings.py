@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-_&%r6!rao1dl+&wkye8f9bu#mc7gr#^$bn!6^@_5oiurzgkw1j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['panopano-prod.herokuapp.com', 'panopano-stage.herokuapp.com', 'panopano.com.br']
 
 
 # Application definition
