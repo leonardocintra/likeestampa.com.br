@@ -1,0 +1,1 @@
+web: gunicorn panopano.wsgi --log-file -
