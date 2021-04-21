@@ -30,9 +30,8 @@
             </a>
 
             <ul class="nav nav-pills">
-                <li class="nav-item"><a href="#" class="nav-link active">Home</a></li>
+                <li class="nav-item"><a href="/" class="nav-link active">Home</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">Novidades</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Preços</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">Quem somos</a></li>
             </ul>
         </header>
@@ -41,7 +40,7 @@
             <div class="col-lg-3">
                 <div class="list-group">
                     {% for categoria in subcategorias|dictsort:"nome" %}
-                        <a href="#" class="list-group-item"><i class="fas fa-{{ categoria.icone_fontawesome }}"></i> {{ categoria.nome }}</a>
+                        <a href="{% url 'catalogo:lista_por_subcategoria' categoria.slug %}" class="list-group-item"><i class="fas fa-{{ categoria.icone_fontawesome }}"></i> {{ categoria.nome }}</a>
                     {% empty %}
                         <h3>Nenhuma categoria cadastrada</h3>
                     {% endfor %}
