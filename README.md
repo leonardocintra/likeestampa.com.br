@@ -1,5 +1,5 @@
-# PanoPano - Store
-Pano Pano - Store T-Shirts
+# LikeEstampa - Store
+Like Estampa - Store T-Shirts
 
 ## Historia
 ### Fundado em 20/04/2021

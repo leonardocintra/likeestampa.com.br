@@ -1,6 +1,6 @@
 {
     "name": "likeestampa",
-    "description": "PanoPano - Web Store",
+    "description": "LikeEstampa - Web Store",
     "image": "heroku/python",
     "repository": "https://github.com/leonardocintra/likeestampa",
     "keywords": [
