@@ -40,13 +40,13 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="list-group">
-                    <a href="#" class="list-group-item">Linguagem de programação</a>
-                    <a href="#" class="list-group-item">Bandas / Cantores</a>
-                    <a href="#" class="list-group-item">Filmes</a>
-                    <a href="#" class="list-group-item">Marcas</a>
-                    <a href="#" class="list-group-item">Times de Futebol</a>
+                    {% for categoria in subcategorias|dictsort:"nome" %}
+                        <a href="#" class="list-group-item"><i class="fas fa-{{ categoria.icone_fontawesome }}"></i> {{ categoria.nome }}</a>
+                    {% empty %}
+                        <h3>Nenhuma categoria cadastrada</h3>
+                    {% endfor %}
                 </div>
-
+                <br />
             </div>
 
             {% block content %}
@@ -56,7 +56,9 @@
 
     </div>
 
-    <footer class="text-center" style="padding-bottom: 20px;">
-        <label>2021 - 2021 | Desenvolvido por Leonardo Nascimento Cintra</label>
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Like Estampa 2021</p>
+        </div>
     </footer>
 </body>
