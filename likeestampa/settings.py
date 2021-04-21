@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-_&%r6!rao1dl+&wkye8f9bu#mc7gr#^$bn!6^@_5oiurzgkw1j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['likeestampa-prod.herokuapp.com', 'likeestampa-stage.herokuapp.com', 'likeestampa.com.br', '127.0.0.1', 'www.likeestampa.com.br']
+ALLOWED_HOSTS = ['likeestampa.herokuapp.com', 'likeestampa-stage.herokuapp.com', 'likeestampa.com.br', '127.0.0.1', 'www.likeestampa.com.br']
 
 
 # Application definition
