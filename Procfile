@@ -1,1 +1,1 @@
-web: gunicorn panopano.wsgi --log-file -
+web: gunicorn likeestampa.wsgi --log-file -
