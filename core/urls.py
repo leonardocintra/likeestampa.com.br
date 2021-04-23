@@ -1,9 +1,9 @@
 
 from django.urls import path
-from . import views
+from catalogo import views
 
 app_name = 'core'
 
 urlpatterns = [
-    path('', views.index.as_view(), name='index'),
+    path('', views.product_list.as_view(), name='index'),
 ]

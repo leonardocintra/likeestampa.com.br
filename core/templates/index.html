@@ -2,8 +2,6 @@
 
 {% block content %}
 
-<div class="col-lg-9">
-
     <div class="row">
         <h2>Mostrando categoria: <span class="badge bg-info">Todas</span></h2>
         <br />
@@ -16,7 +14,7 @@
                         {{ prod.nome }}
                     </h5>
                     <h5 class="text-success"">R$ 24.99</h5>
-                    <span class="badge bg-info">{{ prod.subcategoria }}</span>
+                    <span class="badge bg-danger">#{{ prod.id }}</span> <span class="badge bg-info">{{ prod.subcategoria }}</span>
                     <p class="card-text">{{ prod.descricao }}</p>
                 </div>
                 <div class="card-footer">
@@ -26,6 +24,5 @@
         </div>
         {% endfor %}        
     </div>
-</div>
 
 {% endblock %}
