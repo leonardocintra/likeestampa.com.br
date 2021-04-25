@@ -53,6 +53,30 @@
                     {% endfor %}
                 </div>
                 <br />
+                <div>
+                    <!-- Messenger Plugin de bate-papo Code -->
+                    <div id="fb-root"></div>
+                    <script>
+                        window.fbAsyncInit = function () {
+                            FB.init({
+                                xfbml: true,
+                                version: 'v10.0'
+                            });
+                        };
+
+                        (function (d, s, id) {
+                            var js, fjs = d.getElementsByTagName(s)[0];
+                            if (d.getElementById(id)) return;
+                            js = d.createElement(s); js.id = id;
+                            js.src = 'https://connect.facebook.net/pt_BR/sdk/xfbml.customerchat.js';
+                            fjs.parentNode.insertBefore(js, fjs);
+                        }(document, 'script', 'facebook-jssdk'));
+                    </script>
+
+                    <!-- Your Plugin de bate-papo code -->
+                    <div class="fb-customerchat" attribution="setup_tool" page_id="106768004885009">
+                    </div>
+                </div>
             </div>
             <div class="col-lg-9">
 
@@ -74,7 +98,8 @@
             <div class="col-12 col-md">
                 <h5><i class="fas fa-tshirt"></i> Like Estampa</h5>
                 <small class="d-block mb-1 text-muted">&copy; 2021–2021</small>
-                <small class="d-block mb-3 text-success">By <a href="https://twitter.com/leonardoncintra">Leonardo Cintra</a></small>
+                <small class="d-block mb-3 text-success">By <a href="https://twitter.com/leonardoncintra">Leonardo
+                        Cintra</a></small>
             </div>
             <div class="col-6 col-md">
                 <h5><i class="fas fa-star"></i> Vem aí</h5>
@@ -88,8 +113,10 @@
             <div class="col-6 col-md">
                 <h5><i class="fas fa-thumbs-up"></i> Redes Sociais</h5>
                 <ul class="list-unstyled">
-                    <li><a class="btn btn-primary" href="https://www.facebook.com/likeestampa"> <i class="fab fa-facebook"></i> Facebook</a></li>
-                    <li><a class="btn btn-danger" href="https://www.instagram.com/likeestampa/"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a class="btn btn-primary" href="https://www.facebook.com/likeestampa"> <i
+                                class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a class="btn btn-danger" href="https://www.instagram.com/likeestampa/"><i
+                                class="fab fa-instagram"></i> Instagram</a></li>
                 </ul>
             </div>
             <div class="col-6 col-md">
