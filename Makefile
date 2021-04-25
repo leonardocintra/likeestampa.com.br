@@ -10,7 +10,7 @@ shell:
 deploy-prod:
 	@git push heroku main
 	@git push origin main
-	@heroku run python manage.py migrate
+	@heroku run python manage.py migrate -- remote prod
 
 deploy-stage:
 	@git push stage main
