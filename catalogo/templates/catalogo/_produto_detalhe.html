@@ -1,0 +1,28 @@
+<div class="col-lg-4 col-md-6 mb-4">
+    <div class="card h-100">
+        {% for img in produto_imagens %}
+            {% if img.produto.id == prod.id %}
+                {% if forloop.first %}
+                    <a href="#"><img class="card-img-top" src="{{ img.imagem.url }}" alt="{{ img.produto.nome }}"></a>
+                {% endif %}
+            {% else %}
+                {% if forloop.first %}
+                    <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                {% endif %}
+            {% endif %}
+        {% empty %}
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+        {% endfor %}
+        <div class="card-body">
+            <h5 class="card-title text-center">
+                {{ prod.nome }}
+            </h5>
+            <h5 class="text-success"">R$ 35.00</h5>
+            <span class=" badge bg-danger">#{{ prod.id }}</span> <span class="badge bg-info">{{ prod.subcategoria }}</span>
+                <p class="card-text">{{ prod.descricao }}</p>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+        </div>
+    </div>
+</div>

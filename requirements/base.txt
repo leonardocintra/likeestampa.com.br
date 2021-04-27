@@ -1,3 +1,4 @@
+cloudinary==1.25.0
 dj-database-url==0.5.0
 dj-static==0.0.6
 django==3.2

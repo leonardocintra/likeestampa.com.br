@@ -1,6 +1,6 @@
 from django.views.generic.list import ListView
 from django.shortcuts import get_object_or_404
-from .models import Produto, SubCategoria
+from .models import Produto, SubCategoria, ProdutoImagem
 
 
 class ProdutosListView(ListView):
@@ -11,6 +11,7 @@ class ProdutosListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['subcategorias'] = SubCategoria.objects.all()
+        context['produto_imagens'] = ProdutoImagem.objects.all()
         return context
 
 
@@ -25,6 +26,7 @@ class SubCategoriaListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(SubCategoriaListView, self).get_context_data(**kwargs)
         context['subcategorias'] = SubCategoria.objects.all()
+        context['produto_imagens'] = ProdutoImagem.objects.all()
         context['sub_categoria_selecionada'] = get_object_or_404(
             SubCategoria, slug=self.kwargs['slug'])
         return context

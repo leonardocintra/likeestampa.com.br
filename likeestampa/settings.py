@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'cloudinary',
+
     'core',
     'catalogo',
 ]
@@ -132,3 +134,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# CLOUDINARY CONFIGS
+CLOUDINARY = {
+  'cloud_name': 'leonardocintra',  
+  'api_key': '182946961533113',  
+  'api_secret': 'LAIVTLNHtG5x-TTdUmHgaE3CnsM',  
+}
+
