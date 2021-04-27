@@ -4,8 +4,9 @@ from django.urls import reverse
 
 class Categoria(models.Model):
     """ Ex: camiseta, caneca, bones """
-    nome = models.CharField(max_length=100)
-    slug = models.SlugField('Identificador', max_length=100)
+    nome = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField('Identificador', max_length=100, unique=True)
+    ativo = models.BooleanField(default=True)
     created_at = models.DateField('Criado em', auto_now_add=True)
     updated_at = models.DateField('Modificado em', auto_now=True)
 
@@ -24,9 +25,10 @@ class Categoria(models.Model):
 
 class SubCategoria(models.Model):
     """Ex: camiseta cantor, camiseta carros, caneca programação, etc"""
-    nome = models.CharField(max_length=100)
-    slug = models.SlugField('Identificador', max_length=100)
+    nome = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField('Identificador', max_length=100, unique=True)
     icone_fontawesome = models.CharField(max_length=100, null=True)
+    ativo = models.BooleanField(default=False)
     created_at = models.DateField('Criado em', auto_now_add=True)
     updated_at = models.DateField('Modificado em', auto_now=True)
 
@@ -45,9 +47,10 @@ class SubCategoria(models.Model):
 
 class Produto(models.Model):
     """Ex: camieta sao paulo, camiseta python, etc"""
-    nome = models.CharField(max_length=100)
+    nome = models.CharField(max_length=100, unique=True)
     descricao = models.TextField('Descrição', blank=True)
-    slug = models.SlugField('Identificador', max_length=100)
+    slug = models.SlugField('Identificador', max_length=100, unique=True)
+    ativo = models.BooleanField(default=False)
     subcategoria = models.ForeignKey(SubCategoria, on_delete=models.CASCADE)
     created_at = models.DateField('Criado em', auto_now_add=True)
     updated_at = models.DateField('Modificado em', auto_now=True)
