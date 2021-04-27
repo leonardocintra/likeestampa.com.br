@@ -66,3 +66,19 @@ class Produto(models.Model):
 
     def __str__(self):
         return self.nome
+
+
+# class ProdutoImagem(models.Model):
+#     produto = models.ForeignKey(Produto, on_delete=models.CASCADE, related_name='images')
+#     slug = models.SlugField('Identificador', max_length=100, unique=True)
+#     created_at = models.DateField('Criado em', auto_now_add=True)
+#     updated_at = models.DateField('Modificado em', auto_now=True)
+    
+#     class Meta:
+#         db_table = 'produto_imagem'
+#         verbose_name_plural = 'produto_imagens'
+#         verbose_name = 'produto_imagem'
+#         ordering = ('-created_at',)
+
+#     def __str__(self):
+#         return self.nome
