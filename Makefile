@@ -16,6 +16,13 @@ deploy-stage:
 	@git push stage main
 	@heroku run python manage.py migrate --remote stage
 
+deploy-all:
+	@git push stage main
+	@heroku run python manage.py migrate --remote stage
+	@git push prod main
+	@heroku run python manage.py migrate --remote prod
+	@git push origin main
+
 migrate:
 	@python manage.py makemigrations
 	@python manage.py migrate
