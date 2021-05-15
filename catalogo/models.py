@@ -53,6 +53,7 @@ class Produto(models.Model):
     slug = models.SlugField('Identificador', max_length=100, unique=True)
     ativo = models.BooleanField(default=False)
     subcategoria = models.ForeignKey(SubCategoria, on_delete=models.CASCADE)
+    imagem_principal = CloudinaryField('Imagem principal', blank=True, null=True)
     created_at = models.DateField('Criado em', auto_now_add=True)
     updated_at = models.DateField('Modificado em', auto_now=True)
 

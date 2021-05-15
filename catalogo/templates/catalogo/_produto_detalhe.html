@@ -1,18 +1,6 @@
 <div class="col-lg-4 col-md-6 mb-4">
     <div class="card h-100">
-        {% for img in produto_imagens %}
-            {% if img.produto.id == prod.id %}
-                {% if forloop.first %}
-                    <a href="#"><img class="card-img-top" src="{{ img.imagem.url }}" alt="{{ img.produto.nome }}"></a>
-                {% endif %}
-            {% else %}
-                {% if forloop.first %}
-                    <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                {% endif %}
-            {% endif %}
-        {% empty %}
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-        {% endfor %}
+        <a href="#"><img class="card-img-top" src="{{ prod.imagem_principal.url }}" alt="{{ prod.nome }}"></a>
         <div class="card-body">
             <h5 class="card-title text-center">
                 {{ prod.nome }}

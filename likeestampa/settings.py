@@ -27,7 +27,8 @@ SECRET_KEY = 'django-insecure-_&%r6!rao1dl+&wkye8f9bu#mc7gr#^$bn!6^@_5oiurzgkw1j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['likeestampa.herokuapp.com', 'likeestampa-test.herokuapp.com', 'likeestampa.com.br', '127.0.0.1', 'www.likeestampa.com.br']
+ALLOWED_HOSTS = ['likeestampa.herokuapp.com', 'likeestampa-test.herokuapp.com',
+                 'likeestampa.com.br', '127.0.0.1', 'www.likeestampa.com.br']
 
 
 # Application definition
@@ -138,8 +139,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CLOUDINARY CONFIGS
 CLOUDINARY = {
-  'cloud_name': 'leonardocintra',  
-  'api_key': '182946961533113',  
-  'api_secret': 'LAIVTLNHtG5x-TTdUmHgaE3CnsM',  
+    'cloud_name': os.environ.get('CLOUDINARY_CLOUD_NAME', 'leonardocintra'),
+    'api_key': os.environ.get('CLOUDINARY_API_KEY', '182946961533113'),
+    'api_secret': os.environ.get('CLOUDINARY_API_SECRET', 'LAIVTLNHtG5x-TTdUmHgaE3CnsM'),
 }
-
