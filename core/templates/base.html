@@ -84,8 +84,8 @@
             </div>
             <div class="col-lg-9">
 
-                <form class="d-flex" style="padding-bottom: 20px;">
-                    <input class="form-control me-2" type="search" placeholder="Pesquisar produto..."
+                <form class="d-flex" style="padding-bottom: 20px;" role="search" action="{% url 'catalogo:product_list' %}">
+                    <input class="form-control me-2" type="search" name="q" placeholder="Pesquisar produto..."
                         aria-label="Search">
                     <button class="btn btn-success" type="submit"><i class="fas fa-tshirt"></i> Pesquisa</button>
                 </form>
