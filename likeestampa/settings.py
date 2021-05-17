@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'cloudinary',
-    'watson',
 
     'core',
     'catalogo',
