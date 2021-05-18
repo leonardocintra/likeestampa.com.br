@@ -10,7 +10,7 @@ class ProdutosListView(ListView):
     def get_queryset(self):
         queryset = Produto.objects.all()
         q = self.request.GET.get('q', '')
-        if q != '':
+        if q:
             queryset = Produto.objects.filter(nome__contains=q)
 
         return queryset
