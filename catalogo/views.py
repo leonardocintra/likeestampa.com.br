@@ -1,7 +1,6 @@
 from django.views.generic.list import ListView
 from django.shortcuts import get_object_or_404
 from .models import Produto, SubCategoria, ProdutoImagem
-from watson import search as watson
 
 
 class ProdutosListView(ListView):
