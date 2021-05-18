@@ -11,7 +11,7 @@ class ProdutosListView(ListView):
         queryset = Produto.objects.all()
         q = self.request.GET.get('q', '')
         if q:
-            queryset = Produto.objects.filter(nome__contains=q)
+            queryset = Produto.objects.filter(nome__icontains=q)
 
         return queryset
 
