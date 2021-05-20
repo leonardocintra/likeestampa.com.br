@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Projeto Like Estampa
+staticfiles/
+
 # C extensions
 *.so
 
