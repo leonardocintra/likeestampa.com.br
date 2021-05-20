@@ -14,7 +14,8 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/heroes/">
 
-    <script data-ad-client="ca-pub-9571667666704538" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script data-ad-client="ca-pub-9571667666704538" async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
 
     <!-- Bootstrap core CSS -->
@@ -41,60 +42,49 @@
 
             <ul class="nav nav-pills">
                 <li class="nav-item"><a href="/" class="nav-link active btn btn-primary">Home</a></li>
-                <li class="nav-item"><a href="#" class="nav-link btn btn-primary">Novidades</a></li>
-                <li class="nav-item"><a href="#" class="nav-link btn btn-primary">Quem somos</a></li>
+                <!-- <li class="nav-item"><a href="#" class="nav-link btn btn-primary">Novidades</a></li> -->
+                <li class="nav-item"><a href="{% url 'core:about' %}" class="nav-link btn btn-primary">Quem somos</a>
+                </li>
             </ul>
         </header>
 
         <div class="row">
             <div class="col-lg-3">
-                <div class="list-group">
-                    {% for categoria in subcategorias %}
-                    <a href="{% url 'catalogo:lista_por_subcategoria' categoria.slug %}" class="list-group-item"><i
-                            class="fas fa-{{ categoria.icone_fontawesome }}"></i> {{ categoria.nome }}</a>
-                    {% empty %}
-                    <h3>Nenhuma categoria cadastrada</h3>
-                    {% endfor %}
-                </div>
-                <br />
-                <div>
-                    <!-- Messenger Plugin de bate-papo Code -->
-                    <div id="fb-root"></div>
-                    <script>
-                        window.fbAsyncInit = function () {
-                            FB.init({
-                                xfbml: true,
-                                version: 'v10.0'
-                            });
-                        };
-
-                        (function (d, s, id) {
-                            var js, fjs = d.getElementsByTagName(s)[0];
-                            if (d.getElementById(id)) return;
-                            js = d.createElement(s); js.id = id;
-                            js.src = 'https://connect.facebook.net/pt_BR/sdk/xfbml.customerchat.js';
-                            fjs.parentNode.insertBefore(js, fjs);
-                        }(document, 'script', 'facebook-jssdk'));
-                    </script>
-
-                    <!-- Your Plugin de bate-papo code -->
-                    <div class="fb-customerchat" attribution="setup_tool" page_id="106768004885009">
-                    </div>
-                </div>
+                {% include 'includes/_categorias.html' %}
             </div>
             <div class="col-lg-9">
-
-                <form class="d-flex" style="padding-bottom: 20px;" role="search" action="{% url 'catalogo:product_list' %}">
-                    <input class="form-control me-2" type="search" name="q" placeholder="Pesquisar produto..."
-                        aria-label="Search">
-                    <button class="btn btn-success" type="submit"><i class="fas fa-tshirt"></i> Pesquisa</button>
-                </form>
+                {% include 'includes/_pesquisa.html' %}
 
                 {% block content %}
                 {% endblock %}
             </div>
         </div>
 
+    </div>
+
+    <div>
+        <!-- Messenger Plugin de bate-papo Code -->
+        <div id="fb-root"></div>
+        <script>
+            window.fbAsyncInit = function () {
+                FB.init({
+                    xfbml: true,
+                    version: 'v10.0'
+                });
+            };
+
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = 'https://connect.facebook.net/pt_BR/sdk/xfbml.customerchat.js';
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
+
+        <!-- Your Plugin de bate-papo code -->
+        <div class="fb-customerchat" attribution="setup_tool" page_id="106768004885009">
+        </div>
     </div>
 
     <footer class="container py-5 text-white">
