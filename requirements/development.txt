@@ -1,3 +1,4 @@
 -r base.txt
 autopep8
 pycodestyle
+rope

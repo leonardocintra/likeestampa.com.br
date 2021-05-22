@@ -35,7 +35,7 @@
 
             <ul class="nav nav-pills">
                 <li class="nav-item"><a href="/" class="nav-link active btn btn-primary">Home</a></li>
-                <!-- <li class="nav-item"><a href="#" class="nav-link btn btn-primary">Novidades</a></li> -->
+                <!-- <li class="nav-item"><a href="#" class="nav-link btn btn-primary">Ultimos lançamentos</a></li> -->
                 <li class="nav-item"><a href="{% url 'core:about' %}" class="nav-link btn btn-primary">Quem somos</a>
                 </li>
             </ul>
@@ -44,6 +44,16 @@
         <div class="row">
             <div class="col-lg-3">
                 {% include 'includes/_categorias.html' %}
+                <br />
+                <form class="input-group mb-3">
+                    <input type="text" name="frete" id="frete" class="form-control" placeholder="Digite seu CEP ..."
+                        aria-label="Digite seu CEP ..." aria-describedby="frete">
+                    <button class="btn btn-primary" type="submit">Aplicar</button>
+                </form>
+
+                {% if frete %}
+                    <h5>Menor preço frete <span class="badge bg-primary">R$ {{ frete }}</span></h5>
+                {% endif %}
             </div>
             <div class="col-lg-9">
                 {% include 'includes/_pesquisa.html' %}

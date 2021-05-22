@@ -6,7 +6,7 @@
     <h2>Mostrando categoria: <span class="badge bg-info">{{ sub_categoria_selecionada }}</span></h2>
     <br />
     {% for prod in object_list %}
-        {% include "catalogo/_produto_detalhe.html" %}
+        {% include "catalogo/_produto_card.html" %}
     {% empty %}
         <h2>Aguarde novidades da categoria!</h2>
     {% endfor %}

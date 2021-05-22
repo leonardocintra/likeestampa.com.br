@@ -39,9 +39,6 @@ class SubCategoria(models.Model):
         verbose_name = 'subcategoria'
         ordering = ('nome',)
 
-    def get_absolute_url(self):
-        return reverse('catalogo:subcategoria', kwargs={'slug': self.slug})
-
     def __str__(self):
         return self.nome
 
@@ -62,9 +59,6 @@ class Produto(models.Model):
         verbose_name_plural = 'produtos'
         verbose_name = 'produto'
         ordering = ('-created_at',)
-
-    def get_absolute_url(self):
-        return reverse('catalogo:produto', kwargs={'slug': self.slug})
 
     def __str__(self):
         return self.nome

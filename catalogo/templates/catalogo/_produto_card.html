@@ -6,11 +6,15 @@
                 {{ prod.nome }}
             </h5>
             <h5 class="text-success"">R$ 35.00</h5>
-            <span class=" badge bg-danger">#{{ prod.id }}</span> <span class="badge bg-info">{{ prod.subcategoria }}</span>
+            <span class=" badge bg-danger">#{{ prod.id }}</span>
+                <span class="badge bg-info">{{ prod.subcategoria }}</span>
                 <p class="card-text">{{ prod.descricao }}</p>
         </div>
         <div class="card-footer">
-            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+            <button type="button" class="btn btn-success">
+                Comprar
+            </button>
+            <a href="{% url 'catalogo:produto' prod.slug %}" class="btn btn-warning">+ Detalhes</a>
         </div>
     </div>
 </div>
