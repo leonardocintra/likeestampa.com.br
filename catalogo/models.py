@@ -37,7 +37,7 @@ class SubCategoria(models.Model):
         db_table = 'subcategoria'
         verbose_name_plural = 'subcategorias'
         verbose_name = 'subcategoria'
-        ordering = ('-created_at',)
+        ordering = ('nome',)
 
     def get_absolute_url(self):
         return reverse('catalogo:subcategoria', kwargs={'slug': self.slug})
