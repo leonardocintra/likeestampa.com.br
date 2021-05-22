@@ -58,6 +58,8 @@ def _frete(self):
         frete = frete.replace('-', '').replace(' ', '')
         if len(frete) == 8 and frete.isnumeric():
             self.request.session['frete'] = get_frete(frete)
+    else:
+        self.request.session['frete'] = None
 
 
 product_list = ProdutosListView
