@@ -49,6 +49,7 @@ def produto(request, slug):
     context = {
         'produto': produto
     }
+    print(produto.id)
     return render(request, 'catalogo/produto_detalhe.html', context)
 
 

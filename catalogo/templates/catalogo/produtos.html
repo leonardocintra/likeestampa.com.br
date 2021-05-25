@@ -1,0 +1,11 @@
+<section class="py-1">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            {% for prod in object_list %}
+                {% include "catalogo/_produto_card.html" %}
+            {% empty %}
+                <h2>Aguarde novidades da categoria!</h2>
+            {% endfor %}
+        </div>
+    </div>
+</section>
