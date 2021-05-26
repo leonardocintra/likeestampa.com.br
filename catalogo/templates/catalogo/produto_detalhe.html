@@ -1,11 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="py-5">
+
+{% include 'includes/_categorias.html' %}
+
+<section class="py-2">
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
-            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0"
-                    src="{{ produto.imagem_principal.url }}" alt="{{ produto.nome }}" /></div>
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ produto.imagem_principal.url }}"
+                    alt="{{ produto.nome }}" /></div>
             <div class="col-md-6">
                 <div class="small mb-1 text-muted">SKU: {{ produto.id }}</div>
                 <h1 class="display-4 fw-bolder">{{ produto.nome }}</h1>
@@ -18,6 +21,7 @@
                 <div class="d-flex">
                     <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1"
                         style="max-width: 3rem" placeholder="qtd" />
+                    
                     <button class="btn btn-outline-dark flex-shrink-0" type="button">
                         <i class="bi-cart-fill me-1"></i>
                         Adicionar ao carrinho

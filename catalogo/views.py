@@ -9,16 +9,17 @@ class ProdutosListView(ListView):
     template_name = 'index.html'
 
     def get_queryset(self):
-        queryset = Produto.objects.all()
+        queryset = Produto.objects.exclude(ativo=False)
         q = self.request.GET.get('q', '')
         if q:
-            queryset = Produto.objects.filter(nome__icontains=q)
+            queryset = Produto.objects.filter(nome__icontains=q).exclude(ativo=False)
 
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['subcategorias'] = SubCategoria.objects.all()
+        subcategorias = SubCategoria.objects.all()
+        context['subcategorias'] = subcategorias
         _frete(self)
         context['frete'] = self.request.session['frete']
         return context
@@ -46,10 +47,11 @@ class SubCategoriaListView(ListView):
 def produto(request, slug):
     """ Pagina de detalhes do produto """
     produto = Produto.objects.get(slug=slug)
+    subcategorias = SubCategoria.objects.all()
     context = {
-        'produto': produto
+        'produto': produto,
+        'subcategorias': subcategorias
     }
-    print(produto.id)
     return render(request, 'catalogo/produto_detalhe.html', context)
 
 
