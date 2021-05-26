@@ -3,6 +3,14 @@ from django.urls import reverse
 from cloudinary.models import CloudinaryField
 
 
+GENERO = [
+    ('I', 'Infantil'),
+    ('B', 'Bebê / Body'),
+    ('M', 'Masculino'),
+    ('F', 'Feminino'),
+]
+
+
 class Categoria(models.Model):
     """ Ex: camiseta, caneca, bones """
     nome = models.CharField(max_length=100, unique=True)
@@ -52,6 +60,7 @@ class Produto(models.Model):
     preco_base = models.DecimalField('Preço base', decimal_places=2, max_digits=999, default=35.00)
     subcategoria = models.ForeignKey(SubCategoria, on_delete=models.CASCADE, related_name='produto_subcategoria')
     imagem_principal = CloudinaryField('Imagem principal', blank=True, null=True)
+    genero = models.CharField(max_length=1, choices=GENERO, default='M')
     created_at = models.DateField('Criado em', auto_now_add=True)
     updated_at = models.DateField('Modificado em', auto_now=True)
 

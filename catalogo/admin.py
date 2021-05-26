@@ -18,7 +18,7 @@ class ProdutoImagemInline(admin.TabularInline):
 
 class ProdutoAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('nome',)}
-    list_display = ['nome', 'subcategoria', 'ativo', ]
+    list_display = ['nome', 'subcategoria', 'ativo', 'genero', ]
     inlines = [ProdutoImagemInline]
 
 

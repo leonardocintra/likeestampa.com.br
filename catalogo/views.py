@@ -18,7 +18,7 @@ class ProdutosListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        subcategorias = SubCategoria.objects.all()
+        subcategorias = SubCategoria.objects.all().exclude(ativo=False)
         context['subcategorias'] = subcategorias
         _frete(self)
         context['frete'] = self.request.session['frete']
@@ -35,7 +35,7 @@ class SubCategoriaListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(SubCategoriaListView, self).get_context_data(**kwargs)
-        context['subcategorias'] = SubCategoria.objects.all()
+        context['subcategorias'] = SubCategoria.objects.all().exclude(ativo=False)
         context['produto_imagens'] = ProdutoImagem.objects.all()
         _frete(self)
         context['frete'] = self.request.session['frete']
@@ -47,7 +47,7 @@ class SubCategoriaListView(ListView):
 def produto(request, slug):
     """ Pagina de detalhes do produto """
     produto = Produto.objects.get(slug=slug)
-    subcategorias = SubCategoria.objects.all()
+    subcategorias = SubCategoria.objects.all().exclude(ativo=False)
     context = {
         'produto': produto,
         'subcategorias': subcategorias
@@ -61,8 +61,6 @@ def _frete(self):
         frete = frete.replace('-', '').replace(' ', '')
         if len(frete) == 8 and frete.isnumeric():
             self.request.session['frete'] = get_frete(frete)
-    else:
-        self.request.session['frete'] = None
 
 
 product_list = ProdutosListView

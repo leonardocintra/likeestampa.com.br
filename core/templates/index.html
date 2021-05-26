@@ -25,6 +25,21 @@
     </div>
 </div>
 
+{% load static %}
+<div class="row">
+    <div class="row justify-content-md-center">
+        <div class="text-center">
+            <h3>Selecione o Gênero</h3>
+        </div>
+        <div class="col-md-auto">
+            <img src="{% static 'homem.jpg' %}" alt="homem">
+        </div>
+        <div class="col-md-auto">
+            <img src="{% static 'mulher.jpg' %}" alt="mulher">
+        </div>
+    </div>
+</div>
+
 {% include "catalogo/produtos.html" %}
 
 {% endblock %}
