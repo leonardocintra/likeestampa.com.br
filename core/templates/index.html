@@ -13,30 +13,41 @@
         </div>
         <div class="col-md-auto">
             {% if frete %}
-                <h6>Menor preço frete <span class="badge bg-primary">R$ {{ frete }}</span></h6>
+            <h6>Menor preço frete <span class="badge bg-primary">R$ {{ frete }}</span></h6>
             {% else %}
-                <form class="input-group mb-3">
-                    <input type="number" name="frete" id="frete" class="form-control" placeholder="Digite seu CEP ..."
-                        aria-label="Digite seu CEP ..." aria-describedby="frete">
-                    <button class="btn btn-primary" type="submit"> Aplicar CEP <i class="fas fa-map-marked"></i></button>
-                </form>
+            <form class="input-group mb-3">
+                <input type="number" name="frete" id="frete" class="form-control" placeholder="Digite seu CEP ..."
+                    aria-label="Digite seu CEP ..." aria-describedby="frete">
+                <button class="btn btn-primary" type="submit"> Aplicar CEP <i class="fas fa-map-marked"></i></button>
+            </form>
             {% endif %}
         </div>
     </div>
 </div>
 
 {% load static %}
-<div class="row">
-    <div class="row justify-content-md-center">
-        <div class="text-center">
-            <h3>Selecione o Gênero</h3>
+<div class="container">
+
+
+    <div class="text-center">
+        <h3>Selecione o Gênero</h3>
+    </div>
+    <div class="d-flex justify-content-center text-center">
+
+        <div class="col">
+            <a href="{% url 'catalogo:produto_masculino' %}" >
+                <img src="{% static 'homem.jpg' %}" alt="homem" />
+            </a>
+            <h3 class="text-center">Masculino</h3>
         </div>
-        <div class="col-md-auto">
-            <img src="{% static 'homem.jpg' %}" alt="homem">
+
+        <div class="col">
+            <a href="{% url 'catalogo:produto_feminino' %}" >
+                <img src="{% static 'mulher.jpg' %}" alt="mulher" />
+            </a>
+            <h3 class="text-center">Feminino</h3>
         </div>
-        <div class="col-md-auto">
-            <img src="{% static 'mulher.jpg' %}" alt="mulher">
-        </div>
+
     </div>
 </div>
 
