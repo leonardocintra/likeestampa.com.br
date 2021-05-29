@@ -16,15 +16,7 @@ class ProdutosListView(ListView):
         if q:
             queryset = queryset.filter(nome__icontains=q).exclude(ativo=False)
 
-        if 'genero' in self.request.session:
-            genero = self.request.session['genero']
-            if genero:
-                if genero == 'F':
-                    queryset = queryset.exclude(genero='M')
-                elif genero == 'M':
-                    queryset = queryset.exclude(genero='F')
-                else:
-                    queryset = queryset
+        queryset = _busca_genero(self, queryset)
 
         return queryset
 
@@ -43,9 +35,12 @@ class SubCategoriaListView(ListView):
     model = Produto
 
     def get_queryset(self):
-        produtos = Produto.objects.filter(
+        queryset = Produto.objects.filter(
             subcategoria__slug=self.kwargs['slug'])
-        return produtos
+
+        queryset = _busca_genero(self, queryset)
+
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super(SubCategoriaListView, self).get_context_data(**kwargs)
@@ -87,6 +82,19 @@ def _frete(self):
             self.request.session['frete'] = get_frete(frete)
     else:
         self.request.session['frete'] = None
+
+
+def _busca_genero(self, queryset):
+    if 'genero' in self.request.session:
+        genero = self.request.session['genero']
+        if genero:
+            if genero == 'F':
+                queryset = queryset.exclude(genero='M')
+            elif genero == 'M':
+                queryset = queryset.exclude(genero='F')
+            else:
+                queryset = queryset
+    return queryset
 
 
 product_list = ProdutosListView
