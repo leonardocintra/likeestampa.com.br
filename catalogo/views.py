@@ -1,9 +1,9 @@
+from django.http import HttpResponseRedirect
 from django.views.generic.list import ListView
 from django.shortcuts import get_object_or_404, render
-from .models import Produto, SubCategoria, ProdutoImagem
-from services.dimona.api import get_frete
 from django.urls import reverse
-from django.http import HttpResponseRedirect
+from services.dimona.api import get_frete
+from .models import Produto, SubCategoria, ProdutoImagem, ProdutoVariacao
 
 
 class ProdutosListView(ListView):
@@ -56,10 +56,15 @@ class SubCategoriaListView(ListView):
 def produto(request, slug):
     """ Pagina de detalhes do produto """
     produto = Produto.objects.get(slug=slug)
+    produtos_relacionados = Produto.objects.filter(subcategoria=produto.subcategoria)[:4]
     subcategorias = SubCategoria.objects.all().exclude(ativo=False)
+    variacoes = ProdutoVariacao.objects.filter(produto=produto)
+
     context = {
         'produto': produto,
-        'subcategorias': subcategorias
+        'subcategorias': subcategorias,
+        'variacoes': variacoes,
+        'produtos_relacionados': produtos_relacionados
     }
     return render(request, 'catalogo/produto_detalhe.html', context)
 

@@ -51,15 +51,34 @@ class SubCategoria(models.Model):
         return self.nome
 
 
+class Variacao(models.Model):
+    descricao = models.CharField('Descrição', unique=True, max_length=50)
+    ativo = models.BooleanField(default=False)
+    created_at = models.DateField('Criado em', auto_now_add=True)
+    updated_at = models.DateField('Modificado em', auto_now=True)
+
+    class Meta:
+        db_table = 'variacao'
+        verbose_name_plural = 'Variações'
+        verbose_name = 'Variação'
+        ordering = ('descricao',)
+
+    def __str__(self):
+        return self.descricao
+
+
 class Produto(models.Model):
     """Ex: camieta sao paulo, camiseta python, etc"""
     nome = models.CharField(max_length=100, unique=True)
     descricao = models.TextField('Descrição', blank=True)
     slug = models.SlugField('Identificador', max_length=100, unique=True)
     ativo = models.BooleanField(default=False)
-    preco_base = models.DecimalField('Preço base', decimal_places=2, max_digits=999, default=35.00)
-    subcategoria = models.ForeignKey(SubCategoria, on_delete=models.CASCADE, related_name='produto_subcategoria')
-    imagem_principal = CloudinaryField('Imagem principal', blank=True, null=True)
+    preco_base = models.DecimalField(
+        'Preço base', decimal_places=2, max_digits=999, default=35.00)
+    subcategoria = models.ForeignKey(
+        SubCategoria, on_delete=models.CASCADE, related_name='produto_subcategoria')
+    imagem_principal = CloudinaryField(
+        'Imagem principal', blank=True, null=True)
     genero = models.CharField(max_length=1, choices=GENERO, default='M')
     created_at = models.DateField('Criado em', auto_now_add=True)
     updated_at = models.DateField('Modificado em', auto_now=True)
@@ -75,16 +94,35 @@ class Produto(models.Model):
 
 
 class ProdutoImagem(models.Model):
-    produto = models.ForeignKey(Produto, on_delete=models.CASCADE, related_name='images')
+    produto = models.ForeignKey(
+        Produto, on_delete=models.CASCADE, related_name='images')
     descricao = models.CharField("Descricao", max_length=200)
     imagem = CloudinaryField('image', blank=False, null=False)
     created_at = models.DateField('Criado em', auto_now_add=True)
     updated_at = models.DateField('Modificado em', auto_now=True)
-    
+
     class Meta:
         db_table = 'produto_imagem'
         verbose_name_plural = 'produto_imagens'
         verbose_name = 'produto_imagem'
+        ordering = ('-created_at',)
+
+    def __str__(self):
+        return self.produto.nome
+
+
+class ProdutoVariacao(models.Model):
+    produto = models.ForeignKey(
+        Produto, on_delete=models.CASCADE, related_name='produto_variacao')
+    variacao = models.ForeignKey(
+        Variacao, on_delete=models.PROTECT, related_name='variacao_produto')
+    created_at = models.DateField('Criado em', auto_now_add=True)
+    updated_at = models.DateField('Modificado em', auto_now=True)
+
+    class Meta:
+        db_table = 'produto_variacao'
+        verbose_name_plural = 'Variações do produto'
+        verbose_name = 'Variação do produto'
         ordering = ('-created_at',)
 
     def __str__(self):
