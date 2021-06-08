@@ -52,8 +52,9 @@ class SubCategoria(models.Model):
 
 
 class Variacao(models.Model):
+    """Ex: COR, Tamanho, Tipo de camiseta"""
     descricao = models.CharField('Descrição', unique=True, max_length=50)
-    ativo = models.BooleanField(default=False)
+    ativo = models.BooleanField(default=True)
     created_at = models.DateField('Criado em', auto_now_add=True)
     updated_at = models.DateField('Modificado em', auto_now=True)
 
@@ -67,6 +68,25 @@ class Variacao(models.Model):
         return self.descricao
 
 
+class TipoVariacao(models.Model):
+    """ Ex: vermlho, verde, branco | P M G GG | Baby Look, etc """
+    descricao = models.CharField('Descrição', unique=True, max_length=50)
+    ativo = models.BooleanField(default=True)
+    variacao = models.ForeignKey(
+        Variacao, on_delete=models.CASCADE, related_name='variacao_tipo_variacao')
+    created_at = models.DateField('Criado em', auto_now_add=True)
+    updated_at = models.DateField('Modificado em', auto_now=True)
+
+    class Meta:
+        db_table = 'tipo_variacao'
+        verbose_name_plural = 'Tipos Variações'
+        verbose_name = 'Tipo Variação'
+        ordering = ('descricao',)
+
+    def __str__(self):
+        return self.descricao
+
+
 class Produto(models.Model):
     """Ex: camieta sao paulo, camiseta python, etc"""
     nome = models.CharField(max_length=100, unique=True)
@@ -74,7 +94,7 @@ class Produto(models.Model):
     slug = models.SlugField('Identificador', max_length=100, unique=True)
     ativo = models.BooleanField(default=False)
     preco_base = models.DecimalField(
-        'Preço base', decimal_places=2, max_digits=999, default=35.00)
+        'Preço base', decimal_places=2, max_digits=999, default=45.90)
     subcategoria = models.ForeignKey(
         SubCategoria, on_delete=models.CASCADE, related_name='produto_subcategoria')
     imagem_principal = CloudinaryField(
@@ -116,6 +136,7 @@ class ProdutoVariacao(models.Model):
         Produto, on_delete=models.CASCADE, related_name='produto_variacao')
     variacao = models.ForeignKey(
         Variacao, on_delete=models.PROTECT, related_name='variacao_produto')
+    tipo_variacao = models.ForeignKey(TipoVariacao, on_delete=models.PROTECT, related_name='tipo_variacao_produto')
     created_at = models.DateField('Criado em', auto_now_add=True)
     updated_at = models.DateField('Modificado em', auto_now=True)
 

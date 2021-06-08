@@ -2,7 +2,6 @@ from django.http import HttpResponseRedirect
 from django.views.generic.list import ListView
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
-from services.dimona.api import get_frete
 from .models import Produto, SubCategoria, ProdutoImagem, ProdutoVariacao
 
 
@@ -24,8 +23,6 @@ class ProdutosListView(ListView):
         context = super().get_context_data(**kwargs)
         subcategorias = SubCategoria.objects.all().exclude(ativo=False)
         context['subcategorias'] = subcategorias
-        _frete(self)
-        context['frete'] = self.request.session['frete']
         return context
 
 
@@ -46,8 +43,6 @@ class SubCategoriaListView(ListView):
         context = super(SubCategoriaListView, self).get_context_data(**kwargs)
         context['subcategorias'] = SubCategoria.objects.all().exclude(ativo=False)
         context['produto_imagens'] = ProdutoImagem.objects.all()
-        _frete(self)
-        context['frete'] = self.request.session['frete']
         context['sub_categoria_selecionada'] = get_object_or_404(
             SubCategoria, slug=self.kwargs['slug'])
         return context
@@ -79,14 +74,9 @@ def produto_feminino(request):
     return HttpResponseRedirect('/')
 
 
-def _frete(self):
-    if self.request.GET.get('frete'):
-        frete = self.request.GET.get('frete')
-        frete = frete.replace('-', '').replace(' ', '')
-        if len(frete) == 8 and frete.isnumeric():
-            self.request.session['frete'] = get_frete(frete)
-    else:
-        self.request.session['frete'] = None
+def todos_os_produtos(request):
+    request.session['genero'] = None
+    return HttpResponseRedirect('/')
 
 
 def _busca_genero(self, queryset):

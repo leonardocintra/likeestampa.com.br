@@ -1,9 +1,13 @@
 from django.contrib import admin
-from .models import Categoria, SubCategoria, Produto, ProdutoImagem, Variacao, ProdutoVariacao
+from .models import Categoria, SubCategoria, Produto, ProdutoImagem, Variacao, ProdutoVariacao, TipoVariacao
 
 
 class VariacaoAdmin(admin.ModelAdmin):
     list_display = ['descricao', 'ativo', ]
+
+
+class TipoVariacaoAdmin(admin.ModelAdmin):
+    list_display = ['descricao', 'variacao', 'ativo', ]
 
 
 class CategoriaAdmin(admin.ModelAdmin):
@@ -35,3 +39,4 @@ admin.site.register(Categoria, CategoriaAdmin)
 admin.site.register(SubCategoria, SubCategoriaAdmin)
 admin.site.register(Produto, ProdutoAdmin)
 admin.site.register(Variacao, VariacaoAdmin)
+admin.site.register(TipoVariacao, TipoVariacaoAdmin)

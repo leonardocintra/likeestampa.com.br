@@ -15,20 +15,9 @@
 {% include 'includes/_categorias.html' %}
 <br />
 
-<div class="row p-3">
-    <div class="col">
+<div class="row p-3 justify-content-md-center">
+    <div class="col-md-6">
         {% include 'includes/_pesquisa.html' %}
-    </div>
-    <div class="col-md-auto">
-        {% if frete %}
-        <h6>Menor preço frete <span class="badge bg-primary">R$ {{ frete }}</span></h6>
-        {% else %}
-        <form class="input-group mb-3">
-            <input type="number" name="frete" id="frete" class="form-control" placeholder="Digite seu CEP ..."
-                aria-label="Digite seu CEP ..." aria-describedby="frete">
-            <button class="btn btn-primary" type="submit"> Aplicar CEP <i class="fas fa-map-marked"></i></button>
-        </form>
-        {% endif %}
     </div>
 </div>
 
