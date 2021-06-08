@@ -136,7 +136,7 @@ class ProdutoVariacao(models.Model):
         Produto, on_delete=models.CASCADE, related_name='produto_variacao')
     variacao = models.ForeignKey(
         Variacao, on_delete=models.PROTECT, related_name='variacao_produto')
-    tipo_variacao = models.ForeignKey(TipoVariacao, on_delete=models.PROTECT, related_name='tipo_variacao_produto')
+    tipo_variacao = models.ForeignKey(TipoVariacao, on_delete=models.SET_NULL, related_name='tipo_variacao_produto', null=True)
     created_at = models.DateField('Criado em', auto_now_add=True)
     updated_at = models.DateField('Modificado em', auto_now=True)
 
