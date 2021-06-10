@@ -5,6 +5,6 @@ from . import views
 app_name = 'pagamento'
 
 urlpatterns = [
-    # path('carrinho/', views.carrinho, name='carrinho'),
+    path('', views.pagamento, name='pagamento'),
     # path('webhook/', None, name='webhook'),
 ]

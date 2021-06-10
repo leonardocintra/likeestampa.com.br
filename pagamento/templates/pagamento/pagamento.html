@@ -1,0 +1,369 @@
+{% extends "base.html" %}
+
+{% block head %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+{% endblock %}
+
+{% block css %}
+<style>
+    .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+    }
+
+    @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+        }
+    }
+
+    .container {
+        max-width: 960px;
+    }
+</style>
+{% endblock %}
+
+{% block js_header %}
+
+{% endblock %}
+
+{% block content %}
+<div class="container py-2">
+
+    <main>
+        <div class="py-5 text-center">
+            <h2>Finalizar compra</h2>
+            <p class="lead">Ambiente seguro - Plataforma do Mercado Pago</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-5 col-lg-4 order-md-last">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-primary">Seu carrinho</span>
+                    <span class="badge bg-primary rounded-pill">{{ quantidade_item }}</span>
+                </h4>
+                <ul class="list-group mb-3">
+                    {% for item in items %}
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0">{{ item }}</h6>
+                            <small class="text-muted">Qtd: {{ item.quantidade }} | Amarelo | P</small>
+                        </div>
+                        <span class="text-muted">R$ {{ item.produto.preco_base }}</span>
+                    </li>
+                    {% endfor %}
+                    <li class="list-group-item d-flex justify-content-between bg-light">
+                        <div class="text-success">
+                            <h6 class="my-0">Cupom</h6>
+                            <small>Nenhum</small>
+                        </div>
+                        <span class="text-success">- R$0.00</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Total</span>
+                        <strong>R$ 20.00</strong>
+                    </li>
+                </ul>
+
+                <form class="card p-2">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Cupom">
+                        <button type="submit" class="btn btn-secondary">Aplicar</button>
+                    </div>
+                </form>
+                <a href="/" class="btn btn-success" style="margin-top: 10px;">Continuar Comprando</a>
+            </div>
+            <div class="col-md-7 col-lg-8">
+                <h4 class="mb-3">Dados de cobrança</h4>
+                <form id="form-checkout" class="needs-validation" novalidate>
+                    <div class="row g-3">
+                        <div class="col-sm-3">
+                            <label for="cpf" class="form-label">CPF</label>
+                            <input type="text" class="form-control" id="cpf" placeholder="" value="" required>
+                            <div class="invalid-feedback">
+                                Informe um CPF válido
+                            </div>
+                        </div>
+
+                        <div class="col-sm-9">
+                            <label for="nome" class="form-label">Nome Completo</label>
+                            <input type="text" class="form-control" id="nome" placeholder="Informa seu nome completo"
+                                value="" required>
+                            <div class="invalid-feedback">
+                                Verifique o nome
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="email" class="form-label">Email </label>
+                            <input type="email" class="form-control" id="email" placeholder="seuemail@exemplo.com"
+                                required>
+                            <div class="invalid-feedback">
+                                Por favor insira um email valido
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="zip" class="form-label">CEP</label>
+                            <input type="text" class="form-control" id="zip" placeholder="" required>
+                            <div class="invalid-feedback">
+                                CEP obrigatório
+                            </div>
+                        </div>
+
+                        <div class="col-md-7">
+                            <label for="cidade" class="form-label">Cidade</label>
+                            <input type="text" class="form-control" id="cidade" placeholder="" required>
+                            <div class="invalid-feedback">
+                                Por favor insira uma cidade valida
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <label for="uf" class="form-label">Estado</label>
+                            <input type="text" class="form-control" id="uf" placeholder="" required>
+                            <div class="invalid-feedback">
+                                Informe UF
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="bairro" class="form-label">Bairro</label>
+                            <input type="text" class="form-control" id="bairro" placeholder="Nome do bairro ..."
+                                required>
+
+                            <div class="invalid-feedback">
+                                Por favor informe o bairro
+                            </div>
+                        </div>
+
+                        <div class="col-8">
+                            <label for="endereco" class="form-label">Endereço</label>
+                            <input type="text" class="form-control" id="endereco" placeholder="Endeerço ..." required>
+                            <div class="invalid-feedback">
+                                Por favor informe o endereço
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <label for="complemlento" class="form-label">Complemento</label>
+                            <input type="text" class="form-control" id="complemlento" placeholder="Ex: Bloco B, AP 103">
+                        </div>
+
+                        <div class="col-12">
+                            <label for="referencia" class="form-label">Referencia</label>
+                            <input type="text" class="form-control" id="referencia"
+                                placeholder="Instrução para ajudar na entrega">
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="same-address">
+                        <label class="form-check-label" for="same-address">Shipping address is the same as my billing
+                            address</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="save-info">
+                        <label class="form-check-label" for="save-info">Save this information for next time</label>
+                    </div> 
+
+                    <hr class="my-4"> -->
+
+                    <h4 class="mb-3">Pagamento</h4>
+
+                    <div class="row gy-3">
+                        <div class="col-md-6">
+                            <label for="form-checkout__cardholderName" class="form-label">Nome no cartão</label>
+                            <input type="text" class="form-control" name="cardholderName" id="form-checkout__cardholderName" required/>
+                            <small class="text-muted">Nome que é exibido no cartão</small>
+                            <div class="invalid-feedback">
+                                Nome no cartão é obrigatório
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="form-checkout__cardNumber" class="form-label">Numero do cartão</label>
+                            <input type="text" class="form-control" name="cardNumber" id="form-checkout__cardNumber" required/>
+                            <div class="invalid-feedback">
+                                Numero do cartão é obrigatório
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="form-checkout__cardExpirationMonth" class="form-label">Mês de expiração</label>
+                            <input type="text" class="form-control" name="cardExpirationMonth" id="form-checkout__cardExpirationMonth" required/>
+                            <div class="invalid-feedback">
+                                Informe a data de expiração
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="form-checkout__cardExpirationYear" class="form-label">Ano de expiração</label>
+                            <input type="text" class="form-control" name="cardExpirationYear" id="form-checkout__cardExpirationYear" required/>
+                            <div class="invalid-feedback">
+                                Informe a data de expiração
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="form-checkout__securityCode" class="form-label">CVV</label>
+                            <input type="text" class="form-control" name="securityCode" id="form-checkout__securityCode" required />
+                            <div class="invalid-feedback">Informe o CVV </div>
+                        </div>
+                    </div>
+                    <br />
+                    <input type="email" name="cardholderEmail" id="form-checkout__cardholderEmail" />
+                    <select name="issuer" id="form-checkout__issuer"></select>
+                    <select name="identificationType" id="form-checkout__identificationType"></select>
+                    <input type="text" name="identificationNumber" id="form-checkout__identificationNumber" />
+                    <select name="installments" id="form-checkout__installments"></select>
+
+                    <hr class="my-4">
+                    <button class="w-100 btn btn-primary btn-lg" type="submit" id="form-checkout__submit">Finalizar
+                        Compra</button>
+                    <br /> <br />
+                    <progress value="0" class="progress-bar">Carregando...</progress>
+                </form>
+            </div>
+        </div>
+    </main>
+</div>
+
+{% endblock %}
+
+{% block js_footer %}
+<script src="https://sdk.mercadopago.com/js/v2"></script>
+<script>
+    const mp = new MercadoPago('{{ MERCADO_PAGO_PUBLIC_KEY }}');
+    // Step #3
+    const cardForm = mp.cardForm({
+        amount: "100.5",
+        autoMount: true,
+        form: {
+            id: "form-checkout",
+            cardholderName: {
+                id: "form-checkout__cardholderName",
+                placeholder: "Titular do cartão",
+            },
+            cardholderEmail: {
+                id: "form-checkout__cardholderEmail",
+                placeholder: "E-mail",
+            },
+            cardNumber: {
+                id: "form-checkout__cardNumber",
+                placeholder: "Número do cartão",
+            },
+            cardExpirationMonth: {
+                id: "form-checkout__cardExpirationMonth",
+                placeholder: "Mês de vencimento",
+            },
+            cardExpirationYear: {
+                id: "form-checkout__cardExpirationYear",
+                placeholder: "Ano de vencimento",
+            },
+            securityCode: {
+                id: "form-checkout__securityCode",
+                placeholder: "Código de segurança",
+            },
+            installments: {
+                id: "form-checkout__installments",
+                placeholder: "Parcelas",
+            },
+            identificationType: {
+                id: "form-checkout__identificationType",
+                placeholder: "Tipo de documento",
+            },
+            identificationNumber: {
+                id: "form-checkout__identificationNumber",
+                placeholder: "Número do documento",
+            },
+            issuer: {
+                id: "form-checkout__issuer",
+                placeholder: "Banco emissor",
+            },
+        },
+        callbacks: {
+            onFormMounted: error => {
+                if (error) return console.warn("Form Mounted handling error: ", error);
+                console.log("Form mounted");
+            },
+            onSubmit: event => {
+                event.preventDefault();
+
+                const {
+                    paymentMethodId: payment_method_id,
+                    issuerId: issuer_id,
+                    cardholderEmail: email,
+                    amount,
+                    token,
+                    installments,
+                    identificationNumber,
+                    identificationType,
+                } = cardForm.getCardFormData();
+
+                fetch("/process_payment", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        token,
+                        issuer_id,
+                        payment_method_id,
+                        transaction_amount: Number(amount),
+                        installments: Number(installments),
+                        description: "Descrição do produto",
+                        payer: {
+                            email,
+                            identification: {
+                                type: identificationType,
+                                number: identificationNumber,
+                            },
+                        },
+                    }),
+                });
+            },
+            onFetching: (resource) => {
+                console.log("Fetching resource: ", resource);
+
+                // Animate progress bar
+                const progressBar = document.querySelector(".progress-bar");
+                progressBar.removeAttribute("value");
+
+                return () => {
+                    progressBar.setAttribute("value", "0");
+                };
+            },
+        },
+    });
+</script>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
+{% endblock %}

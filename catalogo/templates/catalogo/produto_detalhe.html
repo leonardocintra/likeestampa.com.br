@@ -36,7 +36,7 @@
                 <div class="d-flex">
                     <input class="form-control text-center me-2" id="inputQuantity" type="number" value="1"
                         style="max-width: 4rem" placeholder="qtd" />
-                    <a href="{% url 'checkout:carrinho' %}" class="btn btn-outline-dark flex-shrink-0"><i class="bi-cart-fill me-1"></i>
+                    <a href="{% url 'checkout:add_item' produto.id %}" class="btn btn-outline-dark flex-shrink-0"><i class="bi-cart-fill me-1"></i>
                         Adicionar ao carrinho</a>
                 </div>
             </div>
