@@ -10,6 +10,9 @@
     <meta name="author" content="Leonardo Nascimento Cintra">
     <meta name="generator" content="Hugo 0.82.0">
     <meta name="facebook-domain-verification" content="cdosopa6tyvmrauykenwqn9jo0inig" />
+    {% block head %}
+    {% endblock %}
+
     <title>Like Estampa · Home</title>
 
 
@@ -26,6 +29,9 @@
     <!-- <link href="css/styles.css" rel="stylesheet" /> -->
     {% block css %}
     {% endblock %}
+
+    {% block js_header %}
+    {% endblock %}
 </head>
 
 <body>
@@ -37,6 +43,9 @@
 
     <!-- Footer -->
     {% include 'includes/_footer.html' %}
+    
+    {% block js_footer %}
+    {% endblock %}
 </body>
 
 </html>

@@ -22,10 +22,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-_&%r6!rao1dl+&wkye8f9bu#mc7gr#^$bn!6^@_5oiurzgkw1j') 
+SECRET_KEY = os.environ.get(
+    'DJANGO_SECRET_KEY', 'django-insecure-_&%r6!rao1dl+&wkye8f9bu#mc7gr#^$bn!6^@_5oiurzgkw1j')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True # os.environ.get('DEBUG') == 'True'
+DEBUG = True  # os.environ.get('DEBUG') == 'True'
 
 ALLOWED_HOSTS = ['likeestampa.herokuapp.com', 'likeestampa-test.herokuapp.com',
                  'likeestampa.com.br', '127.0.0.1', 'www.likeestampa.com.br']
@@ -42,9 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'cloudinary',
+    'localflavor',
 
     'core',
     'catalogo',
+    'checkout',
+    'pagamento',
+    'pedido',
 ]
 
 MIDDLEWARE = [
@@ -147,3 +152,11 @@ CLOUDINARY = {
     'api_key': os.environ.get('CLOUDINARY_API_KEY', '182946961533113'),
     'api_secret': os.environ.get('CLOUDINARY_API_SECRET', 'LAIVTLNHtG5x-TTdUmHgaE3CnsM'),
 }
+
+
+# MERCADO PAGO
+MERCADO_PAGO_PUBLIC_KEY = os.environ.get('MERCADO_PAGO_PUBLIC_KEY', 'TEST-1f3bd514-5066-47ba-bc5a-cc59eedfdf64')
+MERCADO_PAGO_PRIVATE_KEY = os.environ.get('MERCADO_PAGO_PRIVATE_KEY', 'TEST-7112055085058773-060901-5d4a8146dcccf6e2216931dc77d834fb-4990865')
+
+
+MAXIMO_ITENS_CARRINHO = os.environ.get('MAXIMO_ITENS_CARRINHO', 10)
