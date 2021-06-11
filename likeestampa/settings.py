@@ -44,6 +44,8 @@ INSTALLED_APPS = [
 
     'cloudinary',
     'localflavor',
+    'mathfilters',
+    'widget_tweaks',
 
     'core',
     'catalogo',

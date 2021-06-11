@@ -3,6 +3,7 @@ from django.views.generic.list import ListView
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from .models import Produto, SubCategoria, ProdutoImagem, ProdutoVariacao
+from checkout.views import get_quantidade_items_carrinho
 
 
 class ProdutosListView(ListView):
@@ -23,6 +24,7 @@ class ProdutosListView(ListView):
         context = super().get_context_data(**kwargs)
         subcategorias = SubCategoria.objects.all().exclude(ativo=False)
         context['subcategorias'] = subcategorias
+        context['quantidade_item'] = get_quantidade_items_carrinho(self.request)
         return context
 
 
@@ -59,6 +61,7 @@ def produto(request, slug):
         'produto': produto,
         'subcategorias': subcategorias,
         'variacoes': variacoes,
+        'quantidade_item': get_quantidade_items_carrinho(request),
         'produtos_relacionados': produtos_relacionados
     }
     return render(request, 'catalogo/produto_detalhe.html', context)
