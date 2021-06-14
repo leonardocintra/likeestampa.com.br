@@ -10,18 +10,25 @@ def carrinho(request):
     if not 'carrinho' in request.session:
         return HttpResponseRedirect(redirect_to='/')
 
+    form = ClienteForm()
     if request.method == 'POST':
+        # colocar o is_valid()
         return redirect(reverse("pagamento:pagamento"))
 
-    form = ClienteForm()
     uuid = request.session['carrinho']
     carrinho = Carrinho.objects.get(uuid=uuid)
     items = Item.objects.filter(carrinho=carrinho)
+
+    valor_carrinho = 0
+    for item in items:
+        valor_carrinho = (item.produto.preco_base *
+                          item.quantidade) + valor_carrinho
 
     context = {
         'form': form,
         'items': items,
         'quantidade_item': len(items),
+        'valor_carrinho': valor_carrinho,
         'peoplesoftURL': 'https://people-stage.herokuapp.com/v1/peoplesoft',
     }
     return render(request, 'checkout/carrinho.html', context)
@@ -45,6 +52,17 @@ def adicionar_item_carrinho(request, id):
     else:
         Item(carrinho=carrinho, produto=produto, quantidade=1).save()
 
+    return HttpResponseRedirect(redirect_to='/checkout/carrinho/')
+
+
+def excluir_item_carrinho(request, id):
+    if not 'carrinho' in request.session:
+        return HttpResponseRedirect(redirect_to='/')
+
+    uuid = request.session['carrinho']
+    carrinho = Carrinho.objects.get(uuid=uuid)
+
+    item = Item.objects.filter(pk=id, carrinho=carrinho).delete()
     return HttpResponseRedirect(redirect_to='/checkout/carrinho/')
 
 

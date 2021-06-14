@@ -18,7 +18,6 @@ def pagamento(request):
         'items': items,
         'quantidade_item': len(items),
         'MERCADO_PAGO_PUBLIC_KEY': settings.MERCADO_PAGO_PUBLIC_KEY,
-        'peoplesoftURL': 'https://people-stage.herokuapp.com/v1/peoplesoft',
     }
     return render(request, 'pagamento/pagamento.html', context)
 

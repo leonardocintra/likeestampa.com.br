@@ -114,14 +114,19 @@
                     <li class="list-group-item d-flex justify-content-between lh-sm">
                         <div>
                             <h6 class="my-0">{{ item }}</h6>
+                            <a href="{% url 'checkout:excluir_item_carrinho' item.id %}" class="btn btn-danger btn-sm">
+                                <i class="bi bi-trash"></i>
+                            </a>
                             <small class="text-muted">Qtd: {{ item.quantidade }} | Amarelo | P</small>
                         </div>
                         <span class="text-muted">R$ {{ item.produto.preco_base }}</span>
                     </li>
+                    {% empty %}
+                        <h3 class="text-center">Carrinho vazio</h3>
                     {% endfor %}
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Total</span>
-                        <strong>R$ 20.00</strong>
+                        <strong>R$ {{ valor_carrinho }}</strong>
                     </li>
                 </ul>
             </div>
@@ -222,7 +227,9 @@
 
                     <hr class="my-4">
                     <a href="/" class="btn btn-secondary">Continuar Comprando</a>
-                    <button class="btn btn-primary btn-lg" type="submit">Ir para pagamento</button>
+                    {% if items %}
+                        <button class="btn btn-primary btn-lg" type="submit">Ir para pagamento</button>
+                    {% endif %}
                 </form>
             </div>
         </div>
