@@ -69,7 +69,7 @@ class Variacao(models.Model):
 
 
 class TipoVariacao(models.Model):
-    """ Ex: vermlho, verde, branco | P M G GG | Baby Look, etc """
+    """ Ex: vermelho, verde, branco | P M G GG | Baby Look, etc """
     descricao = models.CharField('Descrição', unique=True, max_length=50)
     ativo = models.BooleanField(default=True)
     variacao = models.ForeignKey(
@@ -136,7 +136,8 @@ class ProdutoVariacao(models.Model):
         Produto, on_delete=models.CASCADE, related_name='produto_variacao')
     variacao = models.ForeignKey(
         Variacao, on_delete=models.PROTECT, related_name='variacao_produto')
-    tipo_variacao = models.ForeignKey(TipoVariacao, on_delete=models.PROTECT, related_name='tipo_variacao_produto', null=False, default=1)
+    tipo_variacao = models.ForeignKey(
+        TipoVariacao, on_delete=models.PROTECT, related_name='tipo_variacao_produto', null=False, default=1)
     created_at = models.DateField('Criado em', auto_now_add=True)
     updated_at = models.DateField('Modificado em', auto_now=True)
 
@@ -148,3 +149,19 @@ class ProdutoVariacao(models.Model):
 
     def __str__(self):
         return self.produto.nome
+
+
+class Seller(models.Model):
+    nome = models.CharField(max_length=100, unique=True)
+    site = models.CharField(max_length=100, unique=True)
+    created_at = models.DateField('Criado em', auto_now_add=True)
+    updated_at = models.DateField('Modificado em', auto_now=True)
+
+    class Meta:
+        db_table = 'seller'
+        verbose_name_plural = 'Seller'
+        verbose_name = 'Seller'
+        ordering = ('nome',)
+
+    def __str__(self):
+        return self.nome
