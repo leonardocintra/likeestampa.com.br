@@ -23,4 +23,6 @@ urlpatterns = [
     path('pagamento/', include('pagamento.urls')),
     path('pedido/', include('pedido.urls')),
     path('admin/', admin.site.urls),
+    # django-allauth
+    path('accounts/', include('allauth.urls')),
 ]
