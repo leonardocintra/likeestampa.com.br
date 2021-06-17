@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='seller',
             name='telefone_contato',
-            field=models.CharField(default='11996226771', max_length=10),
+            field=models.CharField(default='', max_length=10),
         ),
         migrations.AlterField(
             model_name='seller',
