@@ -1,7 +1,5 @@
 {% extends "base.html" %}
 
-{% crispy form %}
-
 {% load crispy_forms_tags %}
 
 {% block content %}
@@ -10,5 +8,6 @@
     {% csrf_token %}
     {{ form|crispy }}
     <button class="btn btn-success" type="submit">Entrar</button>
+    <a href="{% url 'account_signup' %}">Fazer cadastro</a>
 </form>
 {% endblock %}
