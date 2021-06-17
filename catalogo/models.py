@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.dispatch import receiver
 from cloudinary.models import CloudinaryField
 
 
@@ -147,19 +148,3 @@ class ProdutoVariacao(models.Model):
 
     def __str__(self):
         return self.produto.nome
-
-
-class Seller(models.Model):
-    nome = models.CharField(max_length=100, unique=True)
-    site = models.CharField(max_length=100, unique=True)
-    created_at = models.DateField('Criado em', auto_now_add=True)
-    updated_at = models.DateField('Modificado em', auto_now=True)
-
-    class Meta:
-        db_table = 'seller'
-        verbose_name_plural = 'Seller'
-        verbose_name = 'Seller'
-        ordering = ('nome',)
-
-    def __str__(self):
-        return self.nome

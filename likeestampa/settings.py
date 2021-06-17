@@ -35,6 +35,7 @@ ALLOWED_HOSTS = ['likeestampa.herokuapp.com', 'likeestampa-test.herokuapp.com',
 # Application definition
 
 INSTALLED_APPS = [
+    # DJANGO
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,16 +43,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # TERCEIROS
     'cloudinary',
     'localflavor',
     'mathfilters',
     'widget_tweaks',
 
+    # LOCAL
     'core',
     'catalogo',
     'checkout',
     'pagamento',
     'pedido',
+    'seller',
 ]
 
 MIDDLEWARE = [
