@@ -5,7 +5,7 @@ class Seller(models.Model):
     nome = models.CharField(max_length=100, unique=True)
     site = models.CharField(max_length=100, unique=True)
     nome_contato = models.CharField(max_length=100, default='Marcelo Ostia')
-    telefone_contato = models.CharField(max_length=12, default='11996226771')
+    telefone_contato = models.CharField(max_length=12, default='')
     cep = models.CharField(max_length=8)
     endereco = models.CharField(max_length=100)
     numero = models.CharField(max_length=10)
