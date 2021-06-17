@@ -130,7 +130,7 @@
                             <a href="{% url 'checkout:excluir_item_carrinho' item.id %}" class="btn btn-danger btn-sm">
                                 <i class="bi bi-trash"></i>
                             </a>
-                            <small class="text-muted">Qtd: {{ item.quantidade }} | Amarelo | P</small>
+                            <small class="text-muted">Qtd: {{ item.quantidade }} | {{ item.cor.tipo_variacao }} | {{ item.tamanho.tipo_variacao }}</small>
                         </div>
                         <span class="text-muted">R$ {{ item.produto.preco_base }}</span>
                     </li>

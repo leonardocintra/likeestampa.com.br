@@ -134,10 +134,8 @@ class ProdutoImagem(models.Model):
 class ProdutoVariacao(models.Model):
     produto = models.ForeignKey(
         Produto, on_delete=models.CASCADE, related_name='produto_variacao')
-    variacao = models.ForeignKey(
-        Variacao, on_delete=models.PROTECT, related_name='variacao_produto')
     tipo_variacao = models.ForeignKey(
-        TipoVariacao, on_delete=models.PROTECT, related_name='tipo_variacao_produto', null=False, default=1)
+        TipoVariacao, on_delete=models.PROTECT, related_name='tipo_variacao_produto', default=1)
     created_at = models.DateField('Criado em', auto_now_add=True)
     updated_at = models.DateField('Modificado em', auto_now=True)
 

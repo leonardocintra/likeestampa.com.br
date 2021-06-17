@@ -1,6 +1,5 @@
 from django import forms
 from django.forms import ModelForm
-from catalogo.models import ProdutoVariacao
 
 
 class ClienteForm(forms.Form):
@@ -17,9 +16,3 @@ class ClienteForm(forms.Form):
     uf = forms.CharField(label='UF', max_length=100)
     referencia = forms.CharField(
         label='Referencia', max_length=100, required=False)
-
-
-class ProdutoCarrinhoForm(ModelForm):
-    class Meta:
-        model = ProdutoVariacao
-        fields = ['produto', 'variacao', 'tipo_variacao', ]

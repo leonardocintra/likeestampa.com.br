@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Categoria, SubCategoria, Produto, ProdutoImagem, Variacao, ProdutoVariacao, TipoVariacao
+from .models import Categoria, SubCategoria, Produto, ProdutoImagem, Variacao, TipoVariacao
+from catalogo.models import ProdutoVariacao
 
 
 class VariacaoAdmin(admin.ModelAdmin):
@@ -26,7 +27,7 @@ class ProdutoImagemInline(admin.TabularInline):
 
 class ProdutoVariacaoInline(admin.TabularInline):
     model = ProdutoVariacao
-    extra = 4
+    extra = 1
 
 
 class ProdutoAdmin(admin.ModelAdmin):
