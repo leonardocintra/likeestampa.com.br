@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'pagamento',
     'pedido',
     'seller',
+    'usuario',
 ]
 
 MIDDLEWARE = [
@@ -180,6 +181,7 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
+ACCOUNT_SIGNUP_FORM_CLASS = 'usuario.forms.SignupForm'
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
@@ -187,8 +189,8 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
+LOGIN_REDIRECT_URL = "/usuario/"
 
-LOGIN_REDIRECT_URL = '/checkout/carrinho/'
 
 # Django Crispy Form
 

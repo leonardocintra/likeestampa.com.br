@@ -43,6 +43,7 @@ def cadastrar_cliente(cliente):
     if response.status_code == 201:
         return cliente_json['records'][0]['id']
     elif response.status_code == 409:
+        # TODO: colocar tratamento para caso email ja existe
         cliente_json = buscar_cliente_by_id(cliente['id'])
         return cliente_json['records'][0]['id']
     else:

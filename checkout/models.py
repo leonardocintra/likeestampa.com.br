@@ -5,6 +5,7 @@ from catalogo.models import Produto, ProdutoVariacao
 
 class Carrinho(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4)
+    abandonado = models.BooleanField(default=True)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
@@ -14,7 +15,7 @@ class Carrinho(models.Model):
         verbose_name = 'Carrinho'
 
     def __str__(self):
-        return self.uuid
+        return str(self.uuid)
 
 
 class Item(models.Model):

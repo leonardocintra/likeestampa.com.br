@@ -1,10 +1,12 @@
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from checkout.models import Carrinho, Item
 from services.mercadopago import mercadopago
 from services.peoplesoft.peoplesoft import buscar_cliente_by_id
 
 
+@login_required
 def pagamento(request):
 
     if request.method == 'POST':
@@ -14,7 +16,7 @@ def pagamento(request):
         uuid = request.session['carrinho']
         carrinho = Carrinho.objects.get(uuid=uuid)
         items = Item.objects.filter(carrinho=carrinho)
-    
+
     if 'cliente_id' in request.session:
         cliente = buscar_cliente_by_id(request.session['cliente_id'])
         cliente = cliente['records'][0]
