@@ -17,9 +17,9 @@ def cadastrar_cliente(cliente):
         # TODO: verificar tambem se o endereco ainda eh o mesmo
 
     data = {
-        'nome': cliente['nome'],
+        'nome': cliente['nome'] + ' ' + cliente['sobrenome'],
         'cpf': cliente['cpf'],
-        'sexo': 'M',
+        'sexo': cliente['sexo'],
         'email': cliente['email'],
         'enderecos': [
             {
@@ -61,7 +61,7 @@ def buscar_cliente_by_cpf(cpf):
 
 
 def buscar_cliente_by_id(id):
-    response = requests.get(BASE_URL + '/pessoa/' + id, headers=HEADERS)
+    response = requests.get(BASE_URL + '/pessoa/' + str(id), headers=HEADERS)
 
     if response.status_code == 200:
         return json.loads(response.text)
