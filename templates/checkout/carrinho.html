@@ -150,18 +150,14 @@
             </div>
             <div class="col-md-7 col-lg-7">
                 <h4 class="mb-3">Dados de cobrança</h4>
+                {% if user.is_authenticated %}
                 <form method="post" class="needs-validation" novalidate>
                     {% csrf_token %}
                     {{ form.source }}
                     <div class="row g-3">
                         <div class="col-sm-4">
                             <label for="cpf" class="form-label">CPF</label>
-                            <div class="input-group">
-                                {% render_field form.cpf class="form-control" placeholder="CPF ..." %}
-                                <button class="btn btn-info" type="button" name="btnBuscaCPF" id="btnBuscaCPF">
-                                    <b> <i class="bi bi-search"></i> </b>
-                                </button>
-                            </div>
+                            {% render_field form.cpf class="form-control" placeholder="CPF ..." %}
                             <div class="invalid-feedback">
                                 Informe um CPF válido
                             </div>
@@ -241,14 +237,18 @@
                             <label for="referencia" class="form-label">Referencia</label>
                             {% render_field form.referencia class="form-control" placeholder="referencia ..." %}
                         </div>
+                        <a href="#">Adicionar outro endereço</a>
                     </div>
 
                     <hr class="my-4">
                     <a href="/" class="btn btn-secondary">Continuar Comprando</a>
                     {% if items %}
-                    <button class="btn btn-primary btn-lg" type="submit">Ir para pagamento</button>
+                        <button class="btn btn-primary btn-lg" type="submit">Ir para pagamento</button>
                     {% endif %}
                 </form>
+                {% else %}
+                    <h2><a href="{% url 'account_login' %}">Entrar </a> | <a href="{% url 'account_signup' %}">Fazer cadastro</a> </h2>
+                {% endif %}
             </div>
         </div>
     </main>

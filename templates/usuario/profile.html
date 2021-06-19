@@ -1,10 +1,107 @@
 {% extends "base.html" %}
 
-{% block content %}
-<div class="container">
+{% load widget_tweaks %}
 
-    <h1>Ola {{ cliente.user.first_name }}</h1>
-    <h2>CPF: {{ cliente.cpf }}</h2>
+{% block content %}
+<div class="container py-3">
+
+    <h3> <span class="badge bg-secondary">#{{ cliente.peoplesoft_id }}</span> {{ cliente.user.first_name }} </h3>
+    <h4>CPF: {{ cliente.cpf }}</h4>
+
+    {{ form.source }}
+    <div class="row g-3">
+        <div class="col-sm-4">
+            <label for="cpf" class="form-label">CPF</label>
+            <div class="input-group">
+                {% render_field form.cpf class="form-control" placeholder="CPF ..." %}
+                <button class="btn btn-info" type="button" name="btnBuscaCPF" id="btnBuscaCPF">
+                    <b> <i class="bi bi-search"></i> </b>
+                </button>
+            </div>
+            <div class="invalid-feedback">
+                Informe um CPF válido
+            </div>
+        </div>
+
+        <div class="col-sm-8">
+            <label for="nome" class="form-label">Nome Completo</label>
+            {% render_field form.nome class="form-control" placeholder="Nome completo" %}
+            <div class="invalid-feedback">
+                Verifique o nome
+            </div>
+        </div>
+
+        <div class="col-12">
+            <label for="email" class="form-label">Email </label>
+            {% render_field form.email class="form-control" placeholder="seuemail@exemplo.com" %}
+            <div class="invalid-feedback">
+                Por favor insira um email valido
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <label for="cep" class="form-label">CEP</label>
+            {% render_field form.cep class="form-control" placeholder="Seu CEP ..." %}
+            <div class="invalid-feedback">
+                CEP obrigatório
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            <label for="cidade" class="form-label">Cidade</label>
+            {% render_field form.cidade class="form-control" placeholder="Cidade ..." %}
+            <div class="invalid-feedback">
+                Por favor insira uma cidade
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <label for="uf" class="form-label">Estado</label>
+            {% render_field form.uf class="form-control" placeholder="UF ..." %}
+            <div class="invalid-feedback">
+                Informe UF
+            </div>
+        </div>
+
+        <div class="col-2">
+            <label for="numero" class="form-label">Numero</label>
+            {% render_field form.numero class="form-control" placeholder="numero ..." %}
+
+            <div class="invalid-feedback">
+                Por favor informe o numero
+            </div>
+        </div>
+
+        <div class="col-10">
+            <label for="bairro" class="form-label">Bairro</label>
+            {% render_field form.bairro class="form-control" placeholder="bairro ..." %}
+            <div class="invalid-feedback">
+                Por favor informe o bairro
+            </div>
+        </div>
+
+        <div class="col-8">
+            <label for="endereco" class="form-label">Endereço</label>
+            {% render_field form.endereco class="form-control" placeholder="endereco ..." %}
+            <div class="invalid-feedback">
+                Por favor informe o endereço
+            </div>
+        </div>
+
+        <div class="col-4">
+            <label for="complemento" class="form-label">Complemento</label>
+            {% render_field form.complemento class="form-control" placeholder="complemento ..." %}
+        </div>
+
+        <div class="col-12">
+            <label for="referencia" class="form-label">Referencia</label>
+            {% render_field form.referencia class="form-control" placeholder="referencia ..." %}
+        </div>
+        <a href="#">Adicionar outro endereço</a>
+        <br />
+        <a href="#">Alterar minha senha</a>
+    </div>
+
 
 </div>
 
