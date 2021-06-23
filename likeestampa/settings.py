@@ -193,6 +193,9 @@ LOGIN_REDIRECT_URL = "/usuario/"
 
 
 # Django Crispy Form
-
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# PEOPLE SOFT API
+PEOPLE_SOFT_API = os.environ.get('PEOPLE_SOFT_API', 'https://people-stage.herokuapp.com/v1/peoplesoft')
+
 

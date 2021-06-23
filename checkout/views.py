@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
@@ -8,7 +9,6 @@ from .forms import ClienteForm
 
 
 def carrinho(request):
-
     if request.method == 'POST':
         form = ClienteForm(request.POST)
         # TODO: Alterar dados cadastrais ou incluir novo endereco
@@ -36,7 +36,7 @@ def carrinho(request):
         'items': items,
         'quantidade_item': quantidade_item,
         'valor_carrinho': valor_carrinho,
-        'peoplesoftURL': 'https://people-stage.herokuapp.com/v1/peoplesoft',
+        'peoplesoftURL': settings.PEOPLE_SOFT_API,
     }
     return render(request, 'checkout/carrinho.html', context)
 

@@ -4,7 +4,7 @@ from pedido.models import Pedido
 
 class PagamentoMercadoPago(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE,
-                               related_name='pagamento_mercado_pago_pedido', default=1)
+                               related_name='pagamento_mercado_pago_pedido', null=True)
     transaction_amount = models.DecimalField(
         "Valor da Transação", max_digits=10, decimal_places=2, default=9.99
     )
@@ -17,6 +17,7 @@ class PagamentoMercadoPago(models.Model):
         max_length=250, blank=True, default='approved')
     mercado_pago_status_detail = models.CharField(
         max_length=250, blank=True, default='accredited')
+    payment_id = models.PositiveBigIntegerField(null=True)
     created_at = models.DateField('Criado em', auto_now_add=True)
     updated_at = models.DateField('Modificado em', auto_now=True)
 
@@ -26,4 +27,4 @@ class PagamentoMercadoPago(models.Model):
         verbose_name = 'Pagamento do MP'
 
     def __str__(self):
-        return self.pedido
+        return self.mercado_pago_id

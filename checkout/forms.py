@@ -1,10 +1,11 @@
 from django import forms
 from django.forms import ModelForm
+from localflavor.br.forms import BRCPFField
 
 
 class ClienteForm(forms.Form):
     # TODO: migrar para a app usuario
-    cpf = forms.CharField(label='CPF', max_length=11, min_length=11)
+    cpf = BRCPFField()
     nome = forms.CharField(label='Nome', max_length=100)
     email = forms.EmailField(label='E-mail', max_length=100)
     cep = forms.CharField(label='CEP', max_length=8, min_length=8)

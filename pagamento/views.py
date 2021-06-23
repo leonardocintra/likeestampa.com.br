@@ -7,13 +7,18 @@ from django.views.decorators.http import require_POST
 from checkout.models import Carrinho, Item
 from services.mercadopago.mercadopago import create_preference
 from services.peoplesoft.peoplesoft import buscar_cliente_by_id
-import json
 from django.http import HttpResponse
+from pedido.models import Pedido
+from .models import PagamentoMercadoPago
+import json
 
 
 @login_required
 def pagamento(request):
     if not 'carrinho' in request.session:
+        pass  # TODO: mandar mensagem no telegram avisando
+    
+    if 'cliente_id' in request.session:
         pass  # TODO: mandar mensagem no telegram avisando
 
     uuid = request.session['carrinho']
@@ -21,10 +26,9 @@ def pagamento(request):
     items = Item.objects.filter(carrinho=carrinho)
     valor_carrinho = 0
 
-    if 'cliente_id' in request.session:
-        cliente = buscar_cliente_by_id(request.session['cliente_id'])
-        cliente = cliente['records'][0]
-        endereco = cliente['enderecos'][0]
+    cliente = buscar_cliente_by_id(request.session['cliente_id'])
+    cliente = cliente['records'][0]
+    endereco = cliente['enderecos'][0]
 
     payer = {
         "name": cliente['nome'],
@@ -57,9 +61,9 @@ def pagamento(request):
 
     preference_data = {
         "back_urls": {
-            "success": "https://www.tu-sitio/success",
-            "failure": "https://www.tu-sitio/failure",
-            "pending": "https://www.tu-sitio/pendings"
+            "success": "http://127.0.0.1:8000/pedido/",
+            "failure": "http://127.0.0.1:8000/checkout/carrinho/",
+            "pending": "http://127.0.0.1:8000/checkout/carrinho/"
         },
         "payer": payer,
         "auto_return": "approved",
@@ -69,13 +73,27 @@ def pagamento(request):
         "installments": 10
     }
 
-    preference_id = create_preference(preference_data)
+    preference = create_preference(preference_data)
+
+    pedido = Pedido.objects.create(
+        cpf=cliente['cpf'],
+        peoplesoft_pessoa_id=cliente['id'],
+        peoplesoft_endereco_id=endereco['id'],
+        valor_total=valor_carrinho
+    )
+    PagamentoMercadoPago.objects.create(
+        pedido=pedido,
+        mercado_pago_id=preference['id'],
+        mercado_pago_status='criado_pelo_likeestampa'
+    )
+
+    request.session['mercado_pago_id'] = preference['id']
 
     context = {
         'items': items,
         'cliente': cliente,
         'quantidade_item': len(items),
         'MERCADO_PAGO_PUBLIC_KEY': settings.MERCADO_PAGO_PUBLIC_KEY,
-        'MERCADO_PAGO_PREFERENCE_ID': preference_id['id']
+        'MERCADO_PAGO_PREFERENCE_ID': preference['id']
     }
     return render(request, 'pagamento/pagamento.html', context)

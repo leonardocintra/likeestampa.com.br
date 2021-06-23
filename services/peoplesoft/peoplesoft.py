@@ -1,7 +1,8 @@
+from django.conf import settings
 import requests
 import json
 
-BASE_URL = 'https://people-stage.herokuapp.com/v1/peoplesoft'
+BASE_URL = settings.PEOPLE_SOFT_API
 
 HEADERS = {
     'Accept': 'application/json',

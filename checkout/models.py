@@ -6,6 +6,7 @@ from catalogo.models import Produto, ProdutoVariacao
 class Carrinho(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4)
     abandonado = models.BooleanField(default=True)
+    finalizado = models.BooleanField(default=False)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
