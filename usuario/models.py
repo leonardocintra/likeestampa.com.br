@@ -2,11 +2,12 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from localflavor.br.models import BRCPFField
 
 
 class Cliente(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    cpf = models.CharField(max_length=11)
+    cpf = BRCPFField("CPF")
     peoplesoft_id = models.PositiveIntegerField(null=True)
     created_at = models.DateField('Criado em', auto_now_add=True)
     updated_at = models.DateField('Modificado em', auto_now=True)

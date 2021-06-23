@@ -1,35 +1,22 @@
 from django.db import models
-from localflavor.br.models import BRCPFField
 from pedido.models import Pedido
 
 
-class Pagamento(models.Model):
-    pedido = models.ForeignKey(
-        Pedido, related_name="pagamento_pedido", on_delete=models.CASCADE)
-    valor_pedido = models.DecimalField(max_digits=999, decimal_places=2)
-    parcelas = models.IntegerField(default=1)
-    metodo_pagamento = models.CharField(max_length=250)
-    email = models.EmailField()
-    numero_documento = BRCPFField("CPF")
-    created_at = models.DateField('Criado em', auto_now_add=True)
-    updated_at = models.DateField('Modificado em', auto_now=True)
-
-    class Meta:
-        db_table = 'pagamento'
-        verbose_name_plural = 'Pagamentos'
-        verbose_name = 'Pagamento'
-
-    def __str__(self):
-        return self.pedido
-
-
 class PagamentoMercadoPago(models.Model):
-    pagamento = models.ForeignKey(
-        Pagamento, related_name="pagamento_mercado_pago", on_delete=models.CASCADE)
+    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE,
+                               related_name='pagamento_mercado_pago_pedido', default=1)
+    transaction_amount = models.DecimalField(
+        "Valor da Transação", max_digits=10, decimal_places=2, default=9.99
+    )
+    installments = models.PositiveSmallIntegerField("Parcelas", default=1)
+    payment_method_id = models.CharField(
+        "Método de Pagamento", max_length=250, default='master')
     mercado_pago_id = models.CharField(
-        max_length=250, blank=True, db_index=True)
-    mercado_pago_status = models.CharField(max_length=250, blank=True)
-    mercado_pago_status_detail = models.CharField(max_length=250, blank=True)
+        default=1, max_length=250, blank=True, db_index=True)
+    mercado_pago_status = models.CharField(
+        max_length=250, blank=True, default='approved')
+    mercado_pago_status_detail = models.CharField(
+        max_length=250, blank=True, default='accredited')
     created_at = models.DateField('Criado em', auto_now_add=True)
     updated_at = models.DateField('Modificado em', auto_now=True)
 

@@ -8,8 +8,6 @@ from .forms import ClienteForm
 
 
 def carrinho(request):
-    if not 'carrinho' in request.session:
-        return HttpResponseRedirect(redirect_to='/')
 
     if request.method == 'POST':
         form = ClienteForm(request.POST)
@@ -18,21 +16,25 @@ def carrinho(request):
             return redirect(reverse("pagamento:pagamento"))
         print(form.errors)
 
-    uuid = request.session['carrinho']
-    carrinho = Carrinho.objects.get(uuid=uuid)
-    items = Item.objects.filter(carrinho=carrinho)
+    valor_carrinho = 0
+    items = None
+    quantidade_item = 0
+    if 'carrinho' in request.session:
+        uuid = request.session['carrinho']
+        carrinho = Carrinho.objects.get(uuid=uuid)
+        items = Item.objects.filter(carrinho=carrinho)
+    
+        for item in items:
+            quantidade_item = quantidade_item + 1
+            valor_carrinho = (item.produto.preco_base *
+                            item.quantidade) + valor_carrinho
 
     form = get_cliente_data_form(request)
-
-    valor_carrinho = 0
-    for item in items:
-        valor_carrinho = (item.produto.preco_base *
-                          item.quantidade) + valor_carrinho
 
     context = {
         'form': form,
         'items': items,
-        'quantidade_item': len(items),
+        'quantidade_item': quantidade_item,
         'valor_carrinho': valor_carrinho,
         'peoplesoftURL': 'https://people-stage.herokuapp.com/v1/peoplesoft',
     }
@@ -54,7 +56,12 @@ def get_quantidade_items_carrinho(request):
     if not 'carrinho' in request.session:
         return 0
 
-    uuid = request.session['carrinho']
-    carrinho = Carrinho.objects.get(uuid=uuid)
-    items = Item.objects.filter(carrinho=carrinho)
+    try:
+        uuid = request.session['carrinho']
+        carrinho = Carrinho.objects.get(uuid=uuid)
+        items = Item.objects.filter(carrinho=carrinho)
+    except Carrinho.DoesNotExist:
+        del request.session['carrinho']
+        return 0
+
     return len(items)

@@ -1,301 +1,36 @@
 {% extends "base.html" %}
 
-{% block head %}
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-{% endblock %}
-
-{% block js_header %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-        jQuery.fn.ForceNumericOnly =
-            function () {
-                return this.each(function () {
-                    $(this).keydown(function (e) {
-                        var key = e.charCode || e.keyCode || 0;
-                        // allow backspace, tab, delete, enter, arrows, numbers and keypad numbers ONLY
-                        // home, end, period, and numpad decimal
-                        return (
-                            key == 8 ||
-                            key == 9 ||
-                            key == 13 ||
-                            key == 46 ||
-                            key == 110 ||
-                            key == 190 ||
-                            (key >= 35 && key <= 40) ||
-                            (key >= 48 && key <= 57) ||
-                            (key >= 96 && key <= 105));
-                    });
-                });
-            };
-
-        $("#cep").ForceNumericOnly();
-        // colocar o cartao aqui, o cvv, o mes e o ano
-    });
-</script>
-{% endblock %}
-
-{% block css %}
-<style>
-    .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-    }
-
-    @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-            font-size: 3.5rem;
-        }
-    }
-
-    .container {
-        max-width: 960px;
-    }
-</style>
-{% endblock %}
-
 {% block content %}
-<div class="container py-2">
+<div class="container py-4">
 
-    <main>
-        <div class="py-5 text-center">
-            <h2>Finalizar compra</h2>
-            <p class="lead">Ambiente seguro - Plataforma do Mercado Pago</p>
-        </div>
+    <h3>Itens de valor total</h3>
+    {% for item in items %}
+        <b>{{ item }}</b> | R$ {{ item.produto.preco_base }} | Qtd: {{ item.quantidade }} <br />
+    {% endfor %}
 
-        <div class="row g-4">
-            <div class="col-md-5 col-lg-4 order-md-last">
-                <h4 class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-primary">Carrinho</span>
-                    <span class="badge bg-primary rounded-pill">{{ quantidade_item }}</span>
-                </h4>
-                <ul class="list-group mb-3">
-                    <label for="basic-url" class="form-label">Calcular frete</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Digite o CEP">
-                        <button type="submit" class="btn btn-warning">Buscar</button>
-                    </div>
-                    <br />
-                    <form class="card p-2">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Cupom">
-                            <button type="submit" class="btn btn-secondary">Aplicar</button>
-                        </div>
-                    </form>
-                    <li class="list-group-item d-flex justify-content-between">
-                        <span>Total carrinho</span>
-                        <strong>R$ 20.00</strong>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between bg-light">
-                        <div class="text-success">
-                            <h6 class="my-0">Cupom</h6>
-                            <small>Nenhum</small>
-                        </div>
-                        <span class="text-success">- R$0.00</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between">
-                        <span>Total</span>
-                        <strong>R$ 20.00</strong>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-md-7 col-lg-8">
-                <h4 class="mb-3">Informações de pagamento</h4>
-                <small class="text-muted">{{ cliente.nome }} | {{ cliente.email }}</small>
-                <form action="." method="post" id="form-checkout" class="needs-validation" novalidate>
-                    {% csrf_token %}
-
-                    <hr class="my-4">
-
-                    <div class="row gy-3">
-                        <div class="col-md-6">
-                            <label for="form-checkout__cardholderName" class="form-label">Nome no cartão</label>
-                            <input type="text" class="form-control" name="cardholderName"
-                                id="form-checkout__cardholderName" required />
-                            <small class="text-muted">Nome que é exibido no cartão</small>
-                            <div class="invalid-feedback">
-                                Nome no cartão é obrigatório
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="form-checkout__cardNumber" class="form-label">Numero do cartão</label>
-                            <input type="text" class="form-control" name="cardNumber" id="form-checkout__cardNumber"
-                                required />
-                            <div class="invalid-feedback">
-                                Numero do cartão é obrigatório
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <label for="form-checkout__cardExpirationMonth" class="form-label">Mês de expiração</label>
-                            <input type="text" class="form-control" name="cardExpirationMonth"
-                                id="form-checkout__cardExpirationMonth" required />
-                            <div class="invalid-feedback">
-                                Informe a data de expiração
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <label for="form-checkout__cardExpirationYear" class="form-label">Ano de expiração</label>
-                            <input type="text" class="form-control" name="cardExpirationYear"
-                                id="form-checkout__cardExpirationYear" required />
-                            <div class="invalid-feedback">
-                                Informe a data de expiração
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <label for="form-checkout__securityCode" class="form-label">CVV</label>
-                            <input type="text" class="form-control" name="securityCode" id="form-checkout__securityCode"
-                                required />
-                            <div class="invalid-feedback">Informe o CVV </div>
-                        </div>
-                    </div>
-
-                    <hr class="my-4">
-                    <button class="w-100 btn btn-primary btn-lg" type="submit" id="form-checkout__submit">Finalizar
-                        Compra</button>
-                    <br /> <br />
-                    <progress value="0" class="progress-bar">Carregando...</progress>
-                </form>
-            </div>
-        </div>
-    </main>
+    <br />
+    <div class="cho-container">
+    </div>
 </div>
-
 {% endblock %}
 
 {% block js_footer %}
 <script src="https://sdk.mercadopago.com/js/v2"></script>
 <script>
-    const mp = new MercadoPago('{{ MERCADO_PAGO_PUBLIC_KEY }}');
+    const mp = new MercadoPago('{{ MERCADO_PAGO_PUBLIC_KEY }}', {
+        locale: 'pt-BR'
+    });
 
-    const cardForm = mp.cardForm({
-        amount: "100.5",
-        autoMount: true,
-        form: {
-            id: "form-checkout",
-            cardholderName: {
-                id: "form-checkout__cardholderName",
-                placeholder: "Titular do cartão",
-            },
-            cardholderEmail: {
-                id: "form-checkout__cardholderEmail",
-                placeholder: "E-mail",
-            },
-            cardNumber: {
-                id: "form-checkout__cardNumber",
-                placeholder: "Número do cartão",
-            },
-            cardExpirationMonth: {
-                id: "form-checkout__cardExpirationMonth",
-                placeholder: "Mês de vencimento",
-            },
-            cardExpirationYear: {
-                id: "form-checkout__cardExpirationYear",
-                placeholder: "Ano de vencimento",
-            },
-            securityCode: {
-                id: "form-checkout__securityCode",
-                placeholder: "Código de segurança",
-            },
-            installments: {
-                id: "form-checkout__installments",
-                placeholder: "Parcelas",
-            },
-            identificationType: {
-                id: "form-checkout__identificationType",
-                placeholder: "Tipo de documento",
-            },
-            identificationNumber: {
-                id: "form-checkout__identificationNumber",
-                placeholder: "Número do documento",
-            },
-            // issuer: {
-            //     id: "form-checkout__issuer",
-            //     placeholder: "Banco emissor",
-            // },
+    mp.checkout({
+        preference: {
+            id: '{{ MERCADO_PAGO_PREFERENCE_ID }}'
         },
-        callbacks: {
-            onFormMounted: error => {
-                if (error) return console.warn("Form Mounted handling error: ", error);
-                console.log("Form mounted");
-            },
-            onSubmit: event => {
-                event.preventDefault();
-
-                const {
-                    paymentMethodId: payment_method_id,
-                    issuerId: issuer_id,
-                    cardholderEmail: email,
-                    amount,
-                    token,
-                    installments,
-                    identificationNumber,
-                    identificationType,
-                } = cardForm.getCardFormData();
-
-                fetch("/process_payment", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        token,
-                        issuer_id,
-                        payment_method_id,
-                        transaction_amount: Number(amount),
-                        installments: Number(installments),
-                        description: "Descrição do produto",
-                        payer: {
-                            email,
-                            identification: {
-                                type: identificationType,
-                                number: identificationNumber,
-                            },
-                        },
-                    }),
-                });
-            },
-            onFetching: (resource) => {
-                console.log("Fetching resource: ", resource);
-
-                // Animate progress bar
-                const progressBar = document.querySelector(".progress-bar");
-                progressBar.removeAttribute("value");
-
-                return () => {
-                    progressBar.setAttribute("value", "0");
-                };
-            },
-        },
+        render: {
+            container: '.cho-container', // Indica onde o botão de pagamento será exibido
+            label: 'Pagar com Mercado Pago', // Muda o texto do botão de pagamento (opcional)
+        }
     });
 </script>
 
-<script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function () {
-        'use strict'
-
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.querySelectorAll('.needs-validation')
-
-        // Loop over them and prevent submission
-        Array.prototype.slice.call(forms)
-            .forEach(function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-
-                    form.classList.add('was-validated')
-                }, false)
-            })
-    })()
 </script>
 {% endblock %}
