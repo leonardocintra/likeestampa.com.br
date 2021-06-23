@@ -4,6 +4,7 @@ dj-static==0.0.6
 django==3.2.4
 django-allauth==0.44.0
 django-crispy-forms==1.12.0
+django-environ==0.4.5
 django-localflavor==3.1
 django-mathfilters==1.0.0
 django-widget-tweaks==1.4.8

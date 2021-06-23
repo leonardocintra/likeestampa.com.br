@@ -15,21 +15,19 @@ import dj_database_url
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get(
-    'DJANGO_SECRET_KEY', 'django-insecure-_&%r6!rao1dl+&wkye8f9bu#mc7gr#^$bn!6^@_5oiurzgkw1j')
+SECRET_KEY = 'django-insecure-_&%r6!rao1dl+&wkye8f9bu#mc7gr#^$bn!6^@_5oiurzgkw1j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG') == 'True'
+DEBUG = True
 
-ALLOWED_HOSTS = ['likeestampa.herokuapp.com', 'likeestampa-test.herokuapp.com',
-                 'likeestampa.com.br', '127.0.0.1', 'www.likeestampa.com.br']
+ALLOWED_HOSTS = ['likeestampa-test.herokuapp.com', '127.0.0.1', ]
 
 
 # Application definition
@@ -66,13 +64,13 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'likeestampa.urls'
@@ -151,7 +149,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
@@ -169,11 +167,11 @@ CLOUDINARY = {
 
 
 # MERCADO PAGO
-MERCADO_PAGO_PUBLIC_KEY = os.environ.get('MERCADO_PAGO_PUBLIC_KEY', 'TEST-1f3bd514-5066-47ba-bc5a-cc59eedfdf64')
-MERCADO_PAGO_PRIVATE_KEY = os.environ.get('MERCADO_PAGO_PRIVATE_KEY', 'TEST-7112055085058773-060901-5d4a8146dcccf6e2216931dc77d834fb-4990865')
+MERCADO_PAGO_PUBLIC_KEY = 'TEST-1f3bd514-5066-47ba-bc5a-cc59eedfdf64'
+MERCADO_PAGO_PRIVATE_KEY =  'TEST-7112055085058773-060901-5d4a8146dcccf6e2216931dc77d834fb-4990865'
 
 
-MAXIMO_ITENS_CARRINHO = os.environ.get('MAXIMO_ITENS_CARRINHO', 10)
+MAXIMO_ITENS_CARRINHO = 10
 
 
 # Django All Auth
@@ -198,6 +196,7 @@ LOGIN_REDIRECT_URL = "/usuario/"
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # PEOPLE SOFT API
-PEOPLE_SOFT_API = os.environ.get('PEOPLE_SOFT_API', 'https://people-stage.herokuapp.com/v1/peoplesoft')
+PEOPLE_SOFT_API = 'https://people-stage.herokuapp.com/v1/peoplesoft'
+PEOPLE_SOFT_API_TOKEN = ''
 
 
