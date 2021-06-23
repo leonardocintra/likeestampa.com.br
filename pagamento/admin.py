@@ -1,0 +1,12 @@
+from django.contrib import admin
+from .models import PagamentoMercadoPago
+
+
+class PagamentoMercadoPagoAdmin(admin.ModelAdmin):
+    list_display = ['mercado_pago_id', 'mercado_pago_status', ]
+    search_fields = ['mercado_pago_id']
+    readonly_fields = ('pedido', 'mercado_pago_id', 'payment_method_id', 'transaction_amount', 'installments',
+                       'mercado_pago_status', 'mercado_pago_status_detail', 'mercado_pago_id',)
+
+
+admin.site.register(PagamentoMercadoPago, PagamentoMercadoPagoAdmin)

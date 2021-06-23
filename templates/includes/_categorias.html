@@ -1,0 +1,11 @@
+<div class="card-body">
+    <div class="text-center">
+        {% for categoria in subcategorias %}
+        <a href="{% url 'catalogo:lista_por_subcategoria' categoria.slug %}" class="btn btn-light btn-sm">
+            <i class="fas fa-{{ categoria.icone_fontawesome }}"></i> {{ categoria.nome }}
+        </a>
+        {% empty %}
+        <h3>Nenhuma categoria cadastrada</h3>
+        {% endfor %}
+    </div>
+</div>

@@ -1,6 +1,10 @@
 # LikeEstampa - Store
 Like Estampa - Store T-Shirts
 
+
+## Como usar
+ TODO:
+
 ## Historia
 ### Fundado em 20/04/2021
 

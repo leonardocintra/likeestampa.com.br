@@ -22,7 +22,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-_&%r6!rao1dl+&wkye8f9bu#mc7gr#^$bn!6^@_5oiurzgkw1j') 
+SECRET_KEY = os.environ.get(
+    'DJANGO_SECRET_KEY', 'django-insecure-_&%r6!rao1dl+&wkye8f9bu#mc7gr#^$bn!6^@_5oiurzgkw1j')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG') == 'True'
@@ -34,17 +35,33 @@ ALLOWED_HOSTS = ['likeestampa.herokuapp.com', 'likeestampa-test.herokuapp.com',
 # Application definition
 
 INSTALLED_APPS = [
+    # DJANGO
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
+    # TERCEIROS
     'cloudinary',
+    'localflavor',
+    'mathfilters',
+    'widget_tweaks',
+    'crispy_forms',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 
+    # LOCAL
     'core',
     'catalogo',
+    'checkout',
+    'pagamento',
+    'pedido',
+    'seller',
+    'usuario',
 ]
 
 MIDDLEWARE = [
@@ -62,7 +79,7 @@ ROOT_URLCONF = 'likeestampa.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -110,6 +127,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Sessions
+# SESSION_EXPIRE_AT_BROWSER_CLOSE=True
+# SESSION_COOKIE_AGE = 20
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -143,3 +164,38 @@ CLOUDINARY = {
     'api_key': os.environ.get('CLOUDINARY_API_KEY', '182946961533113'),
     'api_secret': os.environ.get('CLOUDINARY_API_SECRET', 'LAIVTLNHtG5x-TTdUmHgaE3CnsM'),
 }
+
+
+# MERCADO PAGO
+MERCADO_PAGO_PUBLIC_KEY = os.environ.get('MERCADO_PAGO_PUBLIC_KEY', 'TEST-1f3bd514-5066-47ba-bc5a-cc59eedfdf64')
+MERCADO_PAGO_PRIVATE_KEY = os.environ.get('MERCADO_PAGO_PRIVATE_KEY', 'TEST-7112055085058773-060901-5d4a8146dcccf6e2216931dc77d834fb-4990865')
+
+
+MAXIMO_ITENS_CARRINHO = os.environ.get('MAXIMO_ITENS_CARRINHO', 10)
+
+
+# Django All Auth
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+ACCOUNT_SIGNUP_FORM_CLASS = 'usuario.forms.SignupForm'
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+ACCOUNT_SESSION_REMEMBER = True
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+LOGIN_REDIRECT_URL = "/usuario/"
+
+
+# Django Crispy Form
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# PEOPLE SOFT API
+PEOPLE_SOFT_API = os.environ.get('PEOPLE_SOFT_API', 'https://people-stage.herokuapp.com/v1/peoplesoft')
+
+

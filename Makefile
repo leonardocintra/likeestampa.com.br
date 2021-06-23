@@ -7,21 +7,8 @@ run:
 shell:
 	@python manage.py shell
 
-deploy-prod:
-	@git push heroku main
-	@git push origin main
-	@heroku run python manage.py migrate -- remote prod
-
-deploy-stage:
-	@git push stage main
-	@heroku run python manage.py migrate --remote stage
-
-deploy-all:
-	@git push stage main
-	@heroku run python manage.py migrate --remote stage
-	@git push prod main
-	@heroku run python manage.py migrate --remote prod
-	@git push origin main
+deploy:
+	@git push origin develop
 
 migrate:
 	@python manage.py makemigrations

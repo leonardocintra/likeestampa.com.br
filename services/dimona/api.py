@@ -4,7 +4,7 @@ import json
 URL_DIMONA = "https://camisadimona.com.br/api/v2/shipping"
 
 HEADERS = {
-    'api-key': 'f9bb66ac5feaebd7b97206198866a898',
+    'api-key': '_PEGUE_A_SUA_VAGABUNDO',
     'Accept': 'application/json',
     'Content-Type': 'application/json'
 }

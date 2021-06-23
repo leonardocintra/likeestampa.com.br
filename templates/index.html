@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block css %}
+    <style>
+        .btn-genero:hover {
+            width: 97%;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<!-- Header-->
+{% include 'includes/_header.html' %}
+
+{% include 'includes/_categorias.html' %}
+<br />
+
+<div class="row p-3 justify-content-md-center">
+    <div class="col-md-6">
+        {% include 'includes/_pesquisa.html' %}
+    </div>
+</div>
+
+
+{% load static %}
+
+<div class="text-center">
+    <h3>Selecione o Gênero</h3>
+</div>
+<div class="d-flex justify-content-center text-center">
+
+    <div class="col-md-auto">
+        <a href="{% url 'catalogo:produto_masculino' %}">
+            <img src="{% static 'homem.jpg' %}" alt="homem" width="95%" class="btn-genero"/>
+        </a>
+        <h3 class="text-center">Masculino</h3>
+    </div>
+
+    <div class="col-md-auto">
+        <a href="{% url 'catalogo:produto_feminino' %}">
+            <img src="{% static 'mulher.jpg' %}" alt="mulher" width="95%" class="btn-genero"/>
+        </a>
+        <h3 class="text-center">Feminino</h3>
+    </div>
+
+</div>
+
+
+
+{% include "catalogo/produtos.html" %}
+
+{% endblock %}

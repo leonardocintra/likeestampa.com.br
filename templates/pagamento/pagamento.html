@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+
+    <h3>Itens de valor total</h3>
+    {% for item in items %}
+        <b>{{ item }}</b> | R$ {{ item.produto.preco_base }} | Qtd: {{ item.quantidade }} <br />
+    {% endfor %}
+
+    <br />
+    <div class="cho-container">
+    </div>
+</div>
+{% endblock %}
+
+{% block js_footer %}
+<script src="https://sdk.mercadopago.com/js/v2"></script>
+<script>
+    const mp = new MercadoPago('{{ MERCADO_PAGO_PUBLIC_KEY }}', {
+        locale: 'pt-BR'
+    });
+
+    mp.checkout({
+        preference: {
+            id: '{{ MERCADO_PAGO_PREFERENCE_ID }}'
+        },
+        render: {
+            container: '.cho-container', // Indica onde o botão de pagamento será exibido
+            label: 'Pagar com Mercado Pago', // Muda o texto do botão de pagamento (opcional)
+        }
+    });
+</script>
+
+</script>
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+
+{% include 'includes/_categorias.html' %}
+
+<section class="py-2">
+    <div class="container px-4 px-lg-5 my-5">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.source }}
+
+            <div class="row gx-4 gx-lg-5 align-items-center">
+                <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ produto.imagem_principal.url }}"
+                        alt="{{ produto.nome }}" /></div>
+                <div class="col-md-6">
+                    <div class="small mb-1 text-muted">SKU: {{ produto.id }}</div>
+                    <h1 class="display-4 fw-bolder">{{ produto.nome }}</h1>
+                    <p class="display-10 fw-bolder">Categoria: {{ produto.subcategoria }}</p>
+                    <div class="fs-5 mb-5">
+                        <span class="text-decoration-line-through">R$45.00</span>
+                        <span>R$ {{ produto.preco_base }}</span>
+                    </div>
+                    <p class="lead">{{ produto.descricao|linebreaks }}</p>
+                    <div class="fs-5 mb-2">
+                        {% for variacao in variacoes %}
+                            {% if variacao.tipo_variacao.variacao.descricao == "Cor" %}
+                                {% render_field form.cor value=variacao.tipo_variacao.id id=variacao.id type="radio" class="btn-check" %}
+                                <label class="btn btn-outline-danger btn-sm" for="{{ variacao.id }}">
+                                    {{ variacao.tipo_variacao }}
+                                </label>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="mb-5">
+                        {% for variacao in variacoes %}
+                            {% if variacao.tipo_variacao.variacao.descricao == "Tamanho" %}
+                                {% render_field form.tamanho value=variacao.tipo_variacao.id id=variacao.id type="radio" class="btn-check"%}
+                                <label class="btn btn-outline-danger" for="{{ variacao.id }}">
+                                    {{ variacao.tipo_variacao }}
+                                </label>
+                            {% endif %}
+                        {% empty %}
+                            <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                                <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                </symbol>
+                            </svg>
+                            <div class="alert alert-warning d-flex align-items-center" role="alert">
+                                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+                                    <use xlink:href="#exclamation-triangle-fill" />
+                                </svg>
+                                <div>
+                                    Produto indisponível / Sem estoque
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="d-flex">
+                        {% if variacoes %}
+                        {% render_field form.quantidade style="max-width: 4rem" class="form-control text-center me-2" %}
+                        <button type="submit" class="btn btn-outline-dark flex-shrink-0">
+                            <i class="bi-cart-fill me-1"></i> Adicionar ao carrinho
+                        </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<!-- Related items section-->
+<section class="py-5 bg-light">
+    <div class="container px-4 px-lg-5 mt-5">
+        <h2 class="fw-bolder mb-4">Produtos relacionados</h2>
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            {% for produto in produtos_relacionados %}
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Sale badge-->
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">mais
+                        vendido
+                    </div>
+                    <!-- Product image-->
+                    <img class="card-img-top" src="{{ produto.imagem_principal.url }}" alt="{{ produto.nome }}" />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">{{ produto.nome }}</h5>
+                            <!-- Product price-->
+                            <span class="text-muted text-decoration-line-through">R$ 50,00</span>
+                            R$ {{ produto.preco_base }}
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto"
+                                href="{% url 'catalogo:produto' produto.slug %}">Comprar</a></div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}
