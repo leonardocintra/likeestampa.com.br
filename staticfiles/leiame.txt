@@ -1,1 +1,16 @@
 Obrigado
+
+
+Use esse comando para descobrir qual elemento esta estourando a barra horizontal.
+Copiar no console do Browser
+
+var docWidth = document.documentElement.offsetWidth;
+
+[].forEach.call(
+  document.querySelectorAll('*'),
+  function(el) {
+    if (el.offsetWidth > docWidth) {
+      console.log(el);
+    }
+  }
+);
