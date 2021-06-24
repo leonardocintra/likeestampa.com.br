@@ -70,7 +70,7 @@ class Variacao(models.Model):
 
 
 class TipoVariacao(models.Model):
-    """ Ex: vermelho, verde, branco | P M G GG | Baby Look, etc """
+    """ Ex: vermelho, verde, branco | P M G GG | etc """
     descricao = models.CharField('Descrição', unique=True, max_length=50)
     ativo = models.BooleanField(default=True)
     variacao = models.ForeignKey(
@@ -114,6 +114,25 @@ class Produto(models.Model):
         return self.nome
 
 
+class ModeloProduto(models.Model):
+    "Modelo seria: Camiseta Tradicional, Camiseta Cavada, Camiseta Baby Look"
+    produto = models.ForeignKey(
+        Produto, on_delete=models.CASCADE, related_name='modelo_produto')
+    nome = models.CharField("Descricao", max_length=50)
+    medidas = models.CharField(max_length=50, blank=True, null=True)
+    created_at = models.DateField('Criado em', auto_now_add=True)
+    updated_at = models.DateField('Modificado em', auto_now=True)
+
+    class Meta:
+        db_table = 'modelo_produto'
+        verbose_name_plural = 'Modelos'
+        verbose_name = 'Modelos'
+        ordering = ('nome',)
+
+    def __str__(self):
+        return self.nome
+
+
 class ProdutoImagem(models.Model):
     produto = models.ForeignKey(
         Produto, on_delete=models.CASCADE, related_name='images')
@@ -137,6 +156,7 @@ class ProdutoVariacao(models.Model):
         Produto, on_delete=models.CASCADE, related_name='produto_variacao')
     tipo_variacao = models.ForeignKey(
         TipoVariacao, on_delete=models.PROTECT, related_name='tipo_variacao_produto', default=1)
+    imagem = CloudinaryField('Imagem Variação', blank=True, null=True)
     created_at = models.DateField('Criado em', auto_now_add=True)
     updated_at = models.DateField('Modificado em', auto_now=True)
 
