@@ -4,12 +4,21 @@ from django.dispatch import receiver
 from cloudinary.models import CloudinaryField
 
 
-GENERO = [
+GENERO = (
     ('I', 'Infantil'),
     ('B', 'Bebê / Body'),
     ('M', 'Masculino'),
     ('F', 'Feminino'),
-]
+)
+
+MODELO = (
+    ('TRADICIONAL', 'Tradicional'),
+    ('BABYLOOK', 'Baby Look'),
+    ('MANGALONGA', 'Manga Longa'),
+    ('REGATA', 'Regata'),
+)
+
+
 
 
 class Categoria(models.Model):
@@ -118,8 +127,7 @@ class ModeloProduto(models.Model):
     "Modelo seria: Camiseta Tradicional, Camiseta Cavada, Camiseta Baby Look"
     produto = models.ForeignKey(
         Produto, on_delete=models.CASCADE, related_name='modelo_produto')
-    nome = models.CharField("Descricao", max_length=50)
-    medidas = models.CharField(max_length=50, blank=True, null=True)
+    nome = models.CharField(choices=MODELO, max_length=50)
     created_at = models.DateField('Criado em', auto_now_add=True)
     updated_at = models.DateField('Modificado em', auto_now=True)
 
@@ -133,30 +141,13 @@ class ModeloProduto(models.Model):
         return self.nome
 
 
-class ProdutoImagem(models.Model):
-    produto = models.ForeignKey(
-        Produto, on_delete=models.CASCADE, related_name='images')
-    descricao = models.CharField("Descricao", max_length=200)
-    imagem = CloudinaryField('image', blank=False, null=False)
-    created_at = models.DateField('Criado em', auto_now_add=True)
-    updated_at = models.DateField('Modificado em', auto_now=True)
-
-    class Meta:
-        db_table = 'produto_imagem'
-        verbose_name_plural = 'produto_imagens'
-        verbose_name = 'produto_imagem'
-        ordering = ('-created_at',)
-
-    def __str__(self):
-        return self.produto.nome
-
-
 class ProdutoVariacao(models.Model):
-    produto = models.ForeignKey(
-        Produto, on_delete=models.CASCADE, related_name='produto_variacao')
+    modelo = models.ForeignKey(
+        ModeloProduto, on_delete=models.CASCADE, related_name='variacao_modelo_produto', null=True)
     tipo_variacao = models.ForeignKey(
         TipoVariacao, on_delete=models.PROTECT, related_name='tipo_variacao_produto', default=1)
     imagem = CloudinaryField('Imagem Variação', blank=True, null=True)
+    outras_informacoes = models.CharField(max_length=50, blank=True, null=True)
     created_at = models.DateField('Criado em', auto_now_add=True)
     updated_at = models.DateField('Modificado em', auto_now=True)
 
@@ -167,4 +158,4 @@ class ProdutoVariacao(models.Model):
         ordering = ('-created_at',)
 
     def __str__(self):
-        return self.produto.nome
+        return self.modelo.nome

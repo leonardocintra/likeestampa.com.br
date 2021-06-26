@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import Categoria, SubCategoria, Produto, ProdutoImagem, Variacao, TipoVariacao
+from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 from catalogo.models import ProdutoVariacao
+from .models import Categoria, SubCategoria, Produto, Variacao, TipoVariacao, ModeloProduto
 
 
 class VariacaoAdmin(admin.ModelAdmin):
@@ -20,20 +21,23 @@ class SubCategoriaAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('nome',)}
 
 
-class ProdutoImagemInline(admin.TabularInline):
-    model = ProdutoImagem
-    extra = 5
-
-
-class ProdutoVariacaoInline(admin.TabularInline):
+class ProdutoVariacaoInline(NestedStackedInline):
     model = ProdutoVariacao
     extra = 1
+    fk_name = 'modelo'
 
 
-class ProdutoAdmin(admin.ModelAdmin):
+class ModeloProdutoInline(NestedStackedInline):
+    model = ModeloProduto
+    extra = 1
+    fk_name = 'produto'
+    inlines = [ProdutoVariacaoInline, ]
+
+
+class ProdutoAdmin(NestedModelAdmin):
     prepopulated_fields = {'slug': ('nome',)}
     list_display = ['nome', 'subcategoria', 'ativo', 'genero', ]
-    inlines = [ProdutoImagemInline, ProdutoVariacaoInline]
+    inlines = [ModeloProdutoInline, ]
 
 
 admin.site.register(Categoria, CategoriaAdmin)
