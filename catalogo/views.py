@@ -5,7 +5,7 @@ from django.urls import reverse
 from checkout.views import get_quantidade_items_carrinho
 from checkout.models import Carrinho, Item
 from .forms import ProdutoDetalheForm
-from .models import Produto, SubCategoria, ProdutoImagem, ProdutoVariacao
+from .models import Produto, SubCategoria, ProdutoVariacao, ModeloProduto
 
 
 class ProdutosListView(ListView):
@@ -47,7 +47,6 @@ class SubCategoriaListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(SubCategoriaListView, self).get_context_data(**kwargs)
         context['subcategorias'] = SubCategoria.objects.all().exclude(ativo=False)
-        context['produto_imagens'] = ProdutoImagem.objects.all()
         context['sub_categoria_selecionada'] = get_object_or_404(
             SubCategoria, slug=self.kwargs['slug'])
         return context
@@ -56,17 +55,28 @@ class SubCategoriaListView(ListView):
 def produto(request, slug):
     """ Pagina de detalhes do produto """
     produto = Produto.objects.get(slug=slug)
-    variacoes = ProdutoVariacao.objects.filter(produto=produto)
-    
+    modelos = ModeloProduto.objects.filter(produto=produto)
+    variacoes = ProdutoVariacao.objects.filter(modelo__in=modelos)
+
     if request.method == 'POST':
         form = ProdutoDetalheForm(request.POST)
-        adicionar_item_carrinho(request, produto, variacoes, form.data['cor'], form.data['tamanho'], form.data['quantidade'])
+        adicionar_item_carrinho(request, produto, variacoes, form.data['modelo'],
+                                form.data['cor'], form.data['tamanho'], form.data['quantidade'])
         return redirect(reverse("checkout:carrinho"))
-    
+
     produtos_relacionados = Produto.objects.filter(
         subcategoria=produto.subcategoria)[:4]
     subcategorias = SubCategoria.objects.all().exclude(ativo=False)
 
+    modelos_jquery = []
+    for modelo in modelos:
+        modelos_jquery.append(modelo.id)
+
+    imagem_da_variacao = {}
+    for variacao in variacoes:
+        if variacao.imagem != None:
+            imagem = {variacao.id: variacao.imagem.url}
+            imagem_da_variacao.update(imagem)
 
     form = ProdutoDetalheForm(initial={
         'quantidade': '1'
@@ -75,6 +85,9 @@ def produto(request, slug):
         'produto': produto,
         'form': form,
         'subcategorias': subcategorias,
+        'modelos': modelos,
+        'modelos_jquery': modelos_jquery,
+        'imagem_da_variacao': imagem_da_variacao,
         'variacoes': variacoes,
         'quantidade_item': get_quantidade_items_carrinho(request),
         'produtos_relacionados': produtos_relacionados
@@ -82,8 +95,10 @@ def produto(request, slug):
     return render(request, 'catalogo/produto_detalhe.html', context)
 
 
-def adicionar_item_carrinho(request, produto, variacoes, cor, tamanho, quantidade):
+def adicionar_item_carrinho(request, produto, variacoes, modelo, cor, tamanho, quantidade):
     carrinho = Carrinho()
+
+    modelo = int(modelo)
 
     if 'carrinho' in request.session:
         uuid = request.session['carrinho']
@@ -92,19 +107,19 @@ def adicionar_item_carrinho(request, produto, variacoes, cor, tamanho, quantidad
         carrinho.save()
         request.session['carrinho'] = str(carrinho.uuid)
 
-    cor = variacoes.get(tipo_variacao_id=int(cor))
-    tamanho = variacoes.get(tipo_variacao_id=int(tamanho))
+    cor = variacoes.get(tipo_variacao_id=int(cor), modelo_id=modelo)
+    tamanho = variacoes.get(tipo_variacao_id=int(tamanho), modelo_id=modelo)
     quantidade = int(quantidade)
 
     item = Item.objects.filter(
-        produto=produto, carrinho=carrinho, cor=cor, tamanho=tamanho)
+        produto=produto, carrinho=carrinho, cor=cor, tamanho=tamanho, modelo_id=modelo)
 
     if item:
-        Item.objects.filter(produto=produto, carrinho=carrinho, cor=cor, tamanho=tamanho).update(
+        Item.objects.filter(produto=produto, carrinho=carrinho, cor=cor, tamanho=tamanho, modelo_id=modelo).update(
             quantidade=item[0].quantidade + quantidade)
     else:
-        Item(carrinho=carrinho, produto=produto, quantidade=quantidade, tamanho=tamanho, cor=cor).save()
-    
+        Item(carrinho=carrinho, produto=produto, modelo_id=modelo,
+             quantidade=quantidade, tamanho=tamanho, cor=cor).save()
 
 
 def produto_masculino(request):
