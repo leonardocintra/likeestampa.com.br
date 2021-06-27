@@ -139,7 +139,7 @@ class ModeloProduto(models.Model):
         return self.nome
 
 
-class ProdutoVariacao(models.Model):
+class ModeloVariacao(models.Model):
     modelo = models.ForeignKey(
         ModeloProduto, on_delete=models.CASCADE, related_name='variacao_modelo_produto', null=True)
     tipo_variacao = models.ForeignKey(
@@ -150,9 +150,9 @@ class ProdutoVariacao(models.Model):
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
     class Meta:
-        db_table = 'produto_variacao'
-        verbose_name_plural = 'Variações do produto'
-        verbose_name = 'Variação do produto'
+        db_table = 'modelo_variacao'
+        verbose_name_plural = 'Variações do modelo'
+        verbose_name = 'Variação do modelo'
         ordering = ('-created_at',)
 
     def __str__(self):

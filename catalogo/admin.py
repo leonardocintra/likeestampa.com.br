@@ -1,6 +1,6 @@
 from django.contrib import admin
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin
-from catalogo.models import ProdutoVariacao
+from catalogo.models import ModeloVariacao
 from .models import Categoria, SubCategoria, Produto, Variacao, TipoVariacao, ModeloProduto
 
 
@@ -22,7 +22,7 @@ class SubCategoriaAdmin(admin.ModelAdmin):
 
 
 class ProdutoVariacaoInline(NestedStackedInline):
-    model = ProdutoVariacao
+    model = ModeloVariacao
     extra = 1
     fk_name = 'modelo'
 

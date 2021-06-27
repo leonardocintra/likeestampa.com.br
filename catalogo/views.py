@@ -5,7 +5,7 @@ from django.urls import reverse
 from checkout.views import get_quantidade_items_carrinho
 from checkout.models import Carrinho, Item
 from .forms import ProdutoDetalheForm
-from .models import Produto, SubCategoria, ProdutoVariacao, ModeloProduto
+from .models import Produto, SubCategoria, ModeloVariacao, ModeloProduto
 
 
 class ProdutosListView(ListView):
@@ -56,7 +56,7 @@ def produto(request, slug):
     """ Pagina de detalhes do produto """
     produto = Produto.objects.get(slug=slug)
     modelos = ModeloProduto.objects.filter(produto=produto)
-    variacoes = ProdutoVariacao.objects.filter(modelo__in=modelos)
+    variacoes = ModeloVariacao.objects.filter(modelo__in=modelos)
 
     if request.method == 'POST':
         form = ProdutoDetalheForm(request.POST)

@@ -1,6 +1,6 @@
 import uuid
 from django.db import models
-from catalogo.models import Produto, ProdutoVariacao, ModeloProduto
+from catalogo.models import Produto, ModeloVariacao, ModeloProduto
 
 
 class Carrinho(models.Model):
@@ -22,8 +22,8 @@ class Carrinho(models.Model):
 class Item(models.Model):
     carrinho = models.ForeignKey(Carrinho, on_delete=models.CASCADE)
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
-    cor = models.ForeignKey(ProdutoVariacao, on_delete=models.SET_NULL, null=True, related_name="item_cor")
-    tamanho = models.ForeignKey(ProdutoVariacao, on_delete=models.SET_NULL, null=True, related_name="item_tamanho")
+    cor = models.ForeignKey(ModeloVariacao, on_delete=models.SET_NULL, null=True, related_name="item_cor")
+    tamanho = models.ForeignKey(ModeloVariacao, on_delete=models.SET_NULL, null=True, related_name="item_tamanho")
     modelo = models.ForeignKey(ModeloProduto, on_delete=models.SET_NULL, null=True, related_name="item_modelo")
     quantidade = models.PositiveIntegerField(default=1)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
