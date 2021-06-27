@@ -15,8 +15,8 @@ class Pedido(models.Model):
     pago = models.BooleanField(default=False)
     valor_total = models.DecimalField(max_digits=999, decimal_places=2, null=True)
     gateway_pagamento = models.CharField(choices=GATEWAY_PAGAMENTO, default='mercado_pago', max_length=20)
-    created_at = models.DateField('Criado em', auto_now_add=True)
-    updated_at = models.DateField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField('Criado em', auto_now_add=True)
+    updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
     class Meta:
         db_table = 'pedido'
