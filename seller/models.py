@@ -15,8 +15,8 @@ class Seller(models.Model):
     cidade = models.CharField(max_length=100)
     uf = models.CharField(max_length=2)
     observacao = models.TextField(null=True, blank=True)
-    created_at = models.DateField('Criado em', auto_now_add=True)
-    updated_at = models.DateField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField('Criado em', auto_now_add=True)
+    updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
     class Meta:
         db_table = 'seller'

@@ -19,15 +19,13 @@ MODELO = (
 )
 
 
-
-
 class Categoria(models.Model):
     """ Ex: camiseta, caneca, bones """
     nome = models.CharField(max_length=100, unique=True)
     slug = models.SlugField('Identificador', max_length=100, unique=True)
     ativo = models.BooleanField(default=True)
-    created_at = models.DateField('Criado em', auto_now_add=True)
-    updated_at = models.DateField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField('Criado em', auto_now_add=True)
+    updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
     class Meta:
         db_table = 'categoria'
@@ -48,8 +46,8 @@ class SubCategoria(models.Model):
     slug = models.SlugField('Identificador', max_length=100, unique=True)
     icone_fontawesome = models.CharField(max_length=100, null=True)
     ativo = models.BooleanField(default=False)
-    created_at = models.DateField('Criado em', auto_now_add=True)
-    updated_at = models.DateField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField('Criado em', auto_now_add=True)
+    updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
     class Meta:
         db_table = 'subcategoria'
@@ -65,8 +63,8 @@ class Variacao(models.Model):
     """Ex: COR, Tamanho, Tipo de camiseta"""
     descricao = models.CharField('Descrição', unique=True, max_length=50)
     ativo = models.BooleanField(default=True)
-    created_at = models.DateField('Criado em', auto_now_add=True)
-    updated_at = models.DateField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField('Criado em', auto_now_add=True)
+    updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
     class Meta:
         db_table = 'variacao'
@@ -84,8 +82,8 @@ class TipoVariacao(models.Model):
     ativo = models.BooleanField(default=True)
     variacao = models.ForeignKey(
         Variacao, on_delete=models.CASCADE, related_name='variacao_tipo_variacao')
-    created_at = models.DateField('Criado em', auto_now_add=True)
-    updated_at = models.DateField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField('Criado em', auto_now_add=True)
+    updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
     class Meta:
         db_table = 'tipo_variacao'
@@ -110,8 +108,8 @@ class Produto(models.Model):
     imagem_principal = CloudinaryField(
         'Imagem principal', blank=True, null=True)
     genero = models.CharField(max_length=1, choices=GENERO, default='M')
-    created_at = models.DateField('Criado em', auto_now_add=True)
-    updated_at = models.DateField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField('Criado em', auto_now_add=True)
+    updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
     class Meta:
         db_table = 'produto'
@@ -128,8 +126,8 @@ class ModeloProduto(models.Model):
     produto = models.ForeignKey(
         Produto, on_delete=models.CASCADE, related_name='modelo_produto')
     nome = models.CharField(choices=MODELO, max_length=50)
-    created_at = models.DateField('Criado em', auto_now_add=True)
-    updated_at = models.DateField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField('Criado em', auto_now_add=True)
+    updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
     class Meta:
         db_table = 'modelo_produto'
@@ -148,8 +146,8 @@ class ProdutoVariacao(models.Model):
         TipoVariacao, on_delete=models.PROTECT, related_name='tipo_variacao_produto', default=1)
     imagem = CloudinaryField('Imagem Variação', blank=True, null=True)
     outras_informacoes = models.CharField(max_length=50, blank=True, null=True)
-    created_at = models.DateField('Criado em', auto_now_add=True)
-    updated_at = models.DateField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField('Criado em', auto_now_add=True)
+    updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
     class Meta:
         db_table = 'produto_variacao'

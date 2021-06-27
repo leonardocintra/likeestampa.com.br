@@ -18,8 +18,8 @@ class PagamentoMercadoPago(models.Model):
     mercado_pago_status_detail = models.CharField(
         max_length=250, blank=True, default='accredited')
     payment_id = models.PositiveBigIntegerField(null=True)
-    created_at = models.DateField('Criado em', auto_now_add=True)
-    updated_at = models.DateField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField('Criado em', auto_now_add=True)
+    updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
     class Meta:
         db_table = 'pagamento_mercado_pago'
