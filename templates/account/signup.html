@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load crispy_forms_tags %}
+{% load widget_tweaks %}
 
 {% block content %}
 <div class="container py-2">
@@ -8,8 +8,117 @@
     <h2>Cadastro</h2>
     <form method="post">
         {% csrf_token %}
-        {{ form|crispy }}
-        
+        {{ form.source }}
+
+        <div class="row g-3">
+
+            <div class="col-sm-4">
+                <label for="cpf" class="form-label">CPF</label>
+                {% render_field form.cpf class="form-control" placeholder="CPF ..." %}
+                <div class="invalid-feedback">
+                    Informe um CPF válido
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <label for="nome" class="form-label">Nome</label>
+                {% render_field form.nome class="form-control" placeholder="Nome" %}
+                <div class="invalid-feedback">
+                    Verifique o nome
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <label for="nome" class="form-label">Sobrenome</label>
+                {% render_field form.sobrenome class="form-control" placeholder="Sobrenome" %}
+                <div class="invalid-feedback">
+                    Verifique o sobrenome
+                </div>
+            </div>
+
+                        
+            <div class="col-3">
+                <label for="email" class="form-label">Sexo </label>
+                {% render_field form.sexo class="form-control" %}
+                <div class="invalid-feedback">
+                    Por favor insira um email valido
+                </div>
+            </div>
+
+            <div class="col-9">
+                <label for="email" class="form-label">Email </label>
+                {% render_field form.email class="form-control" placeholder="seuemail@exemplo.com" %}
+                <div class="invalid-feedback">
+                    Por favor insira um email valido
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label for="cep" class="form-label">CEP</label>
+                {% render_field form.cep class="form-control" placeholder="Seu CEP ..." %}
+                <div class="invalid-feedback">
+                    CEP obrigatório
+                </div>
+            </div>
+
+            <div class="col-md-7">
+                <label for="cidade" class="form-label">Cidade</label>
+                {% render_field form.cidade class="form-control" placeholder="Cidade ..." %}
+                <div class="invalid-feedback">
+                    Por favor insira uma cidade
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <label for="uf" class="form-label">Estado</label>
+                {% render_field form.uf class="form-control" placeholder="UF ..." %}
+                <div class="invalid-feedback">
+                    Informe UF
+                </div>
+            </div>
+
+            <div class="col-2">
+                <label for="numero" class="form-label">Numero</label>
+                {% render_field form.numero class="form-control" placeholder="numero ..." %}
+
+                <div class="invalid-feedback">
+                    Por favor informe o numero
+                </div>
+            </div>
+
+            <div class="col-10">
+                <label for="bairro" class="form-label">Bairro</label>
+                {% render_field form.bairro class="form-control" placeholder="bairro ..." %}
+                <div class="invalid-feedback">
+                    Por favor informe o bairro
+                </div>
+            </div>
+
+            <div class="col-8">
+                <label for="endereco" class="form-label">Endereço</label>
+                {% render_field form.endereco class="form-control" placeholder="endereco ..." %}
+                <div class="invalid-feedback">
+                    Por favor informe o endereço
+                </div>
+            </div>
+
+            <div class="col-4">
+                <label for="complemento" class="form-label">Complemento</label>
+                {% render_field form.complemento class="form-control" placeholder="complemento ..." %}
+            </div>
+
+            <div class="col-12">
+                <label for="referencia" class="form-label">Referencia</label>
+                {% render_field form.referencia class="form-control" placeholder="referencia ..." %}
+            </div>
+
+            <div class="col-4">
+                <label for="password1" class="form-label">Senha de acesso</label>
+                {% render_field form.password1 class="form-control" placeholder="Senha" %}
+            </div>
+        </div>
+
+        <br />
+
         <button class="btn btn-success" type="submit">Cadastrar</button>
     </form>
 </div>

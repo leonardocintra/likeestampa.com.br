@@ -34,13 +34,14 @@
 
     // mostra a imagem da variacao selecionada (cor e modelo)
     function mostraImagemVariacao(e) {
+        $(".imagem_da_variacao").attr("src", '{{ produto.imagem_principal.url }}');
         for (const [key, value] of Object.entries(imagem_da_variacao)) {
             if (key === e) {
                 $(".imagem_da_variacao").attr("src", value);
-            }
+                encontrou = true;
+            }   
         }
     }
-
 
 </script>
 {% endblock %}
