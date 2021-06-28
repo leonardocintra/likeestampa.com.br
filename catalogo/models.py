@@ -153,7 +153,7 @@ class ModeloVariacao(models.Model):
         db_table = 'modelo_variacao'
         verbose_name_plural = 'Variações do modelo'
         verbose_name = 'Variação do modelo'
-        ordering = ('-created_at',)
+        ordering = ('created_at',)
 
     def __str__(self):
         return self.modelo.nome
