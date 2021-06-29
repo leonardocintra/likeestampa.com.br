@@ -1,7 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="container">
-        <h1>Status do pedido #{{ pedido }}</h1>
+    <div class="container py-3">
+        <h1>Status do pedido #{{ pedido.id }}</h1>
+        <h3>Pagamento: 
+            {% if pedido.pago %}
+                PAGO
+            {% else %}
+                AGUARDANDO PAGAMENTO
+            {% endif %}
+        </h3>
+
+        Items
     </div>
 {% endblock %}

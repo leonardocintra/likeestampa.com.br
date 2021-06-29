@@ -32,7 +32,7 @@ def pagamento(request):
 
     payer = {
         "name": cliente['nome'],
-        "surname": "SOBRENOME ESTA NO NOME",
+        "surname": "SOBRENOME NO NOME",
         "email": cliente['email'],
         "identification": {
             "type": "CPF",
@@ -59,11 +59,12 @@ def pagamento(request):
         valor_carrinho = (item.produto.preco_base *
                           item.quantidade) + valor_carrinho
 
+    back_urls = request.build_absolute_uri().replace('/pagamento/', '') + '/pedido/pedido_finalizado_mercado_pago'
     preference_data = {
         "back_urls": {
-            "success": "http://127.0.0.1:8000/pedido/",
-            "failure": "http://127.0.0.1:8000/checkout/carrinho/",
-            "pending": "http://127.0.0.1:8000/checkout/carrinho/"
+            "success": back_urls,
+            "failure": back_urls,
+            "pending": back_urls
         },
         "payer": payer,
         "auto_return": "approved",
@@ -81,18 +82,25 @@ def pagamento(request):
         peoplesoft_endereco_id=endereco['id'],
         valor_total=valor_carrinho
     )
+    
+    frase_padrao = 'PEDIDO_NAO_FINALIZADO'
     PagamentoMercadoPago.objects.create(
         pedido=pedido,
         mercado_pago_id=preference['id'],
-        mercado_pago_status='criado_pelo_likeestampa'
+        mercado_pago_status=frase_padrao,
+        mercado_pago_status_detail=frase_padrao,
+        payment_method_id=frase_padrao
+
     )
 
+    # TODO: toda vez que da F5 ele cria um novo pedido. Validar isso
     request.session['mercado_pago_id'] = preference['id']
 
     context = {
         'items': items,
         'cliente': cliente,
         'quantidade_item': len(items),
+        'valor_carrinho': valor_carrinho,
         'MERCADO_PAGO_PUBLIC_KEY': settings.MERCADO_PAGO_PUBLIC_KEY,
         'MERCADO_PAGO_PREFERENCE_ID': preference['id']
     }

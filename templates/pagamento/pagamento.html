@@ -3,14 +3,46 @@
 {% block content %}
 <div class="container py-4">
 
-    <h3>Itens de valor total</h3>
-    {% for item in items %}
-        <b>{{ item }}</b> | R$ {{ item.produto.preco_base }} | Qtd: {{ item.quantidade }} <br />
-    {% endfor %}
+    <h3 class="display-5"> Cliente: {{ cliente.nome }} </h3>
+    <h4> CPF: {{ cliente.cpf }} </h4>
 
-    <br />
+    <hr />
+
+    <h3>Valor pedido: R$ {{ valor_carrinho }} </h3>
+    
     <div class="cho-container">
     </div>
+
+    <br />
+
+    {% for item in items %}
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{{ item.modelo.produto.imagem_principal.url }}" class="img-fluid rounded-start" alt="{{ item }}">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item }}</h5>
+                    <p class="card-text">
+                        <small class="text-muted">Codigo do produto: #{{ item.produto.id }} {{ item.modelo }}</small>
+                    </p>
+                    <p class="card-text">
+                        R$ <mark>{{ item.produto.preco_base }} </mark>
+                        <br />
+                        Quantidade: {{ item.quantidade }}
+                        <br />
+                        Tamanho: {{ item.tamanho.tipo_variacao }} 
+                        <br /> 
+                        Cor: {{ item.cor.tipo_variacao }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    {% endfor %}
 </div>
 {% endblock %}
 
@@ -27,10 +59,8 @@
         },
         render: {
             container: '.cho-container', // Indica onde o botão de pagamento será exibido
-            label: 'Pagar com Mercado Pago', // Muda o texto do botão de pagamento (opcional)
+            label: 'Pagar com Mercado Pago (R$ {{ valor_carrinho }})', // Muda o texto do botão de pagamento (opcional)
         }
     });
-</script>
-
 </script>
 {% endblock %}
