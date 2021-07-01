@@ -1,13 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect, render
-from django.views.generic import TemplateView
+from django.shortcuts import redirect
 from django.views.generic.detail import DetailView
-from services.mercadopago.mercadopago import get_preference, get_payment
-from pagamento.models import PagamentoMercadoPago
-from .models import Pedido, ItemPedido
+
 from checkout.models import Carrinho, ItemCarrinho
-from django.urls import reverse
+from pagamento.models import PagamentoMercadoPago
+from services.mercadopago.mercadopago import get_preference, get_payment
+from .models import Pedido, ItemPedido
 
 
 @login_required
@@ -63,6 +62,19 @@ def pedido_finalizado_mercado_pago(request):
 class PedidoDetailView(LoginRequiredMixin, DetailView):
     template_name = 'pedido/pedido.html'
     model = Pedido
+
+    def get(self, request, *args, **kwargs):
+        try:
+            pedido = Pedido.objects.get(pk=self.kwargs['pk'])
+        except Pedido.DoesNotExist:
+            return redirect("usuario:cliente")
+        
+        # Aqui nao deixa o usuario entrar o pedido que nao for ele que esta conectado
+        if self.request.user.id != pedido.user_id:
+            return redirect("usuario:cliente")
+
+        return super().get(request, *args, **kwargs)
+            
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

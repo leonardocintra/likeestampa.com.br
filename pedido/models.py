@@ -2,6 +2,7 @@ from django.db import models
 from localflavor.br.models import BRCPFField
 import uuid
 from catalogo.models import ModeloProduto, ModeloVariacao, Produto
+from django.contrib.auth.models import User
 
 GATEWAY_PAGAMENTO = (
     ('mercado_pago', 'Mercado Pago'),
@@ -11,6 +12,7 @@ GATEWAY_PAGAMENTO = (
 
 class Pedido(models.Model):
     cpf = BRCPFField('CPF')
+    user = models.ForeignKey(User, null=True, on_delete=models.PROTECT)
     peoplesoft_pessoa_id = models.PositiveIntegerField(null=False)
     peoplesoft_endereco_id = models.PositiveIntegerField(null=False)
     pago = models.BooleanField(default=False)
