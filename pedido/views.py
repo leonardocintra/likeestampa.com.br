@@ -5,9 +5,8 @@ from django.views.generic import TemplateView
 from django.views.generic.detail import DetailView
 from services.mercadopago.mercadopago import get_preference, get_payment
 from pagamento.models import PagamentoMercadoPago
-from pedido.models import Pedido
-from .models import Pedido
-from checkout.models import Carrinho
+from .models import Pedido, ItemPedido
+from checkout.models import Carrinho, ItemCarrinho
 from django.urls import reverse
 
 
@@ -41,8 +40,22 @@ def pedido_finalizado_mercado_pago(request):
     carrinho_uuid = request.session['carrinho']
     Carrinho.objects.filter(uuid=carrinho_uuid).update(
         abandonado=False, finalizado=True)
+    carrinho = Carrinho.objects.get(uuid=carrinho_uuid)
+    items = ItemCarrinho.objects.filter(carrinho=carrinho)
+
+
+    for item in items:
+        ItemPedido.objects.create(
+            pedido=pagamento_mp.pedido,
+            produto=item.produto,
+            cor=item.cor,
+            tamanho=item.tamanho,
+            modelo=item.modelo,
+            quantidade=item.quantidade
+        )    
     del request.session['carrinho']
     del request.session['mercado_pago_id']
+    # TODO: ver se deleta o carrinho e os items (registro do banco)
 
     return redirect("pedido:pedido", pk=pagamento_mp.pedido.id)
 
@@ -53,5 +66,5 @@ class PedidoDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
+        context['items'] = ItemPedido.objects.filter(pedido=self.object)
         return context

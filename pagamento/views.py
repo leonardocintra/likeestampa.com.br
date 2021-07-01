@@ -90,7 +90,6 @@ def pagamento(request):
         mercado_pago_status=frase_padrao,
         mercado_pago_status_detail=frase_padrao,
         payment_method_id=frase_padrao
-
     )
 
     # TODO: toda vez que da F5 ele cria um novo pedido. Validar isso

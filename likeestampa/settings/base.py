@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'core',
     'catalogo',
     'checkout',
+    'evento',
     'pagamento',
     'pedido',
     'seller',

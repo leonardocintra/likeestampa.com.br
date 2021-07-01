@@ -2,15 +2,42 @@
 
 {% block content %}
     <div class="container py-3">
-        <h1>Status do pedido #{{ pedido.id }}</h1>
-        <h3>Pagamento: 
-            {% if pedido.pago %}
-                PAGO
-            {% else %}
-                AGUARDANDO PAGAMENTO
-            {% endif %}
-        </h3>
+        <div class="col-md-5 col-lg-5 order-md-last">
+            <h1>Status do pedido #{{ pedido.id }}</h1>
+            <h3>Pagamento: 
+                {% if pedido.pago %}
+                    PAGO
+                {% else %}
+                    AGUARDANDO PAGAMENTO
+                {% endif %}
+            </h3>
 
-        Items
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-primary">Seus produtos</span>
+                <span class="badge bg-primary rounded-pill">{{ quantidade_item }}</span>
+            </h4>
+            <ul class="list-group mb-3">
+                {% for item in items %}
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                        <h6 class="my-0">
+                            {{ item }} 
+                            <a href="{% url 'catalogo:produto' item.produto.slug %}" >
+                                <i class="bi bi-arrow-up-right-circle-fill"></i>
+                            </a>
+                        </h6>
+                        <small class="text-muted">Qtd: {{ item.quantidade }} | {{ item.cor.tipo_variacao }} | {{ item.tamanho.tipo_variacao }}</small>
+                    </div>
+                    <span class="text-muted">R$ {{ item.produto.preco_base }}</span>
+                </li>
+                {% empty %}
+                <h3 class="text-center">Não foi possivel recuperar seus pedidos, entre em contato conosco</h3>
+                {% endfor %}
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>Total</span>
+                    <strong>R$ {{ valor_carrinho }}</strong>
+                </li>
+            </ul>
+        </div>
     </div>
 {% endblock %}

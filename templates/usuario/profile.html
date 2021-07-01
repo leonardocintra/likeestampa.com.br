@@ -10,6 +10,9 @@
 
     <div class="row">
         <div class="col-md-6">
+            {% if not pedidos %}
+                <h3> você não possui pedido </h3>
+            {% else %}            
             <table class="table">
                 <thead>
                     <tr>
@@ -32,10 +35,11 @@
                             {% endif %}
                         </td>
                         <td> <a href="{% url 'pedido:pedido' pedido.id %}"> ver mais </a> </td>
-                    </tr>  
-                    {% endfor %}                
+                    </tr>
+                    {% endfor %}           
                 </tbody>
             </table>
+            {% endif %}
         </div>
 
         <div class="col-md-6">
