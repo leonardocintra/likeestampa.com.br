@@ -47,10 +47,15 @@ def pagamento(request):
 
     item_data = []
     for item in items:
+
+        imagem = item.produto.imagem_principal.url
+        if item.cor.imagem:
+            imagem = item.cor.imagem.url
+        
         item_data.append({
             "id": item.produto.slug,
             "title": item.produto.nome,
-            "picture_url": "https://res.cloudinary.com/leonardocintra/image/upload/" + str(item.produto.imagem_principal) + ".jpg",
+            "picture_url": imagem,
             # "description": item.produto.descricao,
             "category_id": item.produto.subcategoria.slug,
             "quantity": item.quantidade,

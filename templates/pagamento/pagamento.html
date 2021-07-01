@@ -16,10 +16,14 @@
     <br />
 
     {% for item in items %}
-    <div class="card mb-3" style="max-width: 540px;">
+    <div class="card mb-3" style="max-width: 540px;">        
         <div class="row g-0">
             <div class="col-md-4">
-                <img src="{{ item.modelo.produto.imagem_principal.url }}" class="img-fluid rounded-start" alt="{{ item }}">
+                {% if item.cor.imagem %}
+                    <img src="{{ item.cor.imagem.url }}" class="img-fluid rounded-start" alt="{{ item }}">
+                {% else %}
+                    <img src="{{ item.modelo.produto.imagem_principal.url }}" class="img-fluid rounded-start" alt="{{ item }}">
+                {% endif %}
             </div>
             <div class="col-md-8">
                 <div class="card-body">

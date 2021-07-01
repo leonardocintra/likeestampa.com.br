@@ -34,8 +34,15 @@ def pedido_finalizado_mercado_pago(request):
     pagamento_mp = PagamentoMercadoPago.objects.get(
         mercado_pago_id=mercado_pago_id)
 
-    # Atualiza os dados do pagamento no pedido
-    Pedido.objects.filter(pk=pagamento_mp.pedido.id).update(pago=True)
+    pago = False
+    if pagamento_mp.mercado_pago_status == 'approved':
+        pago = True
+
+    # Atualiza os dados do pagamento no pedido (pago e o usuario)
+    Pedido.objects.filter(pk=pagamento_mp.pedido.id).update(
+        pago=pago,
+        user_id = request.user.id
+    )
     carrinho_uuid = request.session['carrinho']
     Carrinho.objects.filter(uuid=carrinho_uuid).update(
         abandonado=False, finalizado=True)
@@ -78,5 +85,14 @@ class PedidoDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['items'] = ItemPedido.objects.filter(pedido=self.object)
+        items = ItemPedido.objects.filter(pedido=self.object)
+        context['items'] = items
+
+        valor_pedido = 0
+
+        for item in items:
+            valor_pedido = (item.produto.preco_base *
+                                item.quantidade) + valor_pedido
+        
+        context['valor_pedido'] = valor_pedido
         return context

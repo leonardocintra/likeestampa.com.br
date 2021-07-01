@@ -1,43 +1,55 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="container py-3">
+<div class="container py-3">
+    <div class="row">
+
         <div class="col-md-5 col-lg-5 order-md-last">
             <h1>Status do pedido #{{ pedido.id }}</h1>
-            <h3>Pagamento: 
+            <h3>Valor: R$ {{ valor_pedido }} :
                 {% if pedido.pago %}
-                    PAGO
+                <label class="text-success"> Pago </label>
                 {% else %}
-                    AGUARDANDO PAGAMENTO
+                <label class="text-warning"> Aguardando pagamento </label>
                 {% endif %}
             </h3>
 
-            <h4 class="d-flex justify-content-between align-items-center mb-3">
-                <span class="text-primary">Seus produtos</span>
-                <span class="badge bg-primary rounded-pill">{{ quantidade_item }}</span>
-            </h4>
-            <ul class="list-group mb-3">
-                {% for item in items %}
-                <li class="list-group-item d-flex justify-content-between lh-sm">
-                    <div>
-                        <h6 class="my-0">
-                            {{ item }} 
-                            <a href="{% url 'catalogo:produto' item.produto.slug %}" >
-                                <i class="bi bi-arrow-up-right-circle-fill"></i>
-                            </a>
-                        </h6>
-                        <small class="text-muted">Qtd: {{ item.quantidade }} | {{ item.cor.tipo_variacao }} | {{ item.tamanho.tipo_variacao }}</small>
+            <br />
+
+            {% for item in items %}
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{{ item.modelo.produto.imagem_principal.url }}" class="img-fluid rounded-start"
+                            alt="{{ item }}">
                     </div>
-                    <span class="text-muted">R$ {{ item.produto.preco_base }}</span>
-                </li>
-                {% empty %}
-                <h3 class="text-center">Não foi possivel recuperar seus pedidos, entre em contato conosco</h3>
-                {% endfor %}
-                <li class="list-group-item d-flex justify-content-between">
-                    <span>Total</span>
-                    <strong>R$ {{ valor_carrinho }}</strong>
-                </li>
-            </ul>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ item }}</h5>
+                            <p class="card-text">
+                                <small class="text-muted">Codigo do produto: #{{ item.produto.id }} {{ item.modelo }}</small>
+                            </p>
+                            <p class="card-text">
+                                <b> Valor: </b> <mark>R$ {{ item.produto.preco_base }} </mark>
+                                <br />
+                                <b> Quantidade: </b> {{ item.quantidade }}
+                                <br />
+                                <b> Tamanho: </b> {{ item.tamanho.tipo_variacao }}
+                                <br />
+                                <b> Cor: </b> {{ item.cor.tipo_variacao }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            {% endfor %}
+        </div>
+
+        <div class="col-md-5 col-lg-5 order-md-last">
+            Eventos do pedido
         </div>
     </div>
+</div>
 {% endblock %}

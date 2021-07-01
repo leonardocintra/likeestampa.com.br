@@ -22,6 +22,7 @@ class EventoPedido(models.Model):
         Status, on_delete=models.PROTECT, related_name='status')
     pedido = models.ForeignKey(
         Pedido, on_delete=models.CASCADE, related_name='evento_pedido')
+    evento_atual = models.BooleanField(default=False)
     origem = models.SlugField(max_length=100, default='likeestampa')
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
