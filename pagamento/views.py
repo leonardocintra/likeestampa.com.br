@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 # from django.utils.functional import cached_property
-from checkout.models import Carrinho, Item
+from checkout.models import Carrinho, ItemCarrinho
 from services.mercadopago.mercadopago import create_preference
 from services.peoplesoft.peoplesoft import buscar_cliente_by_id
 from django.http import HttpResponse
@@ -23,7 +23,7 @@ def pagamento(request):
 
     uuid = request.session['carrinho']
     carrinho = Carrinho.objects.get(uuid=uuid)
-    items = Item.objects.filter(carrinho=carrinho)
+    items = ItemCarrinho.objects.filter(carrinho=carrinho)
     valor_carrinho = 0
 
     cliente = buscar_cliente_by_id(request.session['cliente_id'])

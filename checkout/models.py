@@ -19,7 +19,7 @@ class Carrinho(models.Model):
         return str(self.uuid)
 
 
-class Item(models.Model):
+class ItemCarrinho(models.Model):
     carrinho = models.ForeignKey(Carrinho, on_delete=models.CASCADE)
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     cor = models.ForeignKey(ModeloVariacao, on_delete=models.SET_NULL, null=True, related_name="item_cor")
@@ -31,9 +31,9 @@ class Item(models.Model):
 
 
     class Meta:
-        db_table = 'item'
-        verbose_name_plural = 'Itens'
-        verbose_name = 'item'
+        db_table = 'item_carrinho'
+        verbose_name_plural = 'Itens do carrinho'
+        verbose_name = 'Item do carrinho'
 
     def __str__(self):
         return self.produto.nome

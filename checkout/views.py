@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from catalogo.models import Produto
 from usuario.business import get_cliente_data_form
-from .models import Carrinho, Item
+from .models import Carrinho, ItemCarrinho
 from .forms import ClienteForm
 
 
@@ -22,7 +22,7 @@ def carrinho(request):
     if 'carrinho' in request.session:
         uuid = request.session['carrinho']
         carrinho = Carrinho.objects.get(uuid=uuid)
-        items = Item.objects.filter(carrinho=carrinho)
+        items = ItemCarrinho.objects.filter(carrinho=carrinho)
     
         for item in items:
             quantidade_item = quantidade_item + 1
@@ -48,7 +48,7 @@ def excluir_item_carrinho(request, id):
     uuid = request.session['carrinho']
     carrinho = Carrinho.objects.get(uuid=uuid)
 
-    item = Item.objects.filter(pk=id, carrinho=carrinho).delete()
+    item = ItemCarrinho.objects.filter(pk=id, carrinho=carrinho).delete()
     return HttpResponseRedirect(redirect_to='/checkout/carrinho/')
 
 
@@ -59,7 +59,7 @@ def get_quantidade_items_carrinho(request):
     try:
         uuid = request.session['carrinho']
         carrinho = Carrinho.objects.get(uuid=uuid)
-        items = Item.objects.filter(carrinho=carrinho)
+        items = ItemCarrinho.objects.filter(carrinho=carrinho)
     except Carrinho.DoesNotExist:
         del request.session['carrinho']
         return 0

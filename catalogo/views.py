@@ -3,7 +3,7 @@ from django.views.generic.list import ListView
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from checkout.views import get_quantidade_items_carrinho
-from checkout.models import Carrinho, Item
+from checkout.models import Carrinho, ItemCarrinho
 from .forms import ProdutoDetalheForm
 from .models import Produto, SubCategoria, ModeloVariacao, ModeloProduto
 
@@ -111,14 +111,14 @@ def adicionar_item_carrinho(request, produto, variacoes, modelo, cor, tamanho, q
     tamanho = variacoes.get(tipo_variacao_id=int(tamanho), modelo_id=modelo)
     quantidade = int(quantidade)
 
-    item = Item.objects.filter(
+    item = ItemCarrinho.objects.filter(
         produto=produto, carrinho=carrinho, cor=cor, tamanho=tamanho, modelo_id=modelo)
 
     if item:
-        Item.objects.filter(produto=produto, carrinho=carrinho, cor=cor, tamanho=tamanho, modelo_id=modelo).update(
+        ItemCarrinho.objects.filter(produto=produto, carrinho=carrinho, cor=cor, tamanho=tamanho, modelo_id=modelo).update(
             quantidade=item[0].quantidade + quantidade)
     else:
-        Item(carrinho=carrinho, produto=produto, modelo_id=modelo,
+        ItemCarrinho(carrinho=carrinho, produto=produto, modelo_id=modelo,
              quantidade=quantidade, tamanho=tamanho, cor=cor).save()
 
 

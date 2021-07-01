@@ -50,3 +50,8 @@ def pedido_finalizado_mercado_pago(request):
 class PedidoDetailView(LoginRequiredMixin, DetailView):
     template_name = 'pedido/pedido.html'
     model = Pedido
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        return context

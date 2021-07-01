@@ -10,6 +10,9 @@ shell:
 deploy:
 	@git push origin develop
 
+check:
+	@python3 manage.py check
+
 migrate:
 	@python manage.py makemigrations
 	@python manage.py migrate
