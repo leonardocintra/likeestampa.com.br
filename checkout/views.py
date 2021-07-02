@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from catalogo.models import Produto
 from usuario.business import get_cliente_data_form
+from services.melhorenvio.melhorenvio import get_cotacao_frete
 from .models import Carrinho, ItemCarrinho
 from .forms import ClienteForm
 
@@ -31,9 +32,13 @@ def carrinho(request):
 
     form = get_cliente_data_form(request)
 
+    
+    frete_items = get_cotacao_frete()
+
     context = {
         'form': form,
         'items': items,
+        'frete_items': frete_items,
         'quantidade_item': quantidade_item,
         'valor_carrinho': valor_carrinho,
         'peoplesoftURL': settings.PEOPLE_SOFT_API,

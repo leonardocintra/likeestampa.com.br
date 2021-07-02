@@ -14,41 +14,19 @@
                 {% endif %}
             </h3>
 
-            <br />
-
-            {% for item in items %}
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="{{ item.modelo.produto.imagem_principal.url }}" class="img-fluid rounded-start"
-                            alt="{{ item }}">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ item }}</h5>
-                            <p class="card-text">
-                                <small class="text-muted">Codigo do produto: #{{ item.produto.id }} {{ item.modelo }}</small>
-                            </p>
-                            <p class="card-text">
-                                <b> Valor: </b> <mark>R$ {{ item.produto.preco_base }} </mark>
-                                <br />
-                                <b> Quantidade: </b> {{ item.quantidade }}
-                                <br />
-                                <b> Tamanho: </b> {{ item.tamanho.tipo_variacao }}
-                                <br />
-                                <b> Cor: </b> {{ item.cor.tipo_variacao }}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <p>
+                Parcelas: {{ pagamento_mp.installments }} <br />
+                Cartão: {{ pagamento_mp.payment_method_id }} <br />
+                Data compra: {{ pedido.created_at }}
+            </p>
 
             <br />
-            {% endfor %}
+
+            {% include "pagamento/includes/for_items.html" %}
         </div>
 
         <div class="col-md-5 col-lg-5 order-md-last">
-            Eventos do pedido
+            <h1>Eventos do pedido</h1>
         </div>
     </div>
 </div>

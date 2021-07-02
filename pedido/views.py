@@ -87,6 +87,7 @@ class PedidoDetailView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         items = ItemPedido.objects.filter(pedido=self.object)
         context['items'] = items
+        context['pagamento_mp'] = PagamentoMercadoPago.objects.get(pedido_id=self.object.pk)
 
         valor_pedido = 0
 

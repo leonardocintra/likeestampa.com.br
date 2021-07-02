@@ -54,7 +54,7 @@
                     $('#id_cidade').val('');
                     $('#id_referencia').val('');
                     $('#id_complemento').val('');
-                    
+
                 }
             });
         });
@@ -127,15 +127,19 @@
                     <li class="list-group-item d-flex justify-content-between lh-sm">
                         <div>
                             <h6 class="my-0">
-                                {{ item }} 
-                                <a href="{% url 'catalogo:produto' item.produto.slug %}" >
+                                {{ item }}
+                                <a href="{% url 'catalogo:produto' item.produto.slug %}">
                                     <i class="bi bi-arrow-up-right-circle-fill"></i>
                                 </a>
                             </h6>
                             <a href="{% url 'checkout:excluir_item_carrinho' item.id %}" class="btn btn-danger btn-sm">
                                 <i class="bi bi-trash"></i>
                             </a>
-                            <small class="text-muted">Qtd: {{ item.quantidade }} | {{ item.cor.tipo_variacao }} | {{ item.tamanho.tipo_variacao }}</small>
+                            <small class="text-muted">
+                                Qtd: {{ item.quantidade }} | 
+                                {{ item.cor.tipo_variacao }} |
+                                {{ item.tamanho.tipo_variacao }}
+                            </small>
                         </div>
                         <span class="text-muted">R$ {{ item.produto.preco_base }}</span>
                     </li>
@@ -147,6 +151,28 @@
                         <strong>R$ {{ valor_carrinho }}</strong>
                     </li>
                 </ul>
+                <br />
+                <h4>Frete</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Transportadora</th>
+                            <th scope="col">Valor</th>
+                            <th scope="col">Prazo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for frete in frete_items %}
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>{{ frete.name }}</td>
+                            <td>{{ frete.price }}</td>
+                            <td>{{ frete.delivery_time }} dias uteis</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
             <div class="col-md-7 col-lg-7">
                 <h4 class="mb-3">Dados de cobrança</h4>
@@ -243,11 +269,12 @@
                     <hr class="my-4">
                     <a href="/" class="btn btn-secondary">Continuar Comprando</a>
                     {% if items %}
-                        <button class="btn btn-primary btn-lg" type="submit">Ir para pagamento</button>
+                    <button class="btn btn-primary btn-lg" type="submit">Ir para pagamento</button>
                     {% endif %}
                 </form>
                 {% else %}
-                    <h2><a href="{% url 'account_login' %}">Entrar </a> | <a href="{% url 'account_signup' %}">Fazer cadastro</a> </h2>
+                <h2><a href="{% url 'account_login' %}">Entrar </a> | <a href="{% url 'account_signup' %}">Fazer
+                        cadastro</a> </h2>
                 {% endif %}
             </div>
         </div>
