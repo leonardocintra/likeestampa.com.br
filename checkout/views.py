@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from catalogo.models import Produto
 from usuario.business import get_cliente_data_form
-from services.melhorenvio.melhorenvio import get_cotacao_frete
+from services.dimona.api import get_frete
 from .models import Carrinho, ItemCarrinho
 from .forms import ClienteForm
 
@@ -26,14 +26,15 @@ def carrinho(request):
         items = ItemCarrinho.objects.filter(carrinho=carrinho)
     
         for item in items:
-            quantidade_item = quantidade_item + 1
+            quantidade_item = quantidade_item + item.quantidade
             valor_carrinho = (item.produto.preco_base *
                             item.quantidade) + valor_carrinho
 
     form = get_cliente_data_form(request)
 
-    
-    frete_items = get_cotacao_frete()
+    frete_items = {}
+    if items:
+        frete_items = get_frete(form['cep'].initial, quantidade_item)
 
     context = {
         'form': form,

@@ -152,7 +152,12 @@
                     </li>
                 </ul>
                 <br />
-                <h4>Frete</h4>
+                
+                <div class="col-md-4">
+                    Frete para
+                    {% render_field form.cep class="form-control" placeholder="Seu CEP ..." %}
+                </div>
+            
                 <table class="table">
                     <thead>
                         <tr>
@@ -167,8 +172,8 @@
                         <tr>
                             <th scope="row">1</th>
                             <td>{{ frete.name }}</td>
-                            <td>{{ frete.price }}</td>
-                            <td>{{ frete.delivery_time }} dias uteis</td>
+                            <td>R$ {{ frete.value }}</td>
+                            <td>{{ frete.business_days }} dias uteis</td>
                         </tr>
                         {% endfor %}
                     </tbody>
