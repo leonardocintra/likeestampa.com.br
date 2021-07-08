@@ -111,78 +111,69 @@
 {% block content %}
 <div class="container py-2">
 
-    <main>
-        <div class="py-3 text-center">
-            <h2>Carrinho de compras</h2>
-        </div>
-
-        <div class="row g-3">
-            <div class="col-md-5 col-lg-5 order-md-last">
-                <h4 class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-primary">Seu carrinho</span>
-                    <span class="badge bg-primary rounded-pill">{{ quantidade_item }}</span>
-                </h4>
-                <ul class="list-group mb-3">
-                    {% for item in items %}
-                    <li class="list-group-item d-flex justify-content-between lh-sm">
-                        <div>
-                            <h6 class="my-0">
-                                {{ item }}
-                                <a href="{% url 'catalogo:produto' item.produto.slug %}">
-                                    <i class="bi bi-arrow-up-right-circle-fill"></i>
-                                </a>
-                            </h6>
-                            <a href="{% url 'checkout:excluir_item_carrinho' item.id %}" class="btn btn-danger btn-sm">
-                                <i class="bi bi-trash"></i>
-                            </a>
-                            <small class="text-muted">
-                                Qtd: {{ item.quantidade }} | 
-                                {{ item.cor.tipo_variacao }} |
-                                {{ item.tamanho.tipo_variacao }}
-                            </small>
-                        </div>
-                        <span class="text-muted">R$ {{ item.produto.preco_base }}</span>
-                    </li>
-                    {% empty %}
-                    <h3 class="text-center">Carrinho vazio</h3>
-                    {% endfor %}
-                    <li class="list-group-item d-flex justify-content-between">
-                        <span>Total</span>
-                        <strong>R$ {{ valor_carrinho }}</strong>
-                    </li>
-                </ul>
-                <br />
-                
-                <div class="col-md-4">
-                    Frete para
-                    {% render_field form.cep class="form-control" placeholder="Seu CEP ..." %}
-                </div>
-            
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Transportadora</th>
-                            <th scope="col">Valor</th>
-                            <th scope="col">Prazo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for frete in frete_items %}
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>{{ frete.name }}</td>
-                            <td>R$ {{ frete.value }}</td>
-                            <td>{{ frete.business_days }} dias uteis</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+    <form method="post" class="needs-validation" novalidate>
+        <main>
+            <div class="py-3 text-center">
+                <h2>Carrinho de compras</h2>
             </div>
-            <div class="col-md-7 col-lg-7">
-                <h4 class="mb-3">Dados de cobrança</h4>
-                {% if user.is_authenticated %}
-                <form method="post" class="needs-validation" novalidate>
+
+            <div class="row g-3">
+                <div class="col-md-5 col-lg-5 order-md-last">
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-primary">Seu carrinho</span>
+                        <span class="badge bg-primary rounded-pill">{{ quantidade_item }}</span>
+                    </h4>
+                    <ul class="list-group mb-3">
+                        {% for item in items %}
+                        <li class="list-group-item d-flex justify-content-between lh-sm">
+                            <div>
+                                <h6 class="my-0">
+                                    {{ item }}
+                                    <a href="{% url 'catalogo:produto' item.produto.slug %}">
+                                        <i class="bi bi-arrow-up-right-circle-fill"></i>
+                                    </a>
+                                </h6>
+                                <a href="{% url 'checkout:excluir_item_carrinho' item.id %}"
+                                    class="btn btn-danger btn-sm">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                                <small class="text-muted">
+                                    Qtd: {{ item.quantidade }} |
+                                    {{ item.cor.tipo_variacao }} |
+                                    {{ item.tamanho.tipo_variacao }}
+                                </small>
+                            </div>
+                            <span class="text-muted">R$ {{ item.produto.preco_base }}</span>
+                        </li>
+                        {% empty %}
+                        <h3 class="text-center">Carrinho vazio</h3>
+                        {% endfor %}
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Total</span>
+                            <strong>R$ {{ valor_carrinho }}</strong>
+                        </li>
+                    </ul>
+
+
+                    <h4 class="text-center"> <small> Frete CEP </small>{{ cep_padrao }} </h4>
+                    {% for frete in frete_items %}
+                    <div class="form-check">
+                        {{ form_frete.source }}
+                        {% if forloop.first %}
+                            {% render_field form_frete.delivery_method_id value=frete.delivery_method_id id=frete.delivery_method_id type="radio" class="form-check-input" checked=checked %}
+                        {% else %}
+                            {% render_field form_frete.delivery_method_id value=frete.delivery_method_id id=frete.delivery_method_id type="radio" class="form-check-input" %}
+                        {% endif %}
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            <b>R$ {{ frete.value }} </b>| {{ frete.business_days }} dias uteis ({{ frete.name }})
+                        </label>
+                    </div>
+                    {% endfor %}
+                    <hr />
+                </div>
+                <div class="col-md-7 col-lg-7">
+                    <h4 class="mb-3">Dados de cobrança</h4>
+                    {% if user.is_authenticated %}
                     {% csrf_token %}
                     {{ form.source }}
                     <div class="row g-3">
@@ -276,14 +267,16 @@
                     {% if items %}
                     <button class="btn btn-primary btn-lg" type="submit">Ir para pagamento</button>
                     {% endif %}
-                </form>
-                {% else %}
-                <h2><a href="{% url 'account_login' %}">Entrar </a> | <a href="{% url 'account_signup' %}">Fazer
-                        cadastro</a> </h2>
-                {% endif %}
+                    {% else %}
+                    <h2>
+                        <a href="{% url 'account_login' %}">Entrar </a> |
+                        <a href="{% url 'account_signup' %}">Fazer cadastro</a>
+                    </h2>
+                    {% endif %}
+                </div>
             </div>
-        </div>
-    </main>
+        </main>
+    </form>
 </div>
 
 {% endblock %}

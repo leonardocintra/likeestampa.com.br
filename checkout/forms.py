@@ -3,6 +3,11 @@ from django.forms import ModelForm
 from localflavor.br.forms import BRCPFField
 
 
+class FreteForm(forms.Form):
+    # Frete do DIMONA
+    delivery_method_id = forms.IntegerField(min_value=1)
+
+
 class ClienteForm(forms.Form):
     # TODO: migrar para a app usuario
     cpf = BRCPFField()

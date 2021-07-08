@@ -9,15 +9,17 @@ from services.mercadopago.mercadopago import create_preference
 from services.peoplesoft.peoplesoft import buscar_cliente_by_id
 from django.http import HttpResponse
 from pedido.models import Pedido
+from services.dimona.api import get_frete
 from .models import PagamentoMercadoPago
 import json
+import decimal
 
 
 @login_required
 def pagamento(request):
     if not 'carrinho' in request.session:
         pass  # TODO: mandar mensagem no telegram avisando
-    
+
     if 'cliente_id' in request.session:
         pass  # TODO: mandar mensagem no telegram avisando
 
@@ -46,12 +48,12 @@ def pagamento(request):
     }
 
     item_data = []
+    quantidade_total = 0
     for item in items:
-
         imagem = item.produto.imagem_principal.url
         if item.cor.imagem:
             imagem = item.cor.imagem.url
-        
+
         item_data.append({
             "id": item.produto.slug,
             "title": item.produto.nome,
@@ -61,10 +63,47 @@ def pagamento(request):
             "quantity": item.quantidade,
             "unit_price": float(item.produto.preco_base)
         })
+        quantidade_total = quantidade_total + item.quantidade
         valor_carrinho = (item.produto.preco_base *
                           item.quantidade) + valor_carrinho
 
-    back_urls = request.build_absolute_uri().replace('/pagamento/', '') + '/pedido/pedido_finalizado_mercado_pago'
+
+    # monta o frete
+    frete_items = get_frete(endereco['cep'], quantidade_total)
+    valor_frete = 5
+    transportadora = ''
+    if 'cotacao_frete' in request.session:
+        delivery_method_id = int(request.session['cotacao_frete'])
+        for frete in frete_items:
+            if frete['delivery_method_id'] == delivery_method_id:
+                valor_frete = frete['value']
+                transportadora = frete['name']
+                break
+    else:
+        for frete in frete_items:
+            print('deve pegar o valor menor')            
+
+    shipments = {
+        "cost": float(valor_frete),
+        "mode": transportadora
+    }
+
+    valor_frete = round(float(valor_frete), 2)
+    valor_total = round(valor_carrinho + decimal.Decimal(valor_frete), 2)
+
+    # Cria o pedido
+    pedido = Pedido.objects.create(
+        cpf=cliente['cpf'],
+        peoplesoft_pessoa_id=cliente['id'],
+        peoplesoft_endereco_id=endereco['id'],
+        valor_total=valor_total,
+        valor_frete=valor_frete,
+        valor_items=valor_carrinho,
+    )
+
+    # monta urls de retorno
+    back_urls = request.build_absolute_uri().replace('/pagamento/', '') + \
+        '/pedido/pedido_finalizado_mercado_pago'
     preference_data = {
         "back_urls": {
             "success": back_urls,
@@ -75,19 +114,15 @@ def pagamento(request):
         "auto_return": "approved",
         "items": item_data,
         "statement_descriptor": "LIKE_ESTAMPA",
-        "external_reference": "CAMISETA_DA_HORA",
-        "installments": 10
+        "external_reference": "LIKEESTAMPA-" + str(pedido.id),
+        "installments": 10,
+        "shipments": shipments
     }
 
+    # Cria a preferencia no mercado pago
     preference = create_preference(preference_data)
 
-    pedido = Pedido.objects.create(
-        cpf=cliente['cpf'],
-        peoplesoft_pessoa_id=cliente['id'],
-        peoplesoft_endereco_id=endereco['id'],
-        valor_total=valor_carrinho
-    )
-    
+    # Atualiza informações na tabela de pagamento
     frase_padrao = 'PEDIDO_NAO_FINALIZADO'
     PagamentoMercadoPago.objects.create(
         pedido=pedido,
@@ -103,8 +138,10 @@ def pagamento(request):
     context = {
         'items': items,
         'cliente': cliente,
+        'valor_frete': valor_frete,
         'quantidade_item': len(items),
         'valor_carrinho': valor_carrinho,
+        'valor_total': valor_total,
         'MERCADO_PAGO_PUBLIC_KEY': settings.MERCADO_PAGO_PUBLIC_KEY,
         'MERCADO_PAGO_PREFERENCE_ID': preference['id']
     }

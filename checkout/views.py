@@ -6,12 +6,14 @@ from catalogo.models import Produto
 from usuario.business import get_cliente_data_form
 from services.dimona.api import get_frete
 from .models import Carrinho, ItemCarrinho
-from .forms import ClienteForm
+from .forms import ClienteForm, FreteForm
 
 
 def carrinho(request):
     if request.method == 'POST':
         form = ClienteForm(request.POST)
+        frete = FreteForm(request.POST)
+        request.session['cotacao_frete'] = frete['delivery_method_id'].data
         # TODO: Alterar dados cadastrais ou incluir novo endereco
         if form.is_valid():
             return redirect(reverse("pagamento:pagamento"))
@@ -31,13 +33,18 @@ def carrinho(request):
                             item.quantidade) + valor_carrinho
 
     form = get_cliente_data_form(request)
+    form_frete = FreteForm()
+
+    cep_padrao = form['cep'].initial
 
     frete_items = {}
     if items:
-        frete_items = get_frete(form['cep'].initial, quantidade_item)
+        frete_items = get_frete(cep_padrao, quantidade_item)
 
     context = {
         'form': form,
+        'form_frete': form_frete,
+        'cep_padrao': cep_padrao,
         'items': items,
         'frete_items': frete_items,
         'quantidade_item': quantidade_item,
