@@ -88,12 +88,4 @@ class PedidoDetailView(LoginRequiredMixin, DetailView):
         items = ItemPedido.objects.filter(pedido=self.object)
         context['items'] = items
         context['pagamento_mp'] = PagamentoMercadoPago.objects.get(pedido_id=self.object.pk)
-
-        valor_pedido = 0
-
-        for item in items:
-            valor_pedido = (item.produto.preco_base *
-                                item.quantidade) + valor_pedido
-        
-        context['valor_pedido'] = valor_pedido
         return context

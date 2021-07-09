@@ -13,12 +13,14 @@ from services.dimona.api import get_frete
 from .models import PagamentoMercadoPago
 import json
 import decimal
+from django.http.response import HttpResponseRedirect
 
 
 @login_required
 def pagamento(request):
     if not 'carrinho' in request.session:
-        pass  # TODO: mandar mensagem no telegram avisando
+        # TODO: mandar mensagem no telegram avisando
+        HttpResponseRedirect('/')
 
     if 'cliente_id' in request.session:
         pass  # TODO: mandar mensagem no telegram avisando
@@ -31,21 +33,6 @@ def pagamento(request):
     cliente = buscar_cliente_by_id(request.session['cliente_id'])
     cliente = cliente['records'][0]
     endereco = cliente['enderecos'][0]
-
-    payer = {
-        "name": cliente['nome'],
-        "surname": "SOBRENOME NO NOME",
-        "email": cliente['email'],
-        "identification": {
-            "type": "CPF",
-            "number": cliente['cpf']
-        },
-        "address": {
-            "street_name": endereco['endereco'],
-            "street_number": endereco['numero'],
-            "zip_code": endereco['cep']
-        }
-    }
 
     item_data = []
     quantidade_total = 0
@@ -81,11 +68,28 @@ def pagamento(request):
                 break
     else:
         for frete in frete_items:
-            print('deve pegar o valor menor')            
+            print('deve pegar o valor menor')
 
-    shipments = {
-        "cost": float(valor_frete),
-        "mode": transportadora
+    payer = {
+        "name": cliente['nome'],
+        "surname": "SOBRENOME NO NOME",
+        "email": cliente['email'],
+        "identification": {
+            "type": "CPF",
+            "number": cliente['cpf']
+        },
+        "address": {
+            "street_name": endereco['endereco'],
+            "street_number": endereco['numero'],
+            "zip_code": endereco['cep']
+        },
+        "shipments": {
+            "receiver_address": {
+                "street_name": endereco['endereco'],
+                "street_number": endereco['numero'],
+                "zip_code": endereco['cep']
+            }
+        }
     }
 
     valor_frete = round(float(valor_frete), 2)
@@ -102,8 +106,9 @@ def pagamento(request):
     )
 
     # monta urls de retorno
-    back_urls = request.build_absolute_uri().replace('/pagamento/', '') + \
-        '/pedido/pedido_finalizado_mercado_pago'
+    back_urls = request.build_absolute_uri().replace('/pagamento/', '') + '/pedido/pedido_finalizado_mercado_pago'
+    
+    # junta o request pro mercado pago
     preference_data = {
         "back_urls": {
             "success": back_urls,
@@ -116,7 +121,10 @@ def pagamento(request):
         "statement_descriptor": "LIKE_ESTAMPA",
         "external_reference": "LIKEESTAMPA-" + str(pedido.id),
         "installments": 10,
-        "shipments": shipments
+        "shipments": {
+            "cost": float(valor_frete),
+            "mode": "not_specified",
+        }
     }
 
     # Cria a preferencia no mercado pago

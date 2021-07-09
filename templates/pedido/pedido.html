@@ -5,18 +5,20 @@
     <div class="row">
 
         <div class="col-md-5 col-lg-5 order-md-last">
-            <h1>Status do pedido #{{ pedido.id }}</h1>
-            <h3>Valor: R$ {{ valor_pedido }} :
-                {% if pedido.pago %}
+            <h1>Pedido #{{ pedido.id }}</h1>
+            {% if pedido.pago %}
                 <label class="text-success"> Pago </label>
-                {% else %}
+            {% else %}
                 <label class="text-warning"> Aguardando pagamento </label>
-                {% endif %}
-            </h3>
+            {% endif %}
+            <h3>Valor: R$ {{ pedido.valor_total }}</h3>
+            <label>Produtos: R$ {{ pedido.valor_items }} + Frete R$ {{ pedido.valor_frete }}</label>
 
+            <br />
+            <br />
             <p>
                 Parcelas: {{ pagamento_mp.installments }} <br />
-                Cartão: {{ pagamento_mp.payment_method_id }} <br />
+                Forma de pagamento: {{ pagamento_mp.payment_method_id }} <br />
                 Data compra: {{ pedido.created_at }}
             </p>
 
