@@ -42,7 +42,6 @@ def pedido_finalizado_mercado_pago(request):
     carrinho = Carrinho.objects.get(uuid=carrinho_uuid)
     items = ItemCarrinho.objects.filter(carrinho=carrinho)
 
-    item_request = []
     for item in items:
         ItemPedido.objects.create(
             pedido=pagamento_mp.pedido,
@@ -52,25 +51,13 @@ def pedido_finalizado_mercado_pago(request):
             modelo=item.modelo,
             quantidade=item.quantidade
         )
-        item_request.append({
-            "name": item.produto.nome,
-            "sku": item.produto.slug,
-            "qty": item.quantidade,
-            "dimona_sku_id": "10110110110",
-            "designs": [
-                "url_front"
-            ],
-            "mocks": [
-                "mock_front"
-            ]
-        })
 
     pedido = Pedido.objects.get(pk=pagamento_mp.pedido.id)
     pago = False
     if pagamento_mp.mercado_pago_status == 'approved':
         pago = True
         cliente = buscar_cliente_by_id(request.session['cliente_id'])
-        create_order(pagamento_mp.pedido.id, cliente, item_request, pedido.frete_id)
+        create_order(pagamento_mp.pedido.id, cliente, items, pedido.frete_id)
 
     # Atualiza os dados do pagamento no pedido (pago e o usuario)
     Pedido.objects.filter(pk=pagamento_mp.pedido.id).update(
