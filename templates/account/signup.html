@@ -2,15 +2,99 @@
 
 {% load widget_tweaks %}
 
-{% block content %}
-<div class="container py-2">
+{% block js_header %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
 
-    <h2>Cadastro</h2>
-    <form method="post">
+        $("#btnBuscaCep").click(function () {
+            var cep = $('#id_cep').val().replace("-", "");
+            var urlCep = 'https://viacep.com.br/ws/' + cep + '/json/';
+
+            $.ajax({
+                url: urlCep,
+                success: function (result) {
+                    $('#id_cep').val(cep);
+                    $('#id_endereco').val(result.logradouro);
+                    $('#id_bairro').val(result.bairro);
+                    $('#id_uf').val(result.uf);
+                    $('#id_cidade').val(result.localidade);
+                }
+            });
+        });
+
+        $("#btnBuscaCPF").click(function () {
+            var cpf = $('#id_cpf').val().replace("-", "");
+            var urlPeopleSoft = '{{ peoplesoftURL }}' + '/pessoa/cpf/' + cpf;
+
+            $.ajax({
+                url: urlPeopleSoft,
+                success: function (result) {
+                    result = result.records[0];
+                    $('#id_cpf').val(cpf);
+                    $('#id_nome').val(result.nome);
+                    $('#id_email').val(result.email);
+                    $('#id_endereco').val(result.enderecos[0].endereco);
+                    $('#id_cep').val(result.enderecos[0].cep);
+                    $('#id_bairro').val(result.enderecos[0].bairro);
+                    $('#id_uf').val(result.enderecos[0].uf);
+                    $('#id_numero').val(result.enderecos[0].numero);
+                    $('#id_cidade').val(result.enderecos[0].cidade);
+                    $('#id_referencia').val(result.enderecos[0].referencia);
+                    $('#id_complemento').val(result.enderecos[0].complemento);
+
+                }, error: function (result) {
+                    $('#id_nome').val('');
+                    $('#id_email').val('');
+                    $('#id_endereco').val('');
+                    $('#id_cep').val('');
+                    $('#id_bairro').val('');
+                    $('#id_uf').val('');
+                    $('#id_numero').val('');
+                    $('#id_cidade').val('');
+                    $('#id_referencia').val('');
+                    $('#id_complemento').val('');
+
+                }
+            });
+        });
+
+        jQuery.fn.ForceNumericOnly =
+            function () {
+                return this.each(function () {
+                    $(this).keydown(function (e) {
+                        var key = e.charCode || e.keyCode || 0;
+                        // allow backspace, tab, delete, enter, arrows, numbers and keypad numbers ONLY
+                        // home, end, period, and numpad decimal
+                        return (
+                            key == 8 ||
+                            key == 9 ||
+                            key == 13 ||
+                            key == 46 ||
+                            key == 110 ||
+                            key == 190 ||
+                            (key >= 35 && key <= 40) ||
+                            (key >= 48 && key <= 57) ||
+                            (key >= 96 && key <= 105));
+                    });
+                });
+            };
+
+        $("#id_cpf").ForceNumericOnly();
+        $("#id_cep").ForceNumericOnly();
+    });
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+
+    <h2>Seja muito bem vindo! Faça seu cadastro</h2>
+    <form method="post" class="col-md-9">
         {% csrf_token %}
         {{ form.source }}
 
-        <div class="row g-3">
+        <div class="row g-2">
 
             <div class="col-sm-4">
                 <label for="cpf" class="form-label">CPF</label>
@@ -22,14 +106,14 @@
 
             <div class="col-sm-4">
                 <label for="nome" class="form-label">Nome</label>
-                {% render_field form.nome class="form-control" placeholder="Nome" %}
+                {% render_field form.nome class="form-control" placeholder="Nome ..." %}
                 <div class="invalid-feedback">
                     Verifique o nome
                 </div>
             </div>
             <div class="col-sm-4">
-                <label for="nome" class="form-label">Sobrenome</label>
-                {% render_field form.sobrenome class="form-control" placeholder="Sobrenome" %}
+                <label for="sobrenome" class="form-label">Sobrenome</label>
+                {% render_field form.sobrenome class="form-control" placeholder="Sobrenome ..." %}
                 <div class="invalid-feedback">
                     Verifique o sobrenome
                 </div>
@@ -54,7 +138,14 @@
 
             <div class="col-md-3">
                 <label for="cep" class="form-label">CEP</label>
-                {% render_field form.cep class="form-control" placeholder="Seu CEP ..." %}
+                <div class="input-group col-md-3">
+                    {% render_field form.cep class="form-control" placeholder="Seu CEP ..." %}
+                    <span class="input-group-btn">
+                        <button id="btnBuscaCep" name="btnBuscaCep" class="btn btn-info" type="button">
+                           <i class="bi bi-search"></i>
+                        </button>
+                    </span>
+                </div>
                 <div class="invalid-feedback">
                     CEP obrigatório
                 </div>
@@ -103,13 +194,30 @@
 
             <div class="col-4">
                 <label for="complemento" class="form-label">Complemento</label>
-                {% render_field form.complemento class="form-control" placeholder="complemento ..." %}
+                {% render_field form.complemento class="form-control" placeholder="Ex: AP11, BLOCO C, Quadra D ..." %}
             </div>
 
             <div class="col-12">
                 <label for="referencia" class="form-label">Referencia</label>
-                {% render_field form.referencia class="form-control" placeholder="referencia ..." %}
+                {% render_field form.referencia class="form-control" placeholder="Ponto de referencia ..." %}
             </div>
+
+
+            <div class="col-2">
+                <label for="area" class="form-label">Tel. area</label>
+                {% render_field form.area class="form-control" placeholder="area ..." %}
+            </div>
+
+            <div class="col-5">
+                <label for="telefone_numero" class="form-label">Tel. numero</label>
+                {% render_field form.telefone_numero class="form-control" placeholder="telefone numero ..." %}
+            </div>
+
+            <div class="col-3">
+                <label for="tipo" class="form-label">Tipo de telefone </label>
+                {% render_field form.tipo class="form-control" %}
+            </div>
+
 
             <div class="col-4">
                 <label for="password1" class="form-label">Senha de acesso</label>

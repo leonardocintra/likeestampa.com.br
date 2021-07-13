@@ -59,6 +59,7 @@ def pagamento(request):
     frete_items = get_frete(endereco['cep'], quantidade_total)
     valor_frete = 5
     transportadora = ''
+    delivery_method_id = 0
     if 'cotacao_frete' in request.session:
         delivery_method_id = int(request.session['cotacao_frete'])
         for frete in frete_items:
@@ -72,7 +73,7 @@ def pagamento(request):
 
     payer = {
         "name": cliente['nome'],
-        "surname": "SOBRENOME NO NOME",
+        "surname": cliente['sobrenome'],
         "email": cliente['email'],
         "identification": {
             "type": "CPF",
@@ -103,6 +104,8 @@ def pagamento(request):
         valor_total=valor_total,
         valor_frete=valor_frete,
         valor_items=valor_carrinho,
+        frete_id=delivery_method_id,
+        frete_nome=transportadora,
     )
 
     # monta urls de retorno

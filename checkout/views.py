@@ -11,13 +11,11 @@ from .forms import ClienteForm, FreteForm
 
 def carrinho(request):
     if request.method == 'POST':
-        form = ClienteForm(request.POST)
-        frete = FreteForm(request.POST)
-        request.session['cotacao_frete'] = frete['delivery_method_id'].data
+        form = FreteForm(request.POST)
+        request.session['cotacao_frete'] = form['delivery_method_id'].data
         # TODO: Alterar dados cadastrais ou incluir novo endereco
         if form.is_valid():
             return redirect(reverse("pagamento:pagamento"))
-        print(form.errors)
 
     valor_carrinho = 0
     items = None

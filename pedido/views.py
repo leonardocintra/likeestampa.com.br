@@ -6,6 +6,8 @@ from django.views.generic.detail import DetailView
 from checkout.models import Carrinho, ItemCarrinho
 from pagamento.models import PagamentoMercadoPago
 from services.mercadopago.mercadopago import get_preference, get_payment
+from services.dimona.api import create_order
+from services.peoplesoft.peoplesoft import buscar_cliente_by_id
 from .models import Pedido, ItemPedido
 
 
@@ -34,22 +36,13 @@ def pedido_finalizado_mercado_pago(request):
     pagamento_mp = PagamentoMercadoPago.objects.get(
         mercado_pago_id=mercado_pago_id)
 
-    pago = False
-    if pagamento_mp.mercado_pago_status == 'approved':
-        pago = True
-
-    # Atualiza os dados do pagamento no pedido (pago e o usuario)
-    Pedido.objects.filter(pk=pagamento_mp.pedido.id).update(
-        pago=pago,
-        user_id = request.user.id
-    )
     carrinho_uuid = request.session['carrinho']
     Carrinho.objects.filter(uuid=carrinho_uuid).update(
         abandonado=False, finalizado=True)
     carrinho = Carrinho.objects.get(uuid=carrinho_uuid)
     items = ItemCarrinho.objects.filter(carrinho=carrinho)
 
-
+    item_request = []
     for item in items:
         ItemPedido.objects.create(
             pedido=pagamento_mp.pedido,
@@ -58,10 +51,37 @@ def pedido_finalizado_mercado_pago(request):
             tamanho=item.tamanho,
             modelo=item.modelo,
             quantidade=item.quantidade
-        )    
+        )
+        item_request.append({
+            "name": item.produto.nome,
+            "sku": item.produto.slug,
+            "qty": item.quantidade,
+            "dimona_sku_id": "10110110110",
+            "designs": [
+                "url_front"
+            ],
+            "mocks": [
+                "mock_front"
+            ]
+        })
+
+    pedido = Pedido.objects.get(pk=pagamento_mp.pedido.id)
+    pago = False
+    if pagamento_mp.mercado_pago_status == 'approved':
+        pago = True
+        cliente = buscar_cliente_by_id(request.session['cliente_id'])
+        create_order(pagamento_mp.pedido.id, cliente, item_request, pedido.frete_id)
+
+    # Atualiza os dados do pagamento no pedido (pago e o usuario)
+    Pedido.objects.filter(pk=pagamento_mp.pedido.id).update(
+        pago=pago,
+        user_id=request.user.id
+    )
+
     del request.session['carrinho']
     del request.session['mercado_pago_id']
-    # TODO: ver se deleta o carrinho e os items (registro do banco)
+    Carrinho.objects.filter(uuid=carrinho_uuid).delete()
+    ItemCarrinho.objects.filter(carrinho=carrinho).delete()
 
     return redirect("pedido:pedido", pk=pagamento_mp.pedido.id)
 
@@ -75,17 +95,17 @@ class PedidoDetailView(LoginRequiredMixin, DetailView):
             pedido = Pedido.objects.get(pk=self.kwargs['pk'])
         except Pedido.DoesNotExist:
             return redirect("usuario:cliente")
-        
+
         # Aqui nao deixa o usuario entrar o pedido que nao for ele que esta conectado
         if self.request.user.id != pedido.user_id:
             return redirect("usuario:cliente")
 
         return super().get(request, *args, **kwargs)
-            
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         items = ItemPedido.objects.filter(pedido=self.object)
         context['items'] = items
-        context['pagamento_mp'] = PagamentoMercadoPago.objects.get(pedido_id=self.object.pk)
+        context['pagamento_mp'] = PagamentoMercadoPago.objects.get(
+            pedido_id=self.object.pk)
         return context

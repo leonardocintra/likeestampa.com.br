@@ -33,6 +33,13 @@ def cadastrar_cliente(cliente):
                 'referencia': cliente['referencia'],
                 'complemento': cliente['complemento'],
             }
+        ],
+        'telefones': [
+            {
+                'area': cliente['area'],
+                'numero': cliente['telefone_numero'],
+                'tipo': cliente['tipo']
+            }
         ]
     }
 

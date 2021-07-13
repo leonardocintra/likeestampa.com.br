@@ -1,0 +1,33 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Seus dados</h5>
+        <h6 class="card-subtitle mb-2 text-muted">CPF: {{ form.cpf.value }}</h6>
+        <p class="card-text">
+            Nome:<b> {{ form.nome.value }} </b> <br />
+            Sobrenome:<b> {{ form.nome.value }} </b> <br />
+            Email:<b> {{ form.email.value }}</b> <br />
+            Telefone:
+            {% if form.telefone_numero.value %}
+                <b> ({{ form.area.value }}) {{ form.telefone_numero.value }} </b> <br />
+            {% endif %}
+        </p>
+        <a href="#" class="card-link">Alterar</a>
+        <a href="#" class="card-link">Alterar senha</a>
+    </div>
+</div>
+<br />
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Endereços</h5>
+        <h6 class="card-subtitle mb-2 text-muted">CEP: {{ form.cep.value }}</h6>
+        <p class="card-text">
+            Cidade: <b>{{ form.cidade.value }} - {{ form.uf.value }} </b> <br />
+            Endereço: <b>{{ form.endereco.value }}, {{ form.numero.value }} </b> <br />
+            Bairro: <b>{{ form.bairro.value }} </b> <br />
+            Complemento: <b>{{ form.complemento.value }} </b> <br />
+            Referencia: <b>{{ form.referencia.value }} </b> <br />
+
+        </p>
+        <a href="#" class="card-link">Adicionar outro</a>
+    </div>
+</div>

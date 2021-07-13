@@ -10,18 +10,24 @@ def get_cliente_data_form(request):
     if 'cliente_id' in request.session:
         cliente = buscar_cliente_by_id(request.session['cliente_id'])
         cliente = cliente['records'][0]
-        endereco = cliente['enderecos'][0]
+        enderecos = cliente['enderecos'][0]
+        
+        if cliente['telefones']:
+            telefones = cliente['telefones'][0]
+            form.fields['area'].initial = telefones['area']
+            form.fields['telefone_numero'].initial = telefones['numero']
+            form.fields['tipo'].initial = telefones['tipo']
+        form.fields['cep'].initial = enderecos['cep']
         form.fields['cpf'].initial = cliente['cpf']
         form.fields['nome'].initial = cliente['nome']
         form.fields['email'].initial = cliente['email']
-        form.fields['cep'].initial = endereco['cep']
-        form.fields['cidade'].initial = endereco['cidade']
-        form.fields['uf'].initial = endereco['uf']
-        form.fields['numero'].initial = endereco['numero']
-        form.fields['bairro'].initial = endereco['bairro']
-        form.fields['endereco'].initial = endereco['endereco']
-        form.fields['complemento'].initial = endereco['complemento']
-        form.fields['referencia'].initial = endereco['referencia']
+        form.fields['cidade'].initial = enderecos['cidade']
+        form.fields['uf'].initial = enderecos['uf']
+        form.fields['numero'].initial = enderecos['numero']
+        form.fields['bairro'].initial = enderecos['bairro']
+        form.fields['endereco'].initial = enderecos['endereco']
+        form.fields['complemento'].initial = enderecos['complemento']
+        form.fields['referencia'].initial = enderecos['referencia']
 
         form.fields['cpf'].widget.attrs['readonly'] = True
         form.fields['nome'].widget.attrs['readonly'] = True

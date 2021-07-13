@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from localflavor.br.forms import BRCPFField
+from core.constants import UF, TIPO_TELEFONE
 
 
 class FreteForm(forms.Form):
@@ -23,3 +24,6 @@ class ClienteForm(forms.Form):
     uf = forms.CharField(label='UF', max_length=100)
     referencia = forms.CharField(
         label='Referencia', max_length=100, required=False)
+    telefone_numero = forms.CharField(max_length=9, min_length=5)
+    area = forms.CharField(max_length=2, min_length=1)
+    tipo = forms.ChoiceField(choices=TIPO_TELEFONE)

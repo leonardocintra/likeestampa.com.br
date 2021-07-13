@@ -1,7 +1,8 @@
+from cloudinary.models import CloudinaryField
 from django.db import models
 from django.urls import reverse
 from django.dispatch import receiver
-from cloudinary.models import CloudinaryField
+from seller.models import Seller
 
 
 GENERO = (
@@ -80,8 +81,8 @@ class TipoVariacao(models.Model):
     """ Ex: vermelho, verde, branco | P M G GG | etc """
     descricao = models.CharField('Descrição', unique=True, max_length=50)
     ativo = models.BooleanField(default=True)
-    variacao = models.ForeignKey(
-        Variacao, on_delete=models.CASCADE, related_name='variacao_tipo_variacao')
+    variacao = models.ForeignKey(Variacao, on_delete=models.CASCADE, related_name='variacao_tipo_variacao')
+    preco_variacao = models.DecimalField('Preço', decimal_places=2, max_digits=999, default=51.90)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
@@ -98,11 +99,12 @@ class TipoVariacao(models.Model):
 class Produto(models.Model):
     """Ex: camieta sao paulo, camiseta python, etc"""
     nome = models.CharField(max_length=100, unique=True)
+    seller = models.ForeignKey(Seller, on_delete=models.PROTECT, null=True)
     descricao = models.TextField('Descrição', blank=True)
     slug = models.SlugField('Identificador', max_length=100, unique=True)
     ativo = models.BooleanField(default=False)
     preco_base = models.DecimalField(
-        'Preço base', decimal_places=2, max_digits=999, default=45.90)
+        'Preço base', decimal_places=2, max_digits=999, default=51.90)
     subcategoria = models.ForeignKey(
         SubCategoria, on_delete=models.CASCADE, related_name='produto_subcategoria')
     imagem_principal = CloudinaryField(

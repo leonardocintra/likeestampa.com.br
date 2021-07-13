@@ -22,39 +22,59 @@ def get_frete(cep, quantidade):
     return json.loads(response.text)
 
 
-def create_order():
-    payload = json.dumps({
-        "shipping_speed": "sedex",
-        "order_id": "1625584335",
-        "customer_name": "Fulano da Silva",
-        "items": [
-            {
-                "name": "Camisa P Amarela",
-                "sku": "12345",
-                "qty": 2
-            },
-            {
-                "name": "Camisa M Verde",
-                "sku": "12346",
-                "qty": 1
-            },
-            {
-                "name": "Camisa G Vermelha",
-                "sku": "12347",
-                "qty": 1
-            }
-        ],
-        "address": {
-            "street": "Rua Buenos Aires",
-            "number": "334",
-            "complement": "Loja",
-            "city": "Rio de Janeiro",
-            "state": "RJ",
-            "zipcode": "20061001",
-            "neighborhood": "Centro"
-        }
-    })
+def create_order(order_id, cliente, items, delivery_method_id):
+    
+    cliente = cliente['records'][0]
+    endereco = cliente['enderecos'][0]
+    tel_numero = '999999999'
 
-    response = requests.request(
-        "POST", URL_DIMONA + "/order", headers=HEADERS, data=payload)
+    if cliente['telefones']:
+        telefone = cliente['telefones'][0]
+        tel_numero = telefone['area'] + telefone['numero']
+
+    items_request = monta_payload_item(items)
+
+    payload = json.dumps(
+        {
+            "delivery_method_id": delivery_method_id,
+            "order_id": order_id,
+            "customer_name": cliente['nome'],
+            "customer_document": cliente['cpf'],
+            "customer_email": cliente['email'],
+            "webhook_url": "https://option_webhook_url.com",
+            "items": items_request,
+            "address": {
+                "street": endereco['endereco'],
+                "number": endereco['numero'],
+                "complement": endereco['complemento'],
+                "city": endereco['cidade'],
+                "state": endereco['uf'],
+                "zipcode": endereco['cep'],
+                "neighborhood": endereco['bairro'],
+                "phone": tel_numero,
+                "country": "BR"
+            }
+        }
+    )
+
+    response = requests.post(URL_DIMONA + "/order",
+                             headers=HEADERS, data=payload)
     print(response.text)
+
+
+def monta_payload_item(items):
+    item_request = []
+    for item in items:
+        item_request.append({
+            "name": item.produto.nome,
+            "sku": item.produto.slug,
+            "qty": item.quantidade,
+            "dimona_sku_id": "10110110110",
+            "designs": [
+                "url_front"
+            ],
+            "mocks": [
+                "mock_front"
+            ]
+        })
+    return item_request

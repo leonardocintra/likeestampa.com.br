@@ -1,8 +1,9 @@
+import uuid
+from django.contrib.auth.models import User
 from django.db import models
 from localflavor.br.models import BRCPFField
-import uuid
 from catalogo.models import ModeloProduto, ModeloVariacao, Produto
-from django.contrib.auth.models import User
+
 
 GATEWAY_PAGAMENTO = (
     ('mercado_pago', 'Mercado Pago'),
@@ -16,11 +17,16 @@ class Pedido(models.Model):
     peoplesoft_pessoa_id = models.PositiveIntegerField(null=False)
     peoplesoft_endereco_id = models.PositiveIntegerField(null=False)
     pago = models.BooleanField(default=False)
-    valor_total = models.DecimalField(max_digits=999, decimal_places=2, default=1)
-    valor_items = models.DecimalField(max_digits=999, decimal_places=2, default=1)
-    valor_frete = models.DecimalField(max_digits=999, decimal_places=2, default=1)
+    valor_total = models.DecimalField(
+        max_digits=999, decimal_places=2, default=1)
+    valor_items = models.DecimalField(
+        max_digits=999, decimal_places=2, default=1)
+    valor_frete = models.DecimalField(
+        max_digits=999, decimal_places=2, default=1)
     gateway_pagamento = models.CharField(
         choices=GATEWAY_PAGAMENTO, default='mercado_pago', max_length=20)
+    frete_id = models.PositiveIntegerField(default=0)
+    frete_nome = models.CharField(max_length=100, null=True)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
