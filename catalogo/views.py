@@ -119,7 +119,7 @@ def adicionar_item_carrinho(request, produto, variacoes, modelo, cor, tamanho, q
             quantidade=item[0].quantidade + quantidade)
     else:
         ItemCarrinho(carrinho=carrinho, produto=produto, modelo_id=modelo,
-             quantidade=quantidade, tamanho=tamanho, cor=cor).save()
+                     quantidade=quantidade, tamanho=tamanho, cor=cor).save()
 
 
 def produto_masculino(request):

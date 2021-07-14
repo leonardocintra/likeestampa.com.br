@@ -20,6 +20,7 @@ def get_cliente_data_form(request):
         form.fields['cep'].initial = enderecos['cep']
         form.fields['cpf'].initial = cliente['cpf']
         form.fields['nome'].initial = cliente['nome']
+        form.fields['sobrenome'].initial = cliente['sobrenome']
         form.fields['email'].initial = cliente['email']
         form.fields['cidade'].initial = enderecos['cidade']
         form.fields['uf'].initial = enderecos['uf']

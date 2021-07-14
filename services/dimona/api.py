@@ -59,7 +59,7 @@ def create_order(order_id, cliente, items, delivery_method_id):
 
     response = requests.post(URL_DIMONA + "/order",
                              headers=HEADERS, data=payload)
-    print(response.text)
+    return json.loads(response.text)
 
 
 def monta_payload_item(items):

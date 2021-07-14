@@ -27,6 +27,7 @@ class Pedido(models.Model):
         choices=GATEWAY_PAGAMENTO, default='mercado_pago', max_length=20)
     frete_id = models.PositiveIntegerField(default=0)
     frete_nome = models.CharField(max_length=100, null=True)
+    pedido_seller = models.CharField(max_length=100, null=True)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
 

@@ -13,6 +13,7 @@ class ClienteForm(forms.Form):
     # TODO: migrar para a app usuario
     cpf = BRCPFField()
     nome = forms.CharField(label='Nome', max_length=100)
+    sobrenome = forms.CharField(label='Sobrenome', max_length=100)
     email = forms.EmailField(label='E-mail', max_length=100)
     cep = forms.CharField(label='CEP', max_length=8, min_length=8)
     endereco = forms.CharField(label='Endereço', max_length=100)

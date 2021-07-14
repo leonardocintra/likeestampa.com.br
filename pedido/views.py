@@ -54,15 +54,17 @@ def pedido_finalizado_mercado_pago(request):
 
     pedido = Pedido.objects.get(pk=pagamento_mp.pedido.id)
     pago = False
+    dimona = None
     if pagamento_mp.mercado_pago_status == 'approved':
         pago = True
         cliente = buscar_cliente_by_id(request.session['cliente_id'])
-        create_order(pagamento_mp.pedido.id, cliente, items, pedido.frete_id)
+        dimona = create_order(pagamento_mp.pedido.id, cliente, items, pedido.frete_id)
 
     # Atualiza os dados do pagamento no pedido (pago e o usuario)
     Pedido.objects.filter(pk=pagamento_mp.pedido.id).update(
         pago=pago,
-        user_id=request.user.id
+        user_id=request.user.id,
+        pedido_seller=dimona['order']
     )
 
     del request.session['carrinho']
