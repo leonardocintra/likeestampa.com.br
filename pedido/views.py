@@ -6,7 +6,7 @@ from django.views.generic.detail import DetailView
 from checkout.models import Carrinho, ItemCarrinho
 from pagamento.models import PagamentoMercadoPago
 from services.mercadopago.mercadopago import get_preference, get_payment
-from services.dimona.api import create_order
+from services.dimona.api import create_order, get_tracking
 from services.peoplesoft.peoplesoft import buscar_cliente_by_id
 from .models import Pedido, ItemPedido
 

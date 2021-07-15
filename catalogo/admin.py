@@ -37,6 +37,7 @@ class ModeloProdutoInline(NestedStackedInline):
 class ProdutoAdmin(NestedModelAdmin):
     prepopulated_fields = {'slug': ('nome',)}
     search_fields = ['nome',]
+    list_filter = ['ativo', 'subcategoria', ]
     list_display = ['nome', 'subcategoria', 'ativo', 'genero', ]
     inlines = [ModeloProdutoInline, ]
 

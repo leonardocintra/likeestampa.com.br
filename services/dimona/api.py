@@ -10,20 +10,33 @@ HEADERS = {
 }
 
 
+def get_timeline(pedido_dimona):
+    response = requests.get(URL_DIMONA + '/order/' +
+                            pedido_dimona + '/timeline', headers=HEADERS)
+    print(response.text)
+    return json.loads(response.text)
+
+
+def get_tracking(pedido_dimona):
+    response = requests.get(URL_DIMONA + '/order/' +
+                            pedido_dimona + '/tracking', headers=HEADERS)
+    print(response.text)
+    return json.loads(response.text)
+
+
 def get_frete(cep, quantidade):
     payload = json.dumps({
         "zipcode": cep,
         "quantity": quantidade
     })
 
-    response = requests.request(
-        "POST", URL_DIMONA + "/shipping", headers=HEADERS, data=payload)
-
+    response = requests.post(URL_DIMONA + "/shipping",
+                             headers=HEADERS, data=payload)
     return json.loads(response.text)
 
 
 def create_order(order_id, cliente, items, delivery_method_id):
-    
+
     cliente = cliente['records'][0]
     endereco = cliente['enderecos'][0]
     tel_numero = '999999999'
@@ -71,10 +84,10 @@ def monta_payload_item(items):
             "qty": item.quantidade,
             "dimona_sku_id": "10110110110",
             "designs": [
-                "url_front"
+                item.produto.imagem_principal.url
             ],
             "mocks": [
-                "mock_front"
+                item.produto.imagem_design.url
             ]
         })
     return item_request
