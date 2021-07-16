@@ -45,7 +45,7 @@ def create_order(order_id, cliente, items, delivery_method_id):
         telefone = cliente['telefones'][0]
         tel_numero = telefone['area'] + telefone['numero']
 
-    items_request = monta_payload_item(items)
+    items_request = _monta_payload_item(items)
 
     payload = json.dumps(
         {
@@ -75,19 +75,39 @@ def create_order(order_id, cliente, items, delivery_method_id):
     return json.loads(response.text)
 
 
-def monta_payload_item(items):
+def _monta_payload_item(items):
+    skus = requests.get('https://run.mocky.io/v3/fe9e4b43-f3e7-480a-ac23-625db3e24ba7')
+
     item_request = []
     for item in items:
+        imagem_design = ''
+        if item.produto.imagem_design:
+            imagem_design = item.produto.imagem_design.url
+
+        cor = item.cor.tipo_variacao.descricao
+        tamanho = item.tamanho.tipo_variacao.descricao
+        modelo = ''
+        if item.modelo.nome == 'TRADICIONAL':
+            modelo = 'T-Shirt'
+        
         item_request.append({
             "name": item.produto.nome,
             "sku": item.produto.slug,
             "qty": item.quantidade,
-            "dimona_sku_id": "10110110110",
+            "dimona_sku_id": _get_sku_dimona(skus, modelo, tamanho, cor),
             "designs": [
-                item.produto.imagem_principal.url
+                imagem_design
             ],
             "mocks": [
-                item.produto.imagem_design.url
+                item.produto.imagem_principal.url
             ]
         })
     return item_request
+
+
+def _get_sku_dimona(skus, modelo, tamanho, cor):
+    for sku in json.loads(skus.content):
+        if sku['Estilo'] == modelo and sku['Cor'] == cor and sku['Tamanho'] == tamanho:
+            return sku['codigoSku']
+    #TODO: informar que esta errado (aviso telegram por exemplo)
+    return "10110110110"

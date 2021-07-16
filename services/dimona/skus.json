@@ -1,0 +1,3922 @@
+[
+    {
+        "codigoSku": 10110110108,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Branco",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10110110109,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Branco",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10110110110,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Branco",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10110110111,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Branco",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10110110112,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Branco",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10110118308,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Preto",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10110118309,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Preto",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10110118310,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Preto",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10110118311,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Preto",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10110118312,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Preto",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10110113708,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Marinho",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10110113709,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Marinho",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10110113710,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Marinho",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10110113711,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Marinho",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10110113712,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Marinho",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10110112708,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Laranja",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10110112709,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Laranja",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10110112710,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Laranja",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10110112711,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Laranja",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10110112712,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Laranja",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10110114808,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10110114809,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10110114810,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10110114811,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10110114812,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10110111608,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10110111609,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10110111610,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10110111611,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10110111612,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10110112008,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Vermelho",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10110112009,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Vermelho",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10110112010,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Vermelho",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10110112011,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Vermelho",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10110112012,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Vermelho",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10110111508,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Amarelo Canário",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10110111509,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Amarelo Canário",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10110111510,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Amarelo Canário",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10110111511,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Amarelo Canário",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10110111512,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Amarelo Canário",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10110113608,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Royal",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10110113609,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Royal",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10110113610,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Royal",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10110113611,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Royal",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10110113612,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Royal",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10110113508,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Turquesa",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10110113509,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Turquesa",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10110113510,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Turquesa",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10110113511,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Turquesa",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10110113512,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Turquesa",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10110114008,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Água",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10110114009,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Água",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10110114010,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Água",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10110114011,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Água",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10110114012,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Água",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10110119108,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Rosa Bebê",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10110119109,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Rosa Bebê",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10110119110,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Rosa Bebê",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10110119111,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Rosa Bebê",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10110119112,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Rosa Bebê",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10110119508,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Rosa Pink",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10110119509,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Rosa Pink",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10110119510,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Rosa Pink",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10110119511,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Rosa Pink",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10110119512,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Rosa Pink",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10110110208,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10110110209,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10110110210,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10110110211,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10110110212,
+        "Nome": "Quality",
+        "Estilo": "T-Shirt",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10101110108,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Branco",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10101110109,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Branco",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10101110110,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Branco",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10101110111,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Branco",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10101110112,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Branco",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10101118308,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Preto",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10101118309,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Preto",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10101118310,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Preto",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10101118311,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Preto",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10101118312,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Preto",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10101113708,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Marinho",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10101113709,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Marinho",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10101113710,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Marinho",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10101113711,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Marinho",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10101113712,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Marinho",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10101114908,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Musgo",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10101114909,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Musgo",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10101114910,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Musgo",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10101114911,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Musgo",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10101114912,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Musgo",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10101112708,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Laranja",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10101112709,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Laranja",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10101112710,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Laranja",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10101112711,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Laranja",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10101112712,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Laranja",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10101114808,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10101114809,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10101114810,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10101114811,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10101114812,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10101111608,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10101111609,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10101111610,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10101111611,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10101111612,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10101112008,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Vermelho",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10101112009,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Vermelho",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10101112010,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Vermelho",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10101112011,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Vermelho",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10101112012,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Vermelho",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10101111508,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Amarelo Canário",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10101111509,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Amarelo Canário",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10101111510,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Amarelo Canário",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10101111511,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Amarelo Canário",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10101111512,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Amarelo Canário",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10101113608,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Royal",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10101113609,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Royal",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10101113610,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Royal",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10101113611,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Royal",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10101113612,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Royal",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10101113508,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Turquesa",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10101113509,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Turquesa",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10101113510,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Turquesa",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10101113511,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Turquesa",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10101113512,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Turquesa",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10101114008,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Água",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10101114009,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Água",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10101114010,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Água",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10101114011,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Água",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10101114012,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Água",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10101119108,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Rosa Bebê",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10101119109,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Rosa Bebê",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10101119110,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Rosa Bebê",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10101119111,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Rosa Bebê",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10101119112,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Rosa Bebê",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10101119508,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Rosa Pink",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10101119509,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Rosa Pink",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10101119510,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Rosa Pink",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10101119511,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Rosa Pink",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10101119512,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Rosa Pink",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10101110208,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10101110209,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10101110210,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10101110211,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10101110212,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10121110108,
+        "Nome": "Prime",
+        "Estilo": "T-Shirt",
+        "Cor": "Branco",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10121110109,
+        "Nome": "Prime",
+        "Estilo": "T-Shirt",
+        "Cor": "Branco",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10121110110,
+        "Nome": "Prime",
+        "Estilo": "T-Shirt",
+        "Cor": "Branco",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10121110111,
+        "Nome": "Prime",
+        "Estilo": "T-Shirt",
+        "Cor": "Branco",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10121110112,
+        "Nome": "Prime",
+        "Estilo": "T-Shirt",
+        "Cor": "Branco",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10121118308,
+        "Nome": "Prime",
+        "Estilo": "T-Shirt",
+        "Cor": "Preto",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10121118309,
+        "Nome": "Prime",
+        "Estilo": "T-Shirt",
+        "Cor": "Preto",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10121118310,
+        "Nome": "Prime",
+        "Estilo": "T-Shirt",
+        "Cor": "Preto",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10121118311,
+        "Nome": "Prime",
+        "Estilo": "T-Shirt",
+        "Cor": "Preto",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10121118312,
+        "Nome": "Prime",
+        "Estilo": "T-Shirt",
+        "Cor": "Preto",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10111119708,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Cinza Chumbo",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10111119709,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Cinza Chumbo",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10111119710,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Cinza Chumbo",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10111119711,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Cinza Chumbo",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10111119712,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Cinza Chumbo",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10111114808,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10111114809,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10111114810,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10111114811,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10111114812,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10111113608,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Royal",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10111113609,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Royal",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10111113610,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Royal",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10111113611,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Royal",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10111113612,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Royal",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10111113708,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Marinho",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10111113709,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Marinho",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10111113710,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Marinho",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10111113711,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Marinho",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10111113712,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Azul Marinho",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10111112008,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Vermelho",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10111112009,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Vermelho",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10111112010,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Vermelho",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10111112011,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Vermelho",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10111112012,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Vermelho",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10111112708,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Laranja",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10111112709,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Laranja",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10111112710,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Laranja",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10111112711,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Laranja",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10111112712,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Laranja",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10111111508,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Amarelo Canário",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10111111509,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Amarelo Canário",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10111111510,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Amarelo Canário",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10111111511,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Amarelo Canário",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10111111512,
+        "Nome": "Estonada",
+        "Estilo": "T-Shirt",
+        "Cor": "Amarelo Canário",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10603110108,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Branco",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10603110109,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Branco",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10603110110,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Branco",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10603110111,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Branco",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10603110112,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Branco",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10603118308,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Preto",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10603118309,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Preto",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10603118310,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Preto",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10603118311,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Preto",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10603118312,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Preto",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10603110208,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10603110209,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10603110210,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10603110211,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10603110212,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10603119108,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Rosa Bebê",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10603119109,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Rosa Bebê",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10603119110,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Rosa Bebê",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10603119111,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Rosa Bebê",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10603119112,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Rosa Bebê",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10603111608,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10603111609,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10603111610,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10603111611,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10603111612,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10603114908,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Verde Musgo",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10603114909,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Verde Musgo",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10603114910,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Verde Musgo",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10603114911,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Verde Musgo",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10603114912,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Verde Musgo",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10603114808,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10603114809,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10603114810,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10603114811,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10603114812,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10603112708,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Laranja",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10603112709,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Laranja",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10603112710,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Laranja",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10603112711,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Laranja",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10603112712,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Laranja",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10603112008,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Vermelho",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10603112009,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Vermelho",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10603112010,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Vermelho",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10603112011,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Vermelho",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10603112012,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Vermelho",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10603119608,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Vinho",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10603119609,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Vinho",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10603119610,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Vinho",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10603119611,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Vinho",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10603119612,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Vinho",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10603118308,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Azul Marinho",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10603118309,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Azul Marinho",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10603118310,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Azul Marinho",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10603118311,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Azul Marinho",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10603118312,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Azul Marinho",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10603113608,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Azul Royal",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10603113609,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Azul Royal",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10603113610,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Azul Royal",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10603113611,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Azul Royal",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10603113612,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Azul Royal",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10501110108,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Branco",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10501110108,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Branco",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10501110109,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Branco",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10501110110,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Branco",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10501110111,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Branco",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10501118308,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Preto",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10501118309,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Preto",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10501118310,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Preto",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10501118311,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Preto",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10501113708,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Azul Marinho",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10501113709,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Azul Marinho",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10501113710,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Azul Marinho",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10501113711,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Azul Marinho",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10501114908,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Verde Musgo",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10501114909,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Verde Musgo",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10501114910,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Verde Musgo",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10501114911,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Verde Musgo",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10501112708,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Laranja",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10501112709,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Laranja",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10501112710,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Laranja",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10501112711,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Laranja",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10501114808,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10501114809,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10501114810,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10501114811,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10501111608,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10501111609,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10501111610,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10501111611,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10501112008,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Vermelho",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10501112009,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Vermelho",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10501112010,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Vermelho",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10501112011,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Vermelho",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10501111508,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Amarelo Canário",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10501111509,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Amarelo Canário",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10501111510,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Amarelo Canário",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10501111511,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Amarelo Canário",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10501113608,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Azul Royal",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10501113609,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Azul Royal",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10501113610,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Azul Royal",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10501113611,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Azul Royal",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10501113508,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Azul Turquesa",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10501113509,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Azul Turquesa",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10501113510,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Azul Turquesa",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10501113511,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Azul Turquesa",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10501119108,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Rosa Bebê",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10501119109,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Rosa Bebê",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10501119110,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Rosa Bebê",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10501119111,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Rosa Bebê",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10501119508,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Rosa Pink",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10501119509,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Rosa Pink",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10501119510,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Rosa Pink",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10501119511,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Rosa Pink",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10501119711,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10501119710,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10501119709,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10501119708,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10522110108,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Branco",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10522110108,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Branco",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10522110109,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Branco",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10522110110,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Branco",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10522110111,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Branco",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10522118308,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Preto",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10522118309,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Preto",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10522118310,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Preto",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10522118311,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Preto",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10522113708,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Azul Marinho",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10522113709,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Azul Marinho",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10522113710,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Azul Marinho",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10522113711,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Azul Marinho",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10522114908,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Verde Musgo",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10522114909,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Verde Musgo",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10522114910,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Verde Musgo",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10522114911,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Verde Musgo",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10522112708,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Laranja",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10522112709,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Laranja",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10522112710,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Laranja",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10522112711,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Laranja",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10522114808,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10522114809,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10522114810,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10522114811,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10522111608,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10522111609,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10522111610,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10522111611,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10522112008,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Vermelho",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10522112009,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Vermelho",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10522112010,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Vermelho",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10522112011,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Vermelho",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10522111508,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Amarelo Canário",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10522111509,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Amarelo Canário",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10522111510,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Amarelo Canário",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10522111511,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Amarelo Canário",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10522113608,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Azul Royal",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10522113609,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Azul Royal",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10522113610,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Azul Royal",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10522113611,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Azul Royal",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10522113508,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Azul Turquesa",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10522113509,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Azul Turquesa",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10522113510,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Azul Turquesa",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10522113511,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Azul Turquesa",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10522119108,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Rosa Bebê",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10522119109,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Rosa Bebê",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10522119110,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Rosa Bebê",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10522119111,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Rosa Bebê",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10522119508,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Rosa Pink",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10522119509,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Rosa Pink",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10522119510,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Rosa Pink",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10522119511,
+        "Nome": "Quality",
+        "Estilo": "Baby Long",
+        "Cor": "Rosa Pink",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10521110108,
+        "Nome": "Prime",
+        "Estilo": "Baby Long",
+        "Cor": "Branco",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10521110108,
+        "Nome": "Prime",
+        "Estilo": "Baby Long",
+        "Cor": "Branco",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10521110109,
+        "Nome": "Prime",
+        "Estilo": "Baby Long",
+        "Cor": "Branco",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10521110110,
+        "Nome": "Prime",
+        "Estilo": "Baby Long",
+        "Cor": "Branco",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10521110111,
+        "Nome": "Prime",
+        "Estilo": "Baby Long",
+        "Cor": "Branco",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10521118308,
+        "Nome": "Prime",
+        "Estilo": "Baby Long",
+        "Cor": "Preto",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10521118309,
+        "Nome": "Prime",
+        "Estilo": "Baby Long",
+        "Cor": "Preto",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10521118310,
+        "Nome": "Prime",
+        "Estilo": "Baby Long",
+        "Cor": "Preto",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10521118311,
+        "Nome": "Prime",
+        "Estilo": "Baby Long",
+        "Cor": "Preto",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10125119708,
+        "Nome": "Estonada",
+        "Estilo": "Baby Long",
+        "Cor": "Cinza Chumbo",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10125119709,
+        "Nome": "Estonada",
+        "Estilo": "Baby Long",
+        "Cor": "Cinza Chumbo",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10125119710,
+        "Nome": "Estonada",
+        "Estilo": "Baby Long",
+        "Cor": "Cinza Chumbo",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10125119711,
+        "Nome": "Estonada",
+        "Estilo": "Baby Long",
+        "Cor": "Cinza Chumbo",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10125113708,
+        "Nome": "Estonada",
+        "Estilo": "Baby Long",
+        "Cor": "Azul Marinho",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10125113709,
+        "Nome": "Estonada",
+        "Estilo": "Baby Long",
+        "Cor": "Azul Marinho",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10125113710,
+        "Nome": "Estonada",
+        "Estilo": "Baby Long",
+        "Cor": "Azul Marinho",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10125113711,
+        "Nome": "Estonada",
+        "Estilo": "Baby Long",
+        "Cor": "Azul Marinho",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10125112008,
+        "Nome": "Estonada",
+        "Estilo": "Baby Long",
+        "Cor": "Vermelho",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10125112009,
+        "Nome": "Estonada",
+        "Estilo": "Baby Long",
+        "Cor": "Vermelho",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10125112010,
+        "Nome": "Estonada",
+        "Estilo": "Baby Long",
+        "Cor": "Vermelho",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10125112011,
+        "Nome": "Estonada",
+        "Estilo": "Baby Long",
+        "Cor": "Vermelho",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10125112708,
+        "Nome": "Estonada",
+        "Estilo": "Baby Long",
+        "Cor": "Laranja",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10125112709,
+        "Nome": "Estonada",
+        "Estilo": "Baby Long",
+        "Cor": "Laranja",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10125112710,
+        "Nome": "Estonada",
+        "Estilo": "Baby Long",
+        "Cor": "Laranja",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10125112711,
+        "Nome": "Estonada",
+        "Estilo": "Baby Long",
+        "Cor": "Laranja",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10125111508,
+        "Nome": "Estonada",
+        "Estilo": "Baby Long",
+        "Cor": "Amarelo Canário",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10125111509,
+        "Nome": "Estonada",
+        "Estilo": "Baby Long",
+        "Cor": "Amarelo Canário",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10125111510,
+        "Nome": "Estonada",
+        "Estilo": "Baby Long",
+        "Cor": "Amarelo Canário",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10125111511,
+        "Nome": "Estonada",
+        "Estilo": "Baby Long",
+        "Cor": "Amarelo Canário",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10125114808,
+        "Nome": "Estonada",
+        "Estilo": "Baby Long",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10125114809,
+        "Nome": "Estonada",
+        "Estilo": "Baby Long",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10125114810,
+        "Nome": "Estonada",
+        "Estilo": "Baby Long",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10125114811,
+        "Nome": "Estonada",
+        "Estilo": "Baby Long",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10503110108,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Branco",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10503110108,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Branco",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10503110109,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Branco",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10503110110,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Branco",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10503110111,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Branco",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10503118308,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Preto",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10503118309,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Preto",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10503118310,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Preto",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10503118311,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Preto",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10503110208,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10503110209,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10503110210,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10503110211,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10503119108,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Rosa Bebê",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10503119109,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Rosa Bebê",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10503119110,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Rosa Bebê",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10503119111,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Rosa Bebê",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10503111608,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10503111609,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10503111610,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10503111611,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10503114908,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Verde Musgo",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10503114909,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Verde Musgo",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10503114910,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Verde Musgo",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10503114911,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Verde Musgo",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10503114808,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10503114809,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10503114810,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10503114811,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10503112708,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Laranja",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10503112709,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Laranja",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10503112710,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Laranja",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10503112711,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Laranja",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10503112008,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Vermelho",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10503112009,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Vermelho",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10503112010,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Vermelho",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10503112011,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Vermelho",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10503119608,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Vinho",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10503119609,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Vinho",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10503119610,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Vinho",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10503119611,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Vinho",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 11003113708,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Azul Marinho",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 11003113709,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Azul Marinho",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 11003113710,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Azul Marinho",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 11003113711,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Azul Marinho",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10503113608,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Azul Royal",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10503113609,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Azul Royal",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10503113610,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Azul Royal",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10503113611,
+        "Nome": "Polo",
+        "Estilo": "Polo",
+        "Cor": "Azul Royal",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": "ecobagp",
+        "Nome": "Ecobag",
+        "Estilo": "Ecobag",
+        "Cor": "Cru",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": "ecobagm",
+        "Nome": "Ecobag",
+        "Estilo": "Ecobag",
+        "Cor": "Cru",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": "ecobagg",
+        "Nome": "Ecobag",
+        "Estilo": "Ecobag",
+        "Cor": "Cru",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": "caneca",
+        "Nome": "Caneca",
+        "Estilo": "Caneca",
+        "Cor": "Branco",
+        "Tamanho": "310ml"
+    },
+    {
+        "codigoSku": 3020101,
+        "Nome": "Boné Brim",
+        "Estilo": "Boné",
+        "Cor": "Branco",
+        "Tamanho": "Único"
+    },
+    {
+        "codigoSku": 3020183,
+        "Nome": "Boné Brim",
+        "Estilo": "Boné",
+        "Cor": "Preto",
+        "Tamanho": "Único"
+    },
+    {
+        "codigoSku": 3020120,
+        "Nome": "Boné Brim",
+        "Estilo": "Boné",
+        "Cor": "Vermelho",
+        "Tamanho": "Único"
+    },
+    {
+        "codigoSku": 3020116,
+        "Nome": "Boné Brim",
+        "Estilo": "Boné",
+        "Cor": "Amarelo Canário",
+        "Tamanho": "Único"
+    },
+    {
+        "codigoSku": 3020551,
+        "Nome": "Boné Trucker Preto",
+        "Estilo": "Boné",
+        "Cor": "Preto",
+        "Tamanho": "Único"
+    },
+    {
+        "codigoSku": 3020554,
+        "Nome": "Boné Trucker Vermelho",
+        "Estilo": "Boné",
+        "Cor": "Vermelho",
+        "Tamanho": "Único"
+    },
+    {
+        "codigoSku": "aventalbrim",
+        "Nome": "Avental de Brim",
+        "Estilo": "Avental",
+        "Cor": "Azul Royal",
+        "Tamanho": "Único"
+    },
+    {
+        "codigoSku": "aventalbrim",
+        "Nome": "Avental de Brim",
+        "Estilo": "Avental",
+        "Cor": "Branco",
+        "Tamanho": "Único"
+    },
+    {
+        "codigoSku": "aventalbrim",
+        "Nome": "Avental de Brim",
+        "Estilo": "Avental",
+        "Cor": "Preto",
+        "Tamanho": "Único"
+    },
+    {
+        "codigoSku": "aventalbrim",
+        "Nome": "Avental de Brim",
+        "Estilo": "Avental",
+        "Cor": "Laranja",
+        "Tamanho": "Único"
+    },
+    {
+        "codigoSku": "aventalbrim",
+        "Nome": "Avental de Brim",
+        "Estilo": "Avental",
+        "Cor": "Vermelho",
+        "Tamanho": "Único"
+    },
+    {
+        "codigoSku": 10101112001,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Vermelho",
+        "Tamanho": "Tamanho 2"
+    },
+    {
+        "codigoSku": 10101112002,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Vermelho",
+        "Tamanho": "Tamanho 4"
+    },
+    {
+        "codigoSku": 10101112003,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Vermelho",
+        "Tamanho": "Tamanho 6"
+    },
+    {
+        "codigoSku": 10101112004,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Vermelho",
+        "Tamanho": "Tamanho 8"
+    },
+    {
+        "codigoSku": 10101112005,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Vermelho",
+        "Tamanho": "Tamanho 10"
+    },
+    {
+        "codigoSku": 10101112006,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Vermelho",
+        "Tamanho": "Tamanho 12"
+    },
+    {
+        "codigoSku": 10101112007,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Vermelho",
+        "Tamanho": "Tamanho 14"
+    },
+    {
+        "codigoSku": 10101110701,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "Tamanho 2"
+    },
+    {
+        "codigoSku": 10101110702,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "Tamanho 4"
+    },
+    {
+        "codigoSku": 10101110703,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "Tamanho 6"
+    },
+    {
+        "codigoSku": 10101110704,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "Tamanho 8"
+    },
+    {
+        "codigoSku": 10101110705,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "Tamanho 10"
+    },
+    {
+        "codigoSku": 10101110706,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "Tamanho 12"
+    },
+    {
+        "codigoSku": 10101110707,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Verde Bandeira",
+        "Tamanho": "Tamanho 14"
+    },
+    {
+        "codigoSku": 10101114901,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Verde Musgo",
+        "Tamanho": "Tamanho 2"
+    },
+    {
+        "codigoSku": 10101114902,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Verde Musgo",
+        "Tamanho": "Tamanho 4"
+    },
+    {
+        "codigoSku": 10101114903,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Verde Musgo",
+        "Tamanho": "Tamanho 6"
+    },
+    {
+        "codigoSku": 10101114904,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Verde Musgo",
+        "Tamanho": "Tamanho 8"
+    },
+    {
+        "codigoSku": 10101114905,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Verde Musgo",
+        "Tamanho": "Tamanho 10"
+    },
+    {
+        "codigoSku": 10101114906,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Verde Musgo",
+        "Tamanho": "Tamanho 12"
+    },
+    {
+        "codigoSku": 10101114907,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Verde Musgo",
+        "Tamanho": "Tamanho 14"
+    },
+    {
+        "codigoSku": 10101119502,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Rosa Pink",
+        "Tamanho": "Tamanho 2"
+    },
+    {
+        "codigoSku": 10101119503,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Rosa Pink",
+        "Tamanho": "Tamanho 4"
+    },
+    {
+        "codigoSku": 10101119504,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Rosa Pink",
+        "Tamanho": "Tamanho 6"
+    },
+    {
+        "codigoSku": 10101119505,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Rosa Pink",
+        "Tamanho": "Tamanho 8"
+    },
+    {
+        "codigoSku": 10101119506,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Rosa Pink",
+        "Tamanho": "Tamanho 10"
+    },
+    {
+        "codigoSku": 10101119507,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Rosa Pink",
+        "Tamanho": "Tamanho 12"
+    },
+    {
+        "codigoSku": 10101119507,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Rosa Pink",
+        "Tamanho": "Tamanho 14"
+    },
+    {
+        "codigoSku": 10101118301,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Preto",
+        "Tamanho": "Tamanho 2"
+    },
+    {
+        "codigoSku": 10101118302,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Preto",
+        "Tamanho": "Tamanho 4"
+    },
+    {
+        "codigoSku": 10101118303,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Preto",
+        "Tamanho": "Tamanho 6"
+    },
+    {
+        "codigoSku": 10101118304,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Preto",
+        "Tamanho": "Tamanho 8"
+    },
+    {
+        "codigoSku": 10101118305,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Preto",
+        "Tamanho": "Tamanho 10"
+    },
+    {
+        "codigoSku": 10101118306,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Preto",
+        "Tamanho": "Tamanho 12"
+    },
+    {
+        "codigoSku": 10101118307,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Preto",
+        "Tamanho": "Tamanho 14"
+    },
+    {
+        "codigoSku": 10101110201,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "Tamanho 2"
+    },
+    {
+        "codigoSku": 10101110202,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "Tamanho 4"
+    },
+    {
+        "codigoSku": 10101110203,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "Tamanho 6"
+    },
+    {
+        "codigoSku": 10101110204,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "Tamanho 8"
+    },
+    {
+        "codigoSku": 10101110205,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "Tamanho 10"
+    },
+    {
+        "codigoSku": 10101110206,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "Tamanho 12"
+    },
+    {
+        "codigoSku": 10101110207,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Cinza Mescla",
+        "Tamanho": "Tamanho 14"
+    },
+    {
+        "codigoSku": 10301113701,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Azul Marinho",
+        "Tamanho": "Tamanho 2"
+    },
+    {
+        "codigoSku": 10301113702,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Azul Marinho",
+        "Tamanho": "Tamanho 4"
+    },
+    {
+        "codigoSku": 10301113703,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Azul Marinho",
+        "Tamanho": "Tamanho 6"
+    },
+    {
+        "codigoSku": 10301113704,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Azul Marinho",
+        "Tamanho": "Tamanho 8"
+    },
+    {
+        "codigoSku": 10301113705,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Azul Marinho",
+        "Tamanho": "Tamanho 10"
+    },
+    {
+        "codigoSku": 10301113706,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Azul Marinho",
+        "Tamanho": "Tamanho 12"
+    },
+    {
+        "codigoSku": 10301113707,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Azul Marinho",
+        "Tamanho": "Tamanho 14"
+    },
+    {
+        "codigoSku": 10301112701,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Laranja",
+        "Tamanho": "Tamanho 2"
+    },
+    {
+        "codigoSku": 10301112702,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Laranja",
+        "Tamanho": "Tamanho 4"
+    },
+    {
+        "codigoSku": 10301112703,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Laranja",
+        "Tamanho": "Tamanho 6"
+    },
+    {
+        "codigoSku": 10301112704,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Laranja",
+        "Tamanho": "Tamanho 8"
+    },
+    {
+        "codigoSku": 10301112705,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Laranja",
+        "Tamanho": "Tamanho 10"
+    },
+    {
+        "codigoSku": 10301112706,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Laranja",
+        "Tamanho": "Tamanho 12"
+    },
+    {
+        "codigoSku": 10301112707,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Laranja",
+        "Tamanho": "Tamanho 14"
+    },
+    {
+        "codigoSku": 10101110101,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Branco",
+        "Tamanho": "Tamanho 2"
+    },
+    {
+        "codigoSku": 10101110102,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Branco",
+        "Tamanho": "Tamanho 4"
+    },
+    {
+        "codigoSku": 10101110103,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Branco",
+        "Tamanho": "Tamanho 6"
+    },
+    {
+        "codigoSku": 10101110104,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Branco",
+        "Tamanho": "Tamanho 8"
+    },
+    {
+        "codigoSku": 10101110105,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Branco",
+        "Tamanho": "Tamanho 10"
+    },
+    {
+        "codigoSku": 10101110106,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Branco",
+        "Tamanho": "Tamanho 12"
+    },
+    {
+        "codigoSku": 10101110107,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Branco",
+        "Tamanho": "Tamanho 14"
+    },
+    {
+        "codigoSku": 10101113601,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Azul Royal",
+        "Tamanho": "Tamanho 2"
+    },
+    {
+        "codigoSku": 10101113602,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Azul Royal",
+        "Tamanho": "Tamanho 4"
+    },
+    {
+        "codigoSku": 10101113603,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Azul Royal",
+        "Tamanho": "Tamanho 6"
+    },
+    {
+        "codigoSku": 10101113604,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Azul Royal",
+        "Tamanho": "Tamanho 8"
+    },
+    {
+        "codigoSku": 10101113605,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Azul Royal",
+        "Tamanho": "Tamanho 10"
+    },
+    {
+        "codigoSku": 10101113606,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Azul Royal",
+        "Tamanho": "Tamanho 12"
+    },
+    {
+        "codigoSku": 10101113607,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Azul Royal",
+        "Tamanho": "Tamanho 14"
+    },
+    {
+        "codigoSku": 10101111601,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "Tamanho 2"
+    },
+    {
+        "codigoSku": 10101111602,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "Tamanho 4"
+    },
+    {
+        "codigoSku": 10101111603,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "Tamanho 6"
+    },
+    {
+        "codigoSku": 10101111604,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "Tamanho 8"
+    },
+    {
+        "codigoSku": 10101111605,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "Tamanho 10"
+    },
+    {
+        "codigoSku": 10101111606,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "Tamanho 12"
+    },
+    {
+        "codigoSku": 10101111607,
+        "Nome": "Classic Infantil",
+        "Estilo": "T-shirt",
+        "Cor": "Amarelo Ouro",
+        "Tamanho": "Tamanho 14"
+    },
+    {
+        "codigoSku": 10101117008,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Roxo",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10101117009,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Roxo",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10101117010,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Roxo",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10101117011,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Roxo",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10101117012,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Roxo",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10501117008,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Roxo",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10501117009,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Roxo",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10501117010,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Roxo",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10501117011,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Roxo",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10101119708,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Cinza Chumbo",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10101119709,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Cinza Chumbo",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10101119710,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Cinza Chumbo",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10101119711,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Cinza Chumbo",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": 10101119712,
+        "Nome": "Classic",
+        "Estilo": "T-Shirt",
+        "Cor": "Cinza Chumbo",
+        "Tamanho": "XGG"
+    },
+    {
+        "codigoSku": 10501119708,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Cinza Chumbo",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": 10501119709,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Cinza Chumbo",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": 10501119710,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Cinza Chumbo",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": 10501119711,
+        "Nome": "Classic",
+        "Estilo": "Baby Long",
+        "Cor": "Cinza Chumbo",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": "body0101",
+        "Nome": "Body Infantil",
+        "Estilo": "Body Infantil",
+        "Cor": "Branco",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": "body0102",
+        "Nome": "Body Infantil",
+        "Estilo": "Body Infantil",
+        "Cor": "Branco",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": "body0103",
+        "Nome": "Body Infantil",
+        "Estilo": "Body Infantil",
+        "Cor": "Branco",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": "body0104",
+        "Nome": "Body Infantil",
+        "Estilo": "Body Infantil",
+        "Cor": "Branco",
+        "Tamanho": "GG"
+    },
+    {
+        "codigoSku": "body0201",
+        "Nome": "Body Infantil",
+        "Estilo": "Body Infantil",
+        "Cor": "Preto",
+        "Tamanho": "P"
+    },
+    {
+        "codigoSku": "body0202",
+        "Nome": "Body Infantil",
+        "Estilo": "Body Infantil",
+        "Cor": "Preto",
+        "Tamanho": "M"
+    },
+    {
+        "codigoSku": "body0203",
+        "Nome": "Body Infantil",
+        "Estilo": "Body Infantil",
+        "Cor": "Preto",
+        "Tamanho": "G"
+    },
+    {
+        "codigoSku": "body0204",
+        "Nome": "Body Infantil",
+        "Estilo": "Body Infantil",
+        "Cor": "Preto",
+        "Tamanho": "GG"
+    }
+]
