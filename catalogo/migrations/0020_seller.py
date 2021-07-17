@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Seller',
+            name='SellerExcluido',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('nome', models.CharField(max_length=100, unique=True)),
@@ -20,9 +20,9 @@ class Migration(migrations.Migration):
                 ('updated_at', models.DateField(auto_now=True, verbose_name='Modificado em')),
             ],
             options={
-                'verbose_name': 'Seller',
-                'verbose_name_plural': 'Seller',
-                'db_table': 'seller',
+                'verbose_name': 'SellerExcluido',
+                'verbose_name_plural': 'SellerExcluidos',
+                'db_table': 'sellerExcluido',
                 'ordering': ('nome',),
             },
         ),
