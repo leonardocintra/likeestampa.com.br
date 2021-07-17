@@ -34,9 +34,6 @@ class Categoria(models.Model):
         verbose_name = 'categoria'
         ordering = ('-created_at',)
 
-    def get_absolute_url(self):
-        return reverse('catalogo:categoria', kwargs={'slug': self.slug})
-
     def __str__(self):
         return self.nome
 
