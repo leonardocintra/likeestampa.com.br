@@ -24,7 +24,7 @@ class ClienteModelTest(TestCase):
     def test_str(self):
         self.assertEqual('Leonardo', str(self.obj))
 
-    def test_cpf(self):
+    def test_cpf_blank(self):
         self.assertEqual('', str(self.obj.cpf))
 
     def test_cpf(self):

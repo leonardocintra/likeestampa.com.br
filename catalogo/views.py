@@ -9,7 +9,7 @@ from .models import Produto, SubCategoria, ModeloVariacao, ModeloProduto
 
 
 class ProdutosListView(ListView):
-    paginate_by = 100
+    paginate_by = 30
     template_name = 'index.html'
 
     def get_queryset(self):
