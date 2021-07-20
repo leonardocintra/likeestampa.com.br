@@ -96,7 +96,7 @@
 
         <div class="row g-2">
 
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <label for="cpf" class="form-label">CPF</label>
                 {% render_field form.cpf class="form-control" placeholder="CPF ..." %}
                 <div class="invalid-feedback">
@@ -111,7 +111,7 @@
                     Verifique o nome
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-5">
                 <label for="sobrenome" class="form-label">Sobrenome</label>
                 {% render_field form.sobrenome class="form-control" placeholder="Sobrenome ..." %}
                 <div class="invalid-feedback">
@@ -203,21 +203,11 @@
             </div>
 
 
-            <div class="col-2">
-                <label for="area" class="form-label">Tel. area</label>
-                {% render_field form.area class="form-control" placeholder="area ..." %}
-            </div>
 
             <div class="col-5">
-                <label for="telefone_numero" class="form-label">Tel. numero</label>
-                {% render_field form.telefone_numero class="form-control" placeholder="telefone numero ..." %}
+                <label for="telefone" class="form-label">Tel. numero</label>
+                {% render_field form.telefone class="form-control" placeholder="telefone numero ..." %}
             </div>
-
-            <div class="col-3">
-                <label for="tipo" class="form-label">Tipo de telefone </label>
-                {% render_field form.tipo class="form-control" %}
-            </div>
-
 
             <div class="col-4">
                 <label for="password1" class="form-label">Senha de acesso</label>

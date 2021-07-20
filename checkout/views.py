@@ -3,10 +3,11 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from catalogo.models import Produto
-from usuario.business import get_cliente_data_form
 from services.dimona.api import get_frete
+from usuario.forms import ClienteForm
+from usuario.models import Cliente, EnderecoCliente
+from .forms import FreteForm
 from .models import Carrinho, ItemCarrinho
-from .forms import ClienteForm, FreteForm
 
 
 def carrinho(request):
@@ -30,24 +31,34 @@ def carrinho(request):
             valor_carrinho = (item.produto.preco_base *
                             item.quantidade) + valor_carrinho
 
-    form = get_cliente_data_form(request)
     form_frete = FreteForm()
 
-    cep_padrao = form['cep'].initial
-
+    user = request.user
+    cliente = None
+    enderecos = None
+    cep = ''
     frete_items = {}
-    if items:
-        frete_items = get_frete(cep_padrao, quantidade_item)
+    
+    if user.is_authenticated:
+        cliente = Cliente.objects.get(user=user)
+        enderecos = EnderecoCliente.objects.filter(cliente=cliente)
+
+        for endereco in enderecos:
+            if endereco.cep:
+                cep = endereco.cep
+
+        if items:
+            frete_items = get_frete(cep, quantidade_item)
 
     context = {
-        'form': form,
         'form_frete': form_frete,
-        'cep_padrao': cep_padrao,
+        'cep_padrao': cep,
         'items': items,
         'frete_items': frete_items,
         'quantidade_item': quantidade_item,
         'valor_carrinho': valor_carrinho,
-        'peoplesoftURL': settings.PEOPLE_SOFT_API,
+        'cliente': cliente,
+        'enderecos': enderecos
     }
     return render(request, 'checkout/carrinho.html', context)
 

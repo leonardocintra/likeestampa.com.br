@@ -1,8 +1,8 @@
 import uuid
 from django.contrib.auth.models import User
 from django.db import models
-from localflavor.br.models import BRCPFField
 from catalogo.models import ModeloProduto, ModeloVariacao, Produto
+from usuario.models import EnderecoCliente
 
 
 GATEWAY_PAGAMENTO = (
@@ -12,10 +12,8 @@ GATEWAY_PAGAMENTO = (
 
 
 class Pedido(models.Model):
-    cpf = BRCPFField('CPF')
     user = models.ForeignKey(User, null=True, on_delete=models.PROTECT)
-    peoplesoft_pessoa_id = models.PositiveIntegerField(null=False)
-    peoplesoft_endereco_id = models.PositiveIntegerField(null=False)
+    endereco_cliente = models.ForeignKey(EnderecoCliente, on_delete=models.PROTECT, null=True)
     pago = models.BooleanField(default=False)
     valor_total = models.DecimalField(
         max_digits=999, decimal_places=2, default=1)

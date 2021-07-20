@@ -1,15 +1,12 @@
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">Seus dados</h5>
-        <h6 class="card-subtitle mb-2 text-muted">CPF: {{ form.cpf.value }}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">CPF: {{ cliente.cpf }}</h6>
         <p class="card-text">
-            Nome:<b> {{ form.nome.value }} </b> <br />
-            Sobrenome:<b> {{ form.sobrenome.value }} </b> <br />
-            Email:<b> {{ form.email.value }}</b> <br />
-            Telefone:
-            {% if form.telefone_numero.value %}
-                <b> ({{ form.area.value }}) {{ form.telefone_numero.value }} </b> <br />
-            {% endif %}
+            Nome:<b> {{ cliente.user.first_name }} </b> <br />
+            Sobrenome:<b> {{ cliente.user.last_name }} </b> <br />
+            Email:<b> {{ cliente.user.email }}</b> <br />
+            Telefone: {{ cliente.telefone }}
         </p>
         <a href="#" class="card-link">Alterar</a>
         <a href="#" class="card-link">Alterar senha</a>
@@ -19,15 +16,17 @@
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">Endereços</h5>
-        <h6 class="card-subtitle mb-2 text-muted">CEP: {{ form.cep.value }}</h6>
-        <p class="card-text">
-            Cidade: <b>{{ form.cidade.value }} - {{ form.uf.value }} </b> <br />
-            Endereço: <b>{{ form.endereco.value }}, {{ form.numero.value }} </b> <br />
-            Bairro: <b>{{ form.bairro.value }} </b> <br />
-            Complemento: <b>{{ form.complemento.value }} </b> <br />
-            Referencia: <b>{{ form.referencia.value }} </b> <br />
+        {% for endereco in enderecos %}
+            <h6 class="card-subtitle mb-2 text-muted">CEP: {{ endereco.cep }}</h6>
+            <p class="card-text">
+                Cidade: <b>{{ endereco.cidade }} - {{ endereco.uf }} </b> <br />
+                Endereço: <b>{{ endereco.endereco }}, {{ endereco.numero }} </b> <br />
+                Bairro: <b>{{ endereco.bairro }} </b> <br />
+                Complemento: <b>{{ endereco.complemento }} </b> <br />
+                Referencia: <b>{{ endereco.referencia }} </b> <br />
 
-        </p>
+            </p>
+        {% endfor %}
         <a href="#" class="card-link">Adicionar outro</a>
     </div>
 </div>

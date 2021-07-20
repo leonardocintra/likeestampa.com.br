@@ -8,12 +8,6 @@ SEXO = {
     ('F', 'Feminino'),
 }
 
-TIPO_TELEFONE = (
-    ('mobile', 'Celular'),
-    ('home', 'Residencial'),
-    ('business', 'Comercial'),
-)
-
 UF = (
     ('AC', 'Acre'),
     ('AL', 'Alagoas'),

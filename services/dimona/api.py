@@ -35,15 +35,11 @@ def get_frete(cep, quantidade):
     return json.loads(response.text)
 
 
-def create_order(order_id, cliente, items, delivery_method_id):
-
-    cliente = cliente['records'][0]
-    endereco = cliente['enderecos'][0]
+def create_order(order_id, cliente, endereco, items, delivery_method_id):
     tel_numero = '999999999'
 
-    if cliente['telefones']:
-        telefone = cliente['telefones'][0]
-        tel_numero = telefone['area'] + telefone['numero']
+    if cliente.telefone:
+        tel_numero = cliente.telefone
 
     items_request = _monta_payload_item(items)
 
@@ -51,19 +47,19 @@ def create_order(order_id, cliente, items, delivery_method_id):
         {
             "delivery_method_id": delivery_method_id,
             "order_id": order_id,
-            "customer_name": cliente['nome'],
-            "customer_document": cliente['cpf'],
-            "customer_email": cliente['email'],
+            "customer_name": cliente.user.first_name,
+            "customer_document": cliente.cpf,
+            "customer_email": cliente.user.email,
             "webhook_url": "https://option_webhook_url.com",
             "items": items_request,
             "address": {
-                "street": endereco['endereco'],
-                "number": endereco['numero'],
-                "complement": endereco['complemento'],
-                "city": endereco['cidade'],
-                "state": endereco['uf'],
-                "zipcode": endereco['cep'],
-                "neighborhood": endereco['bairro'],
+                "street": endereco.endereco,
+                "number": endereco.numero,
+                "complement": endereco.complemento,
+                "city": endereco.cidade,
+                "state": endereco.uf,
+                "zipcode": endereco.cep,
+                "neighborhood": endereco.bairro,
                 "phone": tel_numero,
                 "country": "BR"
             }

@@ -7,7 +7,7 @@ from checkout.models import Carrinho, ItemCarrinho
 from pagamento.models import PagamentoMercadoPago
 from services.mercadopago.mercadopago import get_preference, get_payment
 from services.dimona.api import create_order, get_tracking
-from services.peoplesoft.peoplesoft import buscar_cliente_by_id
+from usuario.models import Cliente, EnderecoCliente
 from .models import Pedido, ItemPedido
 
 
@@ -57,8 +57,10 @@ def pedido_finalizado_mercado_pago(request):
     dimona = None
     if pagamento_mp.mercado_pago_status == 'approved':
         pago = True
-        cliente = buscar_cliente_by_id(request.session['cliente_id'])
-        dimona = create_order(pagamento_mp.pedido.id, cliente, items, pedido.frete_id)
+        user = request.user
+        cliente = Cliente.objects.get(user=user)
+        enderecos = EnderecoCliente.objects.filter(cliente=cliente)
+        dimona = create_order(pagamento_mp.pedido.id, cliente, enderecos[0], items, pedido.frete_id)
 
     # Atualiza os dados do pagamento no pedido (pago e o usuario)
     Pedido.objects.filter(pk=pagamento_mp.pedido.id).update(

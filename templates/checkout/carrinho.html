@@ -88,7 +88,13 @@
                         </div>
                         {% endfor %}
                     {% else %}
-                        <label>Valor do frete apos cadastro</label>
+                        <div class="text-center">
+                            {% if not items %}
+                                <label>Adicione produtos para calular o frete</label>
+                            {% else %}
+                                <label>Valor do frete é mostrado apos o cadastro</label>
+                            {% endif %}
+                        </div>
                     {% endif %}
                     <hr />
                 </div>
@@ -107,8 +113,8 @@
                     {% endif %}
                     {% else %}
                     <h2>
-                        <a href="{% url 'account_login' %}">Entrar </a> |
-                        <a href="{% url 'account_signup' %}">Fazer cadastro</a>
+                        <a class="btn btn-success" href="{% url 'account_login' %}">Entrar </a> ou
+                        <a class="btn btn-primary" href="{% url 'account_signup' %}">Fazer cadastro</a>
                     </h2>
                     {% endif %}
                 </div>

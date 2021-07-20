@@ -6,14 +6,14 @@ from django.views.decorators.http import require_POST
 # from django.utils.functional import cached_property
 from checkout.models import Carrinho, ItemCarrinho
 from services.mercadopago.mercadopago import create_preference
-from services.peoplesoft.peoplesoft import buscar_cliente_by_id
+import decimal
+import json
+from django.http.response import HttpResponseRedirect
 from django.http import HttpResponse
 from pedido.models import Pedido
+from usuario.models import Cliente, EnderecoCliente
 from services.dimona.api import get_frete
 from .models import PagamentoMercadoPago
-import json
-import decimal
-from django.http.response import HttpResponseRedirect
 
 
 @login_required
@@ -22,17 +22,16 @@ def pagamento(request):
         # TODO: mandar mensagem no telegram avisando
         HttpResponseRedirect('/')
 
-    if 'cliente_id' in request.session:
-        pass  # TODO: mandar mensagem no telegram avisando
-
     uuid = request.session['carrinho']
     carrinho = Carrinho.objects.get(uuid=uuid)
     items = ItemCarrinho.objects.filter(carrinho=carrinho)
     valor_carrinho = 0
 
-    cliente = buscar_cliente_by_id(request.session['cliente_id'])
-    cliente = cliente['records'][0]
-    endereco = cliente['enderecos'][0]
+    user = request.user
+    cliente = Cliente.objects.get(user=user)
+    # TODO: aqui esta retornando somente um endereco
+    enderecos = EnderecoCliente.objects.filter(cliente=cliente)[:1]
+
 
     item_data = []
     quantidade_total = 0
@@ -54,9 +53,11 @@ def pagamento(request):
         valor_carrinho = (item.produto.preco_base *
                           item.quantidade) + valor_carrinho
 
+    endereco = enderecos[0]
+    cep = endereco.cep
 
     # monta o frete
-    frete_items = get_frete(endereco['cep'], quantidade_total)
+    frete_items = get_frete(cep, quantidade_total)
     valor_frete = 5
     transportadora = ''
     delivery_method_id = 0
@@ -72,23 +73,23 @@ def pagamento(request):
             print('deve pegar o valor menor')
 
     payer = {
-        "name": cliente['nome'],
-        "surname": cliente['sobrenome'],
-        "email": cliente['email'],
+        "name": cliente.user.first_name,
+        "surname": cliente.user.last_name,
+        "email": cliente.user.email,
         "identification": {
             "type": "CPF",
-            "number": cliente['cpf']
+            "number": cliente.cpf
         },
         "address": {
-            "street_name": endereco['endereco'],
-            "street_number": endereco['numero'],
-            "zip_code": endereco['cep']
+            "street_name": endereco.endereco,
+            "street_number": endereco.numero,
+            "zip_code": endereco.cep,
         },
         "shipments": {
             "receiver_address": {
-                "street_name": endereco['endereco'],
-                "street_number": endereco['numero'],
-                "zip_code": endereco['cep']
+                "street_name": endereco.endereco,
+                "street_number": endereco.numero,
+                "zip_code": endereco.cep
             }
         }
     }
@@ -98,14 +99,12 @@ def pagamento(request):
 
     # Cria o pedido
     pedido = Pedido.objects.create(
-        cpf=cliente['cpf'],
-        peoplesoft_pessoa_id=cliente['id'],
-        peoplesoft_endereco_id=endereco['id'],
         valor_total=valor_total,
         valor_frete=valor_frete,
         valor_items=valor_carrinho,
         frete_id=delivery_method_id,
         frete_nome=transportadora,
+        endereco_cliente=endereco
     )
 
     # monta urls de retorno
