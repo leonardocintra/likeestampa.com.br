@@ -1,4 +1,5 @@
 -r base.txt
 autopep8
+psycopg2-binary==2.9.1
 pycodestyle
 rope

@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.views.generic.detail import DetailView
 
@@ -9,6 +10,7 @@ from services.mercadopago.mercadopago import get_preference, get_payment
 from services.dimona.api import create_order, get_tracking
 from usuario.models import Cliente, EnderecoCliente
 from .models import Pedido, ItemPedido
+from .email import envia_email
 
 
 @login_required
@@ -55,20 +57,27 @@ def pedido_finalizado_mercado_pago(request):
     pedido = Pedido.objects.get(pk=pagamento_mp.pedido.id)
     pago = False
     dimona = None
+    user = request.user
+    cliente = Cliente.objects.get(user=user)
+    enderecos = EnderecoCliente.objects.filter(cliente=cliente)
+
     if pagamento_mp.mercado_pago_status == 'approved':
         pago = True
-        user = request.user
-        cliente = Cliente.objects.get(user=user)
-        enderecos = EnderecoCliente.objects.filter(cliente=cliente)
-        dimona = create_order(pagamento_mp.pedido.id, cliente, enderecos[0], items, pedido.frete_id)
+        dimona = create_order(pagamento_mp.pedido.id,
+                              cliente, enderecos[0], items, pedido.frete_id)
 
+    if dimona:
+        dimona = dimona['order']
+        
     # Atualiza os dados do pagamento no pedido (pago e o usuario)
     Pedido.objects.filter(pk=pagamento_mp.pedido.id).update(
         pago=pago,
         user_id=request.user.id,
-        pedido_seller=dimona['order']
+        pedido_seller=dimona
     )
 
+    envia_email(cliente, pedido.id, pago)
+    
     del request.session['carrinho']
     del request.session['mercado_pago_id']
     Carrinho.objects.filter(uuid=carrinho_uuid).delete()

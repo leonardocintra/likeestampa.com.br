@@ -25,11 +25,11 @@ def carrinho(request):
         uuid = request.session['carrinho']
         carrinho = Carrinho.objects.get(uuid=uuid)
         items = ItemCarrinho.objects.filter(carrinho=carrinho)
-    
+
         for item in items:
             quantidade_item = quantidade_item + item.quantidade
             valor_carrinho = (item.produto.preco_base *
-                            item.quantidade) + valor_carrinho
+                              item.quantidade) + valor_carrinho
 
     form_frete = FreteForm()
 
@@ -38,7 +38,7 @@ def carrinho(request):
     enderecos = None
     cep = ''
     frete_items = {}
-    
+
     if user.is_authenticated:
         cliente = Cliente.objects.get(user=user)
         enderecos = EnderecoCliente.objects.filter(cliente=cliente)

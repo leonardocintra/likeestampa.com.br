@@ -25,3 +25,13 @@ MELHOR_ENVIO_BASE_URL = "https://melhorenvio.com.br"
 
 #LIKE ESTAMPA
 MAXIMO_ITENS_CARRINHO = env.int("MAXIMO_ITENS_CARRINHO")
+
+
+# ANYMAIL
+EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+ANYMAIL = {
+    "MAILGUN_API_KEY": env("MAILGUN_API_KEY"),
+    "MAILGUN_SENDER_DOMAIN": "mg.likeestampa.com.br"
+}
+DEFAULT_FROM_EMAIL = "no-reply@likeestampa.com.br"
+SERVER_EMAIL = DEFAULT_FROM_EMAIL

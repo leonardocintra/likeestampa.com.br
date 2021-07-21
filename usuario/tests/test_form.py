@@ -7,7 +7,7 @@ class SignupFormTest(TestCase):
     def test_form_has_fields(self):
         form = SignupForm()
         expected = ['nome', 'sobrenome', 'email', 'cpf', 'sexo', 'cep', 'endereco', 'bairro',
-                    'numero', 'cidade', 'uf', 'complemento', 'referencia', 'telefone_numero', 'area', 'tipo', ]
+                    'numero', 'cidade', 'uf', 'complemento', 'referencia', 'telefone', ]
         self.assertSequenceEqual(expected, list(form.fields))
 
     def test_cpf_tem_11_digitos(self):

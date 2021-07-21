@@ -11,7 +11,8 @@
         {{ form|crispy }}
         <br />
         <button class="btn btn-success" type="submit">Entrar</button>
-        <a href="{% url 'account_signup' %}"> Criar minha conta</a>
+        <a href="{% url 'account_signup' %}"> Criar minha conta</a> | 
+        <a href={% url 'account_reset_password' %}>Esqueci minha senha</a>
     </form>
 </div>
 {% endblock %}

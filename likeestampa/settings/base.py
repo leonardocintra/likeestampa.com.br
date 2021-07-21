@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'anymail',
 
     # LOCAL
     'core',
@@ -199,5 +200,3 @@ LOGIN_REDIRECT_URL = "/usuario/"
 
 # Django Crispy Form
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-
