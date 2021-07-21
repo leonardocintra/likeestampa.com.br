@@ -57,7 +57,6 @@ class SignupForm(forms.ModelForm):
 
         # Cria o cliente
         user.cliente.cpf = cliente['cpf']
-        user.cliente.peoplesoft_id = 99
         user.cliente.telefone = cliente['telefone']
         user.cliente.save()
         EnderecoCliente.objects.create(

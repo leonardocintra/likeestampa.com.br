@@ -7,9 +7,9 @@
         <div class="col-md-5 col-lg-5 order-md-last">
             <h1>Pedido #{{ pedido.id }}</h1>
             {% if pedido.pago %}
-                <label class="text-success"> Pago </label>
+            <label class="text-success"> Pago </label>
             {% else %}
-                <label class="text-warning"> Aguardando pagamento </label>
+            <label class="text-warning"> Aguardando pagamento </label>
             {% endif %}
             <h3>Valor: R$ {{ pedido.valor_total }}</h3>
             <label>Produtos: R$ {{ pedido.valor_items }} + Frete R$ {{ pedido.valor_frete }}</label>
@@ -29,6 +29,14 @@
 
         <div class="col-md-5 col-lg-5 order-md-last">
             <h1>Eventos do pedido</h1>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0"
+                    aria-valuemax="100">25%</div>
+            </div>
+            <br />
+            {% for evento in eventos %}
+                - {{ evento.evento.descricao }} | {{ evento.created_at }} <br />
+            {% endfor %}
         </div>
     </div>
 </div>

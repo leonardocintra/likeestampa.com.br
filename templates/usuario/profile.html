@@ -5,13 +5,13 @@
 {% block content %}
 <div class="container py-3">
 
-    <h3> <span class="badge bg-secondary">#{{ cliente.peoplesoft_id }}</span> {{ cliente.user.first_name }} </h3>
+    <h3> {{ cliente.user.first_name }} </h3>
     <h4>CPF: {{ cliente.cpf }}</h4>
 
     <div class="row">
         <div class="col-md-6">
             {% if not pedidos %}
-            <h3> você não possui pedido </h3>
+            <h3> você não possui pedidos </h3>
             {% else %}
             <table class="table">
                 <thead>

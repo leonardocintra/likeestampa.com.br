@@ -9,7 +9,6 @@ class Cliente(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     cpf = BRCPFField("CPF")
     telefone = models.CharField(max_length=15, null=True)
-    peoplesoft_id = models.PositiveIntegerField(null=True)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
 

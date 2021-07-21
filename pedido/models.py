@@ -34,8 +34,6 @@ class Pedido(models.Model):
         verbose_name_plural = 'Pedidos'
         verbose_name = 'Pedido'
 
-    def __str__(self):
-        return self.cpf
 
 
 class ItemPedido(models.Model):

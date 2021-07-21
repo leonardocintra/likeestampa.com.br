@@ -32,5 +32,7 @@ class EventoPedido(models.Model):
         verbose_name_plural = 'Evento dos pedidos'
         verbose_name = 'Evento do pedido'
 
-    def __str__(self):
-        return self.pedido
+
+def criar_evento(evento_id, pedido):
+    status = Status.objects.get(pk=evento_id)
+    EventoPedido.objects.create(evento=status, pedido=pedido)

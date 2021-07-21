@@ -1,19 +1,20 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.http.response import HttpResponseRedirect
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 # from django.utils.functional import cached_property
+from evento.models import EventoPedido, criar_evento
 from checkout.models import Carrinho, ItemCarrinho
-from services.mercadopago.mercadopago import create_preference
-import decimal
-import json
-from django.http.response import HttpResponseRedirect
-from django.http import HttpResponse
 from pedido.models import Pedido
 from usuario.models import Cliente, EnderecoCliente
+from services.mercadopago.mercadopago import create_preference
 from services.dimona.api import get_frete
 from .models import PagamentoMercadoPago
+import decimal
+import json
 
 
 @login_required
@@ -31,7 +32,6 @@ def pagamento(request):
     cliente = Cliente.objects.get(user=user)
     # TODO: aqui esta retornando somente um endereco
     enderecos = EnderecoCliente.objects.filter(cliente=cliente)[:1]
-
 
     item_data = []
     quantidade_total = 0
@@ -99,6 +99,7 @@ def pagamento(request):
 
     # Cria o pedido
     pedido = Pedido.objects.create(
+        user=user,
         valor_total=valor_total,
         valor_frete=valor_frete,
         valor_items=valor_carrinho,
@@ -107,9 +108,13 @@ def pagamento(request):
         endereco_cliente=endereco
     )
 
+    # Cria o evento inicial
+    criar_evento(1, pedido)
+
     # monta urls de retorno
-    back_urls = request.build_absolute_uri().replace('/pagamento/', '') + '/pedido/pedido_finalizado_mercado_pago'
-    
+    back_urls = request.build_absolute_uri().replace('/pagamento/', '') + \
+        '/pedido/pedido_finalizado_mercado_pago'
+
     # junta o request pro mercado pago
     preference_data = {
         "back_urls": {
