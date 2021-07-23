@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponseRedirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
@@ -108,6 +108,8 @@ def pagamento(request):
     return render(request, 'pagamento/pagamento.html', context)
 
 
+@require_POST
+@csrf_exempt
 def webhook(request):
     print('ok - webhook mercado pago!')
-    return HttpResponseRedirect('/')
+    return JsonResponse({"foo": "bar"}, status=201)
