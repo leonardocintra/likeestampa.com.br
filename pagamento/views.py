@@ -10,7 +10,7 @@ from evento.models import EventoPedido, criar_evento
 from checkout.models import Carrinho, ItemCarrinho
 from pedido.models import Pedido
 from usuario.models import Cliente, EnderecoCliente
-from services.mercadopago.mercadopago import create_preference
+from services.mercadopago.mercadopago import create_preference, montar_payload_preference
 from services.dimona.api import get_frete
 from .models import PagamentoMercadoPago
 import decimal
@@ -33,22 +33,8 @@ def pagamento(request):
     # TODO: aqui esta retornando somente um endereco
     enderecos = EnderecoCliente.objects.filter(cliente=cliente)[:1]
 
-    item_data = []
     quantidade_total = 0
     for item in items:
-        imagem = item.produto.imagem_principal.url
-        if item.cor.imagem:
-            imagem = item.cor.imagem.url
-
-        item_data.append({
-            "id": item.produto.slug,
-            "title": item.produto.nome,
-            "picture_url": imagem,
-            # "description": item.produto.descricao,
-            "category_id": item.produto.subcategoria.slug,
-            "quantity": item.quantidade,
-            "unit_price": float(item.produto.preco_base)
-        })
         quantidade_total = quantidade_total + item.quantidade
         valor_carrinho = (item.produto.preco_base *
                           item.quantidade) + valor_carrinho
@@ -72,28 +58,6 @@ def pagamento(request):
         for frete in frete_items:
             print('deve pegar o valor menor')
 
-    payer = {
-        "name": cliente.user.first_name,
-        "surname": cliente.user.last_name,
-        "email": cliente.user.email,
-        "identification": {
-            "type": "CPF",
-            "number": cliente.cpf
-        },
-        "address": {
-            "street_name": endereco.endereco,
-            "street_number": endereco.numero,
-            "zip_code": endereco.cep,
-        },
-        "shipments": {
-            "receiver_address": {
-                "street_name": endereco.endereco,
-                "street_number": endereco.numero,
-                "zip_code": endereco.cep
-            }
-        }
-    }
-
     valor_frete = round(float(valor_frete), 2)
     valor_total = round(valor_carrinho + decimal.Decimal(valor_frete), 2)
 
@@ -111,44 +75,25 @@ def pagamento(request):
     # Cria o evento inicial
     criar_evento(1, pedido)
 
-    # monta urls de retorno
-    back_urls = request.build_absolute_uri().replace('/pagamento/', '') + \
-        '/pedido/pedido_finalizado_mercado_pago'
-
-    # junta o request pro mercado pago
-    preference_data = {
-        "back_urls": {
-            "success": back_urls,
-            "failure": back_urls,
-            "pending": back_urls
-        },
-        "payer": payer,
-        "auto_return": "approved",
-        "items": item_data,
-        "statement_descriptor": "LIKE_ESTAMPA",
-        "external_reference": "LIKEESTAMPA-" + str(pedido.id),
-        "installments": 10,
-        "shipments": {
-            "cost": float(valor_frete),
-            "mode": "not_specified",
-        }
-    }
+    # Monta o payload para enviar pro mercado pago
+    preference_data = montar_payload_preference(request, pedido.id, items, cliente, endereco, valor_frete)
 
     # Cria a preferencia no mercado pago
     preference = create_preference(preference_data)
+    preference_id = preference['id']
 
     # Atualiza informações na tabela de pagamento
     frase_padrao = 'PEDIDO_NAO_FINALIZADO'
     PagamentoMercadoPago.objects.create(
         pedido=pedido,
-        mercado_pago_id=preference['id'],
+        mercado_pago_id=preference_id,
         mercado_pago_status=frase_padrao,
         mercado_pago_status_detail=frase_padrao,
         payment_method_id=frase_padrao
     )
 
     # TODO: toda vez que da F5 ele cria um novo pedido. Validar isso
-    request.session['mercado_pago_id'] = preference['id']
+    request.session['mercado_pago_id'] = preference_id
 
     context = {
         'items': items,
@@ -158,6 +103,10 @@ def pagamento(request):
         'valor_carrinho': valor_carrinho,
         'valor_total': valor_total,
         'MERCADO_PAGO_PUBLIC_KEY': settings.MERCADO_PAGO_PUBLIC_KEY,
-        'MERCADO_PAGO_PREFERENCE_ID': preference['id']
+        'MERCADO_PAGO_PREFERENCE_ID': preference_id
     }
     return render(request, 'pagamento/pagamento.html', context)
+
+
+def webhook(request):
+    print('ok - webhook mercado pago!')

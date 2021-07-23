@@ -8,8 +8,8 @@
             Email:<b> {{ cliente.user.email }}</b> <br />
             Telefone: {{ cliente.telefone }}
         </p>
-        <a href="#" class="card-link">Alterar</a>
-        <a href="#" class="card-link">Alterar senha</a>
+        {% comment %} <a href="{% url 'usuario:cliente_update' cliente.id %}" class="card-link">Alterar</a> {% endcomment %}
+        {% comment %} <a href="#" class="card-link">Alterar senha</a> {% endcomment %}
     </div>
 </div>
 <br />
@@ -27,6 +27,6 @@
 
             </p>
         {% endfor %}
-        <a href="#" class="card-link">Adicionar outro</a>
+        {% comment %} <a href="#" class="card-link">Adicionar outro</a> {% endcomment %}
     </div>
 </div>

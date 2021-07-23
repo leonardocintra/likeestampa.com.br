@@ -2,6 +2,24 @@
 
 {% load widget_tweaks %}
 
+{% block css %}
+<style>
+    .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+    }
+
+    @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+        }
+    }
+</style>
+{% endblock %}
+
 {% block js_header %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
@@ -19,42 +37,6 @@
                     $('#id_bairro').val(result.bairro);
                     $('#id_uf').val(result.uf);
                     $('#id_cidade').val(result.localidade);
-                }
-            });
-        });
-
-        $("#btnBuscaCPF").click(function () {
-            var cpf = $('#id_cpf').val().replace("-", "");
-            var urlPeopleSoft = '{{ peoplesoftURL }}' + '/pessoa/cpf/' + cpf;
-
-            $.ajax({
-                url: urlPeopleSoft,
-                success: function (result) {
-                    result = result.records[0];
-                    $('#id_cpf').val(cpf);
-                    $('#id_nome').val(result.nome);
-                    $('#id_email').val(result.email);
-                    $('#id_endereco').val(result.enderecos[0].endereco);
-                    $('#id_cep').val(result.enderecos[0].cep);
-                    $('#id_bairro').val(result.enderecos[0].bairro);
-                    $('#id_uf').val(result.enderecos[0].uf);
-                    $('#id_numero').val(result.enderecos[0].numero);
-                    $('#id_cidade').val(result.enderecos[0].cidade);
-                    $('#id_referencia').val(result.enderecos[0].referencia);
-                    $('#id_complemento').val(result.enderecos[0].complemento);
-
-                }, error: function (result) {
-                    $('#id_nome').val('');
-                    $('#id_email').val('');
-                    $('#id_endereco').val('');
-                    $('#id_cep').val('');
-                    $('#id_bairro').val('');
-                    $('#id_uf').val('');
-                    $('#id_numero').val('');
-                    $('#id_cidade').val('');
-                    $('#id_referencia').val('');
-                    $('#id_complemento').val('');
-
                 }
             });
         });
@@ -90,11 +72,29 @@
 <div class="container py-4">
 
     <h2>Seja muito bem vindo! Faça seu cadastro</h2>
-    <form method="post" class="col-md-9">
+    <form method="post" class="col-md-9 needs-validation" novalidate>
         {% csrf_token %}
         {{ form.source }}
+        {% if form.errors %}
+            <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                </symbol>
+            </svg>
+            {% for field in form %}
+                {% for error in field.errors %}
+                <div class="alert alert-warning d-flex align-items-center" role="alert">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                    <div>
+                        {{ error }}
+                    </div>
+                </div>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
 
         <div class="row g-2">
+
 
             <div class="col-sm-3">
                 <label for="cpf" class="form-label">CPF</label>
@@ -202,8 +202,6 @@
                 {% render_field form.referencia class="form-control" placeholder="Ponto de referencia ..." %}
             </div>
 
-
-
             <div class="col-5">
                 <label for="telefone" class="form-label">Tel. numero</label>
                 {% render_field form.telefone class="form-control" placeholder="telefone numero ..." %}
@@ -212,6 +210,9 @@
             <div class="col-4">
                 <label for="password1" class="form-label">Senha de acesso</label>
                 {% render_field form.password1 class="form-control" placeholder="Senha" %}
+                <div class="invalid-feedback">
+                    Verifique a senha
+                </div>
             </div>
         </div>
 
@@ -220,4 +221,29 @@
         <button class="btn btn-success" type="submit">Cadastrar</button>
     </form>
 </div>
+{% endblock %}
+
+{% block js_footer %}
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
 {% endblock %}

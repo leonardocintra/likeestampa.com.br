@@ -1,6 +1,8 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.http.response import HttpResponseRedirect
+from django.views.generic.edit import UpdateView
 from pedido.models import Pedido
 from .models import Cliente, EnderecoCliente
 
@@ -19,3 +21,13 @@ def cliente(request):
         'pedidos': pedidos
     }
     return render(request, "usuario/profile.html", context)
+
+
+class ClienteUpdateView(LoginRequiredMixin, UpdateView):
+    model = Cliente
+    template_name = "usuario/update_cliente.html"
+    fields = ('cpf', 'telefone', )
+
+
+cliente_update = ClienteUpdateView.as_view()
+

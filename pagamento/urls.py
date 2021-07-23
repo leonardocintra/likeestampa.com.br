@@ -5,5 +5,5 @@ app_name = 'pagamento'
 
 urlpatterns = [
     path('', views.pagamento, name='pagamento'),
-    # path('webhook/', None, name='webhook'),
+    path('webhook/', views.webhook , name='webhook'),
 ]

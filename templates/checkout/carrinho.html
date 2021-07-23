@@ -2,7 +2,6 @@
 
 {% load widget_tweaks %}
 
-
 {% block css %}
 <style>
     .bd-placeholder-img {
@@ -101,21 +100,21 @@
                 <div class="col-md-7 col-lg-7">
                     <h4 class="mb-3">Dados de cobrança</h4>
                     {% if user.is_authenticated %}
-                    {% csrf_token %}
-                    {{ form.source }}
+                        {% csrf_token %}
+                        {{ form.source }}
 
-                    {% include "usuario/includes/card_nome_endereco.html" %}
+                        {% include "usuario/includes/card_nome_endereco.html" %}
 
-                    <hr class="my-4">
-                    <a href="/" class="btn btn-secondary">Continuar Comprando</a>
-                    {% if items %}
-                    <button class="btn btn-primary btn-lg" type="submit">Ir para pagamento</button>
-                    {% endif %}
+                        <hr class="my-4">
+                        <a href="/" class="btn btn-secondary">Continuar Comprando</a>
+                        {% if items %}
+                            <button class="btn btn-primary btn-lg" type="submit">Ir para pagamento</button>
+                        {% endif %}
                     {% else %}
-                    <h2 class="text-center">
-                        <a class="btn btn-success" href="{% url 'account_login' %}">Entrar </a> ou
-                        <a class="btn btn-primary" href="{% url 'account_signup' %}">Fazer cadastro</a>
-                    </h2>
+                        <h2 class="text-center">
+                            <a class="btn btn-success" href="{% url 'account_login' %}">Entrar </a> ou
+                            <a class="btn btn-primary" href="{% url 'account_signup' %}">Fazer cadastro</a>
+                        </h2>
                     {% endif %}
                 </div>
             </div>
