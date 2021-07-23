@@ -110,3 +110,4 @@ def pagamento(request):
 
 def webhook(request):
     print('ok - webhook mercado pago!')
+    return HttpResponseRedirect('/')
