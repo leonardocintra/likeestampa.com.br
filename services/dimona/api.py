@@ -48,7 +48,7 @@ def create_order(order_id, cliente, endereco, items, delivery_method_id):
         {
             "delivery_method_id": delivery_method_id,
             "order_id": order_id,
-            "customer_name": cliente.user.first_name,
+            "customer_name": cliente.user.first_name + ' ' + cliente.user.last_name,
             "customer_document": cliente.cpf,
             "customer_email": cliente.user.email,
             "webhook_url": "https://option_webhook_url.com",
@@ -84,7 +84,7 @@ def _monta_payload_item(items):
 
         cor = item.cor.tipo_variacao.descricao
         tamanho = item.tamanho.tipo_variacao.descricao
-        modelo = 'T-Shirt' # se for TRADICIONAL vai cair t-shirt
+        modelo = 'T-Shirt'
         if item.modelo.nome == 'BABYLOOK':
             modelo = 'Baby Long'
         
@@ -108,4 +108,4 @@ def _get_sku_dimona(skus, modelo, tamanho, cor):
         if sku['Estilo'] == modelo and sku['Cor'] == cor and sku['Tamanho'] == tamanho and sku['Nome'] == 'Quality':
             return sku['codigoSku']
     #TODO: informar que esta errado (aviso telegram por exemplo)
-    return "10110110110"
+    return 10110110110

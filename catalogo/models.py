@@ -78,8 +78,10 @@ class TipoVariacao(models.Model):
     """ Ex: vermelho, verde, branco | P M G GG | etc """
     descricao = models.CharField('Descrição', unique=True, max_length=50)
     ativo = models.BooleanField(default=True)
-    variacao = models.ForeignKey(Variacao, on_delete=models.CASCADE, related_name='variacao_tipo_variacao')
-    preco_variacao = models.DecimalField('Preço', decimal_places=2, max_digits=999, default=51.90)
+    variacao = models.ForeignKey(
+        Variacao, on_delete=models.CASCADE, related_name='variacao_tipo_variacao')
+    preco_variacao = models.DecimalField(
+        'Preço', decimal_places=2, max_digits=999, default=51.90)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
@@ -100,9 +102,12 @@ class Produto(models.Model):
     descricao = models.TextField('Descrição', blank=True)
     slug = models.SlugField('Identificador', max_length=100, unique=True)
     ativo = models.BooleanField(default=False)
-    preco_base = models.DecimalField('Preço base', decimal_places=2, max_digits=999, default=51.90)
-    subcategoria = models.ForeignKey(SubCategoria, on_delete=models.CASCADE, related_name='produto_subcategoria')
-    imagem_principal = CloudinaryField('Imagem principal', default='NAO_INFORMADO')
+    preco_base = models.DecimalField(
+        'Preço base', decimal_places=2, max_digits=999, default=51.90)
+    subcategoria = models.ForeignKey(
+        SubCategoria, on_delete=models.CASCADE, related_name='produto_subcategoria')
+    imagem_principal = CloudinaryField(
+        'Imagem principal', default='NAO_INFORMADO')
     imagem_design = CloudinaryField('Imagem design', default='NAO_INFORMADO')
     genero = models.CharField(max_length=1, choices=GENERO, default='M')
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
@@ -116,6 +121,21 @@ class Produto(models.Model):
 
     def __str__(self):
         return self.nome
+
+
+class Modelo(models.Model):
+    descricao = models.CharField(max_length=50)
+    created_at = models.DateTimeField('Criado em', auto_now_add=True)
+    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+
+    class Meta:
+        db_table = 'modelo'
+        verbose_name_plural = 'Modelos'
+        verbose_name = 'Modelos'
+        ordering = ('descricao',)
+
+    def __str__(self):
+        return self.descricao
 
 
 class ModeloProduto(models.Model):

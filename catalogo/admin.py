@@ -1,7 +1,7 @@
 from django.contrib import admin
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 from catalogo.models import ModeloVariacao
-from .models import Categoria, SubCategoria, Produto, Variacao, TipoVariacao, ModeloProduto
+from .models import Categoria, SubCategoria, Produto, Variacao, TipoVariacao, ModeloProduto, Modelo
 
 
 class VariacaoAdmin(admin.ModelAdmin):
@@ -42,8 +42,13 @@ class ProdutoAdmin(NestedModelAdmin):
     inlines = [ModeloProdutoInline, ]
 
 
+class ModeloAdmin(admin.ModelAdmin):
+    search_fields = ['descricao', ]
+
+
 admin.site.register(Categoria, CategoriaAdmin)
-admin.site.register(SubCategoria, SubCategoriaAdmin)
+admin.site.register(Modelo, ModeloAdmin)
 admin.site.register(Produto, ProdutoAdmin)
-admin.site.register(Variacao, VariacaoAdmin)
+admin.site.register(SubCategoria, SubCategoriaAdmin)
 admin.site.register(TipoVariacao, TipoVariacaoAdmin)
+admin.site.register(Variacao, VariacaoAdmin)
