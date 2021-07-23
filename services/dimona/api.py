@@ -1,5 +1,6 @@
 import requests
 import json
+from pedido.models import Pedido
 
 URL_DIMONA = "https://camisadimona.com.br/api/v2"
 
@@ -66,8 +67,9 @@ def create_order(order_id, cliente, endereco, items, delivery_method_id):
         }
     )
 
-    response = requests.post(URL_DIMONA + "/order",
-                             headers=HEADERS, data=payload)
+    Pedido.objects.filter(pk=order_id).update(request_seller=payload)
+    response = requests.post(URL_DIMONA + "/order", headers=HEADERS, data=payload)
+    
     return json.loads(response.text)
 
 
@@ -82,9 +84,9 @@ def _monta_payload_item(items):
 
         cor = item.cor.tipo_variacao.descricao
         tamanho = item.tamanho.tipo_variacao.descricao
-        modelo = ''
-        if item.modelo.nome == 'TRADICIONAL':
-            modelo = 'T-Shirt'
+        modelo = 'T-Shirt' # se for TRADICIONAL vai cair t-shirt
+        if item.modelo.nome == 'BABYLOOK':
+            modelo = 'Baby Long'
         
         item_request.append({
             "name": item.produto.nome,
@@ -103,7 +105,7 @@ def _monta_payload_item(items):
 
 def _get_sku_dimona(skus, modelo, tamanho, cor):
     for sku in json.loads(skus.content):
-        if sku['Estilo'] == modelo and sku['Cor'] == cor and sku['Tamanho'] == tamanho:
+        if sku['Estilo'] == modelo and sku['Cor'] == cor and sku['Tamanho'] == tamanho and sku['Nome'] == 'Quality':
             return sku['codigoSku']
     #TODO: informar que esta errado (aviso telegram por exemplo)
     return "10110110110"

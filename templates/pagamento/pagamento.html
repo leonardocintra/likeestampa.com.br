@@ -8,12 +8,12 @@
 
     <hr />
 
-    <h3> 
+    <h3>
         <span class="badge rounded-pill bg-info">Produtos: {{ valor_carrinho }}</span> +
         <span class="badge rounded-pill bg-secondary">Frete: {{ valor_frete }}</span> =
         <span class="badge rounded-pill bg-success">R$ {{ valor_total }}</span>
     </h3>
-    
+
     <hr />
     <div class="cho-container">
     </div>
@@ -38,7 +38,7 @@
         },
         render: {
             container: '.cho-container', // Indica onde o botão de pagamento será exibido
-            label: 'Pagar com Mercado Pago (R$ {{ valor_total }})', // Muda o texto do botão de pagamento (opcional)
+            label: 'Finalizar compra! (R$ {{ valor_total }})', // Muda o texto do botão de pagamento (opcional)
         }
     });
 </script>
