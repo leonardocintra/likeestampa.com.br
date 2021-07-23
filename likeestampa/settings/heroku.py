@@ -8,7 +8,7 @@ DEBUG = env.bool("DEBUG", False)
 
 SECRET_KEY = env("SECRET_KEY")
 
-ALLOWED_HOSTS = ["likeestampa.com.br", "www.likeestampa.com.br"]
+ALLOWED_HOSTS = ["likeestampa.com.br", "www.likeestampa.com.br", "https://likeestampa.herokuapp.com", ]
 
 DATABASES = {
     "default": env.db(),
