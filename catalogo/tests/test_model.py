@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.shortcuts import resolve_url as r
 from django.test import TestCase
-from catalogo.models import Categoria, ModeloProduto, Produto, SubCategoria, TipoVariacao, Variacao, ModeloVariacao
+from catalogo.models import Categoria, ModeloProduto, Produto, SubCategoria, TipoVariacao, Variacao, ModeloVariacao, Modelo
 from django.db import IntegrityError
 
 
@@ -150,8 +150,17 @@ class ProdutoModelTest(TestCase):
         self.assertEqual('Camiseta NodeJs', str(self.obj))
 
 
+class ModeloModelTest(TestCase):
+    def setUp(self):
+        Modelo.objects.create(descricao='T-Shirt')
+
+    def test_create(self):
+        self.assertTrue(Modelo.objects.exists())
+
+
 class ModeloProdutoModelTest(TestCase):
     def setUp(self):
+        Modelo.objects.create(descricao='T-Shirt')
         subcategoria = SubCategoria.objects.create(
             nome='Programação', slug='programacao', )
         produto = Produto.objects.create(
@@ -190,6 +199,7 @@ class ModeloVariacaoModelTest(TestCase):
             imagem_principal='Imagem do cloudinary',
             imagem_design='Imagem do cloudinary',
         )
+        Modelo.objects.create(descricao='T-Shirt')
         modelo = ModeloProduto.objects.create(
             produto=produto,
             nome='Tradicional'
@@ -197,7 +207,7 @@ class ModeloVariacaoModelTest(TestCase):
         variacao = Variacao.objects.create(descricao='Tamanho', )
         tipo_variacao = TipoVariacao.objects.create(
             descricao='P', variacao=variacao,)
-        
+
         self.obj = ModeloVariacao(
             modelo=modelo,
             tipo_variacao=tipo_variacao,

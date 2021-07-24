@@ -14,7 +14,7 @@ GENERO = (
 
 MODELO = (
     ('TRADICIONAL', 'Tradicional'),
-    ('BABYLOOK', 'Baby Look'),
+    ('BABYLOOK', 'T-Shirt Feminina'),
     ('MANGALONGA', 'Manga Longa'),
     ('REGATA', 'Regata'),
 )
@@ -124,7 +124,7 @@ class Produto(models.Model):
 
 
 class Modelo(models.Model):
-    descricao = models.CharField(max_length=50)
+    descricao = models.CharField(max_length=50, default='T-Shirt')
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
@@ -143,6 +143,7 @@ class ModeloProduto(models.Model):
     produto = models.ForeignKey(
         Produto, on_delete=models.CASCADE, related_name='modelo_produto')
     nome = models.CharField(choices=MODELO, max_length=50)
+    modelo = models.ForeignKey(Modelo, on_delete=models.PROTECT, default=1)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
