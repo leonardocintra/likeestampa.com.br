@@ -40,6 +40,3 @@ class PagamentoMercadoPagoWebhook(models.Model):
 
     class Meta:
         db_table = 'mercado_pago_webhook'
-
-    def __str__(self):
-        return self.mercado_pago

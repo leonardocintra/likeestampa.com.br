@@ -21,7 +21,7 @@ import json
 def pagamento(request):
     if not 'carrinho' in request.session:
         # TODO: mandar mensagem no telegram avisando
-        HttpResponseRedirect('/')
+        return HttpResponseRedirect('/')
 
     uuid = request.session['carrinho']
     carrinho = Carrinho.objects.get(uuid=uuid)
@@ -111,5 +111,18 @@ def pagamento(request):
 @require_POST
 @csrf_exempt
 def webhook(request):
-    print('ok - webhook mercado pago!')
-    return JsonResponse({"foo": "bar"}, status=201)
+    payload = json.loads(request.body)
+    payment_id = payload['id']
+
+    try:
+        mercado_pago = PagamentoMercadoPago.objects.get(payment_id=payment_id)
+        PagamentoMercadoPagoWebhook.objects.create(
+           mercado_pago=mercado_pago,
+           webhook_request=payload
+        )
+        return JsonResponse({"foo": "bar"}, status=201)
+    except PagamentoMercadoPago.DoesNotExist:
+        print('nao rolou nao manooo')
+    except print(0):
+        pass
+    
