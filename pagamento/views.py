@@ -12,7 +12,7 @@ from pedido.models import Pedido
 from usuario.models import Cliente, EnderecoCliente
 from services.mercadopago.mercadopago import create_preference, montar_payload_preference
 from services.dimona.api import get_frete
-from .models import PagamentoMercadoPago
+from .models import PagamentoMercadoPago, PagamentoMercadoPagoWebhook
 import decimal
 import json
 

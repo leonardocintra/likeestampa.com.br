@@ -1,6 +1,8 @@
 import requests
 import json
+from django.conf import settings
 from pedido.models import Pedido
+from random import randint
 
 URL_DIMONA = "https://camisadimona.com.br/api/v2"
 
@@ -11,17 +13,30 @@ HEADERS = {
 }
 
 
+
+def get_tracking_url(pedido_dimona):
+    try:
+        response = requests.get(
+            URL_DIMONA + '/order/' + pedido_dimona, headers=HEADERS)
+        return json.loads(response.text)
+    except:
+        return {
+            "tracking_url": "",
+        }
+
+
 def get_timeline(pedido_dimona):
-    response = requests.get(URL_DIMONA + '/order/' +
-                            pedido_dimona + '/timeline', headers=HEADERS)
-    print(response.text)
-    return json.loads(response.text)
+    try:
+        response = requests.get(URL_DIMONA + '/order/' +
+                                pedido_dimona + '/timeline', headers=HEADERS)
+        return json.loads(response.text)
+    except print(0):
+        return None
 
 
 def get_tracking(pedido_dimona):
     response = requests.get(URL_DIMONA + '/order/' +
                             pedido_dimona + '/tracking', headers=HEADERS)
-    print(response.text)
     return json.loads(response.text)
 
 
@@ -68,13 +83,16 @@ def create_order(order_id, cliente, endereco, items, delivery_method_id):
     )
 
     Pedido.objects.filter(pk=order_id).update(request_seller=payload)
-    response = requests.post(URL_DIMONA + "/order", headers=HEADERS, data=payload)
-    
+    if settings.DEBUG:
+        return _get_fake_dimona_order_id()
+    response = requests.post(URL_DIMONA + "/order",
+                             headers=HEADERS, data=payload)
     return json.loads(response.text)
 
 
 def _monta_payload_item(items):
-    skus = requests.get('https://run.mocky.io/v3/fe9e4b43-f3e7-480a-ac23-625db3e24ba7')
+    skus = requests.get(
+        'https://run.mocky.io/v3/fe9e4b43-f3e7-480a-ac23-625db3e24ba7')
 
     item_request = []
     for item in items:
@@ -87,7 +105,7 @@ def _monta_payload_item(items):
         modelo = 'T-Shirt'
         if item.modelo.nome == 'BABYLOOK':
             modelo = 'Baby Long'
-        
+
         item_request.append({
             "name": item.produto.nome,
             "sku": item.produto.slug,
@@ -107,5 +125,12 @@ def _get_sku_dimona(skus, modelo, tamanho, cor):
     for sku in json.loads(skus.content):
         if sku['Estilo'] == modelo and sku['Cor'] == cor and sku['Tamanho'] == tamanho and sku['Nome'] == 'Quality':
             return sku['codigoSku']
-    #TODO: informar que esta errado (aviso telegram por exemplo)
+    # TODO: informar que esta errado (aviso telegram por exemplo)
     return 10110110110
+
+
+def _get_fake_dimona_order_id():
+    range1 = str(randint(100, 999))
+    range2 = str(randint(100, 999))
+    range3 = str(randint(100, 999))
+    return {"order": "{0}-{1}-{2}".format(range1, range2, range3)}

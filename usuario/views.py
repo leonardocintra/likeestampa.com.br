@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.http.response import HttpResponseRedirect
 from django.views.generic.edit import UpdateView
 from pedido.models import Pedido
+from evento.models import EventoPedido
 from .models import Cliente, EnderecoCliente
 
 
@@ -15,10 +16,12 @@ def cliente(request):
     cliente = Cliente.objects.get(user=user)
     enderecos = EnderecoCliente.objects.filter(cliente=cliente)
     pedidos = Pedido.objects.filter(endereco_cliente__in=enderecos)
+    status_pedido = EventoPedido.objects.filter(pedido__in=pedidos)
     context = {
         'cliente': cliente,
         'enderecos': enderecos,
-        'pedidos': pedidos
+        'pedidos': pedidos,
+        'status_pedido': status_pedido,
     }
     return render(request, "usuario/profile.html", context)
 

@@ -1,5 +1,8 @@
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMultiAlternatives
 
+
+def envia_email_compra():
+    pass # https://docs.djangoproject.com/en/3.2/topics/email/#sending-alternative-content-types
 
 def envia_email(cliente, pedido, pedido_pago, items):
     pagamento = 'Aguardando pagamento'
@@ -18,4 +21,4 @@ def envia_email(cliente, pedido, pedido_pago, items):
     {3} \n Caso tiver alguma duvida pode nos responder esse mail. \n Ou entrar em contato por whatsapp (35) 9999-7619".format(cliente.user.first_name, pedido, pagamento, produtos)
 
     send_mail("Like Estampa - Pedido: #" + str(pedido), message,
-              "Like Estampa <contato@likeestampa.com.br>", [cliente.user.email])
+              "Like Estampa <likeestampa@gmail.com>", [cliente.user.email])

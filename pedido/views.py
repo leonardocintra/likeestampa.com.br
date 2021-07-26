@@ -8,7 +8,7 @@ from checkout.models import Carrinho, ItemCarrinho
 from evento.models import EventoPedido, criar_evento
 from pagamento.models import PagamentoMercadoPago
 from services.mercadopago.mercadopago import get_preference, get_payment
-from services.dimona.api import create_order, get_tracking
+from services.dimona.api import create_order, get_tracking_url, get_timeline
 from usuario.models import Cliente, EnderecoCliente
 from .models import Pedido, ItemPedido
 from .email import envia_email
@@ -77,9 +77,10 @@ def pedido_finalizado_mercado_pago(request):
     )
 
     if pago:
-        criar_evento(2, pedido)
+        criar_evento(2, pedido) # Pedido Pago
+        criar_evento(3, pedido) # Pedido em producao
     else:
-        criar_evento(6, pedido)
+        criar_evento(6, pedido) # Aguardando pagamento
 
     envia_email(cliente, pedido.id, pago, items)
     
@@ -111,6 +112,9 @@ class PedidoDetailView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         items = ItemPedido.objects.filter(pedido=self.object)
         eventos = EventoPedido.objects.filter(pedido=self.object)
+        url_rastreio = get_tracking_url(self.object.pedido_seller)['tracking_url']
+
+        context['url_rastreio'] = url_rastreio
         context['eventos'] = eventos
         context['items'] = items
         context['pagamento_mp'] = PagamentoMercadoPago.objects.get(

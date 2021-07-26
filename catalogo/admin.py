@@ -34,12 +34,23 @@ class ModeloProdutoInline(NestedStackedInline):
     inlines = [ProdutoVariacaoInline, ]
 
 
+@admin.action(description='Ativar produtos')
+def ativar_produtos(modeladmin, request, queryset):
+    queryset.update(ativo=True)
+
+@admin.action(description='Desativar produtos')
+def desativar_produtos(modeladmin, request, queryset):
+    queryset.update(ativo=False)
+
+
 class ProdutoAdmin(NestedModelAdmin):
     prepopulated_fields = {'slug': ('nome',)}
-    search_fields = ['nome',]
+    search_fields = ['nome', ]
     list_filter = ['ativo', 'subcategoria', ]
     list_display = ['nome', 'subcategoria', 'ativo', 'genero', ]
     inlines = [ModeloProdutoInline, ]
+
+    actions = [ativar_produtos, desativar_produtos, ]
 
 
 class ModeloAdmin(admin.ModelAdmin):

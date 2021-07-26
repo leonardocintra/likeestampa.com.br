@@ -7,7 +7,7 @@ class PedidoAdmin(admin.ModelAdmin):
     list_display = ['id', 'pago', 'nome_cliente', 'created_at', ]
     search_fields = ['id', ]
     list_filter = ['pago', 'gateway_pagamento', ]
-    readonly_fields = ['id', 'user', 'valor_total', 'endereco_cliente', 'valor_frete',
+    readonly_fields = ['id', 'user', 'valor_total', 'endereco_cliente', 'valor_frete', 'request_seller',
                        'valor_items', 'frete_id', 'gateway_pagamento', ]
 
     def save_model(self, request, obj, form, change):

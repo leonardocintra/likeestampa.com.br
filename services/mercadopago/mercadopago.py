@@ -76,6 +76,11 @@ def montar_payload_preference(request, pedido_id, items, cliente, endereco, valo
         "statement_descriptor": "LIKE_ESTAMPA",
         "external_reference": "LIKEESTAMPA-" + str(pedido_id),
         "installments": 10,
+        "excluded_payment_types": [
+            {
+                "id": "ticket"
+            }
+        ],
         "shipments": {
             "cost": float(valor_frete),
             "mode": "not_specified",

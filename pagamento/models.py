@@ -28,3 +28,18 @@ class PagamentoMercadoPago(models.Model):
 
     def __str__(self):
         return self.mercado_pago_id
+
+
+class PagamentoMercadoPagoWebhook(models.Model):
+    mercado_pago = models.ForeignKey(PagamentoMercadoPago, on_delete=models.CASCADE)
+    webhook_request = models.JSONField()
+    webhook_data_recebimento = models.DateTimeField(auto_now=True)
+    webhook_executado = models.BooleanField(default=False)
+    created_at = models.DateTimeField('Criado em', auto_now_add=True)
+    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+
+    class Meta:
+        db_table = 'mercado_pago_webhook'
+
+    def __str__(self):
+        return self.mercado_pago

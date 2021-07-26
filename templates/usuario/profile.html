@@ -12,6 +12,7 @@
         <div class="col-md-6">
             {% if not pedidos %}
             <h3> você não possui pedidos </h3>
+            <a href="/" class="btn btn-secondary">Ir para as compras</a>
             {% else %}
             <table class="table">
                 <thead>
@@ -28,11 +29,11 @@
                         <th scope="row">{{ pedido.id }}</th>
                         <td>{{ pedido.created_at }}</td>
                         <td>
-                            {% if pedido.pago %}
-                            <p class="fw-light">Preparando</p>
-                            {% else %}
-                            <p class="fw-light">Não pago</p>
-                            {% endif %}
+                            {% for status in status_pedido %}
+                                {% if status.pedido == pedido %}
+                                    {{ status.evento }} <br />
+                                {% endif %}
+                            {% endfor %}
                         </td>
                         <td> <a href="{% url 'pedido:pedido' pedido.id %}"> ver mais </a> </td>
                     </tr>

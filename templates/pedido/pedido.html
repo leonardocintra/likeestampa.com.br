@@ -13,6 +13,10 @@
             {% endif %}
             <h3>Valor: R$ {{ pedido.valor_total }}</h3>
             <label>Produtos: R$ {{ pedido.valor_items }} + Frete R$ {{ pedido.valor_frete }}</label>
+            {% if url_rastreio %}
+                <br />  
+                <a href="{{ url_rastreio }}" target="_blank">Rastrear pedido</a>
+            {% endif %}
 
             <br />
             <br />
@@ -35,7 +39,7 @@
             </div>
             <br />
             {% for evento in eventos %}
-                - {{ evento.evento.descricao }} | {{ evento.created_at }} <br />
+                <i class="bi bi-align-end"></i> {{ evento.evento.descricao }} | <i> {{ evento.created_at }} </i> <br />
             {% endfor %}
         </div>
     </div>
