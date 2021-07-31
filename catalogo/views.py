@@ -38,7 +38,7 @@ class SubCategoriaListView(ListView):
 
     def get_queryset(self):
         queryset = Produto.objects.filter(
-            subcategoria__slug=self.kwargs['slug'])
+            subcategoria__slug=self.kwargs['slug']).exclude(ativo=False)
 
         queryset = _busca_genero(self, queryset)
 

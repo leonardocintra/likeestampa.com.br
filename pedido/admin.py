@@ -4,7 +4,7 @@ from .models import Pedido
 
 @admin.register(Pedido)
 class PedidoAdmin(admin.ModelAdmin):
-    list_display = ['id', 'pago', 'nome_cliente', 'created_at', ]
+    list_display = ['id', 'pago', 'nome_cliente', 'created_at', 'pedido_seller',  ]
     search_fields = ['id', ]
     list_filter = ['pago', 'gateway_pagamento', ]
     readonly_fields = ['id', 'user', 'valor_total', 'endereco_cliente', 'valor_frete', 'request_seller',

@@ -56,7 +56,7 @@
             {{ form.source }}
 
             <div class="row gx-4 gx-lg-5 align-items-center">
-                <div class="col-md-6">
+                <div class="col-md-6 text-center">
                     <img class="card-img-top mb-5 mb-md-0 imagem_da_variacao" src="{{ produto.imagem_principal.url }}" alt="{{ produto.nome }}" />
                 </div>
                 <div class="col-md-6">
@@ -128,6 +128,7 @@
                                 </div>
                             </div>
                         {% endfor %}
+                        
                     </div>
                     <div class="d-flex">
                         {% if modelos %}
