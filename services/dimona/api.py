@@ -130,6 +130,7 @@ def _get_sku_dimona(skus, modelo, tamanho, cor):
 
 
 def _get_fake_dimona_order_id():
+    # Quando nao estiver no ambiente de producao, geraremos um pedido fake
     range1 = str(randint(100, 999))
     range2 = str(randint(100, 999))
     range3 = str(randint(100, 999))

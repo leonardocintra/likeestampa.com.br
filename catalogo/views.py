@@ -147,7 +147,7 @@ def _busca_genero(self, queryset):
                 queryset = queryset.exclude(genero='F')
             else:
                 queryset = queryset
-    return queryset
+    return queryset.exclude(ativo=False)
 
 
 product_list = ProdutosListView
