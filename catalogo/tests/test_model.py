@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.shortcuts import resolve_url as r
 from django.test import TestCase
-from catalogo.models import Categoria, ModeloProduto, Produto, SubCategoria, TipoVariacao, Variacao, ModeloVariacao, Modelo
+from catalogo.models import Categoria, ModeloProduto, Produto, SubCategoria, TipoVariacao, Variacao, ModeloVariacao, Modelo, SkuDimona
 from django.db import IntegrityError
 
 
@@ -203,6 +203,28 @@ class ModeloVariacaoModelTest(TestCase):
 
     def test_str(self):
         self.assertEqual('Tradicional', str(self.obj))
+
+
+class SkuDimonaModelTest(TestCase):
+    def setUp(self):
+        Modelo.objects.create(descricao='T-Shirt')
+        modelo = Modelo.objects.get(id=1)
+        self.obj = SkuDimona.objects.create(
+            sku='328198319',
+            nome='Dimona Quality',
+            estilo=modelo,
+            cor='Azul',
+            tamanho='G'
+        )
+
+    def test_create(self):
+        self.assertTrue(SkuDimona.objects.exists())
+
+    def test_created_at(self):
+        self.assertIsInstance(self.obj.created_at, datetime)
+
+    def test_str(self):
+        self.assertEqual('Dimona Quality', str(self.obj))
 
 
 def create_produto():

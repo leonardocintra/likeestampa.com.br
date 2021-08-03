@@ -175,3 +175,22 @@ class ModeloVariacao(models.Model):
 
     def __str__(self):
         return self.modelo.nome
+
+
+class SkuDimona(models.Model):
+    sku = models.CharField(max_length=50, unique=True)
+    nome = models.CharField(max_length=50)
+    estilo = models.ForeignKey(Modelo, on_delete=models.CASCADE)
+    cor = models.CharField(max_length=50)
+    tamanho = models.CharField(max_length=50)
+    created_at = models.DateTimeField('Criado em', auto_now_add=True)
+    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+
+    class Meta:
+        db_table = 'sku_dimona'
+        verbose_name_plural = 'SKU Dimona'
+        verbose_name = 'SKUs Dimona'
+        ordering = ('created_at',)
+
+    def __str__(self):
+        return self.nome
