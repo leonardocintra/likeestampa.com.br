@@ -14,6 +14,10 @@ class CategoriaModelTest(TestCase):
     def test_create(self):
         self.assertTrue(Categoria.objects.exists())
 
+    def test_str(self):
+        categoria = Categoria.objects.get(id=1)
+        self.assertEqual('Camisetas', str(categoria))
+
     def test_created_at(self):
         categoria = Categoria.objects.get(id=1)
         self.assertIsInstance(categoria.created_at, datetime)
@@ -119,17 +123,7 @@ class TipoVariacaoModelTest(TestCase):
 
 class ProdutoModelTest(TestCase):
     def setUp(self):
-        subcategoria = SubCategoria.objects.create(
-            nome='Programação', slug='programacao', )
-        self.obj = Produto(
-            nome='Camiseta NodeJs',
-            descricao='Camiseta feita de algodão 100% 30.1',
-            slug='camiseta-nodejs',
-            subcategoria=subcategoria,
-            imagem_principal='Imagem do cloudinary',
-            imagem_design='Imagem do cloudinary',
-        )
-        self.obj.save()
+        self.obj = create_produto()
 
     def test_create(self):
         self.assertTrue(Produto.objects.exists())
@@ -157,20 +151,15 @@ class ModeloModelTest(TestCase):
     def test_create(self):
         self.assertTrue(Modelo.objects.exists())
 
+    def test_str(self):
+        obj = Modelo.objects.get(id=1)
+        self.assertEqual('T-Shirt', str(obj))
+
 
 class ModeloProdutoModelTest(TestCase):
     def setUp(self):
         Modelo.objects.create(descricao='T-Shirt')
-        subcategoria = SubCategoria.objects.create(
-            nome='Programação', slug='programacao', )
-        produto = Produto.objects.create(
-            nome='Camiseta NodeJs',
-            descricao='Camiseta feita de algodão 100% 30.1',
-            slug='camiseta-nodejs',
-            subcategoria=subcategoria,
-            imagem_principal='Imagem do cloudinary',
-            imagem_design='Imagem do cloudinary',
-        )
+        produto = create_produto()
         self.obj = ModeloProduto(
             produto=produto,
             nome='Tradicional'
@@ -189,16 +178,7 @@ class ModeloProdutoModelTest(TestCase):
 
 class ModeloVariacaoModelTest(TestCase):
     def setUp(self):
-        subcategoria = SubCategoria.objects.create(
-            nome='Programação', slug='programacao', )
-        produto = Produto.objects.create(
-            nome='Camiseta NodeJs',
-            descricao='Camiseta feita de algodão 100% 30.1',
-            slug='camiseta-nodejs',
-            subcategoria=subcategoria,
-            imagem_principal='Imagem do cloudinary',
-            imagem_design='Imagem do cloudinary',
-        )
+        produto = create_produto()
         Modelo.objects.create(descricao='T-Shirt')
         modelo = ModeloProduto.objects.create(
             produto=produto,
@@ -223,3 +203,16 @@ class ModeloVariacaoModelTest(TestCase):
 
     def test_str(self):
         self.assertEqual('Tradicional', str(self.obj))
+
+
+def create_produto():
+    subcategoria = SubCategoria.objects.create(
+        nome='Programação', slug='programacao', )
+    return Produto.objects.create(
+        nome='Camiseta NodeJs',
+        descricao='Camiseta feita de algodão 100% 30.1',
+        slug='camiseta-nodejs',
+        subcategoria=subcategoria,
+        imagem_principal='Imagem do cloudinary',
+        imagem_design='Imagem do cloudinary',
+    )

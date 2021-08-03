@@ -18,4 +18,7 @@ migrate:
 	@python manage.py migrate
 
 test:
-	@python3 manage.py test
+	@python3 manage.py test -v 2
+
+coverage:
+	@coverage run --source='.' manage.py test -v 2 && coverage report && coverage html
