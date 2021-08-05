@@ -135,8 +135,7 @@ class Modelo(models.Model):
 
 class ModeloProduto(models.Model):
     "Modelo seria: T-Shirt, mangalonga, etc"
-    produto = models.ForeignKey(
-        Produto, on_delete=models.CASCADE, related_name='modelo_produto')
+    produto = models.ForeignKey(Produto, on_delete=models.CASCADE, related_name='modelo_produto')
     modelo = models.ForeignKey(Modelo, on_delete=models.PROTECT, default=1)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)

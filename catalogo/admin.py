@@ -46,11 +46,17 @@ def desativar_produtos(modeladmin, request, queryset):
 class ProdutoAdmin(NestedModelAdmin):
     prepopulated_fields = {'slug': ('nome',)}
     search_fields = ['nome', ]
-    list_filter = ['ativo', 'subcategoria', ]
-    list_display = ['nome', 'subcategoria', 'ativo', 'genero', ]
+    list_filter = ['ativo', 'subcategoria', 'genero', ]
+    list_display = ['nome', 'subcategoria', 'ativo', 'genero', 'modelo', ]
     inlines = [ModeloProdutoInline, ]
 
     actions = [ativar_produtos, desativar_produtos, ]
+
+    @admin.display()
+    def modelo(self, obj):
+        # TODO: cachear
+        modelo = ModeloProduto.objects.get(produto_id=obj.pk)
+        return modelo
 
 
 class ModeloAdmin(admin.ModelAdmin):
