@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% load widget_tweaks %}
 
 {% block js_header %}
@@ -42,6 +44,14 @@
         }
     }
 
+    function mostrarMedida() {
+        {% if produto.genero == 'F' %}
+            $(".imagem_da_variacao").attr("src", "{% static 'tshirt-feminina-medidas.png' %}");
+        {% else %}
+            $(".imagem_da_variacao").attr("src", "{% static 'tshirt-masculino-medidas.png' %}");
+        {% endif %}
+    }   
+
 </script>
 {% endblock %}
 
@@ -68,13 +78,14 @@
                         <span>R$ {{ produto.preco_base }}</span>
                     </div>
                     <p class="lead">{{ produto.descricao|linebreaks }}</p>
+                    <p><button type="button" class="btn btn-success btn-sm" onclick="mostrarMedida();"> Ver medidas </button> </p>
                     <div class="fs-5 mb-2">
                         <div style="padding: 10px;">
                         Modelo: <br />
                         {% for modelo in modelos %}
                             {% render_field form.modelo value=modelo.id id=modelo.id type="radio" class="btn-check" %}
                             <label class="btn btn-outline-dark btn-sm" for="{{ modelo.id }}" onclick="mostrarVariacaoDesseModelo('{{ modelo.id }}');">
-                                {{ modelo.get_nome_display }}
+                                {{ modelo.modelo.descricao_cliente }}
                             </label>
                         {% endfor %}
                         </div>
@@ -89,7 +100,7 @@
                                             {% if variacao.modelo == modelo %}
                                                 {% if variacao.tipo_variacao.variacao.descricao == "Cor" %}
                                                     {% render_field form.cor value=variacao.tipo_variacao.id id=variacao.id type="radio" class="btn-check radiovariacao" %}
-                                                    <label class="btn btn-outline-primary btn-sm" for="{{ variacao.id }}" onclick="mostraImagemVariacao('{{ variacao.id }}')">
+                                                    <label class="btn btn-outline-primary btn-sm" for="{{ variacao.id }}" onclick="mostraImagemVariacao('{{ variacao.id }}')" style="background-color:{{ variacao.tipo_variacao.valor_adicional }}">
                                                         {{ variacao.tipo_variacao }}
                                                     </label>
                                                 {% endif %}

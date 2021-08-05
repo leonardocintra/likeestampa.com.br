@@ -2,6 +2,7 @@ from cloudinary.models import CloudinaryField
 from django.db import models
 from django.urls import reverse
 from django.dispatch import receiver
+
 from seller.models import Seller
 
 
@@ -11,14 +12,6 @@ GENERO = (
     ('M', 'Masculino'),
     ('F', 'Feminino'),
 )
-
-MODELO = (
-    ('TRADICIONAL', 'Tradicional'),
-    ('BABYLOOK', 'T-Shirt Feminina'),
-    ('MANGALONGA', 'Manga Longa'),
-    ('REGATA', 'Regata'),
-)
-
 
 class Categoria(models.Model):
     """ Ex: camiseta, caneca, bones """
@@ -82,6 +75,7 @@ class TipoVariacao(models.Model):
         Variacao, on_delete=models.CASCADE, related_name='variacao_tipo_variacao')
     preco_variacao = models.DecimalField(
         'Preço', decimal_places=2, max_digits=999, default=51.90)
+    valor_adicional = models.CharField(max_length=50, null=True, blank=True)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
@@ -125,6 +119,7 @@ class Produto(models.Model):
 
 class Modelo(models.Model):
     descricao = models.CharField(max_length=50, default='T-Shirt')
+    descricao_cliente = models.CharField(max_length=50, null=True, blank=True)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
@@ -139,10 +134,9 @@ class Modelo(models.Model):
 
 
 class ModeloProduto(models.Model):
-    "Modelo seria: Camiseta Tradicional, Camiseta Cavada, Camiseta Baby Look"
+    "Modelo seria: T-Shirt, mangalonga, etc"
     produto = models.ForeignKey(
         Produto, on_delete=models.CASCADE, related_name='modelo_produto')
-    nome = models.CharField(choices=MODELO, max_length=50)
     modelo = models.ForeignKey(Modelo, on_delete=models.PROTECT, default=1)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
@@ -151,10 +145,10 @@ class ModeloProduto(models.Model):
         db_table = 'modelo_produto'
         verbose_name_plural = 'Modelos'
         verbose_name = 'Modelos'
-        ordering = ('nome',)
+        ordering = ('-created_at',)
 
     def __str__(self):
-        return self.nome
+        return self.modelo.descricao
 
 
 class ModeloVariacao(models.Model):
@@ -174,7 +168,7 @@ class ModeloVariacao(models.Model):
         ordering = ('created_at',)
 
     def __str__(self):
-        return self.modelo.nome
+        return self.modelo.modelo.descricao
 
 
 class SkuDimona(models.Model):

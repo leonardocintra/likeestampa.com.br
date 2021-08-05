@@ -1,8 +1,9 @@
 import requests
 import json
-from django.conf import settings
-from pedido.models import Pedido
 from random import randint
+from django.conf import settings
+from catalogo.models import SkuDimona
+from pedido.models import Pedido
 
 URL_DIMONA = "https://camisadimona.com.br/api/v2"
 
@@ -11,7 +12,6 @@ HEADERS = {
     'Accept': 'application/json',
     'Content-Type': 'application/json'
 }
-
 
 
 def get_tracking_url(pedido_dimona):
@@ -91,8 +91,7 @@ def create_order(order_id, cliente, endereco, items, delivery_method_id):
 
 
 def _monta_payload_item(items):
-    skus = requests.get(
-        'https://run.mocky.io/v3/fe9e4b43-f3e7-480a-ac23-625db3e24ba7')
+    skus = SkuDimona.objects.all()
 
     item_request = []
     for item in items:
@@ -102,9 +101,7 @@ def _monta_payload_item(items):
 
         cor = item.cor.tipo_variacao.descricao
         tamanho = item.tamanho.tipo_variacao.descricao
-        modelo = 'T-Shirt'
-        if item.modelo.nome == 'BABYLOOK':
-            modelo = 'Baby Long'
+        modelo = item.modelo.modelo.descricao
 
         item_request.append({
             "name": item.produto.nome,
@@ -122,9 +119,11 @@ def _monta_payload_item(items):
 
 
 def _get_sku_dimona(skus, modelo, tamanho, cor):
-    for sku in json.loads(skus.content):
-        if sku['Estilo'] == modelo and sku['Cor'] == cor and sku['Tamanho'] == tamanho and sku['Nome'] == 'Quality':
-            return sku['codigoSku']
+    skus = skus.filter(cor=cor)
+    skus = skus.filter(tamanho=tamanho)
+    for sku in skus:
+        if sku.estilo.descricao == modelo and sku.cor == cor and sku.tamanho == tamanho and sku.nome == 'Dimona Quality':
+            return sku.sku
     # TODO: informar que esta errado (aviso telegram por exemplo)
     return 10110110110
 

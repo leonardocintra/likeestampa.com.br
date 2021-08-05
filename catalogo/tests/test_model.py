@@ -160,10 +160,7 @@ class ModeloProdutoModelTest(TestCase):
     def setUp(self):
         Modelo.objects.create(descricao='T-Shirt')
         produto = create_produto()
-        self.obj = ModeloProduto(
-            produto=produto,
-            nome='Tradicional'
-        )
+        self.obj = ModeloProduto(produto=produto)
         self.obj.save()
 
     def test_create(self):
@@ -173,17 +170,14 @@ class ModeloProdutoModelTest(TestCase):
         self.assertIsInstance(self.obj.created_at, datetime)
 
     def test_str(self):
-        self.assertEqual('Tradicional', str(self.obj))
+        self.assertEqual('T-Shirt', str(self.obj))
 
 
 class ModeloVariacaoModelTest(TestCase):
     def setUp(self):
         produto = create_produto()
         Modelo.objects.create(descricao='T-Shirt')
-        modelo = ModeloProduto.objects.create(
-            produto=produto,
-            nome='Tradicional'
-        )
+        modelo = ModeloProduto.objects.create(produto=produto)
         variacao = Variacao.objects.create(descricao='Tamanho', )
         tipo_variacao = TipoVariacao.objects.create(
             descricao='P', variacao=variacao,)
@@ -202,7 +196,7 @@ class ModeloVariacaoModelTest(TestCase):
         self.assertIsInstance(self.obj.created_at, datetime)
 
     def test_str(self):
-        self.assertEqual('Tradicional', str(self.obj))
+        self.assertEqual('T-Shirt', str(self.obj))
 
 
 class SkuDimonaModelTest(TestCase):

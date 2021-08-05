@@ -9,7 +9,7 @@ class VariacaoAdmin(admin.ModelAdmin):
 
 
 class TipoVariacaoAdmin(admin.ModelAdmin):
-    list_display = ['descricao', 'variacao', 'ativo', ]
+    list_display = ['descricao', 'variacao', 'ativo', 'valor_adicional',  ]
 
 
 class CategoriaAdmin(admin.ModelAdmin):
@@ -54,6 +54,7 @@ class ProdutoAdmin(NestedModelAdmin):
 
 
 class ModeloAdmin(admin.ModelAdmin):
+    list_display = ['descricao', 'descricao_cliente', ]
     search_fields = ['descricao', ]
 
 

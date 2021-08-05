@@ -27,10 +27,7 @@ class ItemCarrinhoModelTest(TestCase):
         produto = create_produto()
 
         Modelo.objects.create(descricao='T-Shirt')
-        modelo = ModeloProduto.objects.create(
-            produto=produto,
-            nome='Tradicional'
-        )
+        modelo = ModeloProduto.objects.create(produto=produto)
         variacao_tamanho = Variacao.objects.create(descricao='Tamanho', )
         variacao_cor = Variacao.objects.create(descricao='Cor', )
         tp_tamanho = TipoVariacao.objects.create(
