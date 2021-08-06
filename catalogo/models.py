@@ -118,6 +118,7 @@ class Produto(models.Model):
 
 
 class Modelo(models.Model):
+    "Modelo seria: T-Shirt, mangalonga, etc"
     descricao = models.CharField(max_length=50, default='T-Shirt')
     descricao_cliente = models.CharField(max_length=50, null=True, blank=True)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
@@ -134,7 +135,6 @@ class Modelo(models.Model):
 
 
 class ModeloProduto(models.Model):
-    "Modelo seria: T-Shirt, mangalonga, etc"
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE, related_name='modelo_produto')
     modelo = models.ForeignKey(Modelo, on_delete=models.PROTECT, default=1)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
@@ -151,7 +151,7 @@ class ModeloProduto(models.Model):
 
 
 class ModeloVariacao(models.Model):
-    modelo = models.ForeignKey(
+    modelo_produto = models.ForeignKey(
         ModeloProduto, on_delete=models.CASCADE, related_name='variacao_modelo_produto', null=True)
     tipo_variacao = models.ForeignKey(
         TipoVariacao, on_delete=models.PROTECT, related_name='tipo_variacao_produto', default=1)
@@ -167,7 +167,7 @@ class ModeloVariacao(models.Model):
         ordering = ('created_at',)
 
     def __str__(self):
-        return self.modelo.modelo.descricao
+        return self.modelo_produto.modelo.descricao
 
 
 class SkuDimona(models.Model):

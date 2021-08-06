@@ -177,13 +177,13 @@ class ModeloVariacaoModelTest(TestCase):
     def setUp(self):
         produto = create_produto()
         Modelo.objects.create(descricao='T-Shirt')
-        modelo = ModeloProduto.objects.create(produto=produto)
+        modelo_produto = ModeloProduto.objects.create(produto=produto)
         variacao = Variacao.objects.create(descricao='Tamanho', )
         tipo_variacao = TipoVariacao.objects.create(
             descricao='P', variacao=variacao,)
 
         self.obj = ModeloVariacao(
-            modelo=modelo,
+            modelo_produto=modelo_produto,
             tipo_variacao=tipo_variacao,
             imagem='Imagem cloudinary',
         )

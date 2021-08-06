@@ -6,6 +6,16 @@ Like Estampa - Store T-Shirts
 ## Como usar
  TODO:
 
+
+## Testes
+```
+$ make test
+```
+### Coverage
+```
+$ make coverage
+```
+
 ## Historia
 ### Fundado em 20/04/2021
 

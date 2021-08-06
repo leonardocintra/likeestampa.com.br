@@ -45,7 +45,7 @@ class ItemPedido(models.Model):
         ModeloVariacao, on_delete=models.PROTECT, related_name='item_pedido_cor')
     tamanho = models.ForeignKey(
         ModeloVariacao, on_delete=models.PROTECT, related_name='item_pedido_tamanho')
-    modelo = models.ForeignKey(
+    modelo_produto = models.ForeignKey(
         ModeloProduto, on_delete=models.PROTECT, related_name='item_pedido_modelo')
     quantidade = models.PositiveIntegerField(default=1)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)

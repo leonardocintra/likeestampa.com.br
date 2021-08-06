@@ -27,7 +27,7 @@ class ItemCarrinhoModelTest(TestCase):
         produto = create_produto()
 
         Modelo.objects.create(descricao='T-Shirt')
-        modelo = ModeloProduto.objects.create(produto=produto)
+        modelo_produto = ModeloProduto.objects.create(produto=produto)
         variacao_tamanho = Variacao.objects.create(descricao='Tamanho', )
         variacao_cor = Variacao.objects.create(descricao='Cor', )
         tp_tamanho = TipoVariacao.objects.create(
@@ -36,11 +36,11 @@ class ItemCarrinhoModelTest(TestCase):
             descricao='Azul', variacao=variacao_cor,)
 
         tamanho = ModeloVariacao.objects.create(
-            modelo=modelo,
+            modelo_produto=modelo_produto,
             tipo_variacao=tp_tamanho
         )
         cor = ModeloVariacao.objects.create(
-            modelo=modelo,
+            modelo_produto=modelo_produto,
             tipo_variacao=tp_cor
         )
 
@@ -49,7 +49,7 @@ class ItemCarrinhoModelTest(TestCase):
             produto=produto,
             cor=cor,
             tamanho=tamanho,
-            modelo=modelo
+            modelo_produto=modelo_produto
         )
 
     def test_create(self):

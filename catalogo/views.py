@@ -56,7 +56,7 @@ def produto(request, slug):
     """ Pagina de detalhes do produto """
     produto = Produto.objects.get(slug=slug)
     modelos = ModeloProduto.objects.filter(produto=produto)
-    variacoes = ModeloVariacao.objects.filter(modelo__in=modelos)
+    variacoes = ModeloVariacao.objects.filter(modelo_produto__in=modelos)
 
     if request.method == 'POST':
         form = ProdutoDetalheForm(request.POST)

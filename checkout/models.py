@@ -24,7 +24,7 @@ class ItemCarrinho(models.Model):
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     cor = models.ForeignKey(ModeloVariacao, on_delete=models.SET_NULL, null=True, related_name="item_cor")
     tamanho = models.ForeignKey(ModeloVariacao, on_delete=models.SET_NULL, null=True, related_name="item_tamanho")
-    modelo = models.ForeignKey(ModeloProduto, on_delete=models.SET_NULL, null=True, related_name="item_modelo")
+    modelo_produto = models.ForeignKey(ModeloProduto, on_delete=models.SET_NULL, null=True, related_name="item_modelo")
     quantidade = models.PositiveIntegerField(default=1)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)

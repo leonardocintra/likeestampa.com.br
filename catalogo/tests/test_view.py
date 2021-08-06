@@ -35,3 +35,22 @@ class ProdutoListViewTest(TestCase):
     def test_is_not_paginated(self):
         self.assertTrue('is_paginated' in self.response.context)
         self.assertFalse(self.response.context['is_paginated'])
+
+
+class ProdutoDetailViewTest(TestCase):
+    def setUp(self):
+        subcategoria = SubCategoria.objects.create(
+            nome='Programação', slug='programacao')
+        self.obj = Produto.objects.create(
+            nome=f'Camiseta Python Django',
+            descricao='Camiseta 100 de Algodão - Malha Final etc tal',
+            slug=f'camiseta-python-django',
+            subcategoria=subcategoria,
+            imagem_principal='Imagem Cloudinary 1',
+            imagem_design='Imagem Cloudinary 2',
+        )
+
+        self.resp = self.client.get(r('catalogo:produto', self.obj.slug))
+
+    def test_get(self):
+        self.assertEqual(200, self.resp.status_code)

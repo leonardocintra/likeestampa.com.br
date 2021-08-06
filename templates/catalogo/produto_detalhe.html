@@ -97,7 +97,7 @@
                                     Cor:
                                     <div class="fs-5 mb-2">
                                         {% for variacao in variacoes %}
-                                            {% if variacao.modelo == modelo %}
+                                            {% if variacao.modelo_produto == modelo %}
                                                 {% if variacao.tipo_variacao.variacao.descricao == "Cor" %}
                                                     {% render_field form.cor value=variacao.tipo_variacao.id id=variacao.id type="radio" class="btn-check radiovariacao" %}
                                                     <label class="btn btn-outline-primary btn-sm" for="{{ variacao.id }}" onclick="mostraImagemVariacao('{{ variacao.id }}')" style="background-color:{{ variacao.tipo_variacao.valor_adicional }}">
@@ -111,7 +111,7 @@
                                     Tamanho:
                                     <div class="fs-5 mb-2">
                                         {% for variacao in variacoes %}
-                                            {% if variacao.modelo == modelo %}
+                                            {% if variacao.modelo_produto == modelo %}
                                                 {% if variacao.tipo_variacao.variacao.descricao == "Tamanho" %}
                                                     {% render_field form.tamanho value=variacao.tipo_variacao.id id=variacao.id type="radio" class="btn-check radiovariacao"%}
                                                     <label class="btn btn-outline-danger" for="{{ variacao.id }}">
