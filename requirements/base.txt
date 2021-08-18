@@ -9,7 +9,7 @@ django-crispy-forms==1.12.0
 django-environ==0.4.5
 django-localflavor==3.1
 django-mathfilters==1.0.0
-django-nested-inline==0.4.3
+django-nested-inline==0.4.4
 django-widget-tweaks==1.4.8
 fontawesome-free==5.15.3
 gunicorn==20.0.4
