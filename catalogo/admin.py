@@ -24,7 +24,7 @@ class SubCategoriaAdmin(admin.ModelAdmin):
 class ProdutoVariacaoInline(NestedStackedInline):
     model = ModeloVariacao
     extra = 5
-    fk_name = 'modelo'
+    fk_name = 'modelo_produto'
 
 
 class ModeloProdutoInline(NestedStackedInline):

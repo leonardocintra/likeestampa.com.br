@@ -107,18 +107,18 @@ def adicionar_item_carrinho(request, produto, variacoes, modelo, cor, tamanho, q
         carrinho.save()
         request.session['carrinho'] = str(carrinho.uuid)
 
-    cor = variacoes.get(tipo_variacao_id=int(cor), modelo_id=modelo)
-    tamanho = variacoes.get(tipo_variacao_id=int(tamanho), modelo_id=modelo)
+    cor = variacoes.get(tipo_variacao_id=int(cor), modelo_produto_id=modelo)
+    tamanho = variacoes.get(tipo_variacao_id=int(tamanho), modelo_produto_id=modelo)
     quantidade = int(quantidade)
 
     item = ItemCarrinho.objects.filter(
-        produto=produto, carrinho=carrinho, cor=cor, tamanho=tamanho, modelo_id=modelo)
+        produto=produto, carrinho=carrinho, cor=cor, tamanho=tamanho, modelo_produto_id=modelo)
 
     if item:
-        ItemCarrinho.objects.filter(produto=produto, carrinho=carrinho, cor=cor, tamanho=tamanho, modelo_id=modelo).update(
+        ItemCarrinho.objects.filter(produto=produto, carrinho=carrinho, cor=cor, tamanho=tamanho, modelo_produto_id=modelo).update(
             quantidade=item[0].quantidade + quantidade)
     else:
-        ItemCarrinho(carrinho=carrinho, produto=produto, modelo_id=modelo,
+        ItemCarrinho(carrinho=carrinho, produto=produto, modelo_produto_id=modelo,
                      quantidade=quantidade, tamanho=tamanho, cor=cor).save()
 
 
