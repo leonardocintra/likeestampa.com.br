@@ -76,7 +76,8 @@ def pagamento(request):
     criar_evento(1, pedido)
 
     # Monta o payload para enviar pro mercado pago
-    preference_data = montar_payload_preference(request, pedido.id, items, cliente, endereco, valor_frete)
+    preference_data = montar_payload_preference(
+        request, pedido.id, items, cliente, endereco, valor_frete)
 
     # Cria a preferencia no mercado pago
     preference = create_preference(preference_data)
@@ -110,19 +111,35 @@ def pagamento(request):
 
 @require_POST
 @csrf_exempt
+def mp_notifications(request):
+    # Notificações do Mercado Pago IPN
+    if request.GET.get('topic') == 'payment':
+        print('eh outra coisa')
+    payment_id = request.GET.get('id')
+    try:
+        mercado_pago = PagamentoMercadoPago.objects.get(payment_id=payment_id)
+        return JsonResponse({"foo": "bar"}, status=201)
+    except PagamentoMercadoPago.DoesNotExist:
+        return JsonResponse({"payment": "not found"}, status=200)
+    except print(0):
+        pass
+
+
+@require_POST
+@csrf_exempt
 def webhook(request):
+    # Notificações do Mercado Pago Webhook
     payload = json.loads(request.body)
     payment_id = payload['id']
 
     try:
         mercado_pago = PagamentoMercadoPago.objects.get(payment_id=payment_id)
         PagamentoMercadoPagoWebhook.objects.create(
-           mercado_pago=mercado_pago,
-           webhook_request=payload
+            mercado_pago=mercado_pago,
+            webhook_request=payload
         )
         return JsonResponse({"foo": "bar"}, status=201)
     except PagamentoMercadoPago.DoesNotExist:
         print('nao rolou nao manooo')
     except print(0):
         pass
-    
