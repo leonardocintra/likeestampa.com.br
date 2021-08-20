@@ -51,13 +51,13 @@ def get_frete(cep, quantidade):
     return json.loads(response.text)
 
 
-def create_order(order_id, cliente, endereco, items, delivery_method_id):
+def create_payload_order(order_id, cliente, endereco, items, delivery_method_id):
     tel_numero = '999999999'
 
     if cliente.telefone:
         tel_numero = cliente.telefone
 
-    items_request = _monta_payload_item(items)
+    items_request = __monta_payload_item(items)
 
     payload = json.dumps(
         {
@@ -83,14 +83,18 @@ def create_order(order_id, cliente, endereco, items, delivery_method_id):
     )
 
     Pedido.objects.filter(pk=order_id).update(request_seller=payload)
+
+
+def create_order(payload):
+    data = json.loads(payload)
     if settings.DEBUG:
-        return _get_fake_dimona_order_id()
+        return __get_fake_dimona_order_id()
     response = requests.post(URL_DIMONA + "/order",
-                             headers=HEADERS, data=payload)
+                             headers=HEADERS, data=data)
     return json.loads(response.text)
 
 
-def _monta_payload_item(items):
+def __monta_payload_item(items):
     skus = SkuDimona.objects.all()
 
     item_request = []
@@ -107,7 +111,7 @@ def _monta_payload_item(items):
             "name": item.produto.nome,
             "sku": item.produto.slug,
             "qty": item.quantidade,
-            "dimona_sku_id": _get_sku_dimona(skus, modelo_produto, tamanho, cor),
+            "dimona_sku_id": __get_sku_dimona(skus, modelo_produto, tamanho, cor),
             "designs": [
                 imagem_design
             ],
@@ -118,17 +122,17 @@ def _monta_payload_item(items):
     return item_request
 
 
-def _get_sku_dimona(skus, modelo_produto, tamanho, cor):
+def __get_sku_dimona(skus, modelo_produto, tamanho, cor):
     skus = skus.filter(cor=cor)
     skus = skus.filter(tamanho=tamanho)
     for sku in skus:
         if sku.estilo.descricao == modelo_produto and sku.cor == cor and sku.tamanho == tamanho and sku.nome == 'Dimona Quality':
             return sku.sku
     # TODO: informar que esta errado (aviso telegram por exemplo)
-    return 10110110110
+    return 999999999
 
 
-def _get_fake_dimona_order_id():
+def __get_fake_dimona_order_id():
     # Quando nao estiver no ambiente de producao, geraremos um pedido fake
     range1 = str(randint(100, 999))
     range2 = str(randint(100, 999))

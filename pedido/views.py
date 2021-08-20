@@ -8,7 +8,7 @@ from checkout.models import Carrinho, ItemCarrinho
 from evento.models import EventoPedido, criar_evento
 from pagamento.models import PagamentoMercadoPago
 from services.mercadopago.mercadopago import get_preference, get_payment
-from services.dimona.api import create_order, get_tracking_url, get_timeline
+from services.dimona.api import create_order, get_tracking_url, get_timeline, create_payload_order
 from usuario.models import Cliente, EnderecoCliente
 from .models import Pedido, ItemPedido
 from .email import envia_email
@@ -62,14 +62,16 @@ def pedido_finalizado_mercado_pago(request):
     cliente = Cliente.objects.get(user=user)
     enderecos = EnderecoCliente.objects.filter(cliente=cliente)
 
+    create_payload_order(pagamento_mp.pedido.id, cliente,
+                         enderecos[0], items, pedido.frete_id)
     if pagamento_mp.mercado_pago_status == 'approved':
         pago = True
-        dimona = create_order(pagamento_mp.pedido.id,
-                              cliente, enderecos[0], items, pedido.frete_id)
+        pedido = Pedido.objects.get(pk=pedido.id)
+        dimona = create_order(pedido.request_seller)
 
     if dimona:
         dimona = dimona['order']
-        
+
     # Atualiza os dados do pagamento no pedido (pago e o usuario)
     Pedido.objects.filter(pk=pagamento_mp.pedido.id).update(
         pago=pago,
@@ -77,13 +79,13 @@ def pedido_finalizado_mercado_pago(request):
     )
 
     if pago:
-        criar_evento(2, pedido) # Pedido Pago
-        criar_evento(3, pedido) # Pedido em producao
+        criar_evento(2, pedido)  # Pedido Pago
+        criar_evento(3, pedido)  # Pedido em producao
     else:
-        criar_evento(6, pedido) # Aguardando pagamento
+        criar_evento(6, pedido)  # Aguardando pagamento
 
     envia_email(cliente, pedido.id, pago, items)
-    
+
     del request.session['carrinho']
     del request.session['mercado_pago_id']
     Carrinho.objects.filter(uuid=carrinho_uuid).delete()
