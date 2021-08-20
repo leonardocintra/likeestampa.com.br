@@ -51,7 +51,7 @@ def pedido_finalizado_mercado_pago(request):
             produto=item.produto,
             cor=item.cor,
             tamanho=item.tamanho,
-            modelo=item.modelo,
+            modelo_produto=item.modelo_produto,
             quantidade=item.quantidade
         )
 

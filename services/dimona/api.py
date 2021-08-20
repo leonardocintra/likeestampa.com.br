@@ -101,13 +101,13 @@ def _monta_payload_item(items):
 
         cor = item.cor.tipo_variacao.descricao
         tamanho = item.tamanho.tipo_variacao.descricao
-        modelo = item.modelo.modelo.descricao
+        modelo_produto = item.modelo_produto.modelo.descricao
 
         item_request.append({
             "name": item.produto.nome,
             "sku": item.produto.slug,
             "qty": item.quantidade,
-            "dimona_sku_id": _get_sku_dimona(skus, modelo, tamanho, cor),
+            "dimona_sku_id": _get_sku_dimona(skus, modelo_produto, tamanho, cor),
             "designs": [
                 imagem_design
             ],
@@ -118,11 +118,11 @@ def _monta_payload_item(items):
     return item_request
 
 
-def _get_sku_dimona(skus, modelo, tamanho, cor):
+def _get_sku_dimona(skus, modelo_produto, tamanho, cor):
     skus = skus.filter(cor=cor)
     skus = skus.filter(tamanho=tamanho)
     for sku in skus:
-        if sku.estilo.descricao == modelo and sku.cor == cor and sku.tamanho == tamanho and sku.nome == 'Dimona Quality':
+        if sku.estilo.descricao == modelo_produto and sku.cor == cor and sku.tamanho == tamanho and sku.nome == 'Dimona Quality':
             return sku.sku
     # TODO: informar que esta errado (aviso telegram por exemplo)
     return 10110110110
