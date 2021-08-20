@@ -1,16 +1,13 @@
-{% load static %}
-{% load cloudinary %}
 <!doctype html>
 <html lang="pt-br">
 
 <head>
+    {% load static %} {% load cloudinary %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Leonardo Nascimento Cintra">
-    <meta name="generator" content="Hugo 0.82.0">
-    {% block head %}
-    {% endblock %}
+    <meta name="generator" content="Hugo 0.82.0"> {% block head %} {% endblock %}
 
     <title>Like Estampa · Home</title>
 
@@ -26,25 +23,23 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <!-- <link href="css/styles.css" rel="stylesheet" /> -->
-    {% block css %}
-    {% endblock %}
-
-    {% block js_header %}
-    {% endblock %}
+    <style>
+        /* Show it is fixed to the top */
+        
+        body {
+            min-height: 75rem;
+            padding-top: 3.5rem;
+        }
+    </style>
+    {% block css %} {% endblock %} {% block js_header %} {% endblock %}
 </head>
 
 <body>
     <!-- Navigation-->
-    {% include 'includes/_navegacao.html' %}
-
-    {% block content %}
-    {% endblock %}
+    {% include 'includes/_navegacao.html' %} {% block content %} {% endblock %}
 
     <!-- Footer -->
-    {% include 'includes/_footer.html' %}
-    
-    {% block js_footer %}
-    {% endblock %}
+    {% include 'includes/_footer.html' %} {% block js_footer %} {% endblock %}
 </body>
 
 </html>
