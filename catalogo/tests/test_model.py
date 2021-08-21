@@ -146,21 +146,21 @@ class ProdutoModelTest(TestCase):
 
 class ModeloModelTest(TestCase):
     def setUp(self):
-        Modelo.objects.create(descricao='T-Shirt')
+        self.obj = Modelo.objects.create(descricao='T-Shirt')
 
     def test_create(self):
         self.assertTrue(Modelo.objects.exists())
 
     def test_str(self):
-        obj = Modelo.objects.get(id=1)
-        self.assertEqual('T-Shirt', str(obj))
+        Modelo.objects.get(pk=self.obj.id)
+        self.assertEqual('T-Shirt', str(self.obj))
 
 
 class ModeloProdutoModelTest(TestCase):
     def setUp(self):
-        Modelo.objects.create(descricao='T-Shirt')
+        modelo = Modelo.objects.create(descricao='T-Shirt')
         produto = create_produto()
-        self.obj = ModeloProduto(produto=produto)
+        self.obj = ModeloProduto(produto=produto, modelo=modelo)
         self.obj.save()
 
     def test_create(self):
@@ -176,8 +176,8 @@ class ModeloProdutoModelTest(TestCase):
 class ModeloVariacaoModelTest(TestCase):
     def setUp(self):
         produto = create_produto()
-        Modelo.objects.create(descricao='T-Shirt')
-        modelo_produto = ModeloProduto.objects.create(produto=produto)
+        modelo = Modelo.objects.create(descricao='T-Shirt')
+        modelo_produto = ModeloProduto.objects.create(produto=produto, modelo=modelo)
         variacao = Variacao.objects.create(descricao='Tamanho', )
         tipo_variacao = TipoVariacao.objects.create(
             descricao='P', variacao=variacao,)
@@ -201,8 +201,7 @@ class ModeloVariacaoModelTest(TestCase):
 
 class SkuDimonaModelTest(TestCase):
     def setUp(self):
-        Modelo.objects.create(descricao='T-Shirt')
-        modelo = Modelo.objects.get(id=1)
+        modelo = Modelo.objects.create(descricao='T-Shirt')
         self.obj = SkuDimona.objects.create(
             sku='328198319',
             nome='Dimona Quality',

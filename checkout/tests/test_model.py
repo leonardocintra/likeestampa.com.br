@@ -22,12 +22,11 @@ class CarrinhoModelTest(TestCase):
 
 class ItemCarrinhoModelTest(TestCase):
     def setUp(self):
-        Carrinho.objects.create(uuid=UUID_FAKE)
-        carrinho = Carrinho.objects.get(id=1)
+        carrinho = Carrinho.objects.create(uuid=UUID_FAKE)
         produto = create_produto()
 
-        Modelo.objects.create(descricao='T-Shirt')
-        modelo_produto = ModeloProduto.objects.create(produto=produto)
+        modelo = Modelo.objects.create(descricao='T-Shirt')
+        modelo_produto = ModeloProduto.objects.create(produto=produto, modelo=modelo)
         variacao_tamanho = Variacao.objects.create(descricao='Tamanho', )
         variacao_cor = Variacao.objects.create(descricao='Cor', )
         tp_tamanho = TipoVariacao.objects.create(

@@ -10,7 +10,7 @@ from evento.models import EventoPedido, criar_evento
 from checkout.models import Carrinho, ItemCarrinho
 from pedido.models import Pedido
 from usuario.models import Cliente, EnderecoCliente
-from services.mercadopago.mercadopago import create_preference, montar_payload_preference
+from services.mercadopago.mercadopago import create_preference, montar_payload_preference, get_payment
 from services.dimona.api import get_frete
 from .models import PagamentoMercadoPago, PagamentoMercadoPagoWebhook
 import decimal
@@ -113,16 +113,26 @@ def pagamento(request):
 @csrf_exempt
 def mp_notifications(request):
     # Notificações do Mercado Pago IPN
-    if request.GET.get('topic') == 'payment':
-        print('eh outra coisa')
-    payment_id = request.GET.get('id')
     try:
-        mercado_pago = PagamentoMercadoPago.objects.get(payment_id=payment_id)
-        return JsonResponse({"foo": "bar"}, status=201)
+        if request.GET.get('topic') == 'payment':
+            payment_id = request.GET.get('id')
+
+            obj_mp = get_payment(payment_id)
+
+            if obj_mp['status'] != 'approved':
+                return JsonResponse({"foo": "bar"}, status=201)
+
+            if obj_mp['status'] == 'approved':
+                PagamentoMercadoPago.objects.filter(payment_id=payment_id).update(
+                    mercado_pago_status=obj_mp['status'],
+                    mercado_pago_status_detail= obj_mp['status_detail'],
+                )
+            return JsonResponse({"foo": "bar"}, status=201)
+
     except PagamentoMercadoPago.DoesNotExist:
         return JsonResponse({"payment": "not found"}, status=200)
     except print(0):
-        pass
+        return JsonResponse({"payment": "not found"}, status=200)
 
 
 @require_POST
