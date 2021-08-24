@@ -14,18 +14,7 @@ from .models import Pedido, ItemPedido
 from .email import envia_email
 
 
-@login_required
-def pedido_finalizado_mercado_pago(request):
-    if not 'mercado_pago_id' in request.session:
-        pedido_id = int(request.session['pedido'])
-        return redirect("pedido:pedido", pk=pedido_id)
-
-    mercado_pago_id = request.session['mercado_pago_id']
-    payment_id = request.GET.get('payment_id')
-
-    preference = get_preference(mercado_pago_id)
-    payment = get_payment(payment_id)
-
+def __atualizar_pagamento_mp(payment, mercado_pago_id, payment_id):
     # Atualiza os dados do mercado pago na tabela de pagamento
     PagamentoMercadoPago.objects.filter(
         mercado_pago_id=mercado_pago_id).update(
@@ -36,10 +25,28 @@ def pedido_finalizado_mercado_pago(request):
             mercado_pago_status_detail=payment['status_detail'],
             payment_id=payment_id
     )
+
+
+@login_required
+def pedido_finalizado_mercado_pago(request):
+    if not 'mercado_pago_id' in request.session:
+        pedido_id = int(request.session['pedido'])
+        return redirect("pedido:pedido", pk=pedido_id)
+
+    # TODO: isso aqui pode ser null ?
+    carrinho_uuid = request.session['carrinho']
+
+    mercado_pago_id = request.session['mercado_pago_id']
+    payment_id = request.GET.get('payment_id')
+
+    preference = get_preference(mercado_pago_id)
+    payment = get_payment(payment_id)
+
+    __atualizar_pagamento_mp(payment, mercado_pago_id, payment_id)
+
     pagamento_mp = PagamentoMercadoPago.objects.get(
         mercado_pago_id=mercado_pago_id)
 
-    carrinho_uuid = request.session['carrinho']
     Carrinho.objects.filter(uuid=carrinho_uuid).update(
         abandonado=False, finalizado=True)
     carrinho = Carrinho.objects.get(uuid=carrinho_uuid)
@@ -114,7 +121,8 @@ class PedidoDetailView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         items = ItemPedido.objects.filter(pedido=self.object)
         eventos = EventoPedido.objects.filter(pedido=self.object)
-        url_rastreio = get_tracking_url(self.object.pedido_seller)['tracking_url']
+        url_rastreio = get_tracking_url(self.object.pedido_seller)[
+            'tracking_url']
 
         context['url_rastreio'] = url_rastreio
         context['eventos'] = eventos

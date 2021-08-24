@@ -7,11 +7,7 @@ from django.contrib.auth.models import User
 class ClienteModelTest(TestCase):
 
     def setUp(self):
-        user = User.objects.create_user(
-            username='leonardo',
-            first_name='Leonardo',
-            email='leonardo@leonardo.com',
-            password='123kkkuuu#')
+        user = get_fake_user()
         self.obj = Cliente.objects.get(user=user)
 
     def test_criacao_cliente(self):
@@ -40,23 +36,9 @@ class ClienteModelTest(TestCase):
 
 class EnderecoClienteModelTest(TestCase):
     def setUp(self):
-        user = User.objects.create_user(
-            username='leonardo',
-            first_name='Leonardo',
-            email='leonardo@leonardo.com',
-            password='123kkkuuu#')
+        user = get_fake_user()
         cliente = Cliente.objects.get(user=user)
-
-        self.obj = EnderecoCliente(
-            cliente=cliente,
-            cep='37990000',
-            endereco='Rua 6 de abril',
-            numero='123',
-            cidade='Ibiraci',
-            uf='MG',
-            bairro='Alto da Boa Vista'
-        )
-        self.obj.save()
+        self.obj = get_fake_endereco(cliente)
 
     def test_create(self):
         self.assertTrue(EnderecoCliente.objects.exists())
@@ -69,3 +51,31 @@ class EnderecoClienteModelTest(TestCase):
 
     def test_pais_default_value(self):
         self.assertEqual('Brasil', self.obj.pais)
+
+
+def get_fake_user(username='leonardo', email='leonardo@likeestampa.com.br'):
+    if Cliente.objects.exists():
+        cliente = Cliente.objects.all()[:1]
+        user = User.objects.get(pk=cliente[0].user.id)
+        Cliente.objects.filter(user=user).update(telefone='998876363',
+                                                 cpf='47507777065')
+        return user
+
+    user = User.objects.create_user(
+        username=username,
+        first_name='Leonardo',
+        email=email,
+        password='123kkkuuu#')
+    return user
+
+
+def get_fake_endereco(cliente):
+    return EnderecoCliente.objects.create(
+        cliente=cliente,
+        cep='37990000',
+        endereco='Rua 6 de abril',
+        numero='123',
+        cidade='Ibiraci',
+        uf='MG',
+        bairro='Alto da Boa Vista'
+    )
