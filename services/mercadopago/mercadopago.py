@@ -9,7 +9,7 @@ headers = {
 }
 
 
-def montar_payload_back_urls(request):
+def __montar_payload_back_urls(request):
     back_urls = request.build_absolute_uri().replace('/pagamento/', '') + \
         '/pedido/pedido_finalizado_mercado_pago'
     return {
@@ -19,7 +19,7 @@ def montar_payload_back_urls(request):
     }
 
 
-def montar_payload_items(items):
+def __montar_payload_items(items):
     item_data = []
     for item in items:
         imagem = item.produto.imagem_principal.url
@@ -38,7 +38,7 @@ def montar_payload_items(items):
     return item_data
 
 
-def montar_payload_payer(cliente, endereco):
+def __montar_payload_payer(cliente, endereco):
     return {
         "name": cliente.user.first_name,
         "surname": cliente.user.last_name,
@@ -64,18 +64,18 @@ def montar_payload_payer(cliente, endereco):
 
 def montar_payload_preference(request, pedido_id, items, cliente, endereco, valor_frete):
 
-    item_data = montar_payload_items(items)
-    payer = montar_payload_payer(cliente, endereco)
-    back_urls = montar_payload_back_urls(request)
+    item_data = __montar_payload_items(items)
+    payer = __montar_payload_payer(cliente, endereco)
+    back_urls = __montar_payload_back_urls(request)
 
     return {
         "back_urls": back_urls,
         "payer": payer,
         "auto_return": "approved",
         "items": item_data,
-        "statement_descriptor": "LIKE_ESTAMPA",
+        "statement_descriptor": "LIKEESTAMPA",
         "external_reference": "LIKEESTAMPA-" + str(pedido_id),
-        "installments": 10,
+        "installments": 1,
         "excluded_payment_types": [
             {
                 "id": "ticket"
@@ -96,12 +96,10 @@ def create_preference(preference_data):
 def get_payment(payment_id):
     url = 'https://api.mercadopago.com/v1/payments/' + payment_id
     r = requests.get(url, headers=headers)
-
     return json.loads(r.text)
 
 
 def get_preference(preference_id):
     url = 'https://api.mercadopago.com/checkout/preferences/' + preference_id
     r = requests.get(url, headers=headers)
-
     return json.loads(r.text)

@@ -72,6 +72,7 @@ def pedido_finalizado_mercado_pago(request):
     create_payload_order(pagamento_mp.pedido.id, cliente,
                          enderecos[0], items, pedido.frete_id)
     if pagamento_mp.mercado_pago_status == 'approved':
+        # TODO: precisa confirmar se foi pago mesmo fazendo um GET no mp (Usuario maldido pode modificar a URL mandando um APROVED)
         pago = True
         pedido = Pedido.objects.get(pk=pedido.id)
         dimona = create_order(pedido.request_seller)
