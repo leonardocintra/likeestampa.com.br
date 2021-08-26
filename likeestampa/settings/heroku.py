@@ -10,6 +10,11 @@ SECRET_KEY = env("SECRET_KEY")
 
 ALLOWED_HOSTS = ["likeestampa.com.br", "www.likeestampa.com.br", "likeestampa.herokuapp.com", ]
 
+
+# SECURE SSL (HTTPS Sempre)
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
+
 DATABASES = {
     "default": env.db(),
 }
