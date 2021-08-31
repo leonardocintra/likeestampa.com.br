@@ -12,6 +12,7 @@ from pedido.models import Pedido
 from usuario.models import Cliente, EnderecoCliente
 from services.mercadopago.mercadopago import create_preference, montar_payload_preference, get_payment
 from services.dimona.api import get_frete
+from services.telegram.api import enviar_mensagem
 from .models import PagamentoMercadoPago, PagamentoMercadoPagoWebhook
 import decimal
 import json
@@ -44,7 +45,7 @@ def pagamento(request):
 
     # monta o frete
     frete_items = get_frete(cep, quantidade_total)
-    valor_frete = 5
+    valor_frete = 10.0
     transportadora = ''
     delivery_method_id = 0
     if 'cotacao_frete' in request.session:
@@ -55,8 +56,15 @@ def pagamento(request):
                 transportadora = frete['name']
                 break
     else:
+        menor_valor = -1
         for frete in frete_items:
-            print('deve pegar o valor menor')
+            if float(menor_valor) < float(0):
+                menor_valor = float(frete['value'])
+
+            if float(frete['value']) <= float(menor_valor):
+                menor_valor = frete['value']
+        
+        valor_frete = menor_valor
 
     valor_frete = round(float(valor_frete), 2)
     valor_total = round(valor_carrinho + decimal.Decimal(valor_frete), 2)
@@ -117,6 +125,7 @@ def mp_notifications(request):
         if request.GET.get('topic') == 'payment':
             payment_id = request.GET.get('id')
 
+            enviar_mensagem(payment_id, 'IPN do Mercado pago')
             obj_mp = get_payment(payment_id)
 
             if obj_mp['status'] != 'approved':
@@ -128,6 +137,8 @@ def mp_notifications(request):
                     mercado_pago_status_detail= obj_mp['status_detail'],
                 )
             return JsonResponse({"foo": "bar"}, status=201)
+        else:
+            enviar_mensagem('Voce recebeu uma notificação IPN do mercado pago mas não foi um topic payment: {0}'.format(request.GET.get('topic')), 'IPN do Mercado pago')
 
     except PagamentoMercadoPago.DoesNotExist:
         return JsonResponse({"payment": "not found"}, status=200)
@@ -141,6 +152,8 @@ def webhook(request):
     # Notificações do Mercado Pago Webhook
     payload = json.loads(request.body)
     payment_id = payload['id']
+
+    enviar_mensagem(payment_id, 'Webhook do Mercado pago')
 
     try:
         mercado_pago = PagamentoMercadoPago.objects.get(payment_id=payment_id)

@@ -51,7 +51,7 @@ class SubCategoria(models.Model):
 
 
 class Variacao(models.Model):
-    """Ex: COR, Tamanho, Tipo de camiseta"""
+    """Ex: COR, Tamanho, Tipo de camiseta, Genero """
     descricao = models.CharField('Descrição', unique=True, max_length=50)
     ativo = models.BooleanField(default=True)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
