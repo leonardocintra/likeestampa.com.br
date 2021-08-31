@@ -161,8 +161,8 @@ def webhook(request):
             mercado_pago=mercado_pago,
             webhook_request=payload
         )
-        return JsonResponse({"foo": "bar"}, status=201)
     except PagamentoMercadoPago.DoesNotExist:
-        print('nao rolou nao manooo')
+        enviar_mensagem('Pagamento não encontrato apos receber um Webhook do mercado pago', payment_id, 'Webhook do Mercado pago')
+        return JsonResponse({"foo": "bar"}, status=200)
     except print(0):
         pass
