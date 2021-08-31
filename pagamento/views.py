@@ -153,7 +153,7 @@ def webhook(request):
     payload = json.loads(request.body)
     payment_id = payload['id']
 
-    enviar_mensagem(payment_id, 'Webhook do Mercado pago')
+    enviar_mensagem(payload, payment_id, 'Webhook do Mercado pago')
 
     try:
         mercado_pago = PagamentoMercadoPago.objects.get(payment_id=payment_id)
