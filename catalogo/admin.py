@@ -9,7 +9,7 @@ class VariacaoAdmin(admin.ModelAdmin):
 
 
 class TipoVariacaoAdmin(admin.ModelAdmin):
-    list_display = ['descricao', 'variacao', 'ativo', 'valor_adicional',  ]
+    list_display = ['descricao', 'variacao', 'ativo', 'valor_adicional', ]
 
 
 class CategoriaAdmin(admin.ModelAdmin):
@@ -37,6 +37,7 @@ class ModeloProdutoInline(NestedStackedInline):
 @admin.action(description='Ativar produtos')
 def ativar_produtos(modeladmin, request, queryset):
     queryset.update(ativo=True)
+
 
 @admin.action(description='Desativar produtos')
 def desativar_produtos(modeladmin, request, queryset):

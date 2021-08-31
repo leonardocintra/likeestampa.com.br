@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from catalogo.models import Produto
 from services.dimona.api import get_frete
+from services.telegram.api import enviar_mensagem
 from usuario.forms import ClienteForm
 from usuario.models import Cliente, EnderecoCliente
 from .forms import FreteForm
@@ -13,6 +14,7 @@ from .models import Carrinho, ItemCarrinho
 def carrinho(request):
     if request.method == 'POST':
         form = FreteForm(request.POST)
+        enviar_mensagem('Cliente novo na área', 'Carrinho de Compras', 'Algum cliente clicou no carrinho')
         request.session['cotacao_frete'] = form['delivery_method_id'].data
         # TODO: Alterar dados cadastrais ou incluir novo endereco
         if form.is_valid():
