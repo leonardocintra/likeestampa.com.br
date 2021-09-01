@@ -103,3 +103,15 @@ def get_preference(preference_id):
     url = 'https://api.mercadopago.com/checkout/preferences/' + preference_id
     r = requests.get(url, headers=headers)
     return json.loads(r.text)
+
+
+def confirma_pagamento(payment_id):
+    """ Confirma se realmente foi pago. Ex em caso que o usuario pode mudar a session."""
+    try:
+        pagamento = get_payment(payment_id)
+        if pagamento['status'] == 'approved':
+            return True
+    except:
+        return False
+
+    return False

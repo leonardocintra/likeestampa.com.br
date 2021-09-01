@@ -66,4 +66,5 @@ def get_fake_pedido():
     return Pedido.objects.create(
         user=user,
         endereco_cliente=endereco_cliente,
+        request_seller='{"delivery_method_id": 90689, "order_id": 6, "customer_name": "Ronaldo Nazario", "customer_document": "92484291060", "customer_email": "ronaldo@gmail.com", "webhook_url": "https://option_webhook_url.com", "items": [{"name": "Camiseta For\u00e7a", "sku": "ideograma-forca", "qty": 1, "dimona_sku_id": 999999999, "designs": ["http://res.cloudinary.com/leonardocintra/image/upload/NAO_INFORMADO"], "mocks": ["http://res.cloudinary.com/leonardocintra/image/upload/v1624842615/bgue0uopz62i0m9r1hmo.jpg"]}], "address": {"street": "Avenida Doutor Severino Marcio Pereira Meirelles", "number": "1480", "complement": "", "city": "Franca", "state": "SP", "zipcode": "14408114", "neighborhood": "Villagio Mundo Novo", "phone": "8329382989", "country": "BR"}}'
     )

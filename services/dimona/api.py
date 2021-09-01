@@ -4,6 +4,7 @@ from random import randint
 from django.conf import settings
 from catalogo.models import SkuDimona
 from pedido.models import Pedido
+from services.telegram.api import enviar_mensagem
 
 URL_DIMONA = "https://camisadimona.com.br/api/v2"
 
@@ -52,12 +53,12 @@ def get_frete(cep, quantidade):
 
 
 def create_payload_order(order_id, cliente, endereco, items, delivery_method_id):
-    tel_numero = '999999999'
+    tel_numero = '99999999999'
 
     if cliente.telefone:
         tel_numero = cliente.telefone
 
-    items_request = __monta_payload_item(items)
+    items_request = __monta_payload_item(items, order_id)
 
     payload = json.dumps(
         {
@@ -94,7 +95,7 @@ def create_order(payload):
     return json.loads(response.text)
 
 
-def __monta_payload_item(items):
+def __monta_payload_item(items, order_id):
     skus = SkuDimona.objects.all()
 
     item_request = []
@@ -111,7 +112,7 @@ def __monta_payload_item(items):
             "name": item.produto.nome,
             "sku": item.produto.slug,
             "qty": item.quantidade,
-            "dimona_sku_id": __get_sku_dimona(skus, modelo_produto, tamanho, cor),
+            "dimona_sku_id": __get_sku_dimona(skus, modelo_produto, tamanho, cor, order_id),
             "designs": [
                 imagem_design
             ],
@@ -122,13 +123,14 @@ def __monta_payload_item(items):
     return item_request
 
 
-def __get_sku_dimona(skus, modelo_produto, tamanho, cor):
+def __get_sku_dimona(skus, modelo_produto, tamanho, cor, order_id):
     skus = skus.filter(cor=cor)
     skus = skus.filter(tamanho=tamanho)
     for sku in skus:
         if sku.estilo.descricao == modelo_produto and sku.cor == cor and sku.tamanho == tamanho and sku.nome == 'Dimona Quality':
             return sku.sku
-    # TODO: informar que esta errado (aviso telegram por exemplo)
+    enviar_mensagem('SKU DIMONA não encontrado.\n -Modelo: {0} \n -Tamanho: {1} \n -Cor: {2}'.format(
+        modelo_produto, tamanho, cor), 'SKU não encontrado', str(order_id))
     return 999999999
 
 

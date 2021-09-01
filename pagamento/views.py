@@ -6,9 +6,11 @@ from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 # from django.utils.functional import cached_property
+
 from evento.models import EventoPedido, criar_evento
 from checkout.models import Carrinho, ItemCarrinho
 from pedido.models import Pedido
+from pedido.views import gerar_venda
 from usuario.models import Cliente, EnderecoCliente
 from services.mercadopago.mercadopago import create_preference, montar_payload_preference, get_payment
 from services.dimona.api import get_frete
@@ -63,7 +65,7 @@ def pagamento(request):
 
             if float(frete['value']) <= float(menor_valor):
                 menor_valor = frete['value']
-        
+
         valor_frete = menor_valor
 
     valor_frete = round(float(valor_frete), 2)
@@ -117,6 +119,22 @@ def pagamento(request):
     return render(request, 'pagamento/pagamento.html', context)
 
 
+def atualizar_pagamento(payment_id):
+    obj_mp = get_payment(payment_id)
+
+    if obj_mp['status'] != 'approved':
+        return JsonResponse({"pagamento": "nao-aprovado"}, status=200)
+
+    if obj_mp['status'] == 'approved':
+        PagamentoMercadoPago.objects.filter(payment_id=payment_id).update(
+            mercado_pago_status=obj_mp['status'],
+            mercado_pago_status_detail=obj_mp['status_detail'],
+        )
+        pagamento_mp = PagamentoMercadoPago.objects.get(payment_id=payment_id)
+        gerar_venda(pagamento_mp=pagamento_mp)
+    return JsonResponse({"pagamento": "aprovado"}, status=201)
+
+
 @require_POST
 @csrf_exempt
 def mp_notifications(request):
@@ -124,25 +142,16 @@ def mp_notifications(request):
     try:
         if request.GET.get('topic') == 'payment':
             payment_id = request.GET.get('id')
-
             enviar_mensagem(payment_id, 'IPN do Mercado pago')
-            obj_mp = get_payment(payment_id)
-
-            if obj_mp['status'] != 'approved':
-                return JsonResponse({"foo": "bar"}, status=201)
-
-            if obj_mp['status'] == 'approved':
-                PagamentoMercadoPago.objects.filter(payment_id=payment_id).update(
-                    mercado_pago_status=obj_mp['status'],
-                    mercado_pago_status_detail= obj_mp['status_detail'],
-                )
-            return JsonResponse({"foo": "bar"}, status=201)
+            return atualizar_pagamento(payment_id)
         else:
-            enviar_mensagem('Voce recebeu uma notificação IPN do mercado pago mas não foi um topic payment: {0}'.format(request.GET.get('topic')), 'IPN do Mercado pago')
-
+            enviar_mensagem('Recebeu uma notificação IPN do mercado pago mas não foi um topic payment: {0}'.format(
+                request.GET.get('topic')), 'IPN do Mercado pago')
+            return JsonResponse({"erro": "nao o topico"}, status=200)
     except PagamentoMercadoPago.DoesNotExist:
         return JsonResponse({"payment": "not found"}, status=200)
     except print(0):
+        enviar_mensagem('ERRO ao receber IPN: {0}'.format(str(request)))
         return JsonResponse({"payment": "not found"}, status=200)
 
 
@@ -156,13 +165,11 @@ def webhook(request):
     enviar_mensagem(payload, payment_id, 'Webhook do Mercado pago')
 
     try:
-        mercado_pago = PagamentoMercadoPago.objects.get(payment_id=payment_id)
-        PagamentoMercadoPagoWebhook.objects.create(
-            mercado_pago=mercado_pago,
-            webhook_request=payload
-        )
+        return atualizar_pagamento(payment_id)
     except PagamentoMercadoPago.DoesNotExist:
-        enviar_mensagem('Pagamento não encontrato apos receber um Webhook do mercado pago', payment_id, 'Webhook do Mercado pago')
+        enviar_mensagem('Pagamento não encontrato apos receber um Webhook do mercado pago',
+                        payment_id, 'Webhook do Mercado pago')
         return JsonResponse({"foo": "bar"}, status=200)
     except print(0):
-        pass
+        enviar_mensagem('ERRO ao receber Webhook: {0}'.format(str(request)))
+        return JsonResponse({"foo": "bar"}, status=200)
