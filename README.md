@@ -26,6 +26,9 @@ $ make test
 ```
 
 ### Executar local
+
+Tem um arquivo `fixture.sql` que possui dados iniciais para voce brincar.
+
 ```
 $ make migrate
 $ python3 manage.py createsuperuser
@@ -41,6 +44,15 @@ $ make test
 ```
 $ make coverage
 ```
+
+## Dicas
+### Erros que podem aparecer
+#### DETAIL:  Key (id)=(1) already exists.
+Para corrigir execute o comando abaixo
+```
+python manage.py sqlsequencereset <nome da app> 
+```
+Ex: `python manage.py sqlsequencereset catalogo`
 
 ## Historia
 ### Fundado em 20/04/2021

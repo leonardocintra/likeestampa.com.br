@@ -5,7 +5,7 @@
                 {% if item.cor.imagem %}
                     <img src="{{ item.cor.imagem.url }}" class="img-fluid rounded-start" alt="{{ item }}">
                 {% else %}
-                    <img src="{{ item.modelo.produto.imagem_principal.url }}" class="img-fluid rounded-start" alt="{{ item }}">
+                    <img src="{{ item.modelo_produto.produto.imagem_principal.url }}" class="img-fluid rounded-start" alt="{{ item }}">
                 {% endif %}
             </div>
             <div class="col-md-8">

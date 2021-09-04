@@ -1,3 +1,10 @@
+INSERT INTO status (descricao, created_at, updated_at, visivel_cliente) VALUES('Pedido Recebido', '2021-07-01 01:30:00.149', '2021-07-01 01:30:00.149', true);
+INSERT INTO status (descricao, created_at, updated_at, visivel_cliente) VALUES('Pedido Pago', '2021-07-01 01:30:04.475', '2021-07-01 01:30:04.475', true);
+INSERT INTO status (descricao, created_at, updated_at, visivel_cliente) VALUES('Pedido em produção', '2021-07-01 01:30:17.207', '2021-07-01 01:30:17.207', true);
+INSERT INTO status (descricao, created_at, updated_at, visivel_cliente) VALUES('Pedido em rota de entrega', '2021-07-01 01:30:24.358', '2021-07-01 01:30:24.359', true);
+INSERT INTO status (descricao, created_at, updated_at, visivel_cliente) VALUES('Pedido entregue', '2021-07-01 01:30:30.861', '2021-07-01 01:30:30.861', true);
+INSERT INTO status (descricao, created_at, updated_at, visivel_cliente) VALUES('Aguardando pagamento', '2021-07-21 17:08:15.506', '2021-07-21 17:08:15.506', true);
+INSERT INTO status (descricao, created_at, updated_at, visivel_cliente) VALUES('Pedido Cancelado', '2021-07-23 16:44:17.055', '2021-07-23 16:44:17.055', true);
 INSERT INTO subcategoria (id, nome, slug, created_at, updated_at, icone_fontawesome, ativo) VALUES(2, 'Banda / Cantores', 'banda-cantores', '2021-04-20 21:00:00.000', '2021-04-20 21:00:00.000', 'microphone-alt', false);
 INSERT INTO subcategoria (id, nome, slug, created_at, updated_at, icone_fontawesome, ativo) VALUES(5, 'Religião', 'religiao', '2021-04-20 21:00:00.000', '2021-04-20 21:00:00.000', 'church', false);
 INSERT INTO subcategoria (id, nome, slug, created_at, updated_at, icone_fontawesome, ativo) VALUES(6, 'Bebidas / Comidas', 'bebidas-comidas', '2021-04-20 21:00:00.000', '2021-04-20 21:00:00.000', 'hamburger', false);
@@ -12,72 +19,139 @@ INSERT INTO subcategoria (id, nome, slug, created_at, updated_at, icone_fontawes
 INSERT INTO subcategoria (id, nome, slug, created_at, updated_at, icone_fontawesome, ativo) VALUES(1, 'Programação', 'programacao', '2021-04-20 21:00:00.000', '2021-05-26 21:00:00.000', 'laptop-code', true);
 INSERT INTO subcategoria (id, nome, slug, created_at, updated_at, icone_fontawesome, ativo) VALUES(13, 'Profissões', 'profissoes', '2021-07-19 13:32:42.338', '2021-07-19 13:32:42.338', 'briefcase', true);
 INSERT INTO seller (id, nome, site, cep, endereco, numero, bairro, complemento, referencia, cidade, uf, observacao, created_at, updated_at, nome_contato, telefone_contato, frete_tipo, frete_token, frete_url, ativo) VALUES(1, 'Dimona', 'https://camisadimona.com.br/loja/conta/pedidos', '13898989', 'Rua 6 de Abril', '1302', 'Centro', NULL, NULL, 'Franca', 'MG', '', '2021-07-19 13:32:07.842', '2021-07-19 13:32:07.842', 'Nenhum', '392839823989', 'proprio', '', NULL, true);
-
-INSERT INTO produto (id, nome, descricao, slug, created_at, updated_at, subcategoria_id, ativo, imagem_principal, preco_base, genero, seller_id, imagem_design) VALUES(1, 'Python', 'Camiseta Linguagem de programação Python
-
-Malha cardada fio 24.1
-100% algodão
-Modelagem com caimento reto
-Acabamento com costura simples, gola em ribana
-
-Percentual de encolhimento pós lavagem: 3,70%', 'python', '2021-04-20 21:00:00.000', '2021-06-26 21:00:00.000', 1, true, 'image/upload/v1621297115/hkjlfsghx1wyz2bf3xk8.png', 35.00, 'M', 1, 'NAO_INFORMADO');
-INSERT INTO produto (id, nome, descricao, slug, created_at, updated_at, subcategoria_id, ativo, imagem_principal, preco_base, genero, seller_id, imagem_design) VALUES(5, 'Sao Paulo', 'Camiseta do Tricolor Paulista
-
-Malha cardada fio 24.1
-100% algodão
-Modelagem com caimento reto
-Acabamento com costura simples, gola em ribana
-
-Percentual de encolhimento pós lavagem: 3,70%', 'sao-paulo', '2021-04-20 21:00:00.000', '2021-06-26 21:00:00.000', 4, true, 'image/upload/v1621297101/ngikdcvoqdevogoctgey.png', 35.00, 'M', 1, 'NAO_INFORMADO');
-INSERT INTO produto (id, nome, descricao, slug, created_at, updated_at, subcategoria_id, ativo, imagem_principal, preco_base, genero, seller_id, imagem_design) VALUES(19, 'Basic Style', 'Basic Style
-
-Malha cardada fio 24.1
-100% algodão
-Modelagem com caimento reto
-Acabamento com costura simples, gola em ribana
-
-Percentual de encolhimento pós lavagem: 3,70%', 'basic-style', '2021-05-20 21:00:00.000', '2021-06-26 21:00:00.000', 12, true, 'image/upload/v1621641495/bj5idlflrjlqj92cfdwt.png', 35.00, 'F', 1, 'NAO_INFORMADO');
-INSERT INTO produto (id, nome, descricao, slug, created_at, updated_at, subcategoria_id, ativo, imagem_principal, preco_base, genero, seller_id, imagem_design) VALUES(20, 'Django', 'Camiseta Framework Django
-
-Malha cardada fio 24.1
-100% algodão
-Modelagem com caimento reto
-Acabamento com costura simples, gola em ribana
-
-Percentual de encolhimento pós lavagem: 3,70%', 'django', '2021-05-24 21:00:00.000', '2021-06-26 21:00:00.000', 1, true, 'image/upload/v1621945952/nprlzb1zmc8wl7y7ka5g.png', 35.00, 'M', 1, 'NAO_INFORMADO');
-INSERT INTO produto (id, nome, descricao, slug, created_at, updated_at, subcategoria_id, ativo, imagem_principal, preco_base, genero, seller_id, imagem_design) VALUES(18, 'Love', 'Love
-
-Malha cardada fio 24.1
-100% algodão
-Modelagem com caimento reto
-Acabamento com costura simples, gola em ribana
-
-Percentual de encolhimento pós lavagem: 3,70%', 'love-only', '2021-05-20 21:00:00.000', '2021-06-26 21:00:00.000', 11, true, 'image/upload/v1621641389/wkh4xrhzk6c4qh2qavlq.png', 35.00, 'F', 1, 'NAO_INFORMADO');
-INSERT INTO produto (id, nome, descricao, slug, created_at, updated_at, subcategoria_id, ativo, imagem_principal, preco_base, genero, seller_id, imagem_design) VALUES(17, 'Love Oncinha', 'Love Oncinha
-
-Malha cardada fio 24.1
-100% algodão
-Modelagem com caimento reto
-Acabamento com costura simples, gola em ribana
-
-Percentual de encolhimento pós lavagem: 3,70%', 'love-oncinha', '2021-05-20 21:00:00.000', '2021-06-26 21:00:00.000', 11, true, 'image/upload/v1621641216/ovftnmxzm1alanppw2vg.png', 35.00, 'F', 1, 'NAO_INFORMADO');
-INSERT INTO produto (id, nome, descricao, slug, created_at, updated_at, subcategoria_id, ativo, imagem_principal, preco_base, genero, seller_id, imagem_design) VALUES(21, 'NodeJS', 'Camiseta NodeJS
-
-Malha cardada fio 24.1
-100% algodão
-Modelagem com caimento reto
-Acabamento com costura simples, gola em ribana
-
-Percentual de encolhimento pós lavagem: 3,70%', 'camiseta-nodejs', '2021-05-24 21:00:00.000', '2021-06-26 21:00:00.000', 1, true, 'image/upload/v1621945974/ywfdassk9yetnloakkgp.png', 35.00, 'M', 1, 'NAO_INFORMADO');
-INSERT INTO produto (id, nome, descricao, slug, created_at, updated_at, subcategoria_id, ativo, imagem_principal, preco_base, genero, seller_id, imagem_design) VALUES(22, 'Curso Direito', 'Teste', 'curso-direito', '2021-07-19 13:34:22.356', '2021-07-19 13:35:44.176', 13, true, 'image/upload/v1626712460/pzgsztmvyahrbhgohhmk.jpg', 51.90, 'F', 1, 'image/upload/v1626712461/scqayro9kqztqbw7uc5u.png');
-INSERT INTO produto (id, nome, descricao, slug, created_at, updated_at, subcategoria_id, ativo, imagem_principal, preco_base, genero, seller_id, imagem_design) VALUES(23, 'Camiseta Odonto', 'Odeonto paiuafsdfasfdashdfa]s
-dfasdfasdfasdhfakdfhasldhfaçsdf asdf asd
-fasdfasdjfahsdfjas
-dfa
-sfa
-sf
-asf
-asdfasdfsfdsf', 'camiseta-odonto', '2021-08-04 23:22:56.971', '2021-08-04 23:22:56.971', 13, true, 'image/upload/v1628130175/zvdvtygbqfwudnfbbqik.png', 51.90, 'F', 1, 'image/upload/v1628130176/o7m2hca7jmwkqimepgxb.png');
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110110108', 'Dimona Quality', 'Branco', 'P', '2021-08-03 13:19:50.010', '2021-08-03 13:19:50.010', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110110109', 'Dimona Quality', 'Branco', 'M', '2021-08-03 13:21:00.640', '2021-08-03 13:21:00.640', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110110110', 'Dimona Quality', 'Branco', 'G', '2021-08-03 13:21:00.786', '2021-08-03 13:21:00.786', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110110111', 'Dimona Quality', 'Branco', 'GG', '2021-08-03 13:21:00.926', '2021-08-03 13:21:00.926', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110110112', 'Dimona Quality', 'Branco', 'XGG', '2021-08-03 13:21:01.065', '2021-08-03 13:21:01.065', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110110115', 'Dimona Quality', 'Branco', 'G1', '2021-08-03 13:21:01.206', '2021-08-03 13:21:01.206', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110110116', 'Dimona Quality', 'Branco', 'G2', '2021-08-03 13:21:01.345', '2021-08-03 13:21:01.345', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110110117', 'Dimona Quality', 'Branco', 'G3', '2021-08-03 13:21:01.484', '2021-08-03 13:21:01.484', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110110118', 'Dimona Quality', 'Branco', 'G4', '2021-08-03 13:21:01.624', '2021-08-03 13:21:01.624', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110118308', 'Dimona Quality', 'Preto', 'P', '2021-08-03 13:21:01.764', '2021-08-03 13:21:01.764', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110118309', 'Dimona Quality', 'Preto', 'M', '2021-08-03 13:21:01.904', '2021-08-03 13:21:01.904', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110118310', 'Dimona Quality', 'Preto', 'G', '2021-08-03 13:21:02.043', '2021-08-03 13:21:02.043', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110118311', 'Dimona Quality', 'Preto', 'GG', '2021-08-03 13:21:02.182', '2021-08-03 13:21:02.182', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110118312', 'Dimona Quality', 'Preto', 'XGG', '2021-08-03 13:21:02.321', '2021-08-03 13:21:02.321', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110118315', 'Dimona Quality', 'Preto', 'G1', '2021-08-03 13:21:02.462', '2021-08-03 13:21:02.462', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110118316', 'Dimona Quality', 'Preto', 'G2', '2021-08-03 13:21:02.604', '2021-08-03 13:21:02.604', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110118317', 'Dimona Quality', 'Preto', 'G3', '2021-08-03 13:21:02.744', '2021-08-03 13:21:02.744', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110118318', 'Dimona Quality', 'Preto', 'G4', '2021-08-03 13:21:02.882', '2021-08-03 13:21:02.882', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110113708', 'Dimona Quality', 'Azul Marinho', 'P', '2021-08-03 13:21:03.021', '2021-08-03 13:21:03.021', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110113709', 'Dimona Quality', 'Azul Marinho', 'M', '2021-08-03 13:21:03.213', '2021-08-03 13:21:03.213', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110113710', 'Dimona Quality', 'Azul Marinho', 'G', '2021-08-03 13:21:03.355', '2021-08-03 13:21:03.355', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110113711', 'Dimona Quality', 'Azul Marinho', 'GG', '2021-08-03 13:21:03.494', '2021-08-03 13:21:03.494', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110113712', 'Dimona Quality', 'Azul Marinho', 'XGG', '2021-08-03 13:21:03.641', '2021-08-03 13:21:03.641', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110113715', 'Dimona Quality', 'Azul Marinho', 'G1', '2021-08-03 13:21:03.780', '2021-08-03 13:21:03.780', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110113716', 'Dimona Quality', 'Azul Marinho', 'G2', '2021-08-03 13:21:03.920', '2021-08-03 13:21:03.920', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110113717', 'Dimona Quality', 'Azul Marinho', 'G3', '2021-08-03 13:21:04.059', '2021-08-03 13:21:04.059', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110113718', 'Dimona Quality', 'Azul Marinho', 'G4', '2021-08-03 13:21:04.210', '2021-08-03 13:21:04.210', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110112708', 'Dimona Quality', 'Laranja', 'P', '2021-08-03 13:21:04.350', '2021-08-03 13:21:04.350', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110112709', 'Dimona Quality', 'Laranja', 'M', '2021-08-03 13:21:04.492', '2021-08-03 13:21:04.492', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110112710', 'Dimona Quality', 'Laranja', 'G', '2021-08-03 13:21:04.631', '2021-08-03 13:21:04.631', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110112711', 'Dimona Quality', 'Laranja', 'GG', '2021-08-03 13:21:04.770', '2021-08-03 13:21:04.770', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110112712', 'Dimona Quality', 'Laranja', 'XGG', '2021-08-03 13:21:04.908', '2021-08-03 13:21:04.908', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110114808', 'Dimona Quality', 'Verde Bandeira', 'P', '2021-08-03 13:21:05.052', '2021-08-03 13:21:05.052', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110114809', 'Dimona Quality', 'Verde Bandeira', 'M', '2021-08-03 13:21:05.193', '2021-08-03 13:21:05.193', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110114810', 'Dimona Quality', 'Verde Bandeira', 'G', '2021-08-03 13:21:05.333', '2021-08-03 13:21:05.333', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110114811', 'Dimona Quality', 'Verde Bandeira', 'GG', '2021-08-03 13:21:05.473', '2021-08-03 13:21:05.473', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110114812', 'Dimona Quality', 'Verde Bandeira', 'XGG', '2021-08-03 13:21:05.612', '2021-08-03 13:21:05.612', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110112008', 'Dimona Quality', 'Vermelho', 'P', '2021-08-03 13:21:05.760', '2021-08-03 13:21:05.760', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110112009', 'Dimona Quality', 'Vermelho', 'M', '2021-08-03 13:21:05.915', '2021-08-03 13:21:05.915', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110112010', 'Dimona Quality', 'Vermelho', 'G', '2021-08-03 13:21:06.061', '2021-08-03 13:21:06.061', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110112011', 'Dimona Quality', 'Vermelho', 'GG', '2021-08-03 13:21:06.200', '2021-08-03 13:21:06.200', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110112012', 'Dimona Quality', 'Vermelho', 'XGG', '2021-08-03 13:21:06.347', '2021-08-03 13:21:06.347', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110111508', 'Dimona Quality', 'Amarelo Canário', 'P', '2021-08-03 13:21:06.486', '2021-08-03 13:21:06.486', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110111509', 'Dimona Quality', 'Amarelo Canário', 'M', '2021-08-03 13:21:06.626', '2021-08-03 13:21:06.626', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110111510', 'Dimona Quality', 'Amarelo Canário', 'G', '2021-08-03 13:21:06.764', '2021-08-03 13:21:06.764', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110111511', 'Dimona Quality', 'Amarelo Canário', 'GG', '2021-08-03 13:21:06.909', '2021-08-03 13:21:06.909', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110111512', 'Dimona Quality', 'Amarelo Canário', 'XGG', '2021-08-03 13:21:07.054', '2021-08-03 13:21:07.054', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110113608', 'Dimona Quality', 'Azul Royal', 'P', '2021-08-03 13:21:07.205', '2021-08-03 13:21:07.205', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110113609', 'Dimona Quality', 'Azul Royal', 'M', '2021-08-03 13:21:07.349', '2021-08-03 13:21:07.349', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110113610', 'Dimona Quality', 'Azul Royal', 'G', '2021-08-03 13:21:07.487', '2021-08-03 13:21:07.487', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110113611', 'Dimona Quality', 'Azul Royal', 'GG', '2021-08-03 13:21:07.626', '2021-08-03 13:21:07.626', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110113612', 'Dimona Quality', 'Azul Royal', 'XGG', '2021-08-03 13:21:07.780', '2021-08-03 13:21:07.780', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110119508', 'Dimona Quality', 'Rosa Pink', 'P', '2021-08-03 13:21:07.921', '2021-08-03 13:21:07.921', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110119509', 'Dimona Quality', 'Rosa Pink', 'M', '2021-08-03 13:21:08.060', '2021-08-03 13:21:08.060', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110119510', 'Dimona Quality', 'Rosa Pink', 'G', '2021-08-03 13:21:08.202', '2021-08-03 13:21:08.202', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110119511', 'Dimona Quality', 'Rosa Pink', 'GG', '2021-08-03 13:21:08.341', '2021-08-03 13:21:08.341', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110119512', 'Dimona Quality', 'Rosa Pink', 'XGG', '2021-08-03 13:21:08.480', '2021-08-03 13:21:08.480', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110111308', 'Dimona Quality', 'Azul Turquesa', 'P', '2021-08-03 13:21:08.636', '2021-08-03 13:21:08.636', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110111309', 'Dimona Quality', 'Azul Turquesa', 'M', '2021-08-03 13:21:08.774', '2021-08-03 13:21:08.774', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110111310', 'Dimona Quality', 'Azul Turquesa', 'G', '2021-08-03 13:21:08.932', '2021-08-03 13:21:08.932', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110111311', 'Dimona Quality', 'Azul Turquesa', 'GG', '2021-08-03 13:21:09.072', '2021-08-03 13:21:09.072', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110111312', 'Dimona Quality', 'Azul Turquesa', 'XGG', '2021-08-03 13:21:09.211', '2021-08-03 13:21:09.211', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110119608', 'Dimona Quality', 'Vinho', 'P', '2021-08-03 13:21:09.353', '2021-08-03 13:21:09.353', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110119609', 'Dimona Quality', 'Vinho', 'M', '2021-08-03 13:21:09.493', '2021-08-03 13:21:09.493', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110119610', 'Dimona Quality', 'Vinho', 'G', '2021-08-03 13:21:09.633', '2021-08-03 13:21:09.633', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110119611', 'Dimona Quality', 'Vinho', 'GG', '2021-08-03 13:21:09.772', '2021-08-03 13:21:09.772', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110119612', 'Dimona Quality', 'Vinho', 'XGG', '2021-08-03 13:21:09.911', '2021-08-03 13:21:09.911', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110119708', 'Dimona Quality', 'Cinza Chumbo', 'P', '2021-08-03 13:21:10.049', '2021-08-03 13:21:10.049', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110119709', 'Dimona Quality', 'Cinza Chumbo', 'M', '2021-08-03 13:21:10.196', '2021-08-03 13:21:10.196', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110119710', 'Dimona Quality', 'Cinza Chumbo', 'G', '2021-08-03 13:21:10.334', '2021-08-03 13:21:10.334', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110119711', 'Dimona Quality', 'Cinza Chumbo', 'GG', '2021-08-03 13:21:10.473', '2021-08-03 13:21:10.473', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110119712', 'Dimona Quality', 'Cinza Chumbo', 'XGG', '2021-08-03 13:21:10.612', '2021-08-03 13:21:10.612', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110110208', 'Dimona Quality', 'Cinza Mescla', 'P', '2021-08-03 13:21:10.750', '2021-08-03 13:21:10.750', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110110209', 'Dimona Quality', 'Cinza Mescla', 'M', '2021-08-03 13:21:10.891', '2021-08-03 13:21:10.891', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110110210', 'Dimona Quality', 'Cinza Mescla', 'G', '2021-08-03 13:21:11.030', '2021-08-03 13:21:11.030', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110110211', 'Dimona Quality', 'Cinza Mescla', 'GG', '2021-08-03 13:21:11.169', '2021-08-03 13:21:11.169', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110110212', 'Dimona Quality', 'Cinza Mescla', 'XGG', '2021-08-03 13:21:11.307', '2021-08-03 13:21:11.307', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110110215', 'Dimona Quality', 'Cinza Mescla', 'G1', '2021-08-03 13:21:11.449', '2021-08-03 13:21:11.449', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110110216', 'Dimona Quality', 'Cinza Mescla', 'G2', '2021-08-03 13:21:11.590', '2021-08-03 13:21:11.590', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110110217', 'Dimona Quality', 'Cinza Mescla', 'G3', '2021-08-03 13:21:11.733', '2021-08-03 13:21:11.733', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010110110218', 'Dimona Quality', 'Cinza Mescla', 'G4', '2021-08-03 13:21:11.871', '2021-08-03 13:21:11.871', 1);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('11136110108', 'Cropped Quality', 'Branco', 'P', '2021-08-03 13:21:18.148', '2021-08-20 18:21:23.856', 3);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('11136110109', 'Cropped Quality', 'Branco', 'M', '2021-08-03 13:21:18.287', '2021-08-20 18:21:23.856', 3);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('11136110110', 'Cropped Quality', 'Branco', 'G', '2021-08-03 13:21:18.425', '2021-08-20 18:21:23.856', 3);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('11136110111', 'Cropped Quality', 'Branco', 'GG', '2021-08-03 13:21:18.563', '2021-08-20 18:21:23.856', 3);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('11910118308', 'Cropped Quality', 'Preto', 'P', '2021-08-03 13:21:18.702', '2021-08-20 18:21:23.856', 3);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('11910118309', 'Cropped Quality', 'Preto', 'M', '2021-08-03 13:21:18.840', '2021-08-20 18:21:23.856', 3);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('11910118310', 'Cropped Quality', 'Preto', 'G', '2021-08-03 13:21:18.982', '2021-08-20 18:21:23.856', 3);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('11910118311', 'Cropped Quality', 'Preto', 'GG', '2021-08-03 13:21:19.125', '2021-08-20 18:21:23.856', 3);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522110108', 'Dimona Quality', 'Branco', 'P', '2021-08-03 13:21:12.017', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522110109', 'Dimona Quality', 'Branco', 'M', '2021-08-03 13:21:12.155', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522110110', 'Dimona Quality', 'Branco', 'G', '2021-08-03 13:21:12.294', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522110111', 'Dimona Quality', 'Branco', 'GG', '2021-08-03 13:21:12.434', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522118308', 'Dimona Quality', 'Preto', 'P', '2021-08-03 13:21:12.574', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522118309', 'Dimona Quality', 'Preto', 'M', '2021-08-03 13:21:12.713', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522118310', 'Dimona Quality', 'Preto', 'G', '2021-08-03 13:21:12.853', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522118311', 'Dimona Quality', 'Preto', 'GG', '2021-08-03 13:21:12.993', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522113708', 'Dimona Quality', 'Azul Marinho', 'P', '2021-08-03 13:21:13.131', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522113709', 'Dimona Quality', 'Azul Marinho', 'M', '2021-08-03 13:21:13.269', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522113710', 'Dimona Quality', 'Azul Marinho', 'G', '2021-08-03 13:21:13.407', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522113711', 'Dimona Quality', 'Azul Marinho', 'GG', '2021-08-03 13:21:13.546', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010522117008', 'Dimona Quality', 'Roxo', 'P', '2021-08-03 13:21:13.684', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010522117009', 'Dimona Quality', 'Roxo', 'M', '2021-08-03 13:21:13.823', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010522117010', 'Dimona Quality', 'Roxo', 'G', '2021-08-03 13:21:13.963', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010522117011', 'Dimona Quality', 'Roxo', 'GG', '2021-08-03 13:21:14.102', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522112708', 'Dimona Quality', 'Laranja', 'P', '2021-08-03 13:21:14.241', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522112709', 'Dimona Quality', 'Laranja', 'M', '2021-08-03 13:21:14.383', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522112710', 'Dimona Quality', 'Laranja', 'G', '2021-08-03 13:21:14.522', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522112711', 'Dimona Quality', 'Laranja', 'GG', '2021-08-03 13:21:14.661', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010501113508', 'Dimona Quality', 'Azul Turquesa', 'P', '2021-08-03 13:21:14.800', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010501113509', 'Dimona Quality', 'Azul Turquesa', 'M', '2021-08-03 13:21:14.939', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010501113510', 'Dimona Quality', 'Azul Turquesa', 'G', '2021-08-03 13:21:15.077', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010501113511', 'Dimona Quality', 'Azul Turquesa', 'GG', '2021-08-03 13:21:15.215', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522112008', 'Dimona Quality', 'Vermelho', 'P', '2021-08-03 13:21:15.354', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522112009', 'Dimona Quality', 'Vermelho', 'M', '2021-08-03 13:21:15.493', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522112010', 'Dimona Quality', 'Vermelho', 'G', '2021-08-03 13:21:15.632', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522112011', 'Dimona Quality', 'Vermelho', 'GG', '2021-08-03 13:21:15.773', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522111508', 'Dimona Quality', 'Amarelo Canário', 'P', '2021-08-03 13:21:15.912', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522111509', 'Dimona Quality', 'Amarelo Canário', 'M', '2021-08-03 13:21:16.053', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522111510', 'Dimona Quality', 'Amarelo Canário', 'G', '2021-08-03 13:21:16.191', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522111511', 'Dimona Quality', 'Amarelo Canário', 'GG', '2021-08-03 13:21:16.329', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522113608', 'Dimona Quality', 'Azul Royal', 'P', '2021-08-03 13:21:16.468', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522113609', 'Dimona Quality', 'Azul Royal', 'M', '2021-08-03 13:21:16.618', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522113610', 'Dimona Quality', 'Azul Royal', 'G', '2021-08-03 13:21:16.757', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522113611', 'Dimona Quality', 'Azul Royal', 'GG', '2021-08-03 13:21:16.898', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522119508', 'Dimona Quality', 'Rosa Pink', 'P', '2021-08-03 13:21:17.036', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522119509', 'Dimona Quality', 'Rosa Pink', 'M', '2021-08-03 13:21:17.175', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522119510', 'Dimona Quality', 'Rosa Pink', 'G', '2021-08-03 13:21:17.313', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10522119511', 'Dimona Quality', 'Rosa Pink', 'GG', '2021-08-03 13:21:17.452', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010501110208', 'Dimona Quality', 'Cinza Mescla', 'P', '2021-08-03 13:21:17.590', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010501110209', 'Dimona Quality', 'Cinza Mescla', 'M', '2021-08-03 13:21:17.728', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010522110210', 'Dimona Quality', 'Cinza Mescla', 'G', '2021-08-03 13:21:17.868', '2021-08-20 18:21:23.856', 2);
+INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010501110211', 'Dimona Quality', 'Cinza Mescla', 'GG', '2021-08-03 13:21:18.009', '2021-08-20 18:21:23.856', 2);
 INSERT INTO variacao (id, descricao, ativo, created_at, updated_at) VALUES(3, 'Cor', true, '2021-06-06 21:00:00.000', '2021-06-07 21:00:00.000');
 INSERT INTO variacao (id, descricao, ativo, created_at, updated_at) VALUES(4, 'Tamanho', true, '2021-06-06 21:00:00.000', '2021-06-07 21:00:00.000');
 INSERT INTO tipo_variacao (id, descricao, ativo, created_at, updated_at, variacao_id, preco_variacao, valor_adicional) VALUES(3, 'P', true, '2021-06-07 21:00:00.000', '2021-06-07 21:00:00.000', 4, 51.90, NULL);
@@ -91,68 +165,4 @@ INSERT INTO tipo_variacao (id, descricao, ativo, created_at, updated_at, variaca
 INSERT INTO tipo_variacao (id, descricao, ativo, created_at, updated_at, variacao_id, preco_variacao, valor_adicional) VALUES(9, 'Cinza Mescla', true, '2021-08-04 23:22:48.886', '2021-08-04 23:22:48.886', 3, 51.90, '#BEC0C3');
 INSERT INTO modelo (id, descricao, created_at, updated_at, descricao_cliente) VALUES(1, 'T-Shirt', '2021-07-23 19:56:47.798', '2021-08-04 23:18:07.099', 'T-Shirt');
 INSERT INTO modelo (id, descricao, created_at, updated_at, descricao_cliente) VALUES(2, 'Baby Long', '2021-08-04 23:18:20.175', '2021-08-04 23:18:20.175', 'T-Shirt Feminina');
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(7, '2021-06-15 21:00:00.000', '2021-06-15 21:00:00.000', 3, NULL, NULL, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(8, '2021-06-15 21:00:00.000', '2021-06-15 21:00:00.000', 4, NULL, NULL, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(9, '2021-06-15 21:00:00.000', '2021-06-15 21:00:00.000', 5, NULL, NULL, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(10, '2021-06-15 21:00:00.000', '2021-06-15 21:00:00.000', 6, NULL, NULL, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(6, '2021-06-15 21:00:00.000', '2021-06-15 21:00:00.000', 1, NULL, NULL, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(11, '2021-06-15 21:00:00.000', '2021-06-15 21:00:00.000', 3, NULL, NULL, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(12, '2021-06-15 21:00:00.000', '2021-06-15 21:00:00.000', 4, NULL, NULL, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(13, '2021-06-15 21:00:00.000', '2021-06-15 21:00:00.000', 5, NULL, NULL, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(14, '2021-06-15 21:00:00.000', '2021-06-15 21:00:00.000', 6, NULL, NULL, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(15, '2021-06-15 21:00:00.000', '2021-06-15 21:00:00.000', 1, NULL, NULL, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(16, '2021-06-25 21:00:00.000', '2021-06-25 21:00:00.000', 3, NULL, 1, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(17, '2021-06-25 21:00:00.000', '2021-06-25 21:00:00.000', 4, NULL, 1, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(18, '2021-06-25 21:00:00.000', '2021-06-25 21:00:00.000', 5, NULL, 1, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(19, '2021-06-25 21:00:00.000', '2021-06-25 21:00:00.000', 6, NULL, 1, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(20, '2021-06-25 21:00:00.000', '2021-06-26 21:00:00.000', 8, NULL, 1, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(21, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 3, NULL, 2, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(22, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 4, NULL, 2, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(23, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 5, NULL, 2, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(24, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 6, NULL, 2, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(25, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 3, NULL, 3, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(26, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 4, NULL, 3, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(27, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 5, NULL, 3, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(28, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 6, NULL, 3, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(29, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 8, NULL, 3, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(30, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 8, NULL, 4, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(31, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 3, NULL, 4, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(32, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 4, NULL, 4, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(33, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 5, NULL, 4, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(34, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 6, NULL, 4, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(35, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 8, NULL, 5, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(36, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 3, NULL, 5, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(37, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 4, NULL, 5, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(38, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 5, NULL, 5, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(39, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 6, NULL, 5, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(40, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 8, NULL, 6, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(41, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 3, NULL, 6, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(42, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 4, NULL, 6, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(43, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 5, NULL, 6, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(44, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 6, NULL, 6, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(45, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 8, NULL, 7, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(46, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 3, NULL, 7, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(47, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 4, NULL, 7, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(48, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 5, NULL, 7, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(49, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 6, NULL, 7, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(50, '2021-07-19 13:34:22.381', '2021-07-19 13:34:22.381', 8, NULL, 8, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(51, '2021-07-19 13:34:22.396', '2021-07-19 13:34:22.396', 3, NULL, 8, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(52, '2021-07-19 13:34:22.405', '2021-07-19 13:34:22.405', 4, NULL, 8, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(53, '2021-07-19 13:34:22.413', '2021-07-19 13:34:22.413', 5, NULL, 8, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(54, '2021-07-19 13:34:22.420', '2021-07-19 13:34:22.421', 6, NULL, 8, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(55, '2021-08-04 23:22:56.983', '2021-08-04 23:22:56.983', 8, NULL, 9, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(56, '2021-08-04 23:22:56.993', '2021-08-04 23:22:56.993', 3, NULL, 9, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(57, '2021-08-04 23:22:56.995', '2021-08-04 23:22:56.995', 4, NULL, 9, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(58, '2021-08-04 23:22:56.996', '2021-08-04 23:22:56.996', 5, NULL, 9, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(59, '2021-08-04 23:22:56.998', '2021-08-04 23:22:56.998', 6, NULL, 9, NULL);
-INSERT INTO modelo_variacao (id, created_at, updated_at, tipo_variacao_id, imagem, modelo_produto_id, outras_informacoes) VALUES(60, '2021-08-04 23:22:57.702', '2021-08-04 23:22:57.702', 9, 'image/upload/v1628130177/p0fr7qetvxuhib2kfedg.png', 9, NULL);
-INSERT INTO modelo_produto (id, created_at, updated_at, produto_id, modelo_id) VALUES(1, '2021-06-25 21:00:00.000', '2021-06-25 21:00:00.000', 19, 1);
-INSERT INTO modelo_produto (id, created_at, updated_at, produto_id, modelo_id) VALUES(2, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 20, 1);
-INSERT INTO modelo_produto (id, created_at, updated_at, produto_id, modelo_id) VALUES(3, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 18, 1);
-INSERT INTO modelo_produto (id, created_at, updated_at, produto_id, modelo_id) VALUES(4, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 17, 1);
-INSERT INTO modelo_produto (id, created_at, updated_at, produto_id, modelo_id) VALUES(5, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 21, 1);
-INSERT INTO modelo_produto (id, created_at, updated_at, produto_id, modelo_id) VALUES(6, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 1, 1);
-INSERT INTO modelo_produto (id, created_at, updated_at, produto_id, modelo_id) VALUES(7, '2021-06-26 21:00:00.000', '2021-06-26 21:00:00.000', 5, 1);
-INSERT INTO modelo_produto (id, created_at, updated_at, produto_id, modelo_id) VALUES(8, '2021-07-19 13:34:22.369', '2021-07-19 13:34:22.369', 22, 1);
-INSERT INTO modelo_produto (id, created_at, updated_at, produto_id, modelo_id) VALUES(9, '2021-08-04 23:22:56.975', '2021-08-04 23:22:56.975', 23, 2);
-
+INSERT INTO modelo (id, descricao, created_at, updated_at, descricao_cliente) VALUES(3, 'Cropped', '2021-08-04 23:18:20.175', '2021-08-04 23:18:20.175', 'Cropped');
