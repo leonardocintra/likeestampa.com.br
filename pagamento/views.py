@@ -1,13 +1,12 @@
+# from django.utils.functional import cached_property
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponseRedirect
-from django.http import HttpResponse, JsonResponse
-from django.shortcuts import redirect, render
+from django.http import JsonResponse
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
-# from django.utils.functional import cached_property
-
-from evento.models import EventoPedido, criar_evento
+from evento.models import criar_evento
 from checkout.models import Carrinho, ItemCarrinho
 from pedido.models import Pedido
 from pedido.views import gerar_venda
@@ -15,7 +14,7 @@ from usuario.models import Cliente, EnderecoCliente
 from services.mercadopago.mercadopago import create_preference, montar_payload_preference, get_payment
 from services.dimona.api import get_frete
 from services.telegram.api import enviar_mensagem
-from .models import PagamentoMercadoPago, PagamentoMercadoPagoWebhook
+from .models import PagamentoMercadoPago
 import decimal
 import json
 
@@ -147,7 +146,7 @@ def mp_notifications(request):
         else:
             enviar_mensagem('Recebeu uma notificação IPN do mercado pago mas não foi um topic payment: {0}'.format(
                 request.GET.get('topic')), 'IPN do Mercado pago')
-            return JsonResponse({"erro": "nao o topico"}, status=200)
+            return JsonResponse({"erro": "topico nao mapeado"}, status=200)
     except PagamentoMercadoPago.DoesNotExist:
         return JsonResponse({"payment": "not found"}, status=200)
     except print(0):
@@ -162,7 +161,8 @@ def webhook(request):
     payload = json.loads(request.body)
     payment_id = payload['id']
 
-    enviar_mensagem(payload, payment_id, 'Webhook do Mercado pago')
+    if payload['live_mode']:
+        enviar_mensagem(payload, payment_id, 'Webhook do Mercado pago')
 
     try:
         return atualizar_pagamento(payment_id)
