@@ -1,8 +1,6 @@
 # LikeEstampa - Store
 Like Estampa - Store T-Shirts
 
-[![Build Status](https://travis-ci.com/leonardocintra/likeestampa.svg?branch=main)](https://travis-ci.com/leonardocintra/likeestampa)
-
 ## Como usar
 
 ### Dependencias
