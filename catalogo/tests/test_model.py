@@ -1,8 +1,23 @@
 from datetime import datetime
 from django.shortcuts import resolve_url as r
 from django.test import TestCase
-from catalogo.models import Categoria, ModeloProduto, Produto, SubCategoria, TipoVariacao, Variacao, ModeloVariacao, Modelo, SkuDimona
+from catalogo.models import Categoria, ModeloProduto, Produto, SubCategoria, TipoVariacao, Variacao, ModeloVariacao, Modelo, SkuDimona, Cor
 from django.db import IntegrityError
+
+
+class CorModelTest(TestCase):
+    def setUp(self):
+        self.obj = Cor(
+            nome='Verde Bandeira',
+            slug='verde-bandeira'
+        )
+        self.obj.save()
+
+    def test_create(self):
+        self.assertTrue(Cor.objects.exists())
+
+    def test_str(self):
+        self.assertEqual('Verde Bandeira', str(self.obj))
 
 
 class CategoriaModelTest(TestCase):
@@ -177,7 +192,8 @@ class ModeloVariacaoModelTest(TestCase):
     def setUp(self):
         produto = get_fake_produto()
         modelo = Modelo.objects.create(descricao='T-Shirt')
-        modelo_produto = ModeloProduto.objects.create(produto=produto, modelo=modelo)
+        modelo_produto = ModeloProduto.objects.create(
+            produto=produto, modelo=modelo)
         variacao = Variacao.objects.create(descricao='Tamanho', )
         tipo_variacao = TipoVariacao.objects.create(
             descricao='P', variacao=variacao,)

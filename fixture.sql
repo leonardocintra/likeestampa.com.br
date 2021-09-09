@@ -1,3 +1,16 @@
+INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at) VALUES('Branco', '#FFFFFF', 'branco', true, '2021-09-09 19:05:30.346', '2021-09-09 19:05:30.346');
+INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at) VALUES('Amarelo Canário', '#FFDE67', 'amarelo-canario', true, '2021-09-09 19:05:51.380', '2021-09-09 19:05:51.380');
+INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at) VALUES('Laranja', '#FF9156', 'laranja', true, '2021-09-09 19:06:06.189', '2021-09-09 19:06:06.189');
+INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at) VALUES('Vermelho', '#FF1726', 'vermelho', true, '2021-09-09 19:06:18.386', '2021-09-09 19:06:18.386');
+INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at) VALUES('Rosa Pink', '#FF109C', 'rosa-pink', true, '2021-09-09 19:06:34.788', '2021-09-09 19:06:34.788');
+INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at) VALUES('Roxo', '#7232EF', 'roxo', true, '2021-09-09 19:06:45.775', '2021-09-09 19:06:45.776');
+INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at) VALUES('Azul Royal', '#004BAA', 'azul-royal', true, '2021-09-09 19:07:00.969', '2021-09-09 19:07:00.969');
+INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at) VALUES('Azul Marinho', '#263038', 'azul-marinho', true, '2021-09-09 19:07:18.556', '2021-09-09 19:07:18.556');
+INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at) VALUES('Azul Turquesa', '#009CED', 'azul-turquesa', true, '2021-09-09 19:07:44.893', '2021-09-09 19:07:44.893');
+INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at) VALUES('Cinza Mescla', '#BEC0C3', 'cinza-mescla', true, '2021-09-09 19:07:57.185', '2021-09-09 19:07:57.185');
+INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at) VALUES('Preto', '#000000', 'preto', true, '2021-09-09 19:08:09.338', '2021-09-09 19:08:09.338');
+INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at) VALUES('Verde Bandeira', '#00803C', 'verde-bandeira', true, '2021-09-09 19:08:50.701', '2021-09-09 19:08:50.701');
+INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at) VALUES('Cinza Chumbo', '#4C4A4C', 'cinza-chumbo', true, '2021-09-09 19:09:07.548', '2021-09-09 19:09:07.548');
 INSERT INTO status (descricao, created_at, updated_at, visivel_cliente) VALUES('Pedido Recebido', '2021-07-01 01:30:00.149', '2021-07-01 01:30:00.149', true);
 INSERT INTO status (descricao, created_at, updated_at, visivel_cliente) VALUES('Pedido Pago', '2021-07-01 01:30:04.475', '2021-07-01 01:30:04.475', true);
 INSERT INTO status (descricao, created_at, updated_at, visivel_cliente) VALUES('Pedido em produção', '2021-07-01 01:30:17.207', '2021-07-01 01:30:17.207', true);
