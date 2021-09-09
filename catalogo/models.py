@@ -188,6 +188,23 @@ class Cor(models.Model):
         return self.nome
 
 
+class Tamanho(models.Model):
+    nome = models.CharField(max_length=10, unique=True)
+    slug = models.SlugField(max_length=15, unique=True)
+    ativo = models.BooleanField(default=True)
+    created_at = models.DateTimeField('Criado em', auto_now_add=True)
+    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+
+    class Meta:
+        db_table = 'tamanho'
+        verbose_name_plural = 'Tamanhos'
+        verbose_name = 'tamanho'
+        ordering = ('nome',)
+
+    def __str__(self):
+        return self.nome
+
+
 class SkuDimona(models.Model):
     sku = models.CharField(max_length=50, unique=True)
     nome = models.CharField(max_length=50)

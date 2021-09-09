@@ -1,3 +1,8 @@
+INSERT INTO tamanho (nome, slug, ativo, created_at, updated_at) VALUES('P', 'p', true, '2021-09-09 19:31:05.049', '2021-09-09 19:31:05.049');
+INSERT INTO tamanho (nome, slug, ativo, created_at, updated_at) VALUES('M', 'm', true, '2021-09-09 19:31:18.305', '2021-09-09 19:31:18.306');
+INSERT INTO tamanho (nome, slug, ativo, created_at, updated_at) VALUES('G', 'g', true, '2021-09-09 19:31:20.874', '2021-09-09 19:31:20.874');
+INSERT INTO tamanho (nome, slug, ativo, created_at, updated_at) VALUES('GG', 'gg', true, '2021-09-09 19:31:25.247', '2021-09-09 19:31:25.247');
+INSERT INTO tamanho (nome, slug, ativo, created_at, updated_at) VALUES('XGG', 'xgg', true, '2021-09-09 19:31:29.307', '2021-09-09 19:31:29.307');
 INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at) VALUES('Branco', '#FFFFFF', 'branco', true, '2021-09-09 19:05:30.346', '2021-09-09 19:05:30.346');
 INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at) VALUES('Amarelo Canário', '#FFDE67', 'amarelo-canario', true, '2021-09-09 19:05:51.380', '2021-09-09 19:05:51.380');
 INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at) VALUES('Laranja', '#FF9156', 'laranja', true, '2021-09-09 19:06:06.189', '2021-09-09 19:06:06.189');
