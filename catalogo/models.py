@@ -1,7 +1,5 @@
 from cloudinary.models import CloudinaryField
 from django.db import models
-from django.urls import reverse
-from django.dispatch import receiver
 
 from seller.models import Seller
 
@@ -12,6 +10,7 @@ GENERO = (
     ('M', 'Masculino'),
     ('F', 'Feminino'),
 )
+
 
 class Categoria(models.Model):
     """ Ex: camiseta, caneca, bones """
@@ -135,7 +134,8 @@ class Modelo(models.Model):
 
 
 class ModeloProduto(models.Model):
-    produto = models.ForeignKey(Produto, on_delete=models.CASCADE, related_name='modelo_produto')
+    produto = models.ForeignKey(
+        Produto, on_delete=models.CASCADE, related_name='modelo_produto')
     modelo = models.ForeignKey(Modelo, on_delete=models.PROTECT, default=1)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
@@ -168,6 +168,24 @@ class ModeloVariacao(models.Model):
 
     def __str__(self):
         return self.modelo_produto.modelo.descricao
+
+
+class Cor(models.Model):
+    nome = models.CharField(max_length=50, unique=True)
+    valor = models.CharField(max_length=20, unique=True)
+    slug = models.SlugField(max_length=60, unique=True)
+    ativo = models.BooleanField(default=True)
+    created_at = models.DateTimeField('Criado em', auto_now_add=True)
+    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+
+    class Meta:
+        db_table = 'cor'
+        verbose_name_plural = 'Cores'
+        verbose_name = 'Cor'
+        ordering = ('nome',)
+
+    def __str__(self):
+        return self.nome
 
 
 class SkuDimona(models.Model):
