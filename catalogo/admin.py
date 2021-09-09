@@ -1,7 +1,11 @@
 from django.contrib import admin
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin, NestedTabularInline
 from catalogo.models import ModeloVariacao
-from .models import Categoria, SubCategoria, Produto, Variacao, TipoVariacao, ModeloProduto, Modelo, Cor
+from .models import Categoria, SubCategoria, Produto, Variacao, TipoVariacao, ModeloProduto, Modelo, Cor, Tamanho
+
+
+class TamanhoAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('nome',)}
 
 
 class CorAdmin(admin.ModelAdmin):
@@ -76,3 +80,4 @@ admin.site.register(SubCategoria, SubCategoriaAdmin)
 admin.site.register(TipoVariacao, TipoVariacaoAdmin)
 admin.site.register(Variacao, VariacaoAdmin)
 admin.site.register(Cor, CorAdmin)
+admin.site.register(Tamanho, TamanhoAdmin)

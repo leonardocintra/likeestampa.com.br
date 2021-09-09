@@ -1,8 +1,23 @@
 from datetime import datetime
 from django.shortcuts import resolve_url as r
 from django.test import TestCase
-from catalogo.models import Categoria, ModeloProduto, Produto, SubCategoria, TipoVariacao, Variacao, ModeloVariacao, Modelo, SkuDimona, Cor
+from catalogo.models import Categoria, ModeloProduto, Produto, SubCategoria, TipoVariacao, Variacao, ModeloVariacao, Modelo, SkuDimona, Cor, Tamanho
 from django.db import IntegrityError
+
+
+class TamanhoModelTest(TestCase):
+    def setUp(self):
+        self.obj = Tamanho(
+            nome='P',
+            slug='p'
+        )
+        self.obj.save()
+
+    def test_create(self):
+        self.assertTrue(Tamanho.objects.exists())
+
+    def test_str(self):
+        self.assertEqual('P', str(self.obj))
 
 
 class CorModelTest(TestCase):
