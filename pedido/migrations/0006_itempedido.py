@@ -32,3 +32,7 @@ class Migration(migrations.Migration):
             },
         ),
     ]
+
+    run_before = [
+        ('catalogo', '0055_auto_20210910_1354'),
+    ]

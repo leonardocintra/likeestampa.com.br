@@ -23,3 +23,7 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='item_pedido_tamanho', to='catalogo.tamanho'),
         ),
     ]
+
+    run_before = [
+        ('catalogo', '0055_auto_20210910_1354'),
+    ]
