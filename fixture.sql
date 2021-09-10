@@ -1,3 +1,5 @@
+INSERT INTO seller (id, nome, site, cep, endereco, numero, bairro, complemento, referencia, cidade, uf, observacao, created_at, updated_at, nome_contato, telefone_contato, frete_tipo, frete_token, frete_url, ativo) VALUES(1, 'Dimona', 'https://camisadimona.com.br/loja/conta/pedidos', '13898989', 'Rua 6 de Abril', '1302', 'Centro', NULL, NULL, 'Franca', 'MG', '', '2021-07-19 13:32:07.842', '2021-07-19 13:32:07.842', 'Nenhum', '392839823989', 'proprio', '', NULL, true);
+
 INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES('Branco', '#FFFFFF', 'branco', true, '2021-09-09 19:05:30.346', '2021-09-09 19:05:30.346', 0);
 INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES('Amarelo Canário', '#FFDE67', 'amarelo-canario', true, '2021-09-09 19:05:51.380', '2021-09-09 20:12:57.124', 1);
 INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES('Laranja', '#FF9156', 'laranja', true, '2021-09-09 19:06:06.189', '2021-09-09 20:13:45.820', 2);
@@ -10,6 +12,10 @@ INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibica
 INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES('Azul Marinho', '#00547B', 'azul-marinho', true, '2021-09-09 19:07:18.556', '2021-09-09 20:18:11.382', 7);
 INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES('Verde Bandeira', '#00803C', 'verde-bandeira', true, '2021-09-09 19:08:50.701', '2021-09-09 20:18:54.848', 9);
 INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES('Cinza Mescla', '#BEC0C3', 'cinza-mescla', true, '2021-09-09 19:07:57.185', '2021-09-09 20:19:00.194', 10);
+
+INSERT INTO modelo (id, descricao, created_at, updated_at, descricao_cliente) VALUES(1, 'T-Shirt', '2021-07-23 19:56:47.798', '2021-08-04 23:18:07.099', 'T-Shirt');
+INSERT INTO modelo (id, descricao, created_at, updated_at, descricao_cliente) VALUES(2, 'Baby Long', '2021-08-04 23:18:20.175', '2021-08-04 23:18:20.175', 'T-Shirt Feminina');
+INSERT INTO modelo (id, descricao, created_at, updated_at, descricao_cliente) VALUES(3, 'Cropped', '2021-08-04 23:18:20.175', '2021-08-04 23:18:20.175', 'Cropped');
 
 INSERT INTO tamanho (nome, slug, ativo, created_at, updated_at, order_exibicao) VALUES('P', 'p', true, '2021-09-09 19:31:05.049', '2021-09-09 20:16:42.143', 0);
 INSERT INTO tamanho (nome, slug, ativo, created_at, updated_at, order_exibicao) VALUES('M', 'm', true, '2021-09-09 19:31:18.305', '2021-09-09 20:16:45.745', 1);
@@ -38,8 +44,6 @@ INSERT INTO subcategoria (id, nome, slug, created_at, updated_at, icone_fontawes
 INSERT INTO subcategoria (id, nome, slug, created_at, updated_at, icone_fontawesome, ativo) VALUES(4, 'Times de Futebol', 'times-de-futebol', '2021-04-20 21:00:00.000', '2021-05-26 21:00:00.000', 'futbol', true);
 INSERT INTO subcategoria (id, nome, slug, created_at, updated_at, icone_fontawesome, ativo) VALUES(1, 'Programação', 'programacao', '2021-04-20 21:00:00.000', '2021-05-26 21:00:00.000', 'laptop-code', true);
 INSERT INTO subcategoria (id, nome, slug, created_at, updated_at, icone_fontawesome, ativo) VALUES(13, 'Profissões', 'profissoes', '2021-07-19 13:32:42.338', '2021-07-19 13:32:42.338', 'briefcase', true);
-
-INSERT INTO seller (id, nome, site, cep, endereco, numero, bairro, complemento, referencia, cidade, uf, observacao, created_at, updated_at, nome_contato, telefone_contato, frete_tipo, frete_token, frete_url, ativo) VALUES(1, 'Dimona', 'https://camisadimona.com.br/loja/conta/pedidos', '13898989', 'Rua 6 de Abril', '1302', 'Centro', NULL, NULL, 'Franca', 'MG', '', '2021-07-19 13:32:07.842', '2021-07-19 13:32:07.842', 'Nenhum', '392839823989', 'proprio', '', NULL, true);
 
 INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110110108', 'Dimona Quality', 'Branco', 'P', '2021-08-03 13:19:50.010', '2021-08-03 13:19:50.010', 1);
 INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10110110109', 'Dimona Quality', 'Branco', 'M', '2021-08-03 13:21:00.640', '2021-08-03 13:21:00.640', 1);
@@ -174,7 +178,3 @@ INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_
 INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010501110209', 'Dimona Quality', 'Cinza Mescla', 'M', '2021-08-03 13:21:17.728', '2021-08-20 18:21:23.856', 2);
 INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010522110210', 'Dimona Quality', 'Cinza Mescla', 'G', '2021-08-03 13:21:17.868', '2021-08-20 18:21:23.856', 2);
 INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('010501110211', 'Dimona Quality', 'Cinza Mescla', 'GG', '2021-08-03 13:21:18.009', '2021-08-20 18:21:23.856', 2);
-
-INSERT INTO modelo (id, descricao, created_at, updated_at, descricao_cliente) VALUES(1, 'T-Shirt', '2021-07-23 19:56:47.798', '2021-08-04 23:18:07.099', 'T-Shirt');
-INSERT INTO modelo (id, descricao, created_at, updated_at, descricao_cliente) VALUES(2, 'Baby Long', '2021-08-04 23:18:20.175', '2021-08-04 23:18:20.175', 'T-Shirt Feminina');
-INSERT INTO modelo (id, descricao, created_at, updated_at, descricao_cliente) VALUES(3, 'Cropped', '2021-08-04 23:18:20.175', '2021-08-04 23:18:20.175', 'Cropped');
