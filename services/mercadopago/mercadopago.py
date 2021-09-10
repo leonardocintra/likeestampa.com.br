@@ -23,9 +23,7 @@ def __montar_payload_items(items):
     item_data = []
     for item in items:
         imagem = item.produto.imagem_principal.url
-        if item.cor.imagem:
-            imagem = item.cor.imagem.url
-
+        
         item_data.append({
             "id": item.produto.slug,
             "title": item.produto.nome,

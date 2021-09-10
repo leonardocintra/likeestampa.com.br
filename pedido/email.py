@@ -12,7 +12,7 @@ def envia_email(cliente, pedido, pedido_pago, items):
     produtos = ''
     for item in items:
         produtos = produtos + '- {0} {1} {2} {3} x {4} \n'.format(
-            item.produto, item.cor.tipo_variacao.descricao, item.tamanho.tipo_variacao.descricao, item.modelo_produto, item.quantidade)
+            item.produto, item.cor, item.tamanho, item.modelo_produto, item.quantidade)
 
     message = "Ola {0} ! \n \n \
     Seu pedido #{1} foi gerado com sucesso! \n \

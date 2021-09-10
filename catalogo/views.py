@@ -56,7 +56,6 @@ def produto(request, slug):
     cores = Cor.objects.all().exclude(ativo=False)
     tamanhos = Tamanho.objects.all().exclude(ativo=False)
 
-
     if request.method == 'POST':
         form = ProdutoDetalheForm(request.POST)
         adicionar_item_carrinho(request, produto, form.data['modelo'],
@@ -66,10 +65,6 @@ def produto(request, slug):
     produtos_relacionados = Produto.objects.filter(
         subcategoria=produto.subcategoria)[:4]
     subcategorias = SubCategoria.objects.all().exclude(ativo=False)
-
-    modelos_jquery = []
-    for modelo in modelos:
-        modelos_jquery.append(modelo.id)
 
     form = ProdutoDetalheForm(initial={
         'quantidade': '1'
@@ -99,8 +94,8 @@ def adicionar_item_carrinho(request, produto, modelo, cor, tamanho, quantidade):
         carrinho.save()
         request.session['carrinho'] = str(carrinho.uuid)
 
-    cor = cor
-    tamanho = tamanho
+    cor = Cor.objects.get(slug=cor)
+    tamanho = Tamanho.objects.get(slug=tamanho)
     quantidade = int(quantidade)
 
     item = ItemCarrinho.objects.filter(

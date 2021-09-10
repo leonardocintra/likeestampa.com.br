@@ -104,8 +104,8 @@ def __monta_payload_item(items, order_id):
         if item.produto.imagem_design:
             imagem_design = item.produto.imagem_design.url
 
-        cor = item.cor.tipo_variacao.descricao
-        tamanho = item.tamanho.tipo_variacao.descricao
+        cor = item.cor
+        tamanho = item.tamanho
         modelo_produto = item.modelo_produto.modelo.descricao
 
         item_request.append({
@@ -124,10 +124,10 @@ def __monta_payload_item(items, order_id):
 
 
 def __get_sku_dimona(skus, modelo_produto, tamanho, cor, order_id):
-    skus = skus.filter(cor=cor)
-    skus = skus.filter(tamanho=tamanho)
+    skus = skus.filter(cor=cor.nome)
+    skus = skus.filter(tamanho=tamanho.nome)
     for sku in skus:
-        if sku.estilo.descricao == modelo_produto and sku.cor == cor and sku.tamanho == tamanho and sku.nome == 'Dimona Quality':
+        if sku.estilo.descricao == modelo_produto and sku.cor == cor.nome and sku.tamanho == tamanho.nome and sku.nome == 'Dimona Quality':
             return sku.sku
     enviar_mensagem('SKU DIMONA não encontrado.\n -Modelo: {0} \n -Tamanho: {1} \n -Cor: {2}'.format(
         modelo_produto, tamanho, cor), 'SKU não encontrado', str(order_id))

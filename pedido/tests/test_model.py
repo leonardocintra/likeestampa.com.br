@@ -1,11 +1,10 @@
 from django.test import TestCase
-from django.contrib.auth.models import User
 from usuario.models import Cliente
 from pedido.models import Pedido, ItemPedido
 
 from catalogo.tests.test_model import get_fake_produto
 from usuario.tests.test_model import get_fake_endereco, get_fake_user
-from catalogo.models import Modelo, ModeloProduto, ModeloVariacao, TipoVariacao, Variacao
+from catalogo.models import Cor, Modelo, ModeloProduto, Tamanho
 
 
 class PedidoModelTest(TestCase):
@@ -24,25 +23,9 @@ class ItemPedidoModelTest(TestCase):
         modelo_produto = ModeloProduto.objects.create(
             produto=produto, modelo=modelo)
 
-        # Tamanho
-        variacao_tamanho = Variacao.objects.create(descricao='Tamanho', )
-        tipo_variacao_tamanho = TipoVariacao.objects.create(
-            descricao='P', variacao=variacao_tamanho,)
-        # Cor
-        variacao_cor = Variacao.objects.create(descricao='Cor', )
-        tipo_variacao_cor = TipoVariacao.objects.create(
-            descricao='Amarelo', variacao=variacao_cor,)
 
-        cor = ModeloVariacao.objects.create(
-            modelo_produto=modelo_produto,
-            tipo_variacao=tipo_variacao_cor,
-            imagem='Imagem cloudinary',
-        )
-        tamanho = ModeloVariacao.objects.create(
-            modelo_produto=modelo_produto,
-            tipo_variacao=tipo_variacao_tamanho,
-            imagem='Imagem cloudinary',
-        )
+        cor = Cor.objects.create(nome='Roxo', )
+        tamanho = Tamanho.objects.create(nome='G', )
 
         self.obj = ItemPedido.objects.create(
             pedido=pedido,

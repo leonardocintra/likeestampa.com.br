@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
+from requests.api import get
 from evento.models import criar_evento
 from checkout.models import Carrinho, ItemCarrinho
 from pedido.models import Pedido
@@ -144,8 +145,8 @@ def mp_notifications(request):
             enviar_mensagem(payment_id, 'IPN do Mercado pago')
             return atualizar_pagamento(payment_id)
         else:
-            enviar_mensagem('Recebeu uma notificação IPN do mercado pago mas não foi um topic payment: {0}'.format(
-                request.GET.get('topic')), 'IPN do Mercado pago')
+            enviar_mensagem('Recebeu uma notificação IPN do mercado pago mas não foi um topic payment: {0} - ID: {1}'.format(
+                request.GET.get('topic'), request.GET.get('id')), 'IPN do Mercado pago')
             return JsonResponse({"erro": "topico nao mapeado"}, status=200)
     except PagamentoMercadoPago.DoesNotExist:
         return JsonResponse({"payment": "not found"}, status=200)

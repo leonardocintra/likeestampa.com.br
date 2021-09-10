@@ -55,8 +55,8 @@
                                 </a>
                                 <small class="text-muted">
                                     Qtd: {{ item.quantidade }} |
-                                    {{ item.cor.tipo_variacao }} |
-                                    {{ item.tamanho.tipo_variacao }}
+                                    {{ item.cor }} |
+                                    {{ item.tamanho }}
                                 </small>
                             </div>
                             <span class="text-muted">R$ {{ item.produto.preco_base }}</span>
@@ -106,7 +106,6 @@
                         {% include "usuario/includes/card_nome_endereco.html" %}
 
                         <hr class="my-4">
-                        <a href="/" class="btn btn-secondary">Continuar Comprando</a>
                         {% if items %}
                             <button class="btn btn-primary btn-lg" type="submit">Ir para pagamento</button>
                         {% endif %}
@@ -116,6 +115,8 @@
                             <a class="btn btn-primary" href="{% url 'account_signup' %}">Fazer cadastro</a>
                         </h2>
                     {% endif %}
+                    <br />
+                    <a style="margin-top: 10px;" href="/" class="btn btn-secondary">Continuar Comprando</a>
                 </div>
             </div>
         </main>
