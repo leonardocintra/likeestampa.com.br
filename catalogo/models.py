@@ -49,45 +49,6 @@ class SubCategoria(models.Model):
         return self.nome
 
 
-class Variacao(models.Model):
-    """Ex: COR, Tamanho, Tipo de camiseta, Genero """
-    descricao = models.CharField('Descrição', unique=True, max_length=50)
-    ativo = models.BooleanField(default=True)
-    created_at = models.DateTimeField('Criado em', auto_now_add=True)
-    updated_at = models.DateTimeField('Modificado em', auto_now=True)
-
-    class Meta:
-        db_table = 'variacao'
-        verbose_name_plural = 'Variações'
-        verbose_name = 'Variação'
-        ordering = ('descricao',)
-
-    def __str__(self):
-        return self.descricao
-
-
-class TipoVariacao(models.Model):
-    """ Ex: vermelho, verde, branco | P M G GG | etc """
-    descricao = models.CharField('Descrição', unique=True, max_length=50)
-    ativo = models.BooleanField(default=True)
-    variacao = models.ForeignKey(
-        Variacao, on_delete=models.CASCADE, related_name='variacao_tipo_variacao')
-    preco_variacao = models.DecimalField(
-        'Preço', decimal_places=2, max_digits=999, default=51.90)
-    valor_adicional = models.CharField(max_length=50, null=True, blank=True)
-    created_at = models.DateTimeField('Criado em', auto_now_add=True)
-    updated_at = models.DateTimeField('Modificado em', auto_now=True)
-
-    class Meta:
-        db_table = 'tipo_variacao'
-        verbose_name_plural = 'Tipos Variações'
-        verbose_name = 'Tipo Variação'
-        ordering = ('descricao',)
-
-    def __str__(self):
-        return self.descricao
-
-
 class Produto(models.Model):
     """Ex: camieta sao paulo, camiseta python, etc"""
     nome = models.CharField(max_length=100, unique=True)
@@ -148,26 +109,6 @@ class ModeloProduto(models.Model):
 
     def __str__(self):
         return self.modelo.descricao
-
-
-class ModeloVariacao(models.Model):
-    modelo_produto = models.ForeignKey(
-        ModeloProduto, on_delete=models.CASCADE, related_name='variacao_modelo_produto', null=True)
-    tipo_variacao = models.ForeignKey(
-        TipoVariacao, on_delete=models.PROTECT, related_name='tipo_variacao_produto', default=1)
-    imagem = CloudinaryField('Imagem Variação', blank=True, null=True)
-    outras_informacoes = models.CharField(max_length=50, blank=True, null=True)
-    created_at = models.DateTimeField('Criado em', auto_now_add=True)
-    updated_at = models.DateTimeField('Modificado em', auto_now=True)
-
-    class Meta:
-        db_table = 'modelo_variacao'
-        verbose_name_plural = 'Variações do modelo'
-        verbose_name = 'Variação do modelo'
-        ordering = ('created_at',)
-
-    def __str__(self):
-        return self.modelo_produto.modelo.descricao
 
 
 class Cor(models.Model):
