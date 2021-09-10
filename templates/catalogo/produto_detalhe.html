@@ -7,43 +7,6 @@
 {% block js_header %}
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script>
-
-    const modelos = {{ modelos_jquery }};
-    const imagem_da_variacao = {{ imagem_da_variacao|safe }};
-
-    // quando o documento for carregado nao mostrar todas as variações
-    $(document).ready(function() {
-        modelos.forEach(element => {
-            elemento = '#fecha' + element.toString();
-            $(elemento).hide();
-        });
-    });
-
-    // botão que ao selecionar o modelo mostrará a variação correspondente
-    function mostrarVariacaoDesseModelo(e) {
-        var elemento = '#fecha' + e
-        $(elemento).show();
-
-        $('.radiovariacao').prop('checked', false);
-        
-        modelos.forEach(element => {
-            if (element.toString() !== e) {
-                elemento = '#fecha' + element.toString();
-                $(elemento).hide();
-            }
-        });
-    }
-
-    // mostra a imagem da variacao selecionada (cor e modelo)
-    function mostraImagemVariacao(e) {
-        $(".imagem_da_variacao").attr("src", '{{ produto.imagem_principal.url }}');
-        for (const [key, value] of Object.entries(imagem_da_variacao)) {
-            if (key === e) {
-                $(".imagem_da_variacao").attr("src", value);
-            }   
-        }
-    }
-
     function mostrarMedida() {
         {% if produto.genero == 'F' %}
             $(".imagem_da_variacao").attr("src", "{% static 'tshirt-feminina-medidas.png' %}");
@@ -80,49 +43,44 @@
                     <p class="lead">{{ produto.descricao|linebreaks }}</p>
                     <p><button type="button" class="btn btn-success btn-sm" onclick="mostrarMedida();"> Ver medidas </button> </p>
                     <div class="fs-5 mb-2">
-                        <div style="padding: 10px;">
-                        Modelo: <br />
-                        {% for modelo in modelos %}
-                            {% render_field form.modelo value=modelo.id id=modelo.id type="radio" class="btn-check" %}
-                            <label class="btn btn-outline-dark btn-sm" for="{{ modelo.id }}" onclick="mostrarVariacaoDesseModelo('{{ modelo.id }}');">
-                                {{ modelo.modelo.descricao_cliente }}
-                            </label>
-                        {% endfor %}
+                        <div class="text-center" style="padding: 10px;">
+                            Modelo: 
+                            <br />
+                            {% for modelo in modelos %}
+                                {% render_field form.modelo value=modelo.id id=modelo.id type="radio" class="btn-check" %}
+                                <label class="btn btn-outline-dark btn-sm" for="{{ modelo.id }}">
+                                    {{ modelo.modelo.descricao_cliente }}
+                                </label>
+                            {% endfor %}
                         </div>
 
+                        <div class="text-center">
+                            Selecione a cor:
+                            <br />
+                            
+                            {% for cor in cores %}
+                                {% render_field form.cor id=cor.slug type="radio" class="btn-check" %}
+                                <label class="btn btn-outline-primary btn-sm" for="{{ cor.slug }}" style="padding:10px; background-color:{{ cor.valor }};">
+                                    &nbsp;
+                                </label>
+                            {% endfor %}
+                        </div>
+                        <br />                        
+                        
+                        <div class="text-center">
+                            Selecione o tamanho:
+                            <br />
+                            {% for tamanho in tamanhos %}
+                                {% render_field form.tamanho value=tamanho id=tamanho.slug type="radio" class="btn-check"%}
+                                <label class="btn btn-outline-danger" for="{{ tamanho.slug }}">
+                                    {{ tamanho }}
+                                </label>
+                            {% endfor %}
+                        </div>
+                        
+
                         {% for modelo in modelos %}
-                            <div id="fecha{{ modelo.id }}" class="card py-1" >
-                                <div class="card-body">
-
-                                    Cor:
-                                    <div class="fs-5 mb-2">
-                                        {% for variacao in variacoes %}
-                                            {% if variacao.modelo_produto == modelo %}
-                                                {% if variacao.tipo_variacao.variacao.descricao == "Cor" %}
-                                                    {% render_field form.cor value=variacao.tipo_variacao.id id=variacao.id type="radio" class="btn-check radiovariacao" %}
-                                                    <label class="btn btn-outline-primary btn-sm" for="{{ variacao.id }}" onclick="mostraImagemVariacao('{{ variacao.id }}')" style="background-color:{{ variacao.tipo_variacao.valor_adicional }}">
-                                                        {{ variacao.tipo_variacao }}
-                                                    </label>
-                                                {% endif %}
-                                            {% endif %}
-                                        {% endfor %}
-                                    </div>
-
-                                    Tamanho:
-                                    <div class="fs-5 mb-2">
-                                        {% for variacao in variacoes %}
-                                            {% if variacao.modelo_produto == modelo %}
-                                                {% if variacao.tipo_variacao.variacao.descricao == "Tamanho" %}
-                                                    {% render_field form.tamanho value=variacao.tipo_variacao.id id=variacao.id type="radio" class="btn-check radiovariacao"%}
-                                                    <label class="btn btn-outline-danger" for="{{ variacao.id }}">
-                                                        {{ variacao.tipo_variacao }}
-                                                    </label>
-                                                {% endif %}
-                                            {% endif %}
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                            </div>
+                            {{ modelo }}
                         {% empty %}
                             <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
                                 <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">

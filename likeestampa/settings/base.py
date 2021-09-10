@@ -44,7 +44,6 @@ INSTALLED_APPS = [
 
     # TERCEIROS
     'cloudinary',
-    'nested_inline',
     'localflavor',
     'mathfilters',
     'widget_tweaks',
