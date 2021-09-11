@@ -31,15 +31,20 @@
             padding-top: 3.5rem;
         }
     </style>
-    {% block css %} {% endblock %} {% block js_header %} {% endblock %}
+    {% block css %} {% endblock %} 
+    {% block js_header %} {% endblock %}
 </head>
 
 <body>
     <!-- Navigation-->
-    {% include 'includes/_navegacao.html' %} {% block content %} {% endblock %}
+    {% include 'includes/_navegacao.html' %} 
+    
+    {% block content %} {% endblock %}
 
     <!-- Footer -->
-    {% include 'includes/_footer.html' %} {% block js_footer %} {% endblock %}
+    {% include 'includes/_footer.html' %} 
+    
+    {% block js_footer %} {% endblock %}
 </body>
 
 </html>
