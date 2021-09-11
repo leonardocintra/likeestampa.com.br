@@ -1,6 +1,5 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.views.generic.detail import DetailView
 
@@ -9,7 +8,7 @@ from evento.models import EventoPedido, criar_evento
 from pagamento.models import PagamentoMercadoPago
 from pagamento.business import atualizar_pagamento_mp
 from services.mercadopago.mercadopago import get_preference, get_payment, confirma_pagamento
-from services.dimona.api import create_order, get_tracking_url, get_timeline, create_payload_order
+from services.dimona.api import create_order, get_tracking_url, create_payload_order
 from services.telegram.api import enviar_mensagem
 from usuario.models import Cliente, EnderecoCliente
 from .models import Pedido, ItemPedido
@@ -42,8 +41,6 @@ def pedido_finalizado_mercado_pago(request):
 
     mercado_pago_id = request.session['mercado_pago_id']
     payment_id = request.GET.get('payment_id')
-
-    preference = get_preference(mercado_pago_id)
     payment = get_payment(payment_id)
 
     atualizar_pagamento_mp(payment, mercado_pago_id, payment_id)

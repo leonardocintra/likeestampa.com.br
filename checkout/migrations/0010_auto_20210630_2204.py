@@ -24,3 +24,7 @@ class Migration(migrations.Migration):
             table='item_carrinho',
         ),
     ]
+    
+    run_before = [
+        ('catalogo', '0055_auto_20210910_1354'),
+    ]

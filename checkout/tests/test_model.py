@@ -1,7 +1,6 @@
-import uuid
 from django.test import TestCase
 from checkout.models import Carrinho, ItemCarrinho
-from catalogo.models import Modelo, ModeloProduto, ModeloVariacao, Produto, SubCategoria, TipoVariacao, Variacao
+from catalogo.models import Cor, Modelo, ModeloProduto, Tamanho
 from catalogo.tests.test_model import get_fake_produto
 
 UUID_FAKE_CARRINHO = 'f2ce90d6-422b-45d6-8345-a31d223d75d0'
@@ -38,21 +37,9 @@ def get_fake_carrinho_com_items():
     modelo = Modelo.objects.create(descricao='T-Shirt')
     modelo_produto = ModeloProduto.objects.create(
         produto=produto, modelo=modelo)
-    variacao_tamanho = Variacao.objects.create(descricao='Tamanho', )
-    variacao_cor = Variacao.objects.create(descricao='Cor', )
-    tp_tamanho = TipoVariacao.objects.create(
-        descricao='P', variacao=variacao_tamanho,)
-    tp_cor = TipoVariacao.objects.create(
-        descricao='Azul', variacao=variacao_cor,)
 
-    tamanho = ModeloVariacao.objects.create(
-        modelo_produto=modelo_produto,
-        tipo_variacao=tp_tamanho
-    )
-    cor = ModeloVariacao.objects.create(
-        modelo_produto=modelo_produto,
-        tipo_variacao=tp_cor
-    )
+    tamanho = Tamanho.objects.create(nome='GG', )
+    cor = Cor.objects.create(nome='Laranja', )
 
     return ItemCarrinho.objects.create(
         carrinho=carrinho,

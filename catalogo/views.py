@@ -1,11 +1,11 @@
-from django.http import HttpResponseRedirect
 from django.views.generic.list import ListView
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
+
 from checkout.views import get_quantidade_items_carrinho
 from checkout.models import Carrinho, ItemCarrinho
 from .forms import ProdutoDetalheForm
-from .models import Produto, SubCategoria, ModeloVariacao, ModeloProduto
+from .models import Cor, Produto, SubCategoria, ModeloProduto, Tamanho
 
 
 class ProdutosListView(ListView):
@@ -17,8 +17,6 @@ class ProdutosListView(ListView):
         q = self.request.GET.get('q', '')
         if q:
             queryset = queryset.filter(nome__icontains=q).exclude(ativo=False)
-
-        queryset = _busca_genero(self, queryset)
 
         return queryset
 
@@ -40,8 +38,6 @@ class SubCategoriaListView(ListView):
         queryset = Produto.objects.filter(
             subcategoria__slug=self.kwargs['slug']).exclude(ativo=False)
 
-        queryset = _busca_genero(self, queryset)
-
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -56,27 +52,19 @@ def produto(request, slug):
     """ Pagina de detalhes do produto """
     produto = Produto.objects.get(slug=slug)
     modelos = ModeloProduto.objects.filter(produto=produto)
-    variacoes = ModeloVariacao.objects.filter(modelo_produto__in=modelos)
+
+    cores = Cor.objects.all().exclude(ativo=False)
+    tamanhos = Tamanho.objects.all().exclude(ativo=False)
 
     if request.method == 'POST':
         form = ProdutoDetalheForm(request.POST)
-        adicionar_item_carrinho(request, produto, variacoes, form.data['modelo'],
+        adicionar_item_carrinho(request, produto, form.data['modelo'],
                                 form.data['cor'], form.data['tamanho'], form.data['quantidade'])
         return redirect(reverse("checkout:carrinho"))
 
     produtos_relacionados = Produto.objects.filter(
         subcategoria=produto.subcategoria)[:4]
     subcategorias = SubCategoria.objects.all().exclude(ativo=False)
-
-    modelos_jquery = []
-    for modelo in modelos:
-        modelos_jquery.append(modelo.id)
-
-    imagem_da_variacao = {}
-    for variacao in variacoes:
-        if variacao.imagem != None:
-            imagem = {variacao.id: variacao.imagem.url}
-            imagem_da_variacao.update(imagem)
 
     form = ProdutoDetalheForm(initial={
         'quantidade': '1'
@@ -85,17 +73,16 @@ def produto(request, slug):
         'produto': produto,
         'form': form,
         'subcategorias': subcategorias,
+        'cores': cores,
+        'tamanhos': tamanhos,
         'modelos': modelos,
-        'modelos_jquery': modelos_jquery,
-        'imagem_da_variacao': imagem_da_variacao,
-        'variacoes': variacoes,
         'quantidade_item': get_quantidade_items_carrinho(request),
         'produtos_relacionados': produtos_relacionados
     }
     return render(request, 'catalogo/produto_detalhe.html', context)
 
 
-def adicionar_item_carrinho(request, produto, variacoes, modelo, cor, tamanho, quantidade):
+def adicionar_item_carrinho(request, produto, modelo, cor, tamanho, quantidade):
     carrinho = Carrinho()
 
     modelo = int(modelo)
@@ -107,8 +94,8 @@ def adicionar_item_carrinho(request, produto, variacoes, modelo, cor, tamanho, q
         carrinho.save()
         request.session['carrinho'] = str(carrinho.uuid)
 
-    cor = variacoes.get(tipo_variacao_id=int(cor), modelo_produto_id=modelo)
-    tamanho = variacoes.get(tipo_variacao_id=int(tamanho), modelo_produto_id=modelo)
+    cor = Cor.objects.get(slug=cor)
+    tamanho = Tamanho.objects.get(slug=tamanho)
     quantidade = int(quantidade)
 
     item = ItemCarrinho.objects.filter(
@@ -120,34 +107,6 @@ def adicionar_item_carrinho(request, produto, variacoes, modelo, cor, tamanho, q
     else:
         ItemCarrinho(carrinho=carrinho, produto=produto, modelo_produto_id=modelo,
                      quantidade=quantidade, tamanho=tamanho, cor=cor).save()
-
-
-def produto_masculino(request):
-    request.session['genero'] = 'M'
-    return HttpResponseRedirect('/')
-
-
-def produto_feminino(request):
-    request.session['genero'] = 'F'
-    return HttpResponseRedirect('/')
-
-
-def todos_os_produtos(request):
-    request.session['genero'] = None
-    return HttpResponseRedirect('/')
-
-
-def _busca_genero(self, queryset):
-    if 'genero' in self.request.session:
-        genero = self.request.session['genero']
-        if genero:
-            if genero == 'F':
-                queryset = queryset.exclude(genero='M')
-            elif genero == 'M':
-                queryset = queryset.exclude(genero='F')
-            else:
-                queryset = queryset
-    return queryset.exclude(ativo=False)
 
 
 product_list = ProdutosListView

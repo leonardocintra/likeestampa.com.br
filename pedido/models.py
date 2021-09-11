@@ -1,7 +1,7 @@
 import uuid
 from django.contrib.auth.models import User
 from django.db import models
-from catalogo.models import ModeloProduto, ModeloVariacao, Produto
+from catalogo.models import Cor, ModeloProduto, Produto, Tamanho
 from usuario.models import EnderecoCliente
 
 
@@ -42,9 +42,9 @@ class ItemPedido(models.Model):
         Pedido, on_delete=models.CASCADE, related_name='pedido_item')
     produto = models.ForeignKey(Produto, on_delete=models.PROTECT)
     cor = models.ForeignKey(
-        ModeloVariacao, on_delete=models.PROTECT, related_name='item_pedido_cor')
+        Cor, on_delete=models.PROTECT, related_name='item_pedido_cor')
     tamanho = models.ForeignKey(
-        ModeloVariacao, on_delete=models.PROTECT, related_name='item_pedido_tamanho')
+        Tamanho, on_delete=models.PROTECT, related_name='item_pedido_tamanho')
     modelo_produto = models.ForeignKey(
         ModeloProduto, on_delete=models.PROTECT, related_name='item_pedido_modelo')
     quantidade = models.PositiveIntegerField(default=1)

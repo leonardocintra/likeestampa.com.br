@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.shortcuts import resolve_url as r
 from django.test import TestCase
-from catalogo.models import Categoria, ModeloProduto, Produto, SubCategoria, TipoVariacao, Variacao, ModeloVariacao, Modelo, SkuDimona, Cor, Tamanho
+from catalogo.models import Categoria, ModeloProduto, Produto, SubCategoria, Modelo, SkuDimona, Cor, Tamanho
 from django.db import IntegrityError
 
 
@@ -112,45 +112,6 @@ class SubCategoriaModelTest(TestCase):
         self.assertEqual('Programação', str(self.obj))
 
 
-class VariacaoModelTest(TestCase):
-    def setUp(self):
-        self.obj = Variacao(
-            descricao='Tamanho'
-        )
-        self.obj.save()
-
-    def test_ativo_default_true(self):
-        self.assertTrue(self.obj.ativo)
-
-    def test_created_at(self):
-        self.assertIsInstance(self.obj.created_at, datetime)
-
-    def test_str(self):
-        self.assertEqual('Tamanho', str(self.obj))
-
-
-class TipoVariacaoModelTest(TestCase):
-    def setUp(self):
-        variacao = Variacao.objects.create(descricao='Tamanho', )
-        self.obj = TipoVariacao(
-            descricao='P',
-            variacao=variacao,
-        )
-        self.obj.save()
-
-    def test_create(self):
-        self.assertTrue(TipoVariacao.objects.exists())
-
-    def test_ativo_default_true(self):
-        self.assertTrue(self.obj.ativo)
-
-    def test_created_at(self):
-        self.assertIsInstance(self.obj.created_at, datetime)
-
-    def test_str(self):
-        self.assertEqual('P', str(self.obj))
-
-
 class ProdutoModelTest(TestCase):
     def setUp(self):
         self.obj = get_fake_produto()
@@ -195,33 +156,6 @@ class ModeloProdutoModelTest(TestCase):
 
     def test_create(self):
         self.assertTrue(ModeloProduto.objects.exists())
-
-    def test_created_at(self):
-        self.assertIsInstance(self.obj.created_at, datetime)
-
-    def test_str(self):
-        self.assertEqual('T-Shirt', str(self.obj))
-
-
-class ModeloVariacaoModelTest(TestCase):
-    def setUp(self):
-        produto = get_fake_produto()
-        modelo = Modelo.objects.create(descricao='T-Shirt')
-        modelo_produto = ModeloProduto.objects.create(
-            produto=produto, modelo=modelo)
-        variacao = Variacao.objects.create(descricao='Tamanho', )
-        tipo_variacao = TipoVariacao.objects.create(
-            descricao='P', variacao=variacao,)
-
-        self.obj = ModeloVariacao(
-            modelo_produto=modelo_produto,
-            tipo_variacao=tipo_variacao,
-            imagem='Imagem cloudinary',
-        )
-        self.obj.save()
-
-    def test_create(self):
-        self.assertTrue(ModeloVariacao.objects.exists())
 
     def test_created_at(self):
         self.assertIsInstance(self.obj.created_at, datetime)
