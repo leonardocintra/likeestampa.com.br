@@ -9,7 +9,7 @@ class TamanhoAdmin(admin.ModelAdmin):
 
 class CorAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('nome',)}
-    list_display = ['nome', 'ativo', 'order_exibicao', ]
+    list_display = ['nome', 'ativo', 'order_exibicao', 'valor',  ]
 
 
 class CategoriaAdmin(admin.ModelAdmin):
