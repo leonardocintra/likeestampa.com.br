@@ -1,7 +1,7 @@
 from datetime import datetime
-from django.shortcuts import resolve_url as r
+from django.forms.fields import ImageField
 from django.test import TestCase
-from catalogo.models import Categoria, ModeloProduto, Produto, SubCategoria, Modelo, SkuDimona, Cor, Tamanho
+from catalogo.models import Categoria, ModeloProduto, Produto, ProdutoImagem, SubCategoria, Modelo, SkuDimona, Cor, Tamanho
 from django.db import IntegrityError
 
 
@@ -127,6 +127,24 @@ class ProdutoModelTest(TestCase):
 
     def test_preco_base(self):
         self.assertEqual(51.90, self.obj.preco_base)
+
+    def test_created_at(self):
+        self.assertIsInstance(self.obj.created_at, datetime)
+
+    def test_str(self):
+        self.assertEqual('Camiseta NodeJs', str(self.obj))
+
+
+class ProdutoImagemModelTest(TestCase):
+    def setUp(self):
+        produto = get_fake_produto()
+        self.obj = ProdutoImagem.objects.create(
+            produto=produto,
+            imagem='imagem-cloudinary',
+        )
+
+    def test_create(self):
+        self.assertTrue(ProdutoImagem.objects.exists())
 
     def test_created_at(self):
         self.assertIsInstance(self.obj.created_at, datetime)

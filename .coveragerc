@@ -4,3 +4,4 @@ omit=
     */tests/*
     */migrations/*
     */__init__.py
+    likeestampa/*

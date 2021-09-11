@@ -4,7 +4,6 @@ from catalogo.models import Produto, SubCategoria
 
 
 class ProdutoListViewTest(TestCase):
-
     @classmethod
     def setUpTestData(cls):
         subcategoria = SubCategoria.objects.create(
@@ -50,7 +49,14 @@ class ProdutoDetailViewTest(TestCase):
             imagem_design='Imagem Cloudinary 2',
         )
 
-        self.resp = self.client.get(r('catalogo:produto', self.obj.slug))
+        self.response = self.client.get(r('catalogo:produto', self.obj.slug))
+
+    def test_template(self):
+        self.assertTemplateUsed(self.response, 'catalogo/produto_detalhe.html')
 
     def test_get(self):
-        self.assertEqual(200, self.resp.status_code)
+        self.assertEqual(200, self.response.status_code)
+    
+    # def test_post(self):
+    #     self.response = self.client.post(r('catalogo:produto', self.obj.slug))
+    #     self.assertEqual(200, self.response.status_code)
