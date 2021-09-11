@@ -5,7 +5,7 @@ from django.urls import reverse
 from checkout.views import get_quantidade_items_carrinho
 from checkout.models import Carrinho, ItemCarrinho
 from .forms import ProdutoDetalheForm
-from .models import Cor, Produto, SubCategoria, ModeloProduto, Tamanho
+from .models import Cor, Produto, ProdutoImagem, SubCategoria, ModeloProduto, Tamanho
 
 
 class ProdutosListView(ListView):
@@ -51,16 +51,16 @@ class SubCategoriaListView(ListView):
 def produto(request, slug):
     """ Pagina de detalhes do produto """
     produto = Produto.objects.get(slug=slug)
-    modelos = ModeloProduto.objects.filter(produto=produto)
-
-    cores = Cor.objects.all().exclude(ativo=False)
-    tamanhos = Tamanho.objects.all().exclude(ativo=False)
-
     if request.method == 'POST':
         form = ProdutoDetalheForm(request.POST)
         adicionar_item_carrinho(request, produto, form.data['modelo'],
                                 form.data['cor'], form.data['tamanho'], form.data['quantidade'])
         return redirect(reverse("checkout:carrinho"))
+    
+    imagens = ProdutoImagem.objects.filter(produto=produto)
+    modelos = ModeloProduto.objects.filter(produto=produto)
+    cores = Cor.objects.all().exclude(ativo=False)
+    tamanhos = Tamanho.objects.all().exclude(ativo=False)
 
     produtos_relacionados = Produto.objects.filter(
         subcategoria=produto.subcategoria)[:4]
@@ -71,6 +71,7 @@ def produto(request, slug):
     })
     context = {
         'produto': produto,
+        'imagens': imagens,
         'form': form,
         'subcategorias': subcategorias,
         'cores': cores,

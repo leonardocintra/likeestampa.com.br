@@ -5,7 +5,13 @@
 {% load widget_tweaks %}
 
 {% block js_header %}
-{% endblock %}
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script>    
+    function alterarLabelCorSelecionada(cor) {
+        $('#cor-selecionada').text(cor);
+    }
+</script>
+{% endblock js_header %}
 
 {% block content %}
 
@@ -15,6 +21,7 @@
     <div class="container px-4 px-lg-5 my-5">
         <form method="post">
             {% csrf_token %}
+
             {{ form.source }}
 
             <div class="row gx-4 gx-lg-5 align-items-center">
@@ -30,10 +37,9 @@
                         <span>R$ {{ produto.preco_base }}</span>
                     </div>
                     <p class="lead">{{ produto.descricao|linebreaks }}</p>
-                    <p><button type="button" class="btn btn-success btn-sm" onclick="mostrarMedida();"> Ver medidas </button> </p>
                     <div class="fs-5 mb-2">
                         <div class="text-center" style="padding: 10px;">
-                            Modelo: 
+                            Modelo:
                             <br />
                             {% for modelo in modelos %}
                                 {% render_field form.modelo value=modelo.id id=modelo.id type="radio" class="btn-check" %}
@@ -44,28 +50,28 @@
                         </div>
 
                         <div class="text-center">
-                            Selecione a cor:
+                            Selecione a cor: <span id="cor-selecionada" style="margin-bottom: 10px;" class="badge bg-light text-dark">Branco</span>
                             <br />
-                            
+
                             {% for cor in cores %}
                                 {% render_field form.cor value=cor.slug id=cor.slug type="radio" class="btn-check" %}
-                                <label class="btn btn-outline-primary btn-sm" for="{{ cor.slug }}" style="padding:10px; background-color:{{ cor.valor }};">
+                                <label onclick="alterarLabelCorSelecionada('{{ cor.nome }}')" class="btn btn-outline-primary btn-sm" for="{{ cor.slug }}" style="padding:10px; background-color:{{ cor.valor }};">
                                     &nbsp;
                                 </label>
                             {% endfor %}
                         </div>
-                        <br />                        
-                        
+                        <br />
+
                         <div class="text-center">
                             Selecione o tamanho:
                             <br />
                             {% for tamanho in tamanhos %}
-                                {% render_field form.tamanho value=tamanho.slug id=tamanho.slug type="radio" class="btn-check"%}
+                            {% render_field form.tamanho value=tamanho.slug id=tamanho.slug type="radio" class="btn-check"%}
                                 <label class="btn btn-outline-danger" for="{{ tamanho.slug }}">
                                     {{ tamanho }}
                                 </label>
                             {% endfor %}
-                        </div>                        
+                        </div>
                     </div>
                     <div class="d-flex">
                         {% if modelos %}
