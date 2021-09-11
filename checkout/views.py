@@ -1,23 +1,24 @@
-from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from catalogo.models import Produto
 from services.dimona.api import get_frete
 from services.telegram.api import enviar_mensagem
-from usuario.forms import ClienteForm
 from usuario.models import Cliente, EnderecoCliente
 from .forms import FreteForm
 from .models import Carrinho, ItemCarrinho
 
 
 def carrinho(request):
+    cep = ''
+    if 'calcular-frete' in request.POST:
+        cep = request.POST['calcular-frete']
+
     if request.method == 'POST':
         form = FreteForm(request.POST)
-        enviar_mensagem('Cliente novo na área', 'Carrinho de Compras', 'Algum cliente clicou no carrinho')
-        request.session['cotacao_frete'] = form['delivery_method_id'].data
         # TODO: Alterar dados cadastrais ou incluir novo endereco
         if form.is_valid():
+            request.session['cotacao_frete'] = form['delivery_method_id'].data
+            enviar_mensagem('Cliente novo na área', 'Carrinho de Compras', 'Algum cliente clicou no carrinho')
             return redirect(reverse("pagamento:pagamento"))
 
     valor_carrinho = 0
@@ -38,7 +39,6 @@ def carrinho(request):
     user = request.user
     cliente = None
     enderecos = None
-    cep = ''
     frete_items = {}
 
     if user.is_authenticated:
@@ -49,8 +49,10 @@ def carrinho(request):
             if endereco.cep:
                 cep = endereco.cep
 
-        if items:
-            frete_items = get_frete(cep, quantidade_item)
+    if cep != '' and items:
+        frete_items = get_frete(cep, quantidade_item)
+        if frete_items == []:
+            frete_items = 'frete-nao-encontrado'
 
     context = {
         'form_frete': form_frete,
@@ -72,7 +74,7 @@ def excluir_item_carrinho(request, id):
     uuid = request.session['carrinho']
     carrinho = Carrinho.objects.get(uuid=uuid)
 
-    item = ItemCarrinho.objects.filter(pk=id, carrinho=carrinho).delete()
+    ItemCarrinho.objects.filter(pk=id, carrinho=carrinho).delete()
     return HttpResponseRedirect(redirect_to='/checkout/carrinho/')
 
 

@@ -2,27 +2,8 @@
 
 {% load widget_tweaks %}
 
-{% block css %}
-<style>
-    .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-    }
-
-    @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-            font-size: 3.5rem;
-        }
-    }
-
-    .container {
-        max-width: 960px;
-    }
-</style>
-{% endblock %}
+{% block js_header %}
+{% endblock js_header %}
 
 {% block content %}
 <div class="container py-2">
@@ -71,7 +52,7 @@
                     </ul>
 
 
-                    {% if frete_items %}
+                    {% if frete_items and frete_items != 'frete-nao-encontrado' %}
                         <h4 class="text-center"> <small> Frete CEP </small>{{ cep_padrao }} </h4>
                         {% for frete in frete_items %}
                         <div class="form-check">
@@ -91,7 +72,18 @@
                             {% if not items %}
                                 <label>Adicione produtos para calular o frete</label>
                             {% else %}
-                                <label>Valor do frete é mostrado apos o cadastro</label>
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <div class="input-group mb-3">
+                                        <input type="number" class="form-control" placeholder="CEP" name="calcular-frete" aria-label="CEP">
+                                        <button class="btn btn-outline-dark" type="submit" id="button-addon2">Calcular</button>
+                                    </div>
+                                    {% if frete_items == 'frete-nao-encontrado' %}
+                                    <div class="alert alert-warning" role="alert">
+                                        Frete não encontrado. Favor verificar
+                                    </div>
+                                    {% endif %}
+                                </form>
                             {% endif %}
                         </div>
                     {% endif %}
