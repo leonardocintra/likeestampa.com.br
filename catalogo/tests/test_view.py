@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.shortcuts import resolve_url as r
 from catalogo.models import Produto, SubCategoria
+from catalogo.tests.test_model import get_fake_produto
 
 
 class ProdutoListViewTest(TestCase):
@@ -35,6 +36,9 @@ class ProdutoListViewTest(TestCase):
         self.assertTrue('is_paginated' in self.response.context)
         self.assertFalse(self.response.context['is_paginated'])
 
+    def test_produto_mostrar_tela_inicial_false(self):
+        pass #fazer esse teste
+
 
 class ProdutoDetailViewTest(TestCase):
     def setUp(self):
@@ -56,7 +60,7 @@ class ProdutoDetailViewTest(TestCase):
 
     def test_get(self):
         self.assertEqual(200, self.response.status_code)
-    
+
     # def test_post(self):
     #     self.response = self.client.post(r('catalogo:produto', self.obj.slug))
     #     self.assertEqual(200, self.response.status_code)

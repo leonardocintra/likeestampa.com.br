@@ -56,6 +56,7 @@ class Produto(models.Model):
     descricao = models.TextField('Descrição', blank=True)
     slug = models.SlugField('Identificador', max_length=100, unique=True)
     ativo = models.BooleanField(default=False)
+    mostrar_tela_inicial = models.BooleanField(default=True)
     preco_base = models.DecimalField(
         'Preço base', decimal_places=2, max_digits=999, default=51.90)
     subcategoria = models.ForeignKey(
