@@ -51,7 +51,7 @@ class SubCategoria(models.Model):
 
 class Produto(models.Model):
     """Ex: camieta sao paulo, camiseta python, etc"""
-    nome = models.CharField(max_length=100, unique=True)
+    nome = models.CharField(max_length=100)
     seller = models.ForeignKey(Seller, on_delete=models.PROTECT, null=True)
     descricao = models.TextField('Descrição', blank=True)
     slug = models.SlugField('Identificador', max_length=100, unique=True)
