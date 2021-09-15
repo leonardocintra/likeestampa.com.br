@@ -7,7 +7,7 @@ from checkout.models import Carrinho, ItemCarrinho
 from evento.models import EventoPedido, criar_evento
 from pagamento.models import PagamentoMercadoPago
 from pagamento.business import atualizar_pagamento_mp
-from services.mercadopago.mercadopago import get_preference, get_payment, confirma_pagamento
+from services.mercadopago.mercadopago import get_payment, confirma_pagamento
 from services.dimona.api import create_order, get_tracking_url, create_payload_order
 from services.telegram.api import enviar_mensagem
 from usuario.models import Cliente, EnderecoCliente
@@ -16,6 +16,7 @@ from .email import envia_email
 
 
 def gerar_venda(pagamento_mp):
+    enviar_mensagem('Pedido {0} gerando compra dimona ...'.format(str(pagamento_mp.pedido.id)), 'Pedido sendo realizado', str(pagamento_mp.pedido.id))
     pedido = Pedido.objects.get(pk=pagamento_mp.pedido.id)
     dimona = create_order(pedido.request_seller)
 
