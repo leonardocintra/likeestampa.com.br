@@ -38,5 +38,5 @@ ANYMAIL = {
     "MAILGUN_API_KEY": env("MAILGUN_API_KEY"),
     "MAILGUN_SENDER_DOMAIN": "mg.likeestampa.com.br"
 }
-DEFAULT_FROM_EMAIL = "no-reply@likeestampa.com.br"
+DEFAULT_FROM_EMAIL = "likeestampa@gmail.com"
 SERVER_EMAIL = DEFAULT_FROM_EMAIL

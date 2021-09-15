@@ -1,4 +1,4 @@
-from django.core.mail import send_mail, EmailMultiAlternatives
+from django.core.mail import send_mail
 
 
 def envia_email_compra():
