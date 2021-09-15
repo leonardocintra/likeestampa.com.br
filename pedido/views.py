@@ -18,7 +18,12 @@ from .email import envia_email
 def gerar_venda(pagamento_mp):
     enviar_mensagem('Pedido {0} gerando compra dimona ...'.format(str(pagamento_mp.pedido.id)), 'Pedido sendo realizado', str(pagamento_mp.pedido.id))
     pedido = Pedido.objects.get(pk=pagamento_mp.pedido.id)
-    dimona = create_order(pedido.request_seller)
+    dimona = pedido.pedido_seller
+
+    if pedido.pago:
+        enviar_mensagem('Pedido {0} ja foi pago e gerado!'.format(str(pagamento_mp.pedido.id)), 'Pedido ja consta pago', str(pagamento_mp.pedido.id))
+    else:
+        dimona = create_order(pedido.request_seller)
 
     if dimona:
         dimona = dimona['order']
