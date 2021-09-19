@@ -27,6 +27,11 @@
             <div class="row gx-4 gx-lg-5 align-items-center">
                 <div class="col-md-6 text-center">
                     <img class="card-img-top mb-5 mb-md-0" src="{{ produto.imagem_principal.url }}" alt="{{ produto.nome }}" />
+                    <div style="padding-top: 10px;">
+                        {% for imagem in imagens %}
+                            <img src="{{ imagem.imagem.url }}" alt="imagem" class="rounded" width="75px;">
+                        {% endfor %}
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="small mb-1 text-muted">SKU: {{ produto.id }}</div>

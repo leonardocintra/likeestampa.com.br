@@ -9,7 +9,7 @@ from .models import Cor, Produto, ProdutoImagem, SubCategoria, ModeloProduto, Ta
 
 
 class ProdutosListView(ListView):
-    paginate_by = 30
+    paginate_by = 40
     template_name = 'index.html'
 
     def get_queryset(self):
@@ -63,7 +63,7 @@ def produto(request, slug):
     tamanhos = Tamanho.objects.all().exclude(ativo=False)
 
     produtos_relacionados = Produto.objects.filter(
-        subcategoria=produto.subcategoria)[:4]
+        subcategoria=produto.subcategoria)[:8]
     subcategorias = SubCategoria.objects.all().exclude(ativo=False)
 
     form = ProdutoDetalheForm(initial={
