@@ -121,9 +121,6 @@ def pagamento(request):
 def atualizar_pagamento(payment_id):
     obj_mp = get_payment(payment_id)
 
-    if obj_mp['status'] != 'approved':
-        return JsonResponse({"pagamento": "nao-aprovado"}, status=200)
-
     if obj_mp['status'] == 'approved':
         PagamentoMercadoPago.objects.filter(payment_id=payment_id).update(
             mercado_pago_status=obj_mp['status'],
@@ -131,6 +128,13 @@ def atualizar_pagamento(payment_id):
         )
         pagamento_mp = PagamentoMercadoPago.objects.get(payment_id=payment_id)
         gerar_venda(pagamento_mp=pagamento_mp)
+
+    if obj_mp['status'] == 404:
+        return JsonResponse({"pagamento": "nao-encontrado"}, status=200)
+
+    if obj_mp['status'] != 'approved':
+        return JsonResponse({"pagamento": "nao-aprovado"}, status=200)
+
     return JsonResponse({"pagamento": "aprovado"}, status=201)
 
 
@@ -158,6 +162,8 @@ def mp_notifications(request):
 @csrf_exempt
 def webhook(request):
     # Notificações do Mercado Pago Webhook
+    print('----- ENTREI -------------')
+    print(str(request))
     payload = json.loads(request.body)
     payment_id = payload['id']
 
@@ -170,6 +176,6 @@ def webhook(request):
         enviar_mensagem('Pagamento não encontrato apos receber um Webhook do mercado pago',
                         payment_id, 'Webhook do Mercado pago')
         return JsonResponse({"foo": "bar"}, status=200)
-    except print(0):
-        enviar_mensagem('ERRO ao receber Webhook: {0}'.format(str(request)))
+    except:
+        enviar_mensagem('ERRO ao receber Webhook: {0}'.format(request.body))
         return JsonResponse({"foo": "bar"}, status=200)

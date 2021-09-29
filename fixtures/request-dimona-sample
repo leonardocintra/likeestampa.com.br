@@ -1,0 +1,33 @@
+{
+    "delivery_method_id": 90689,
+    "order_id": 211,
+    "customer_name": "Debora Nascimento Cintra",
+    "customer_document": "13618990693",
+    "customer_email": "deboraanascin@gmail.com",
+    "webhook_url": "https://option_webhook_url.com",
+    "items": [
+        {
+            "name": "Camiseta Lhama",
+            "sku": "camiseta-lhama",
+            "qty": 1,
+            "dimona_sku_id": "10522118309",
+            "designs": [
+                "http://res.cloudinary.com/like-estampa/image/upload/v1627086224/yq4qqd5bkrgld9lnrlu0.png"
+            ],
+            "mocks": [
+                "http://res.cloudinary.com/like-estampa/image/upload/v1627086224/rprfielhl2sqgyzaz0zl.png"
+            ]
+        }
+    ],
+    "address": {
+        "street": "Avenida Doutor Severino Marcio Pereira Meirelles",
+        "number": "1480",
+        "complement": "AP11",
+        "city": "Franca",
+        "state": "SP",
+        "zipcode": "14408114",
+        "neighborhood": "Villagio Mundo Novo",
+        "phone": "16981569025",
+        "country": "BR"
+    }
+}
