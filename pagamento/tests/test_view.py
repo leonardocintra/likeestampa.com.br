@@ -1,3 +1,4 @@
+import json
 from django.test import TestCase, Client
 from django.test.utils import override_settings
 from django.urls import reverse as r
@@ -48,9 +49,11 @@ class MpNotificationsTest(TestCase):
     def setUp(self):
         self.client = Client()
 
-    def test_notificacao_mp_ipn_status_not_approved(self):
-        response = self.client.post(r('pagamento:mp_notifications') + '?topic=payment&id=123456789')
-        self.assertJSONEqual(response.content, {"pagamento": "nao-aprovado"})
+    @override_settings(DEBUG=True)
+    def test_notificacao_mp_ipn_pagamento_nao_encontrado(self):
+        response = self.client.post(
+            r('pagamento:mp_notifications') + '?topic=payment&id=123456789')
+        self.assertJSONEqual(response.content, {"pagamento": "nao-encontrado"})
         self.assertEqual(200, response.status_code)
 
     @override_settings(DEBUG=True)
@@ -61,6 +64,17 @@ class MpNotificationsTest(TestCase):
             mercado_pago_id='qualquercoisa',
             payment_id=1240157386,
         )
-        response = self.client.post(r('pagamento:mp_notifications') + '?topic=payment&id=1240157386')
+        response = self.client.post(
+            r('pagamento:mp_notifications') + '?topic=payment&id=1240157386')
         self.assertJSONEqual(response.content, {"pagamento": "aprovado"})
         self.assertEqual(201, response.status_code)
+
+    @override_settings(DEBUG=True)
+    def test_notificacao_mp_webhook_pagamento_nao_encontrado(self):
+        data = json.dumps({
+            'id': 16965220292
+        })
+        response = self.client.post(r('pagamento:webhook'), data=data)
+        self.assertJSONEqual(response.content, {"pagamento": "nao-encontrado"})
+        self.assertEqual(200, response.status_code)
+

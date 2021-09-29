@@ -16,24 +16,26 @@ from .email import envia_email
 
 
 def gerar_venda(pagamento_mp):
-    enviar_mensagem('Pedido {0} gerando compra dimona ...'.format(str(pagamento_mp.pedido.id)), 'Pedido sendo realizado', str(pagamento_mp.pedido.id))
-    pedido = Pedido.objects.get(pk=pagamento_mp.pedido.id)
-    dimona = pedido.pedido_seller
+    try:
+        enviar_mensagem('Pedido {0} gerando compra dimona ...'.format(str(pagamento_mp.pedido.id)), 'Pedido sendo realizado', str(pagamento_mp.pedido.id))
+        pedido = Pedido.objects.get(pk=pagamento_mp.pedido.id)
+        dimona = None
 
-    if pedido.pago:
-        enviar_mensagem('Pedido {0} ja foi pago e gerado!'.format(str(pagamento_mp.pedido.id)), 'Pedido ja consta pago', str(pagamento_mp.pedido.id))
-    else:
-        dimona = create_order(pedido.request_seller)
+        if pedido.pago:
+            enviar_mensagem('Pedido {0} ja foi pago e gerado!'.format(str(pagamento_mp.pedido.id)), 'Pedido ja consta pago', str(pagamento_mp.pedido.id))
+        else:
+            dimona = create_order(pedido.request_seller)
+            dimona = dimona['order']
 
-    if dimona:
-        dimona = dimona['order']
-
-    # Atualiza os dados do pagamento no pedido (pago e o usuario)
-    Pedido.objects.filter(pk=pagamento_mp.pedido.id).update(
-        pago=True,
-        pedido_seller=dimona
-    )
-    enviar_mensagem('Pedido {0} criado com sucesso!'.format(str(pagamento_mp.pedido.id)), 'Pedido realizado', str(pagamento_mp.pedido.id))
+            # Atualiza os dados do pagamento no pedido (pago e o usuario)
+            Pedido.objects.filter(pk=pagamento_mp.pedido.id).update(
+                pago=True,
+                pedido_seller=dimona
+            )
+            enviar_mensagem('Pedido {0} - Dimona: {1} criado com sucesso!'.format(str(pagamento_mp.pedido.id), dimona), 'Pedido realizado', str(pagamento_mp.pedido.id))
+    except:
+        enviar_mensagem('Erro ao gerar venda')
+        enviar_mensagem('Pedido {0} - ERRO'.format(str(pagamento_mp.pedido.id)), 'ERRO', str(pagamento_mp.pedido.id))
 
 
 @login_required
