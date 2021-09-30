@@ -13,4 +13,4 @@ def envia_email_de_teste():
     - Camiseta de TESTE \n Caso tiver alguma duvida pode nos responder esse mail. \n Ou entrar em contato por whatsapp (35) 9999-7619"
 
     send_mail("Like Estampa - Pedido: 3892999", message,
-              "Like Estampa <likeestampa@gmail.com>", ['juliana@gmail.com', ])
+              "Like Estampa <likeestampa@gmail.com>", ['leonardo.ncintra@outlook.com', ])
