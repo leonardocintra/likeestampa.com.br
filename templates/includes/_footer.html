@@ -1,11 +1,49 @@
 {% load static %}
-<footer class="py-5 bg-dark">
+<footer class="py-5 bg-light">
+    <footer class="container py-5">
+        <div class="row">
+            <div class="col-6 col-md">
+                <h5>O que vem por ai!</h5>
+                <ul class="list-unstyled text-small">
+                    <li>Moletons</li>
+                    <li>Bonés</li>
+                    <li>Canecas</li>
+                    <li>T-Shirt Cropped</li>
+                    <li>Camiseta Polo</li>
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <h5>Troca e Cancelamento</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="link-secondary" href="{% url 'core:trocacancelamento' %}">Trocas e Devoluções</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <h5>Contato</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="link-secondary" href="https://wa.me/message/X45SNP5DPVQ5O1">Whatsapp</a></li>
+                    <li><a class="link-secondary" href="mailto:likeestampa@gmail.com">Email</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <h5>Nossa empresa</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="link-secondary" href="{% url 'core:about' %}">Equipe</a></li>
+                    <li><a class="link-secondary" href="{% url 'core:about' %}">Localização</a></li>
+                    <li><a class="link-secondary" href="{% url 'core:termos' %}">Termos de uso</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
     <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Like Estampa 2021 | Desenvolvido por: leonardo.ncintra@outlook.com</p>
+        <p class="m-0 text-center text-white">Copyright &copy; Like Estampa 2021 | Desenvolvido por:
+            leonardo.ncintra@outlook.com</p>
         <br />
         <div class="text-center">
-            <a class="btn btn-primary" href="https://www.facebook.com/likeestampa"> <i class="fab fa-facebook"></i> Facebook</a>
-            <a class="btn btn-danger" href="https://www.instagram.com/likeestampa/"><i class="fab fa-instagram"></i> Instagram</a>
+            <a class="btn btn-primary" href="https://www.facebook.com/likeestampa"> <i class="fab fa-facebook"></i>
+                Facebook</a>
+            <a class="btn btn-danger" href="https://www.instagram.com/likeestampa/"><i class="fab fa-instagram"></i>
+                Instagram</a>
         </div>
     </div>
 </footer>
