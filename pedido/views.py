@@ -16,6 +16,7 @@ from .email import envia_email
 
 
 def gerar_venda(pagamento_mp):
+    # TODO: esta dando erro aqui para boletos
     try:
         enviar_mensagem('Pedido {0} gerando compra dimona ...'.format(str(pagamento_mp.pedido.id)), 'Pedido sendo realizado', str(pagamento_mp.pedido.id))
         pedido = Pedido.objects.get(pk=pagamento_mp.pedido.id)
@@ -33,8 +34,8 @@ def gerar_venda(pagamento_mp):
                 pedido_seller=dimona
             )
             enviar_mensagem('Pedido {0} - Dimona: {1} criado com sucesso!'.format(str(pagamento_mp.pedido.id), dimona), 'Pedido realizado', str(pagamento_mp.pedido.id))
-    except:
-        enviar_mensagem('Erro ao gerar venda')
+    except Exception as e:
+        enviar_mensagem('Erro ao gerar venda: ' + str(e))
         enviar_mensagem('Pedido {0} - ERRO'.format(str(pagamento_mp.pedido.id)), 'ERRO', str(pagamento_mp.pedido.id))
 
 

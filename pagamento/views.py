@@ -162,8 +162,6 @@ def mp_notifications(request):
 @csrf_exempt
 def webhook(request):
     # Notificações do Mercado Pago Webhook
-    print('----- ENTREI -------------')
-    print(str(request))
     payload = json.loads(request.body)
     payment_id = payload['id']
 
