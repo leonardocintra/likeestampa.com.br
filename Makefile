@@ -1,5 +1,6 @@
 install-dev:
 	@pip install -r requirements/development.txt
+	@python3 manage.py collectstatic --noinput
 
 run:
 	@python manage.py runserver
