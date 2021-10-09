@@ -31,19 +31,45 @@
             padding-top: 3.5rem;
         }
     </style>
-    {% block css %} {% endblock %} 
+    <!-- Messenger Plugin de bate-papo Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your Plugin de bate-papo code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+    {% block css %} {% endblock %}
     {% block js_header %} {% endblock %}
 </head>
 
 <body>
+    <script>
+        var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "106768004885009");
+        chatbox.setAttribute("attribution", "biz_inbox");
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                xfbml: true,
+                version: 'v12.0'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/pt_BR/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
     <!-- Navigation-->
-    {% include 'includes/_navegacao.html' %} 
-    
+    {% include 'includes/_navegacao.html' %}
+
     {% block content %} {% endblock %}
 
     <!-- Footer -->
-    {% include 'includes/_footer.html' %} 
-    
+    {% include 'includes/_footer.html' %}
+
     {% block js_footer %} {% endblock %}
 </body>
 
