@@ -40,6 +40,9 @@
                     <img id="imagemModelo" class="card-img-top mb-5 mb-md-0" src="{{ produto.imagem_principal.url }}" alt="{{ produto.nome }}" />
                     <div style="padding-top: 10px;">
                         {% for imagem in imagens %}
+                            {% if forloop.first %}
+                                <img src="{{ produto.imagem_principal.url }}" alt="{{ produto.nome }}" class="rounded" width="75px;" onclick="mostrarModeloSelecionado(0)">
+                            {% endif %}
                             <img src="{{ imagem.imagem.url }}" alt="imagem" class="rounded" width="75px;" onclick="mostrarModeloSelecionado({{ imagem.id }})">
                         {% endfor %}
                     </div>

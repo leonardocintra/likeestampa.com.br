@@ -58,7 +58,8 @@ def produto(request, slug):
         return redirect(reverse("checkout:carrinho"))
     
     imagens = ProdutoImagem.objects.filter(produto=produto)
-    mockups = {}
+    # Adiciona no mockup a imagem principal (pelo menos a imagem 0)
+    mockups = {0: produto.imagem_principal.url}
     for imagem in imagens:
         mock = {imagem.id: imagem.imagem.url}
         mockups.update(mock)
