@@ -58,6 +58,11 @@ def produto(request, slug):
         return redirect(reverse("checkout:carrinho"))
     
     imagens = ProdutoImagem.objects.filter(produto=produto)
+    mockups = {}
+    for imagem in imagens:
+        mock = {imagem.id: imagem.imagem.url}
+        mockups.update(mock)
+
     modelos = ModeloProduto.objects.filter(produto=produto)
     cores = Cor.objects.all().exclude(ativo=False)
     tamanhos = Tamanho.objects.all().exclude(ativo=False)
@@ -72,6 +77,7 @@ def produto(request, slug):
     context = {
         'produto': produto,
         'imagens': imagens,
+        'mockups': mockups,
         'form': form,
         'subcategorias': subcategorias,
         'cores': cores,

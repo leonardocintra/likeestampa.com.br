@@ -6,9 +6,20 @@
 
 {% block js_header %}
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-<script>    
+<script>
+
     function alterarLabelCorSelecionada(cor) {
         $('#cor-selecionada').text(cor);
+    }
+
+    const mockups = {{ mockups|safe }};
+
+    function mostrarModeloSelecionado(e) {
+        for (const [key, value] of Object.entries(mockups)) {
+            if (parseInt(key) === e) {
+                $("#imagemModelo").attr("src", value);
+            }
+        }
     }
 </script>
 {% endblock js_header %}
@@ -26,10 +37,10 @@
 
             <div class="row gx-4 gx-lg-5 align-items-center">
                 <div class="col-md-6 text-center">
-                    <img class="card-img-top mb-5 mb-md-0" src="{{ produto.imagem_principal.url }}" alt="{{ produto.nome }}" />
+                    <img id="imagemModelo" class="card-img-top mb-5 mb-md-0" src="{{ produto.imagem_principal.url }}" alt="{{ produto.nome }}" />
                     <div style="padding-top: 10px;">
                         {% for imagem in imagens %}
-                            <img src="{{ imagem.imagem.url }}" alt="imagem" class="rounded" width="75px;">
+                            <img src="{{ imagem.imagem.url }}" alt="imagem" class="rounded" width="75px;" onclick="mostrarModeloSelecionado({{ imagem.id }})">
                         {% endfor %}
                     </div>
                 </div>
