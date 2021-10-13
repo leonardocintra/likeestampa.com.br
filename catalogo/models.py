@@ -137,6 +137,7 @@ class Tamanho(models.Model):
     slug = models.SlugField(max_length=15, unique=True)
     ativo = models.BooleanField(default=True)
     order_exibicao = models.PositiveIntegerField(default=0)
+    descricao_cliente = models.CharField(max_length=20, null=True, blank=True)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
@@ -164,8 +165,8 @@ class TamanhoModelo(models.Model):
 
     class Meta:
         db_table = 'tamanho_modelo'
-        verbose_name_plural = 'Tamanhos'
-        verbose_name = 'tamanho'
+        verbose_name_plural = 'Tamanhos e Modelos'
+        verbose_name = 'Tamanhos e Modelos'
         ordering = ('created_at', )
 
     def __str__(self):

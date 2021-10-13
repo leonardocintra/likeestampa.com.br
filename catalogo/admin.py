@@ -1,10 +1,10 @@
 from django.contrib import admin
-from .models import Categoria, SubCategoria, Produto, ModeloProduto, Modelo, Cor, Tamanho, ProdutoImagem
+from .models import Categoria, SubCategoria, Produto, ModeloProduto, Modelo, Cor, Tamanho, ProdutoImagem, TamanhoModelo
 
 
 class TamanhoAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('nome',)}
-    list_display = ['nome', 'ativo', 'order_exibicao', ]
+    list_display = ['nome', 'ativo', 'order_exibicao', 'descricao_cliente', ]
 
 
 class CorAdmin(admin.ModelAdmin):
@@ -54,9 +54,14 @@ class ModeloAdmin(admin.ModelAdmin):
     search_fields = ['descricao', ]
 
 
+class TamanhoModeloAdmin(admin.ModelAdmin):
+    pass
+
+
 admin.site.register(Categoria, CategoriaAdmin)
 admin.site.register(Modelo, ModeloAdmin)
 admin.site.register(Produto, ProdutoAdmin)
 admin.site.register(SubCategoria, SubCategoriaAdmin)
 admin.site.register(Cor, CorAdmin)
 admin.site.register(Tamanho, TamanhoAdmin)
+admin.site.register(TamanhoModelo, TamanhoModeloAdmin)
