@@ -1,7 +1,6 @@
 from datetime import datetime
-from django.forms.fields import ImageField
 from django.test import TestCase
-from catalogo.models import Categoria, ModeloProduto, Produto, ProdutoImagem, SubCategoria, Modelo, SkuDimona, Cor, Tamanho
+from catalogo.models import Categoria, ModeloProduto, Produto, ProdutoImagem, SubCategoria, Modelo, SkuDimona, Cor, Tamanho, TamanhoModelo
 from django.db import IntegrityError
 
 
@@ -33,6 +32,26 @@ class CorModelTest(TestCase):
 
     def test_str(self):
         self.assertEqual('Verde Bandeira', str(self.obj))
+
+
+class TamanhoModeloModelTest(TestCase):
+    def setUp(self):
+        self.modelo = Modelo.objects.create(descricao='T-Shirt')
+        self.tamanho = Tamanho.objects.create(
+            nome='P',
+            slug='p'
+        )
+        self.obj = TamanhoModelo(
+            tamanho=self.tamanho,
+            modelo=self.modelo
+        )
+        self.obj.save()
+
+    def test_create(self):
+        self.assertTrue(TamanhoModelo.objects.exists())
+
+    def test_str(self):
+        self.assertEqual('P - T-Shirt', str(self.obj))
 
 
 class CategoriaModelTest(TestCase):

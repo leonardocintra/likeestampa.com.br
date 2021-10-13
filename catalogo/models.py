@@ -1,5 +1,6 @@
 from cloudinary.models import CloudinaryField
 from django.db import models
+from django.db.models.base import Model
 
 from seller.models import Seller
 
@@ -149,8 +150,31 @@ class Tamanho(models.Model):
         return self.nome
 
 
+class TamanhoModelo(models.Model):
+    """ 
+        O tamanho P M G GG por exemplo nao se aplica a canecas e roupas infantis
+        Nesse caso aqui serve para amarrar o tamnho de acordo com o modelo vendido
+        Modelos podem ser caneca, camiseta, avental sacou ?
+    """
+    tamanho = models.ForeignKey(Tamanho, on_delete=models.CASCADE)
+    modelo = models.ForeignKey(Modelo, on_delete=models.CASCADE)
+    ativo = models.BooleanField(default=True)
+    created_at = models.DateTimeField('Criado em', auto_now_add=True)
+    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+
+    class Meta:
+        db_table = 'tamanho_modelo'
+        verbose_name_plural = 'Tamanhos'
+        verbose_name = 'tamanho'
+        ordering = ('created_at', )
+
+    def __str__(self):
+        return self.tamanho.nome + ' - ' + self.modelo.descricao
+
+
 class ProdutoImagem(models.Model):
-    produto = models.ForeignKey(Produto, on_delete=models.CASCADE, related_name='produto_imagem')
+    produto = models.ForeignKey(
+        Produto, on_delete=models.CASCADE, related_name='produto_imagem')
     imagem = CloudinaryField('Mockup')
     order_exibicao = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
