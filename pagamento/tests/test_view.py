@@ -71,10 +71,21 @@ class MpNotificationsTest(TestCase):
 
     @override_settings(DEBUG=True)
     def test_notificacao_mp_webhook_pagamento_nao_encontrado(self):
-        data = json.dumps({
-            'id': 16965220292
-        })
-        response = self.client.post(r('pagamento:webhook'), data=data)
+        data = {
+            "id": 16965220292,
+            "live_mode": False,
+            "type": "payment",
+            "date_created": "2015-03-25T10:04:58.396-04:00",
+            "application_id": 123123123,
+            "user_id": 44444,
+            "version": 1,
+            "api_version": "v1",
+            "action": "payment.created",
+            "data": {
+                "id": "999999999"
+            }
+        }
+        response = self.client.post(
+            r('pagamento:webhook'), json.dumps(data), "application/json")
         self.assertJSONEqual(response.content, {"pagamento": "nao-encontrado"})
         self.assertEqual(200, response.status_code)
-
