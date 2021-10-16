@@ -4,7 +4,7 @@ from .models import Categoria, SubCategoria, Produto, ModeloProduto, Modelo, Cor
 
 class TamanhoAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('nome',)}
-    list_display = ['nome', 'ativo', 'order_exibicao', 'descricao_cliente', ]
+    list_display = ['nome', 'id', 'ativo', 'order_exibicao', 'descricao_cliente', ]
 
 
 class CorAdmin(admin.ModelAdmin):
@@ -50,7 +50,7 @@ class ProdutoAdmin(admin.ModelAdmin):
 
 
 class ModeloAdmin(admin.ModelAdmin):
-    list_display = ['descricao', 'descricao_cliente', ]
+    list_display = ['descricao', 'descricao_cliente', 'id', ]
     search_fields = ['descricao', ]
 
 

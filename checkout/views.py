@@ -18,7 +18,7 @@ def carrinho(request):
         # TODO: Alterar dados cadastrais ou incluir novo endereco
         if form.is_valid():
             request.session['cotacao_frete'] = form['delivery_method_id'].data
-            enviar_mensagem('Cliente novo na área', 'Carrinho de Compras', 'Algum cliente clicou no carrinho')
+            enviar_mensagem(request.user.first_name, 'Carrinho de Compras', 'Algum cliente clicou no carrinho')
             return redirect(reverse("pagamento:pagamento"))
 
     valor_carrinho = 0
