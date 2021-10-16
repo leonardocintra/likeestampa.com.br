@@ -7,18 +7,56 @@
 {% block js_header %}
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script>
-
     function alterarLabelCorSelecionada(cor) {
         $('#cor-selecionada').text(cor);
     }
-
+    
     const mockups = {{ mockups|safe }};
-
-    function mostrarModeloSelecionado(e) {
+    
+    function mostrarMockupSelecionado(e) {
         for (const [key, value] of Object.entries(mockups)) {
             if (parseInt(key) === e) {
                 $("#imagemModelo").attr("src", value);
             }
+        }
+    }
+    
+    const tamanho_modelo_dict = {{ tamanho_modelo_dict|safe }};
+
+    function escondeTamanhos() {
+        for (const [key, tamanhos] of Object.entries(tamanho_modelo_dict)) {
+            for (let tamanho = 0; tamanho < tamanhos.length; tamanho++) {
+                const element = tamanhos[tamanho];
+                
+                let elementRadio = "#" + element;
+                let elementLabel = "#label-" + element;
+    
+                console.log(elementRadio);
+                console.log(elementLabel);
+    
+                $(elementRadio).hide();
+                $(elementLabel).hide();            
+            }            
+        }
+    }
+
+    function mostrarTamanhosDoModelo(e) {
+        escondeTamanhos();
+        for (const [key, tamanhos] of Object.entries(tamanho_modelo_dict)) {
+            for (let tamanho = 0; tamanho < tamanhos.length; tamanho++) {
+                const element = tamanhos[tamanho];
+                
+                let elementRadio = "#" + element;
+                let elementLabel = "#label-" + element;
+
+                console.log(elementRadio);
+                console.log(elementLabel);
+
+                if (e === key) {
+                    $(elementRadio).show();
+                    $(elementLabel).show();
+                }
+            }            
         }
     }
 </script>
@@ -41,9 +79,9 @@
                     <div style="padding-top: 10px;">
                         {% for imagem in imagens %}
                             {% if forloop.first %}
-                                <img src="{{ produto.imagem_principal.url }}" alt="{{ produto.nome }}" class="rounded" width="75px;" onclick="mostrarModeloSelecionado(0)">
+                                <img src="{{ produto.imagem_principal.url }}" alt="{{ produto.nome }}" class="rounded" width="75px;" onclick="mostrarMockupSelecionado(0)">
                             {% endif %}
-                            <img src="{{ imagem.imagem.url }}" alt="imagem" class="rounded" width="75px;" onclick="mostrarModeloSelecionado({{ imagem.id }})">
+                            <img src="{{ imagem.imagem.url }}" alt="imagem" class="rounded" width="75px;" onclick="mostrarMockupSelecionado({{ imagem.id }})">
                         {% endfor %}
                     </div>
                 </div>
@@ -62,7 +100,7 @@
                             <br />
                             {% for modelo in modelos %}
                                 {% render_field form.modelo value=modelo.id id=modelo.id type="radio" class="btn-check" %}
-                                <label class="btn btn-outline-dark btn-sm" for="{{ modelo.id }}">
+                                <label class="btn btn-outline-dark btn-sm" for="{{ modelo.id }}" onclick="mostrarTamanhosDoModelo('{{ modelo.modelo.descricao }}');">
                                     {{ modelo.modelo.descricao_cliente }}
                                 </label>
                             {% endfor %}
@@ -81,18 +119,7 @@
                         </div>
                         <br />
 
-                        <div class="text-center">
-                            Selecione o tamanho:
-                            <br />
-                            {% for tamanho in tamanhos %}
-                            {% render_field form.tamanho value=tamanho.slug id=tamanho.slug type="radio" class="btn-check"%}
-                                <label class="btn btn-outline-danger" for="{{ tamanho.slug }}">
-                                    {{ tamanho }}
-                                </label>
-                            {% endfor %}
-                            <br />
-                            <i>Tabela de medidas no final da pagina</i>
-                        </div>
+                        {% include 'catalogo/includes/_tamanhos.html' %}
                     </div>
                     <div class="d-flex">
                         {% if modelos %}
@@ -150,4 +177,10 @@
     </div>
 </section>
 
+{% endblock %}
+
+{% block js_footer %}
+<script>
+    escondeTamanhos();
+</script>
 {% endblock %}

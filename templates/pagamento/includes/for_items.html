@@ -19,6 +19,8 @@
                 <p class="card-text">
                     R$ <mark>{{ item.produto.preco_base|mul:item.quantidade }}</mark>
                     <br />
+                    Modelo: <mark>{{ item.modelo_produto.modelo.descricao_cliente }}</mark>
+                    <br />
                     Quantidade: <b> {{ item.quantidade }} </b>
                     <br />
                     Tamanho: <b>{{ item.tamanho }} </b>
