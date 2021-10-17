@@ -127,7 +127,7 @@ def __get_sku_dimona(skus, modelo_produto, tamanho, cor, order_id):
     skus = skus.filter(cor=cor.nome)
     skus = skus.filter(tamanho=tamanho.nome)
     for sku in skus:
-        if sku.estilo.descricao == modelo_produto and sku.cor == cor.nome and sku.tamanho == tamanho.nome and sku.nome == 'Dimona Quality':
+        if sku.estilo.descricao == modelo_produto and sku.cor == cor.nome and sku.tamanho == tamanho.nome and sku.nome == modelo_produto:
             return sku.sku
     enviar_mensagem('SKU DIMONA não encontrado.\n -Modelo: {0} \n -Tamanho: {1} \n -Cor: {2}'.format(
         modelo_produto, tamanho, cor), 'SKU não encontrado', str(order_id))
