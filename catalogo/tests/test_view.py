@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.shortcuts import resolve_url as r
-from catalogo.models import Produto, SubCategoria
+from catalogo.models import Cor, Modelo, ModeloProduto, Produto, SubCategoria, Tamanho
 from catalogo.tests.test_model import get_fake_produto
 
 
@@ -37,7 +37,7 @@ class ProdutoListViewTest(TestCase):
         self.assertFalse(self.response.context['is_paginated'])
 
     def test_produto_mostrar_tela_inicial_false(self):
-        pass #fazer esse teste
+        pass  # fazer esse teste
 
 
 class ProdutoDetailViewTest(TestCase):
@@ -61,6 +61,25 @@ class ProdutoDetailViewTest(TestCase):
     def test_get(self):
         self.assertEqual(200, self.response.status_code)
 
-    # def test_post(self):
-    #     self.response = self.client.post(r('catalogo:produto', self.obj.slug))
-    #     self.assertEqual(200, self.response.status_code)
+    def test_html(self):
+        contents = (self.obj.nome, self.obj.descricao, self.obj.subcategoria)
+
+        with self.subTest():
+            for expected in contents:
+                self.assertContains(self.response, expected)
+
+    def test_post(self):
+        produto = Produto.objects.first()
+        modelo = Modelo.objects.create(descricao='Cropped')
+        modelo_produto = ModeloProduto.objects.create(produto=produto, modelo=modelo)
+        Cor.objects.create(nome='Vermelho', slug='vermelho')
+        Tamanho.objects.create(nome='G', slug='g')
+        data = {
+            'modelo': str(modelo_produto.pk),
+            'cor': 'vermelho',
+            'tamanho': 'g',
+            'quantidade': 5
+        }
+        self.response = self.client.post(
+            r('catalogo:produto', self.obj.slug), data=data)
+        self.assertEqual(302, self.response.status_code)

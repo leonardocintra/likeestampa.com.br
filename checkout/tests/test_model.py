@@ -15,7 +15,7 @@ class CarrinhoModelTest(TestCase):
         self.assertTrue(Carrinho.objects.exists())
 
     def test_str(self):
-        carrinho = Carrinho.objects.get(id=1)
+        carrinho = Carrinho.objects.first()
         self.assertEqual(UUID_FAKE_CARRINHO, str(carrinho))
 
 

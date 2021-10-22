@@ -52,6 +52,35 @@ python manage.py sqlsequencereset <nome da app>
 ```
 Ex: `python manage.py sqlsequencereset catalogo`
 
+
+### Para debugar um teste no Visual Studio Code
+
+Quando vai debugar um projeto django normal, VS Code inclui o comando "runserver".
+
+Para debugar o teste, basta comentar ele e incluir "test" :D
+
+```
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Django",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "args": [
+                "test"
+                //"runserver"
+            ],
+            "django": true
+        }
+    ]
+}
+```
+
 ## Historia
 ### Fundado em 20/04/2021
 
