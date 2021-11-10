@@ -9,8 +9,9 @@ from .models import Cor, Produto, ProdutoImagem, SubCategoria, ModeloProduto, Ta
 
 
 class ProdutosListView(ListView):
-    paginate_by = 40
+    paginate_by = 30
     template_name = 'index.html'
+    model = Produto
 
     def get_queryset(self):
         queryset = Produto.objects.exclude(ativo=False)
