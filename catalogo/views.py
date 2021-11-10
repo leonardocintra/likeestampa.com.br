@@ -13,11 +13,12 @@ class ProdutosListView(ListView):
     template_name = 'index.html'
 
     def get_queryset(self):
-        queryset = Produto.objects.exclude(
-            ativo=False).exclude(mostrar_tela_inicial=False)
+        queryset = Produto.objects.exclude(ativo=False)
         q = self.request.GET.get('q', '')
         if q:
-            queryset = queryset.filter(nome__icontains=q).exclude(ativo=False)
+            queryset = queryset.filter(nome__icontains=q)
+        else:
+            queryset = queryset.exclude(mostrar_tela_inicial=False)
 
         return queryset
 
