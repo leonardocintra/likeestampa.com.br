@@ -47,8 +47,8 @@ class ProdutoListViewTest(TestCase):
 
         self.assertFalse(produto.mostrar_tela_inicial)
         self.assertEqual(11, len(Produto.objects.all()))
-        self.assertIsNotNone(self.response.context)
-        # print(self.response.context['object_list'])
+        self.assertIsNotNone(self.response.context['produto_list'])
+        # TODO: PRECISA TESTAR QUE NAO ESTA MOSTRANDO O PRODUTO QUE NAO DEVE MOSTRAR
         # self.assertEqual(len(self.response.context_data['produto_list']), 10)
         # self.assertTrue(len(self.response.context_data['produto_list']) == 10)
 

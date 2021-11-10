@@ -3,11 +3,36 @@
     <div class="container px-4 px-lg-5 mt-5">
         <h2 class="fw-bolder mb-4 text-center">As mais vendidas</h2>
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            {% for prod in object_list %}
+            {% for prod in page_obj %}
                 {% include "catalogo/_produto_card.html" %}
             {% empty %}
                 <h2>Aguarde novidades da categoria!</h2>
             {% endfor %}
         </div>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link">Anterior</a>
+                    </li>
+                {% endif %}
+                
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Proximo</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">Proximo</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+
     </div>
 </section>
