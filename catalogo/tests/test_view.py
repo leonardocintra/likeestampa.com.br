@@ -1,25 +1,22 @@
 from django.test import TestCase
 from django.shortcuts import resolve_url as r
+from django.urls import reverse
 from catalogo.models import Cor, Modelo, ModeloProduto, Produto, SubCategoria, Tamanho
-from catalogo.tests.test_model import get_fake_produto
 
 
 class ProdutoListViewTest(TestCase):
-    @classmethod
-    def setUpTestData(cls):
-        subcategoria = SubCategoria.objects.create(
+    def setUp(self):
+        self.subcategoria = SubCategoria.objects.create(
             nome='Programação', slug='programacao')
-        for produto_id in range(60):
+        for produto_id in range(0, 10):
             Produto.objects.create(
                 nome=f'Camiseta Python Django {produto_id}',
                 descricao='Camiseta 100 de Algodão - Malha Final etc tal',
                 slug=f'camiseta-python-django-{produto_id}',
-                subcategoria=subcategoria,
+                subcategoria=self.subcategoria,
                 imagem_principal='Imagem Cloudinary 1',
                 imagem_design='Imagem Cloudinary 2',
             )
-
-    def setUp(self):
         self.response = self.client.get(r('core:index'))
 
     def test_get(self):
@@ -37,7 +34,23 @@ class ProdutoListViewTest(TestCase):
         self.assertFalse(self.response.context['is_paginated'])
 
     def test_produto_mostrar_tela_inicial_false(self):
-        pass  # fazer esse teste
+        # Nao deve trazer produtos que esta com mostrar_tela_inicial = False
+        produto = Produto.objects.create(
+            nome=f'Camiseta NodeJS Express',
+            descricao='Camiseta 100 de Algodão - Malha Final etc tal',
+            slug=f'camiseta-nodejs-express',
+            subcategoria=self.subcategoria,
+            imagem_principal='Imagem Cloudinary 1',
+            imagem_design='Imagem Cloudinary 2',
+            mostrar_tela_inicial=False,
+        )
+
+        self.assertFalse(produto.mostrar_tela_inicial)
+        self.assertEqual(11, len(Produto.objects.all()))
+        self.assertIsNotNone(self.response.context)
+        # print(self.response.context['object_list'])
+        # self.assertEqual(len(self.response.context_data['produto_list']), 10)
+        # self.assertTrue(len(self.response.context_data['produto_list']) == 10)
 
 
 class ProdutoDetailViewTest(TestCase):
@@ -71,7 +84,8 @@ class ProdutoDetailViewTest(TestCase):
     def test_post(self):
         produto = Produto.objects.first()
         modelo = Modelo.objects.create(descricao='Cropped')
-        modelo_produto = ModeloProduto.objects.create(produto=produto, modelo=modelo)
+        modelo_produto = ModeloProduto.objects.create(
+            produto=produto, modelo=modelo)
         Cor.objects.create(nome='Vermelho', slug='vermelho')
         Tamanho.objects.create(nome='G', slug='g')
         data = {
