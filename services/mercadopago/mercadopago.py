@@ -97,6 +97,12 @@ def get_payment(payment_id):
     return json.loads(r.text)
 
 
+def get_merchant_order(merchant_order_id):
+    url = 'https://api.mercadopago.com/merchant_orders/' + str(merchant_order_id)
+    r = requests.get(url, headers=headers)
+    return json.loads(r.text)
+
+
 def get_preference(preference_id):
     url = 'https://api.mercadopago.com/checkout/preferences/' + str(preference_id)
     r = requests.get(url, headers=headers)

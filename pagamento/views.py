@@ -6,12 +6,13 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
+
 from evento.models import criar_evento
 from checkout.models import Carrinho, ItemCarrinho
 from pedido.models import Pedido
 from pedido.views import gerar_venda
 from usuario.models import Cliente, EnderecoCliente
-from services.mercadopago.mercadopago import create_preference, montar_payload_preference, get_payment
+from services.mercadopago.mercadopago import create_preference, montar_payload_preference, get_payment, get_merchant_order
 from services.dimona.api import get_frete
 from services.telegram.api import enviar_mensagem
 from .models import PagamentoMercadoPago
@@ -143,14 +144,24 @@ def atualizar_pagamento(payment_id):
 def mp_notifications(request):
     # Notificações do Mercado Pago IPN
     try:
-        if request.GET.get('topic') == 'payment':
-            payment_id = request.GET.get('id')
-            enviar_mensagem(payment_id, 'IPN do Mercado pago')
-            return atualizar_pagamento(payment_id)
-        else:
+        if request.GET.get('topic') != 'payment' and request.GET.get('topic') != 'merchant_order':
             enviar_mensagem('Recebeu uma notificação IPN do mercado pago mas não foi um topic payment: {0} - ID: {1}'.format(
                 request.GET.get('topic'), request.GET.get('id')), 'IPN do Mercado pago')
             return JsonResponse({"erro": "topico nao mapeado"}, status=200)
+
+        payment_id = request.GET.get('id')
+
+        if request.GET.get('topic') == 'merchant_order':
+            merchant_order = get_merchant_order(request.GET.get('id'))
+
+            if merchant_order['status'] == 404:
+                enviar_mensagem('IPN Merchant Order não encontrado: {0} - ID: {1}'.format(
+                    request.GET.get('topic'), request.GET.get('id')), 'IPN do Mercado pago')
+                return JsonResponse({"merchant_order": "merchant_order nao encontrado. "}, status=200)
+
+            payment_id = merchant_order['payments'][0]['id']
+        
+        return atualizar_pagamento(payment_id)
     except PagamentoMercadoPago.DoesNotExist:
         return JsonResponse({"payment": "not found"}, status=200)
     except print(0):
