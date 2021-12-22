@@ -132,6 +132,23 @@ class Cor(models.Model):
         return self.nome
 
 
+class PrecoModelo(models.Model):
+    modelo = models.ForeignKey(Modelo, on_delete=models.CASCADE)
+    valor = models.DecimalField('Valor', decimal_places=2, max_digits=999, default=51.90)
+    ativo = models.BooleanField(default=True)
+    created_at = models.DateTimeField('Criado em', auto_now_add=True)
+    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+
+    class Meta:
+        db_table = 'preco_modelo'
+        verbose_name_plural = 'Preços por modelo'
+        verbose_name = 'Preço por demolo'
+        ordering = ('created_at',)
+
+    def __str__(self):
+        return str(self.modelo.descricao + ' | ' + str(self.valor))
+
+
 class Tamanho(models.Model):
     nome = models.CharField(max_length=10, unique=True)
     slug = models.SlugField(max_length=15, unique=True)
