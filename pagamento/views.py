@@ -39,7 +39,7 @@ def pagamento(request):
     quantidade_total = 0
     for item in items:
         quantidade_total = quantidade_total + item.quantidade
-        valor_carrinho = (item.produto.preco_base *
+        valor_carrinho = (item.modelo_produto.modelo.valor *
                           item.quantidade) + valor_carrinho
 
     endereco = enderecos[0]
@@ -72,6 +72,7 @@ def pagamento(request):
     valor_total = round(valor_carrinho + decimal.Decimal(valor_frete), 2)
 
     # Cria o pedido
+    # TODO: todo F5 esta criando um novo pedido - arrumar
     pedido = Pedido.objects.create(
         user=user,
         valor_total=valor_total,

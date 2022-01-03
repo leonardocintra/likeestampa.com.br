@@ -31,7 +31,7 @@ def __montar_payload_items(items):
             # "description": item.produto.descricao,
             "category_id": item.produto.subcategoria.slug,
             "quantity": item.quantidade,
-            "unit_price": float(item.produto.preco_base)
+            "unit_price": float(item.modelo_produto.modelo.valor)
         })
     return item_data
 
@@ -69,7 +69,7 @@ def montar_payload_preference(request, pedido_id, items, cliente, endereco, valo
     return {
         "back_urls": back_urls,
         "payer": payer,
-        "auto_return": "approved",
+        "auto_return": "all",
         "items": item_data,
         "statement_descriptor": "LIKEESTAMPA",
         "external_reference": "LIKEESTAMPA-" + str(pedido_id),

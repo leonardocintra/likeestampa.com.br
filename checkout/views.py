@@ -10,8 +10,6 @@ from .models import Carrinho, ItemCarrinho
 
 def carrinho(request):
     cep = ''
-    if 'calcular-frete' in request.POST:
-        cep = request.POST['calcular-frete']
 
     if request.method == 'POST':
         form = FreteForm(request.POST)
@@ -25,13 +23,18 @@ def carrinho(request):
     items = None
     quantidade_item = 0
     if 'carrinho' in request.session:
+        if 'calcular-frete' in request.POST:
+            cep = request.POST['calcular-frete']
         uuid = request.session['carrinho']
         carrinho = Carrinho.objects.get(uuid=uuid)
         items = ItemCarrinho.objects.filter(carrinho=carrinho)
 
+        """
+        OBS: por enquanto o valor do item esta pegando do valor do modelo e nao do produto
+        """
         for item in items:
             quantidade_item = quantidade_item + item.quantidade
-            valor_carrinho = (item.produto.preco_base *
+            valor_carrinho = (item.modelo_produto.modelo.valor *
                               item.quantidade) + valor_carrinho
 
     form_frete = FreteForm()

@@ -1,6 +1,6 @@
 from datetime import datetime
 from django.test import TestCase
-from catalogo.models import Categoria, ModeloProduto, PrecoModelo, Produto, ProdutoImagem, SubCategoria, Modelo, SkuDimona, Cor, Tamanho, TamanhoModelo
+from catalogo.models import Categoria, ModeloProduto, Produto, ProdutoImagem, SubCategoria, Modelo, SkuDimona, Cor, Tamanho, TamanhoModelo
 from django.db import IntegrityError
 
 
@@ -171,21 +171,6 @@ class ProdutoImagemModelTest(TestCase):
     def test_str(self):
         self.assertEqual('Camiseta NodeJs', str(self.obj))
 
-
-class PrecoModeloModelTest(TestCase):
-    def setUp(self):
-        modelo = Modelo.objects.create(descricao='T-Shirt')
-        self.obj = PrecoModelo.objects.create(
-            modelo=modelo,
-            valor=100.50
-        )
-    
-    def test_create(self):
-        self.assertTrue(PrecoModelo.objects.exists())
-    
-    def test_str(self):
-        PrecoModelo.objects.get(pk=self.obj.id)
-        self.assertEqual('T-Shirt | 100.5', str(self.obj))
 
 class ModeloModelTest(TestCase):
     def setUp(self):

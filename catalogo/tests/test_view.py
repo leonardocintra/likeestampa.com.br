@@ -1,6 +1,5 @@
 from django.test import TestCase
 from django.shortcuts import resolve_url as r
-from django.urls import reverse
 from catalogo.models import Cor, Modelo, ModeloProduto, Produto, SubCategoria, Tamanho
 
 
