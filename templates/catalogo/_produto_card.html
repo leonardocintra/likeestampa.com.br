@@ -1,3 +1,5 @@
+{% load cloudinary %}
+
 <div class="col mb-5">
     <div class="card h-100">
         <!-- Sale badge-->
@@ -5,7 +7,7 @@
             15% off
         </div>
         <!-- Product image-->
-        <img class="card-img-top" src="{{ prod.imagem_principal.url }}" alt="{{ prod.nome }}" />
+        {% cloudinary prod.imagem_principal quality="auto:low" class="card-img-top" %}
         <!-- Product details-->
         <div class="card-body p-4">
             <div class="text-center">
