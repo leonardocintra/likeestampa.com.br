@@ -63,9 +63,11 @@ def produto(request, slug):
 
     imagens = ProdutoImagem.objects.filter(produto=produto)
     # Adiciona no mockup a imagem principal (pelo menos a imagem 0)
+
     mockups = {0: produto.imagem_principal.url}
     for imagem in imagens:
-        mock = {imagem.id: imagem.imagem.url}
+        imagemPerformada = imagem.imagem.url.replace("http://res.cloudinary.com/leonardocintra/image/upload", "http://res.cloudinary.com/leonardocintra/image/upload/q_auto:low")
+        mock = {imagem.id: imagemPerformada}
         mockups.update(mock)
 
     # TODO: Cachear essas variaveis
