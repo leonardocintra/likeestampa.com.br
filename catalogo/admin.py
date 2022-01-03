@@ -1,15 +1,17 @@
 from django.contrib import admin
+from django.db import models
 from .models import Categoria, SubCategoria, Produto, ModeloProduto, Modelo, Cor, Tamanho, ProdutoImagem, TamanhoModelo
 
 
 class TamanhoAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('nome',)}
-    list_display = ['nome', 'id', 'ativo', 'order_exibicao', 'descricao_cliente', ]
+    list_display = ['nome', 'id', 'ativo',
+                    'order_exibicao', 'descricao_cliente', ]
 
 
 class CorAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('nome',)}
-    list_display = ['nome', 'ativo', 'order_exibicao', 'valor',  ]
+    list_display = ['nome', 'ativo', 'order_exibicao', 'valor', ]
 
 
 class CategoriaAdmin(admin.ModelAdmin):
@@ -34,6 +36,7 @@ def desativar_produtos(modeladmin, request, queryset):
 class ProdutoImagemInline(admin.TabularInline):
     model = ProdutoImagem
 
+
 class ModeloProdutoInline(admin.TabularInline):
     model = ModeloProduto
     extra = 1
@@ -50,7 +53,7 @@ class ProdutoAdmin(admin.ModelAdmin):
 
 
 class ModeloAdmin(admin.ModelAdmin):
-    list_display = ['descricao', 'descricao_cliente', 'id', ]
+    list_display = ['descricao', 'descricao_cliente', 'valor', 'id', ]
     search_fields = ['descricao', ]
 
 

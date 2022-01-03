@@ -83,6 +83,7 @@ class Modelo(models.Model):
     "Modelo seria: T-Shirt, mangalonga, etc"
     descricao = models.CharField(max_length=50, default='T-Shirt')
     descricao_cliente = models.CharField(max_length=50, null=True, blank=True)
+    valor = models.DecimalField('Valor', decimal_places=2, max_digits=999, default=51.90)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
 

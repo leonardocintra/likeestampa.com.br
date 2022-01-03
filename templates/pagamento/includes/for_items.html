@@ -17,7 +17,7 @@
                     <small class="text-muted">Codigo do produto: #{{ item.produto.id }} </small>
                 </p>
                 <p class="card-text">
-                    R$ <mark>{{ item.produto.preco_base|mul:item.quantidade }}</mark>
+                    R$ <mark>{{ item.modelo_produto.modelo.valor|mul:item.quantidade }}</mark>
                     <br />
                     Modelo: <mark>{{ item.modelo_produto.modelo.descricao_cliente }}</mark>
                     <br />

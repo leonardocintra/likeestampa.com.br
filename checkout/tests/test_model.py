@@ -34,7 +34,7 @@ def get_fake_carrinho_com_items():
     carrinho = Carrinho.objects.create(uuid=UUID_FAKE_CARRINHO)
     produto = get_fake_produto()
 
-    modelo = Modelo.objects.create(descricao='T-Shirt')
+    modelo = Modelo.objects.create(descricao='T-Shirt', valor=47.90)
     modelo_produto = ModeloProduto.objects.create(
         produto=produto, modelo=modelo)
 
