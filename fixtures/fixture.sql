@@ -13,17 +13,44 @@ INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibica
 INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES('Verde Bandeira', '#00803C', 'verde-bandeira', true, now(), now(), 9);
 INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES('Cinza Mescla', '#BEC0C3', 'cinza-mescla', true, now(), now(), 10);
 
-INSERT INTO modelo (id, descricao, created_at, updated_at, descricao_cliente) VALUES(1, 'T-Shirt', now(), now(), 'T-Shirt');
-INSERT INTO modelo (id, descricao, created_at, updated_at, descricao_cliente) VALUES(2, 'Baby Long', now(), now(), 'T-Shirt Feminina');
-INSERT INTO modelo (id, descricao, created_at, updated_at, descricao_cliente) VALUES(3, 'Cropped', now(), now(), 'Cropped');
-INSERT INTO modelo (id, descricao, created_at, updated_at, descricao_cliente) VALUES(4, 'Classic Infantil', now(), now(), 'Infantil');
+INSERT INTO modelo (id, descricao, created_at, updated_at, descricao_cliente, valor) VALUES(1, 'T-Shirt', now(), now(), 'T-Shirt', 51.99);
+INSERT INTO modelo (id, descricao, created_at, updated_at, descricao_cliente, valor) VALUES(2, 'Baby Long', now(), now(), 'T-Shirt Feminina', 51.99);
+INSERT INTO modelo (id, descricao, created_at, updated_at, descricao_cliente, valor) VALUES(3, 'Cropped', now(), now(), 'Cropped', 51.99);
+INSERT INTO modelo (id, descricao, created_at, updated_at, descricao_cliente, valor) VALUES(4, 'Classic Infantil', now(), now(), 'Infantil', 51.99);
 
 
-INSERT INTO tamanho (nome, slug, ativo, created_at, updated_at, order_exibicao) VALUES('P', 'p', true, now(), now(), 0);
-INSERT INTO tamanho (nome, slug, ativo, created_at, updated_at, order_exibicao) VALUES('M', 'm', true, now(), now(), 1);
-INSERT INTO tamanho (nome, slug, ativo, created_at, updated_at, order_exibicao) VALUES('G', 'g', true, now(), now(), 2);
-INSERT INTO tamanho (nome, slug, ativo, created_at, updated_at, order_exibicao) VALUES('GG', 'gg', true, now(), now(), 3);
-INSERT INTO tamanho (nome, slug, ativo, created_at, updated_at, order_exibicao) VALUES('XGG', 'xgg', true, now(), now(), 4);
+INSERT INTO tamanho (nome, slug, ativo, created_at, updated_at, order_exibicao, descricao_cliente) VALUES('P', 'p', true, now(), now(), 0, 'P');
+INSERT INTO tamanho (nome, slug, ativo, created_at, updated_at, order_exibicao, descricao_cliente) VALUES('M', 'm', true, now(), now(), 1, 'M');
+INSERT INTO tamanho (nome, slug, ativo, created_at, updated_at, order_exibicao, descricao_cliente) VALUES('G', 'g', true, now(), now(), 2, 'G');
+INSERT INTO tamanho (nome, slug, ativo, created_at, updated_at, order_exibicao, descricao_cliente) VALUES('GG', 'gg', true, now(), now(), 3, 'GG');
+INSERT INTO tamanho (nome, slug, ativo, created_at, updated_at, order_exibicao, descricao_cliente) VALUES('XGG', 'xgg', true, now(), now(), 4, 'XGG');
+INSERT INTO tamanho (nome, slug, ativo, created_at, updated_at, order_exibicao, descricao_cliente) VALUES('Tamanho 2', 'tamanho-2', true, now(), now(), 5, 'Tam. 2');
+INSERT INTO tamanho (nome, slug, ativo, created_at, updated_at, order_exibicao, descricao_cliente) VALUES('Tamanho 4', 'tamanho-4', true, now(), now(), 6, 'Tam. 4');
+INSERT INTO tamanho (nome, slug, ativo, created_at, updated_at, order_exibicao, descricao_cliente) VALUES('Tamanho 6', 'tamanho-6', true, now(), now(), 7, 'Tam. 6');
+INSERT INTO tamanho (nome, slug, ativo, created_at, updated_at, order_exibicao, descricao_cliente) VALUES('Tamanho 8', 'tamanho-8', true, now(), now(), 8, 'Tam. 8');
+INSERT INTO tamanho (nome, slug, ativo, created_at, updated_at, order_exibicao, descricao_cliente) VALUES( 'Tamanho 10', 'tamanho-10', true, now(), now(), 9, 'Tam. 10');
+INSERT INTO tamanho (nome, slug, ativo, created_at, updated_at, order_exibicao, descricao_cliente) VALUES( 'Tamanho 12', 'tamanho-12', true, now(), now(), 10, 'Tam. 12');
+INSERT INTO tamanho (nome, slug, ativo, created_at, updated_at, order_exibicao, descricao_cliente) VALUES( 'Tamanho 14', 'tamanho-14', true, now(), now(), 11, 'Tam. 14');
+
+
+INSERT INTO tamanho_modelo (ativo, created_at, updated_at, modelo_id, tamanho_id) VALUES(true, now(), now(), 1, 1);
+INSERT INTO tamanho_modelo (ativo, created_at, updated_at, modelo_id, tamanho_id) VALUES(true, now(), now(), 1, 2);
+INSERT INTO tamanho_modelo (ativo, created_at, updated_at, modelo_id, tamanho_id) VALUES(true, now(), now(), 1, 3);
+INSERT INTO tamanho_modelo (ativo, created_at, updated_at, modelo_id, tamanho_id) VALUES(true, now(), now(), 1, 4);
+INSERT INTO tamanho_modelo (ativo, created_at, updated_at, modelo_id, tamanho_id) VALUES(true, now(), now(), 1, 5);
+INSERT INTO tamanho_modelo (ativo, created_at, updated_at, modelo_id, tamanho_id) VALUES(true, now(), now(), 2, 1);
+INSERT INTO tamanho_modelo (ativo, created_at, updated_at, modelo_id, tamanho_id) VALUES(true, now(), now(), 2, 2);
+INSERT INTO tamanho_modelo (ativo, created_at, updated_at, modelo_id, tamanho_id) VALUES(true, now(), now(), 2, 3);
+INSERT INTO tamanho_modelo (ativo, created_at, updated_at, modelo_id, tamanho_id) VALUES(true, now(), now(), 2, 4);
+INSERT INTO tamanho_modelo (ativo, created_at, updated_at, modelo_id, tamanho_id) VALUES(true, now(), now(), 2, 5);
+INSERT INTO tamanho_modelo (ativo, created_at, updated_at, modelo_id, tamanho_id) VALUES(true, now(), now(), 4, 6);
+INSERT INTO tamanho_modelo (ativo, created_at, updated_at, modelo_id, tamanho_id) VALUES(true, now(), now(), 4, 7);
+INSERT INTO tamanho_modelo (ativo, created_at, updated_at, modelo_id, tamanho_id) VALUES(true, now(), now(), 4, 8);
+INSERT INTO tamanho_modelo (ativo, created_at, updated_at, modelo_id, tamanho_id) VALUES(true, now(), now(), 4, 9);
+INSERT INTO tamanho_modelo (ativo, created_at, updated_at, modelo_id, tamanho_id) VALUES(true, now(), now(), 4, 10);
+INSERT INTO tamanho_modelo (ativo, created_at, updated_at, modelo_id, tamanho_id) VALUES(true, now(), now(), 4, 11);
+INSERT INTO tamanho_modelo (ativo, created_at, updated_at, modelo_id, tamanho_id) VALUES(true, now(), now(), 4, 12);
+
 
 INSERT INTO status (descricao, created_at, updated_at, visivel_cliente) VALUES('Pedido Recebido', now(), now(), true);
 INSERT INTO status (descricao, created_at, updated_at, visivel_cliente) VALUES('Pedido Pago', now(), now(), true);
@@ -271,3 +298,4 @@ INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_
 INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10101111605', 'Classic Infantil', 'Amarelo Ouro', 'Tamanho 10', now(), now(), 4);
 INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10101111606', 'Classic Infantil', 'Amarelo Ouro', 'Tamanho 12', now(), now(), 4);
 INSERT INTO sku_dimona (sku, nome, cor, tamanho, created_at, updated_at, estilo_id) VALUES('10101111607', 'Classic Infantil', 'Amarelo Ouro', 'Tamanho 14', now(), now(), 4);
+

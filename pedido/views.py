@@ -119,8 +119,13 @@ class PedidoDetailView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         items = ItemPedido.objects.filter(pedido=self.object)
         eventos = EventoPedido.objects.filter(pedido=self.object)
-        url_rastreio = get_tracking_url(self.object.pedido_seller)[
-            'tracking_url']
+        tracking = get_tracking_url(self.object.pedido_seller)
+        try:
+            url_rastreio = tracking['tracking_url']
+        except:
+            enviar_mensagem('Erro ao buscar a URL de rastreio do pedido ' + str(self.object))
+            url_rastreio = ''
+        
 
         context['url_rastreio'] = url_rastreio
         context['eventos'] = eventos
