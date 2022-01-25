@@ -177,8 +177,8 @@ def webhook(request):
     payload = json.loads(request.body)
     payment_id = payload['id']
 
-    if payload['live_mode']:
-        enviar_mensagem(payload, payment_id, 'Webhook do Mercado pago')
+    # if payload['live_mode']:
+    enviar_mensagem(payload, payment_id, 'Webhook do Mercado pago (STAGE)')
 
     try:
         return atualizar_pagamento(payment_id)
