@@ -34,6 +34,7 @@ class PedidoFinalizadoMercadoPagoViewTest(TestCase):
         mercado_pago_id = '4990865-858e7361-f82b-4bdf-9532-16741d9d2a34'
         session['mercado_pago_id'] = mercado_pago_id
         session['carrinho'] = UUID_FAKE_CARRINHO
+        session['pedido_uuid'] = None
         session.save()
         pedido = get_fake_pedido()
 
@@ -53,6 +54,7 @@ class PedidoFinalizadoMercadoPagoViewTest(TestCase):
         mercado_pago_id = '4990865-858e7361-f82b-4bdf-9532-16741d9d2a34'
         session['mercado_pago_id'] = mercado_pago_id
         session['carrinho'] = UUID_FAKE_CARRINHO
+        session['pedido_uuid'] = None
         session.save()
         pedido = get_fake_pedido()
 

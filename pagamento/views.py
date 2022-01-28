@@ -12,7 +12,7 @@ from checkout.models import Carrinho, ItemCarrinho
 from pedido.models import Pedido
 from pedido.views import gerar_venda
 from usuario.models import Cliente, EnderecoCliente
-from services.mercadopago.mercadopago import create_preference, montar_payload_preference, get_payment, get_merchant_order
+from services.mercadopago.mercadopago import create_preference, montar_payload_preference, get_payment, get_merchant_order, get_pagamento_by_external_reference
 from services.dimona.api import get_frete
 from services.telegram.api import enviar_mensagem
 from .models import PagamentoMercadoPago
@@ -47,7 +47,7 @@ def pagamento(request):
 
     # monta o frete
     frete_items = get_frete(cep, quantidade_total)
-    valor_frete = 10.0
+    valor_frete = 15.0
     transportadora = ''
     delivery_method_id = 0
     if 'cotacao_frete' in request.session:
@@ -71,24 +71,40 @@ def pagamento(request):
     valor_frete = round(float(valor_frete), 2)
     valor_total = round(valor_carrinho + decimal.Decimal(valor_frete), 2)
 
-    # Cria o pedido
-    # TODO: todo F5 esta criando um novo pedido - arrumar
-    pedido = Pedido.objects.create(
-        user=user,
-        valor_total=valor_total,
-        valor_frete=valor_frete,
-        valor_items=valor_carrinho,
-        frete_id=delivery_method_id,
-        frete_nome=transportadora,
-        endereco_cliente=endereco
-    )
+    # Cria o pedido. Se pedido ja existe, apenas faz update
+    pedido = None
+    if 'pedido_uuid' in request.session:
+        try:
+            Pedido.objects.filter(
+                uuid=request.session['pedido_uuid']).update(
+                    user=user,
+                    valor_total=valor_total,
+                    valor_frete=valor_frete,
+                    valor_items=valor_carrinho,
+                    frete_id=delivery_method_id,
+                    frete_nome=transportadora,
+                    endereco_cliente=endereco,
+            )
+            pedido = Pedido.objects.get(uuid=request.session['pedido_uuid'])
+        except Exception as e:
+            enviar_mensagem(e, 'Erro view pagamento', 'Erro na hora de buscar ou um pedido existente')
 
-    # Cria o evento inicial
-    criar_evento(1, pedido)
+    if pedido is None:
+        pedido = Pedido.objects.create(
+            user=user,
+            valor_total=valor_total,
+            valor_frete=valor_frete,
+            valor_items=valor_carrinho,
+            frete_id=delivery_method_id,
+            frete_nome=transportadora,
+            endereco_cliente=endereco
+        )
+        # Cria o evento inicial
+        criar_evento(1, pedido)
 
     # Monta o payload para enviar pro mercado pago
     preference_data = montar_payload_preference(
-        request, pedido.id, items, cliente, endereco, valor_frete)
+        request, pedido.uuid, items, cliente, endereco, valor_frete)
 
     # Cria a preferencia no mercado pago
     preference = create_preference(preference_data)
@@ -96,6 +112,7 @@ def pagamento(request):
 
     # Atualiza informações na tabela de pagamento
     frase_padrao = 'PEDIDO_NAO_FINALIZADO'
+    PagamentoMercadoPago.objects.filter(pedido=pedido).delete()
     PagamentoMercadoPago.objects.create(
         pedido=pedido,
         mercado_pago_id=preference_id,
@@ -106,6 +123,7 @@ def pagamento(request):
 
     # TODO: toda vez que da F5 ele cria um novo pedido. Validar isso
     request.session['mercado_pago_id'] = preference_id
+    request.session['pedido_uuid'] = str(pedido.uuid)
 
     context = {
         'items': items,
@@ -160,7 +178,10 @@ def mp_notifications(request):
                     request.GET.get('topic'), request.GET.get('id')), 'IPN do Mercado pago')
                 return JsonResponse({"merchant_order": "merchant_order nao encontrado. "}, status=200)
 
-            payment_id = merchant_order['payments'][0]['id']
+            external_reference = merchant_order['external_reference']
+            datas = get_pagamento_by_external_reference(external_reference)
+
+            payment_id = datas['results'][0]['id']
         
         return atualizar_pagamento(payment_id)
     except PagamentoMercadoPago.DoesNotExist:

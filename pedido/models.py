@@ -1,3 +1,4 @@
+from tokenize import blank_re
 import uuid
 from django.contrib.auth.models import User
 from django.db import models
@@ -13,6 +14,7 @@ GATEWAY_PAGAMENTO = (
 
 class Pedido(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.PROTECT)
+    uuid = models.UUIDField(primary_key=False, editable=False, db_index=True, default=uuid.uuid4)
     endereco_cliente = models.ForeignKey(EnderecoCliente, on_delete=models.PROTECT, null=True)
     pago = models.BooleanField(default=False)
     valor_total = models.DecimalField(
