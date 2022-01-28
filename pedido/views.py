@@ -93,6 +93,7 @@ def pedido_finalizado_mercado_pago(request):
 
     del request.session['carrinho']
     del request.session['mercado_pago_id']
+    del request.session['pedido_uuid']
     Carrinho.objects.filter(uuid=carrinho_uuid).delete()
     ItemCarrinho.objects.filter(carrinho=carrinho).delete()
 

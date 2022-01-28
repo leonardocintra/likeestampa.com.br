@@ -75,6 +75,9 @@ def pagamento(request):
     pedido = None
     if 'pedido_uuid' in request.session:
         try:
+            pedido = Pedido.objects.get(uuid=request.session['pedido_uuid'])
+            if pedido.session_ativa == False:
+                del request.session['pedido_uuid']
             Pedido.objects.filter(
                 uuid=request.session['pedido_uuid']).update(
                     user=user,
@@ -85,9 +88,8 @@ def pagamento(request):
                     frete_nome=transportadora,
                     endereco_cliente=endereco,
             )
-            pedido = Pedido.objects.get(uuid=request.session['pedido_uuid'])
         except Exception as e:
-            enviar_mensagem(e, 'Erro view pagamento', 'Erro na hora de buscar ou um pedido existente')
+            pedido = None
 
     if pedido is None:
         pedido = Pedido.objects.create(
@@ -97,10 +99,13 @@ def pagamento(request):
             valor_items=valor_carrinho,
             frete_id=delivery_method_id,
             frete_nome=transportadora,
-            endereco_cliente=endereco
+            endereco_cliente=endereco,
+            session_ativa=True
         )
         # Cria o evento inicial
         criar_evento(1, pedido)
+
+    request.session['pedido_uuid'] = str(pedido.uuid)
 
     # Monta o payload para enviar pro mercado pago
     preference_data = montar_payload_preference(
@@ -121,9 +126,7 @@ def pagamento(request):
         payment_method_id=frase_padrao
     )
 
-    # TODO: toda vez que da F5 ele cria um novo pedido. Validar isso
     request.session['mercado_pago_id'] = preference_id
-    request.session['pedido_uuid'] = str(pedido.uuid)
 
     context = {
         'items': items,
@@ -141,21 +144,21 @@ def pagamento(request):
 def atualizar_pagamento(payment_id):
     obj_mp = get_payment(payment_id)
 
-    if obj_mp['status'] == 'approved':
-        PagamentoMercadoPago.objects.filter(payment_id=payment_id).update(
-            mercado_pago_status=obj_mp['status'],
-            mercado_pago_status_detail=obj_mp['status_detail'],
-        )
-        pagamento_mp = PagamentoMercadoPago.objects.get(payment_id=payment_id)
-        gerar_venda(pagamento_mp=pagamento_mp)
-
     if obj_mp['status'] == 404:
         return JsonResponse({"pagamento": "nao-encontrado"}, status=200)
 
-    if obj_mp['status'] != 'approved':
+    PagamentoMercadoPago.objects.filter(payment_id=payment_id).update(
+        mercado_pago_status=obj_mp['status'],
+        mercado_pago_status_detail=obj_mp['status_detail'],
+    )
+
+    if obj_mp['status'] == 'approved':
+        pagamento_mp = PagamentoMercadoPago.objects.get(payment_id=payment_id)
+        gerar_venda(pagamento_mp=pagamento_mp)
+        return JsonResponse({"pagamento": "aprovado"}, status=201)
+    else:
         return JsonResponse({"pagamento": "nao-aprovado"}, status=200)
 
-    return JsonResponse({"pagamento": "aprovado"}, status=201)
 
 
 @require_POST
@@ -182,6 +185,10 @@ def mp_notifications(request):
             datas = get_pagamento_by_external_reference(external_reference)
 
             payment_id = datas['results'][0]['id']
+
+            Pedido.objects.filter(uuid=external_reference).update(session_ativa=False)
+            pedido = Pedido.objects.get(uuid=external_reference)
+            PagamentoMercadoPago.objects.filter(pedido=pedido).update(payment_id=payment_id)
         
         return atualizar_pagamento(payment_id)
     except PagamentoMercadoPago.DoesNotExist:

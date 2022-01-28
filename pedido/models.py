@@ -1,4 +1,3 @@
-from tokenize import blank_re
 import uuid
 from django.contrib.auth.models import User
 from django.db import models
@@ -29,6 +28,7 @@ class Pedido(models.Model):
     frete_nome = models.CharField(max_length=100, null=True)
     pedido_seller = models.CharField(max_length=100, null=True)
     request_seller = models.JSONField('Request feito no seller', null=True, blank=True)
+    session_ativa = models.BooleanField(default=False)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
