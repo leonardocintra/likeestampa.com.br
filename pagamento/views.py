@@ -194,7 +194,7 @@ def mp_notifications(request):
     except PagamentoMercadoPago.DoesNotExist:
         return JsonResponse({"payment": "not found"}, status=200)
     except:
-        enviar_mensagem('ERRO ao receber IPN: {0}'.format(str(request)))
+        enviar_mensagem('ERRO ao receber IPN (STAGE): {0}'.format(str(request)))
         return JsonResponse({"payment": "not found"}, status=200)
 
 
