@@ -76,4 +76,5 @@ class PedidoFinalizadoMercadoPagoViewTest(TestCase):
         
         pedido = Pedido.objects.get(pk=pedido.id)
         self.assertIsNotNone(pedido.pedido_seller)
+        self.assertIsNotNone(pedido.request_seller)
         self.assertTrue(7, len(pedido.pedido_seller))

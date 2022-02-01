@@ -173,6 +173,7 @@ def mp_notifications(request):
 
         if request.GET.get('topic') == 'merchant_order':
             merchant_order = get_merchant_order(request.GET.get('id'))
+            enviar_mensagem(merchant_order, 'Merchant Order')
 
             if merchant_order['status'] == 404:
                 enviar_mensagem('IPN Merchant Order não encontrado: {0} - ID: {1}'.format(
