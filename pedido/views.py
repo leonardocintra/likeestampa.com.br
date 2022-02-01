@@ -27,8 +27,6 @@ def pedido_finalizado_mercado_pago(request):
     del request.session['carrinho']
     del request.session['mercado_pago_id']
     del request.session['pedido_uuid']
-    carrinho = Carrinho.objects.get(uuid=carrinho_uuid)    
-    ItemCarrinho.objects.filter(carrinho=carrinho).delete()
     Carrinho.objects.filter(uuid=carrinho_uuid).delete()
     return redirect("pedido:pedido", pk=pagamento_mp.pedido.id)
 

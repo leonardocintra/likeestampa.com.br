@@ -16,7 +16,7 @@ def cliente(request):
         return HttpResponseRedirect('/')
     cliente = Cliente.objects.get(user=user)
     enderecos = EnderecoCliente.objects.filter(cliente=cliente)
-    pedidos = Pedido.objects.filter(endereco_cliente__in=enderecos)
+    pedidos = Pedido.objects.filter(endereco_cliente__in=enderecos).order_by('-created_at')
     status_pedido = EventoPedido.objects.filter(pedido__in=pedidos)
     context = {
         'cliente': cliente,
