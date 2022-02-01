@@ -60,7 +60,7 @@ def __montar_payload_payer(cliente, endereco):
     }
 
 
-def montar_payload_preference(request, pedido_id, items, cliente, endereco, valor_frete):
+def montar_payload_preference(request, pedido_uuid, items, cliente, endereco, valor_frete):
 
     item_data = __montar_payload_items(items)
     payer = __montar_payload_payer(cliente, endereco)
@@ -72,7 +72,7 @@ def montar_payload_preference(request, pedido_id, items, cliente, endereco, valo
         "auto_return": "all",
         "items": item_data,
         "statement_descriptor": "LIKEESTAMPA",
-        "external_reference": "LIKEESTAMPA-" + str(pedido_id),
+        "external_reference": str(pedido_uuid),
         "installments": 1,
         "excluded_payment_types": [
             {
@@ -105,6 +105,11 @@ def get_merchant_order(merchant_order_id):
 
 def get_preference(preference_id):
     url = 'https://api.mercadopago.com/checkout/preferences/' + str(preference_id)
+    r = requests.get(url, headers=headers)
+    return json.loads(r.text)
+
+def get_pagamento_by_external_reference(external_reference):
+    url = 'https://api.mercadopago.com/v1/payments/search?sort=date_created&criteria=desc&external_reference=' + str(external_reference)
     r = requests.get(url, headers=headers)
     return json.loads(r.text)
 

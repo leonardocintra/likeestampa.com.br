@@ -13,6 +13,7 @@ GATEWAY_PAGAMENTO = (
 
 class Pedido(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.PROTECT)
+    uuid = models.UUIDField(primary_key=False, editable=False, db_index=True, default=uuid.uuid4)
     endereco_cliente = models.ForeignKey(EnderecoCliente, on_delete=models.PROTECT, null=True)
     pago = models.BooleanField(default=False)
     valor_total = models.DecimalField(
@@ -27,6 +28,7 @@ class Pedido(models.Model):
     frete_nome = models.CharField(max_length=100, null=True)
     pedido_seller = models.CharField(max_length=100, null=True)
     request_seller = models.JSONField('Request feito no seller', null=True, blank=True)
+    session_ativa = models.BooleanField(default=False)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
