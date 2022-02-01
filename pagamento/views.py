@@ -9,8 +9,9 @@ from django.views.decorators.http import require_POST
 
 from evento.models import criar_evento
 from checkout.models import Carrinho, ItemCarrinho
-from pedido.models import Pedido
-from pedido.views import gerar_venda
+from pagamento.business import atualizar_pagamento_mp
+from pedido.business import _gerar_venda, concluir_pedido
+from pedido.models import ItemPedido, Pedido
 from usuario.models import Cliente, EnderecoCliente
 from services.mercadopago.mercadopago import create_preference, montar_payload_preference, get_payment, get_merchant_order, get_pagamento_by_external_reference
 from services.dimona.api import get_frete
@@ -19,6 +20,20 @@ from .models import PagamentoMercadoPago
 import decimal
 import json
 
+def _buscar_pedido_by_external_reference(external_reference):
+    return Pedido.objects.get(uuid=external_reference)
+
+def _create_items_pedido(pedido, items):
+    ItemPedido.objects.filter(pedido=pedido).delete()
+    for item in items:
+        ItemPedido.objects.create(
+            pedido=pedido,
+            produto=item.produto,
+            cor=item.cor,
+            tamanho=item.tamanho,
+            modelo_produto=item.modelo_produto,
+            quantidade=item.quantidade
+        )
 
 @login_required
 def pagamento(request):
@@ -105,6 +120,7 @@ def pagamento(request):
         # Cria o evento inicial
         criar_evento(1, pedido)
 
+    _create_items_pedido(pedido, items)
     request.session['pedido_uuid'] = str(pedido.uuid)
 
     # Monta o payload para enviar pro mercado pago
@@ -141,37 +157,19 @@ def pagamento(request):
     return render(request, 'pagamento/pagamento.html', context)
 
 
-def atualizar_pagamento(payment_id):
-    obj_mp = get_payment(payment_id)
-
-    if obj_mp['status'] == 404:
-        return JsonResponse({"pagamento": "nao-encontrado"}, status=200)
-
-    PagamentoMercadoPago.objects.filter(payment_id=payment_id).update(
-        mercado_pago_status=obj_mp['status'],
-        mercado_pago_status_detail=obj_mp['status_detail'],
-    )
-
-    if obj_mp['status'] == 'approved':
-        pagamento_mp = PagamentoMercadoPago.objects.get(payment_id=payment_id)
-        gerar_venda(pagamento_mp=pagamento_mp)
-        return JsonResponse({"pagamento": "aprovado"}, status=201)
-    else:
-        return JsonResponse({"pagamento": "nao-aprovado"}, status=200)
-
-
-
 @require_POST
 @csrf_exempt
 def mp_notifications(request):
     # Notificações do Mercado Pago IPN
+    # Mercado Pago nao notificica em STAGE, entao tem que fazer os POST na mão
     try:
         if request.GET.get('topic') != 'payment' and request.GET.get('topic') != 'merchant_order':
-            enviar_mensagem('Recebeu uma notificação IPN do mercado pago mas não foi um topic payment: {0} - ID: {1}'.format(
+            enviar_mensagem('Recebeu uma notificação IPN do mercado pago mas não foi um topic mapeado: {0} - ID: {1}'.format(
                 request.GET.get('topic'), request.GET.get('id')), 'IPN do Mercado pago')
             return JsonResponse({"erro": "topico nao mapeado"}, status=200)
 
         payment_id = request.GET.get('id')
+        pedido = None
 
         if request.GET.get('topic') == 'merchant_order':
             merchant_order = get_merchant_order(request.GET.get('id'))
@@ -184,36 +182,39 @@ def mp_notifications(request):
             external_reference = merchant_order['external_reference']
             datas = get_pagamento_by_external_reference(external_reference)
 
+            # TODO: as vezes pode ter mais de um resuts. Entao fazer um loog para ppegar sempre o ultimo
             payment_id = datas['results'][0]['id']
-
+            
             Pedido.objects.filter(uuid=external_reference).update(session_ativa=False)
-            pedido = Pedido.objects.get(uuid=external_reference)
+            pedido = _buscar_pedido_by_external_reference(external_reference)
             PagamentoMercadoPago.objects.filter(pedido=pedido).update(payment_id=payment_id)
-        
-        return atualizar_pagamento(payment_id)
+
+        payment = get_payment(payment_id)
+        if payment['status'] == 404:
+            return JsonResponse({"pagamento": "nao-encontrado"}, status=200)
+
+        atualizar_pagamento_mp(payment)
+        try:
+            if pedido is None:
+                pedido = _buscar_pedido_by_external_reference(payment['external_reference'])
+            concluir_pedido(pedido, payment_id)
+        except Exception as e:
+            print(e)
+            return JsonResponse({"pagamento": "ocorreu um erro no concluir-pedido"}, status=201)
+
+        return JsonResponse({"pagamento": "dado-recebido"}, status=201)
+
     except PagamentoMercadoPago.DoesNotExist:
-        return JsonResponse({"payment": "not found"}, status=200)
-    except:
-        enviar_mensagem('ERRO ao receber IPN (STAGE): {0}'.format(str(request)))
-        return JsonResponse({"payment": "not found"}, status=200)
+        return JsonResponse({"payment": "pagamento não encontrado"}, status=200)
+    except Exception as ex:
+        enviar_mensagem('ERRO ao receber IPN: {0} - {1}'.format(str(request)), ex)
+        return JsonResponse({"payment": "ocorreu um excetipon ao processar"}, status=200)
 
 
 @require_POST
 @csrf_exempt
 def webhook(request):
     # Notificações do Mercado Pago Webhook
-    payload = json.loads(request.body)
-    payment_id = payload['id']
-
-    # if payload['live_mode']:
-    enviar_mensagem(payload, payment_id, 'Webhook do Mercado pago (STAGE)')
-
-    try:
-        return atualizar_pagamento(payment_id)
-    except PagamentoMercadoPago.DoesNotExist:
-        enviar_mensagem('Pagamento não encontrato apos receber um Webhook do mercado pago',
-                        payment_id, 'Webhook do Mercado pago')
-        return JsonResponse({"foo": "bar"}, status=200)
-    except:
-        enviar_mensagem('ERRO ao receber Webhook: {0}'.format(request.body))
-        return JsonResponse({"foo": "bar"}, status=200)
+    # Repetir mesma regra do IPN
+    enviar_mensagem('MENSAGEM Webhook: {0}'.format(str(request)))
+    return JsonResponse({"pagamento": "webhook-nao-configurado"}, status=200)

@@ -68,12 +68,13 @@ class PagamentoViewTest(TestCase):
         self.assertEqual(1, EventoPedido.objects.count())
 
 
-class MpNotificationsTest(TestCase):
+class MercadoPagoNotificationsTest(TestCase):
     def setUp(self):
+        create_fakes_status()
         self.client = Client()
 
     @override_settings(DEBUG=True)
-    def test_notificacao_mp_ipn_pagamento_nao_encontrado(self):
+    def test_notificacao_mp_ipn_pagamento_mp_nao_encontrado(self):
         response = self.client.post(
             r('pagamento:mp_notifications') + '?topic=payment&id=123456789')
         self.assertJSONEqual(response.content, {"pagamento": "nao-encontrado"})
@@ -82,14 +83,16 @@ class MpNotificationsTest(TestCase):
     @override_settings(DEBUG=True)
     def test_notificacao_mp_ipn_status_approved(self):
         pedido = get_fake_pedido()
+        pedido.uuid = '0d994c6f-aebe-44eb-98ce-73d81e2b477a'
+        pedido.save()
         PagamentoMercadoPago.objects.create(
             pedido=pedido,
             mercado_pago_id='qualquercoisa',
-            payment_id=1240157386,
+            payment_id=1245751670,
         )
         response = self.client.post(
-            r('pagamento:mp_notifications') + '?topic=payment&id=1240157386')
-        self.assertJSONEqual(response.content, {"pagamento": "aprovado"})
+            r('pagamento:mp_notifications') + '?topic=payment&id=1245751670')
+        self.assertJSONEqual(response.content, {"pagamento": "dado-recebido"})
         self.assertEqual(201, response.status_code)
 
     @override_settings(DEBUG=True)
@@ -110,5 +113,5 @@ class MpNotificationsTest(TestCase):
         }
         response = self.client.post(
             r('pagamento:webhook'), json.dumps(data), "application/json")
-        self.assertJSONEqual(response.content, {"pagamento": "nao-encontrado"})
+        self.assertJSONEqual(response.content, {"pagamento": "webhook-nao-configurado"})
         self.assertEqual(200, response.status_code)

@@ -82,7 +82,6 @@ def create_payload_order(order_id, cliente, endereco, items, delivery_method_id)
             }
         }
     )
-
     Pedido.objects.filter(pk=order_id).update(request_seller=payload)
 
 
