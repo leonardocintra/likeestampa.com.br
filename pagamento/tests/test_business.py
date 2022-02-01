@@ -18,10 +18,13 @@ class ConcluirPedidoTest(TestCase):
             mercado_pago_id='823948asakfjaslkjfalssasa',
             payment_id=1240157386,
         )
+        concluir_pedido(self.pedido, 1240157386)
     
     def test_pedido_existe(self):    
-        concluir_pedido(self.pedido, 1240157386)
         self.assertEqual(1, Pedido.objects.count())
+    
+    def test_pedido_seller_foi_gerado(self):
+        self.assertIsNotNone(self.pedido.request_seller)
     
     def test_items_do_pedido_criados(self):
         items = ItemPedido.objects.filter(pedido=self.pedido)

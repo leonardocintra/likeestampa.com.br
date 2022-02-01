@@ -8,13 +8,14 @@ from services.telegram.api import enviar_mensagem
 from usuario.models import Cliente, EnderecoCliente
 
 
-def _gerar_venda(pagamento_mp, pedido):
+def _gerar_venda(pagamento_mp):
     # TODO: esta dando erro aqui para boletos
     try:
         enviar_mensagem('Pedido {0} gerando compra dimona ...'.format(str(
             pagamento_mp.pedido.id)), 'Pedido sendo realizado', str(pagamento_mp.pedido.id))
         dimona = None
 
+        pedido = Pedido.objects.get(pk=pagamento_mp.pedido.id)
         if pedido.pago:
             enviar_mensagem('Pedido {0} ja foi pago e gerado!'.format(str(
                 pagamento_mp.pedido.id)), 'Pedido ja consta pago', str(pagamento_mp.pedido.id))
@@ -51,7 +52,7 @@ def concluir_pedido(pedido, payment_id):
         pago = True
         criar_evento(2, pedido)  # Pedido Pago
         criar_evento(3, pedido)  # Pedido em producao
-        _gerar_venda(pagamento, pedido)
+        _gerar_venda(pagamento)
     else:
         criar_evento(6, pedido)  # Aguardando pagamento
     envia_email(cliente, pedido.id, pago, items)
