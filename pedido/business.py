@@ -34,18 +34,26 @@ def _gerar_venda(pagamento_mp):
 
 def concluir_pedido(pedido, payment_id):
     # Aqui finalizamos o pedido (indepentende de estar pago)
+    # Verifica se o pedido ja foi gerado para o seller
+    if pedido.pedido_seller:
+        return
+    
+    Carrinho.objects.filter(pedido=pedido).delete()    
     pago = False
     cliente = Cliente.objects.get(user=pedido.user)
-    enderecos = EnderecoCliente.objects.filter(cliente=cliente)
     items = ItemPedido.objects.filter(pedido=pedido)
-    pagamento = PagamentoMercadoPago.objects.get(pedido=pedido)
-    Carrinho.objects.filter(pedido=pedido).delete()
     
-    if not pedido.pedido_seller:
-        # DIMONA: cria o payload (request)
+    # Verifica se o pedido ja tem um payload montado para quando o pedido receber o pagamento
+    if not pedido.request_seller:
+        enderecos = EnderecoCliente.objects.filter(cliente=cliente)
         create_payload_order(pedido.id, cliente,
                             enderecos[0], items, pedido.frete_id)
+    
 
+    # TODO: precisa enviar evento de cancelado quando o boleto nao foi pago
+    # TODO: precisa enviar evento de pagamento com erro em caso de cartao ou pix
+
+    pagamento = PagamentoMercadoPago.objects.get(pedido=pedido)
     if pagamento.mercado_pago_status == 'approved' and confirma_pagamento(payment_id):
         pago = True
         criar_evento(2, pedido)  # Pedido Pago
