@@ -9,6 +9,7 @@ from pedido.models import ItemPedido, Pedido
 from pedido.tests.test_model import get_fake_pedido
 
 
+@override_settings(DEBUG=True)
 class ConcluirPedidoTest(TestCase):
     def setUp(self):
         create_fakes_status()
@@ -22,24 +23,19 @@ class ConcluirPedidoTest(TestCase):
             payment_id=1240157386,
         )
         get_fake_carrinho_com_items()
-        Carrinho.objects.filter(uuid=UUID_FAKE_CARRINHO).update(pedido=self.pedido)
+        Carrinho.objects.filter(
+            uuid=UUID_FAKE_CARRINHO).update(pedido=self.pedido)
         concluir_pedido(self.pedido, 1240157386)
-    
-    @override_settings(DEBUG=True)
-    def test_pedido_existe(self):    
+
+    def test_pedido_existe(self):
         self.assertEqual(1, Pedido.objects.count())
-    
-    @override_settings(DEBUG=True)
+
     def test_pedido_seller_foi_gerado(self):
         self.assertIsNotNone(self.pedido.request_seller)
-    
-    @override_settings(DEBUG=True)
+
     def test_items_do_pedido_criados(self):
         items = ItemPedido.objects.filter(pedido=self.pedido)
         self.assertEqual(len(items), ItemPedido.objects.count())
-    
-    @override_settings(DEBUG=True)
+
     def test_carrinho_foi_deletado(self):
         self.assertEqual(0, Carrinho.objects.count())
-        
-    

@@ -8,6 +8,7 @@ def enviar_mensagem(mensagem, titulo='*Like Estampa*', subtitulo='_mensagem impo
     text = '*{0}* \n _{1}_ \n `{2}`'.format(titulo, subtitulo, mensagem)
     if settings.DEBUG:
         print(text)
+        return
 
     CHAT_ID = -481527516
     bot.send_message(chat_id=CHAT_ID, text=text,

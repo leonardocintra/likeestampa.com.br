@@ -15,22 +15,17 @@ def _gerar_venda(pagamento_mp):
         enviar_mensagem('Pedido {0} gerando compra dimona ...'.format(str(
             pagamento_mp.pedido.id)), 'Pedido sendo realizado', str(pagamento_mp.pedido.id))
         dimona = None
-
         pedido = Pedido.objects.get(pk=pagamento_mp.pedido.id)
-        if pedido.pago:
-            enviar_mensagem('Pedido {0} ja foi pago e gerado!'.format(str(
-                pagamento_mp.pedido.id)), 'Pedido ja consta pago', str(pagamento_mp.pedido.id))
-        else:
-            dimona = create_order(pedido.request_seller)
-            dimona = dimona['order']
+        dimona = create_order(pedido.request_seller)
+        dimona = dimona['order']
 
-            # Atualiza os dados do pagamento no pedido (pago e o usuario)
-            Pedido.objects.filter(pk=pagamento_mp.pedido.id).update(
-                pago=True,
-                pedido_seller=dimona
-            )
-            enviar_mensagem('Pedido {0} - Dimona: {1} criado com sucesso!'.format(str(
-                pagamento_mp.pedido.id), dimona), 'Pedido realizado', str(pagamento_mp.pedido.id))
+        # Atualiza os dados do pagamento no pedido (pago e o usuario)
+        Pedido.objects.filter(pk=pagamento_mp.pedido.id).update(
+            pago=True,
+            pedido_seller=dimona
+        )
+        enviar_mensagem('Pedido {0} - Dimona: {1} criado com sucesso!'.format(str(
+            pagamento_mp.pedido.id), dimona), 'Pedido realizado', str(pagamento_mp.pedido.id))
     except Exception as e:
         enviar_mensagem('Erro ao gerar venda: ' + str(e))
         enviar_mensagem(
@@ -46,9 +41,10 @@ def concluir_pedido(pedido, payment_id):
     pagamento = PagamentoMercadoPago.objects.get(pedido=pedido)
     Carrinho.objects.filter(pedido=pedido).delete()
     
-    # DIMONA: cria o payload (request)
-    create_payload_order(pedido.id, cliente,
-                        enderecos[0], items, pedido.frete_id)
+    if not pedido.pedido_seller:
+        # DIMONA: cria o payload (request)
+        create_payload_order(pedido.id, cliente,
+                            enderecos[0], items, pedido.frete_id)
 
     if pagamento.mercado_pago_status == 'approved' and confirma_pagamento(payment_id):
         pago = True

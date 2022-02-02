@@ -13,17 +13,18 @@ from pedido.tests.test_model import get_fake_pedido
 from pagamento.models import PagamentoMercadoPago
 
 
+@override_settings(DEBUG=True)
 class PagamentoViewNaoAutenticado(TestCase):
     def setUp(self):
         self.client = Client()
 
-    @override_settings(DEBUG=True)
     def test_usuario_nao_autenticado(self):
         response = self.client.get(r('pagamento:pagamento'))
         self.assertTrue(200, response.status_code)
         self.assertRedirects(response, '/accounts/login/?next=/pagamento/')
 
 
+@override_settings(DEBUG=True)
 class PagamentoViewTest(TestCase):
     def setUp(self):
         get_fake_carrinho_com_items()
@@ -34,14 +35,12 @@ class PagamentoViewTest(TestCase):
         get_fake_endereco(cliente)
         self.client.login(username='leonardo', password='123kkkuuu#')
 
-    @override_settings(DEBUG=True)
     def test_carrinho_nao_esta_na_session(self):
         response = self.client.get(r('pagamento:pagamento'))
         self.assertTrue(200, response.status_code)
         self.assertRedirects(response, r('core:index'))
         self.assertRedirects(response, '/')
 
-    @override_settings(DEBUG=True)
     def test_pagamento(self):
         Pedido.objects.all().delete()
         session = self.client.session
@@ -52,7 +51,6 @@ class PagamentoViewTest(TestCase):
         self.assertTrue(200, response.status_code)
         self.assertEqual(1, Pedido.objects.count())
 
-    @override_settings(DEBUG=True)
     def test_pagamento_refresh_mais_de_uma_x_nao_pode_criar_novo_pedido(self):
         Pedido.objects.all().delete()
         EventoPedido.objects.all().delete()
@@ -72,7 +70,6 @@ class PagamentoViewTest(TestCase):
         self.assertEqual(1, Pedido.objects.count())
         self.assertEqual(1, EventoPedido.objects.count())
 
-    @override_settings(DEBUG=True)
     def test_carrinho_contem_id_pedido(self):
         Pedido.objects.all().delete()
         session = self.client.session
@@ -87,19 +84,18 @@ class PagamentoViewTest(TestCase):
         self.assertIsNotNone(carrinho.pedido)
 
 
+@override_settings(DEBUG=True)
 class MercadoPagoNotificationsTest(TestCase):
     def setUp(self):
         create_fakes_status()
         self.client = Client()
 
-    @override_settings(DEBUG=True)
     def test_notificacao_mp_ipn_pagamento_mp_nao_encontrado(self):
         response = self.client.post(
             r('pagamento:mp_notifications') + '?topic=payment&id=123456789')
         self.assertJSONEqual(response.content, {"pagamento": "nao-encontrado"})
         self.assertEqual(200, response.status_code)
 
-    @override_settings(DEBUG=True)
     def test_notificacao_mp_ipn_status_approved(self):
         pedido = get_fake_pedido()
         pedido.uuid = '0d994c6f-aebe-44eb-98ce-73d81e2b477a'
@@ -114,7 +110,6 @@ class MercadoPagoNotificationsTest(TestCase):
         self.assertJSONEqual(response.content, {"pagamento": "dado-recebido"})
         self.assertEqual(201, response.status_code)
 
-    @override_settings(DEBUG=True)
     def test_notificacao_mp_webhook_pagamento_nao_encontrado(self):
         data = {
             "id": 16965220292,
