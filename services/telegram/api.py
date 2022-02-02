@@ -1,7 +1,9 @@
 import telegram
 from django.conf import settings
 
-bot = telegram.Bot(token='1903499437:AAEmERka8PLttOZCzs9XqmUNVBVw2U4-z2c')
+
+TELEGRAM_TOKEN = settings.TELEGRAM_TOKEN
+bot = telegram.Bot(token=TELEGRAM_TOKEN)
 
 
 def enviar_mensagem(mensagem, titulo='*Like Estampa*', subtitulo='_mensagem importante_'):

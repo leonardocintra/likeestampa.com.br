@@ -6,10 +6,11 @@ from catalogo.models import SkuDimona
 from pedido.models import Pedido
 from services.telegram.api import enviar_mensagem
 
+
 URL_DIMONA = "https://camisadimona.com.br/api/v2"
 
 HEADERS = {
-    'api-key': 'f9bb66ac5feaebd7b97206198866a898',
+    'api-key': settings.DIMONA_KEY,
     'Accept': 'application/json',
     'Content-Type': 'application/json'
 }

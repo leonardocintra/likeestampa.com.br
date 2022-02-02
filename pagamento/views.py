@@ -10,7 +10,7 @@ from django.views.decorators.http import require_POST
 from evento.models import criar_evento
 from checkout.models import Carrinho, ItemCarrinho
 from pagamento.business import atualizar_pagamento_mp
-from pedido.business import _gerar_venda, concluir_pedido
+from pedido.business import concluir_pedido
 from pedido.models import ItemPedido, Pedido
 from usuario.models import Cliente, EnderecoCliente
 from services.mercadopago.mercadopago import create_preference, montar_payload_preference, get_payment, get_merchant_order, get_pagamento_by_external_reference
