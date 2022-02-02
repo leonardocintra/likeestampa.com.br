@@ -1,3 +1,4 @@
+from checkout.models import Carrinho
 from evento.models import criar_evento
 from pagamento.models import PagamentoMercadoPago
 from pedido.email import envia_email
@@ -43,6 +44,7 @@ def concluir_pedido(pedido, payment_id):
     enderecos = EnderecoCliente.objects.filter(cliente=cliente)
     items = ItemPedido.objects.filter(pedido=pedido)
     pagamento = PagamentoMercadoPago.objects.get(pedido=pedido)
+    Carrinho.objects.filter(pedido=pedido).delete()
     
     # DIMONA: cria o payload (request)
     create_payload_order(pedido.id, cliente,

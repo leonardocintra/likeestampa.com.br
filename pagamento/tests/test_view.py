@@ -2,6 +2,7 @@ import json
 from django.test import TestCase, Client
 from django.test.utils import override_settings
 from django.urls import reverse as r
+from checkout.models import Carrinho
 from checkout.tests.test_model import get_fake_carrinho_com_items, UUID_FAKE_CARRINHO
 from evento.models import EventoPedido
 from pedido.models import Pedido
@@ -16,6 +17,7 @@ class PagamentoViewNaoAutenticado(TestCase):
     def setUp(self):
         self.client = Client()
 
+    @override_settings(DEBUG=True)
     def test_usuario_nao_autenticado(self):
         response = self.client.get(r('pagamento:pagamento'))
         self.assertTrue(200, response.status_code)
@@ -32,12 +34,14 @@ class PagamentoViewTest(TestCase):
         get_fake_endereco(cliente)
         self.client.login(username='leonardo', password='123kkkuuu#')
 
+    @override_settings(DEBUG=True)
     def test_carrinho_nao_esta_na_session(self):
         response = self.client.get(r('pagamento:pagamento'))
         self.assertTrue(200, response.status_code)
         self.assertRedirects(response, r('core:index'))
         self.assertRedirects(response, '/')
 
+    @override_settings(DEBUG=True)
     def test_pagamento(self):
         Pedido.objects.all().delete()
         session = self.client.session
@@ -47,7 +51,8 @@ class PagamentoViewTest(TestCase):
         response = self.client.get(r('pagamento:pagamento'))
         self.assertTrue(200, response.status_code)
         self.assertEqual(1, Pedido.objects.count())
-    
+
+    @override_settings(DEBUG=True)
     def test_pagamento_refresh_mais_de_uma_x_nao_pode_criar_novo_pedido(self):
         Pedido.objects.all().delete()
         EventoPedido.objects.all().delete()
@@ -66,6 +71,20 @@ class PagamentoViewTest(TestCase):
         self.assertTrue(200, response.status_code)
         self.assertEqual(1, Pedido.objects.count())
         self.assertEqual(1, EventoPedido.objects.count())
+
+    @override_settings(DEBUG=True)
+    def test_carrinho_contem_id_pedido(self):
+        Pedido.objects.all().delete()
+        session = self.client.session
+        session['carrinho'] = UUID_FAKE_CARRINHO
+        session.save()
+
+        response = self.client.get(r('pagamento:pagamento'))
+        self.assertTrue(200, response.status_code)
+        self.assertEqual(1, Pedido.objects.count())
+        self.assertEqual(1, Carrinho.objects.count())
+        carrinho = Carrinho.objects.get(uuid=UUID_FAKE_CARRINHO)
+        self.assertIsNotNone(carrinho.pedido)
 
 
 class MercadoPagoNotificationsTest(TestCase):
@@ -113,5 +132,6 @@ class MercadoPagoNotificationsTest(TestCase):
         }
         response = self.client.post(
             r('pagamento:webhook'), json.dumps(data), "application/json")
-        self.assertJSONEqual(response.content, {"pagamento": "webhook-nao-configurado"})
+        self.assertJSONEqual(response.content, {
+                             "pagamento": "webhook-nao-configurado"})
         self.assertEqual(200, response.status_code)

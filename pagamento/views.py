@@ -141,7 +141,7 @@ def pagamento(request):
         mercado_pago_status_detail=frase_padrao,
         payment_method_id=frase_padrao
     )
-
+    Carrinho.objects.filter(uuid=uuid).update(pedido=pedido)
     request.session['mercado_pago_id'] = preference_id
 
     context = {
@@ -173,7 +173,7 @@ def mp_notifications(request):
 
         if request.GET.get('topic') == 'merchant_order':
             merchant_order = get_merchant_order(request.GET.get('id'))
-            enviar_mensagem(merchant_order['id'], 'Merchant Order')
+            enviar_mensagem(merchant_order['id'], 'Merchant Order', 'POST IPN MERCADO PAGO')
 
             if merchant_order['status'] == 404:
                 enviar_mensagem('IPN Merchant Order não encontrado: {0} - ID: {1}'.format(
@@ -181,13 +181,17 @@ def mp_notifications(request):
                 return JsonResponse({"merchant_order": "merchant_order nao encontrado. "}, status=200)
 
             external_reference = merchant_order['external_reference']
+            pedido = _buscar_pedido_by_external_reference(external_reference)
+            if not pedido:
+                enviar_mensagem(external_reference, 'Pedido não encontrado', 'External Exchange')
+                return JsonResponse({"pedido": "nao-encontrado"}, status=200)
+            
             datas = get_pagamento_by_external_reference(external_reference)
 
             # TODO: as vezes pode ter mais de um resuts. Entao fazer um loog para ppegar sempre o ultimo
             payment_id = datas['results'][0]['id']
             
             Pedido.objects.filter(uuid=external_reference).update(session_ativa=False)
-            pedido = _buscar_pedido_by_external_reference(external_reference)
             PagamentoMercadoPago.objects.filter(pedido=pedido).update(payment_id=payment_id)
 
         payment = get_payment(payment_id)
