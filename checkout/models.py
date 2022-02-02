@@ -1,12 +1,14 @@
 import uuid
 from django.db import models
 from catalogo.models import Cor, Produto, ModeloProduto, Tamanho
+from pedido.models import Pedido
 
 
 class Carrinho(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4)
     abandonado = models.BooleanField(default=True)
     finalizado = models.BooleanField(default=False)
+    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, null=True)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
 

@@ -1,4 +1,4 @@
-from django.test import TestCase, Client
+from django.test import TestCase, Client, override_settings
 from django.urls import reverse
 from checkout.models import Carrinho, ItemCarrinho
 
@@ -11,6 +11,7 @@ class CarrinhoViewClienteNaoAutenticadoTest(TestCase):
         self.client = Client()
         self.response = self.client.get(reverse('checkout:carrinho'))
 
+    @override_settings(DEBUG=True)
     def test_carrinho_vazio(self):
         quantidade_item = self.response.context['quantidade_item']
         valor_carrinho = self.response.context['valor_carrinho']
@@ -22,14 +23,17 @@ class CarrinhoViewClienteNaoAutenticadoTest(TestCase):
         self.assertContains(
             self.response, "Adicione produtos para calular o frete")
 
+    @override_settings(DEBUG=True)
     def test_template_correto(self):
         self.assertEqual(200, self.response.status_code)
         self.assertTemplateUsed(self.response, 'checkout/carrinho.html')
 
+    @override_settings(DEBUG=True)
     def test_has_form_frete(self):
         form = self.response.context['form_frete']
         self.assertIsInstance(form, FreteForm)
 
+    @override_settings(DEBUG=True)
     def test_aparecer_botao_login_e_cadastro(self):
         btn_login = '<a class="btn btn-success" href="/accounts/login/">Entrar </a>'
         btn_cadastro = '<a class="btn btn-primary" href="/accounts/signup/">Fazer cadastro</a>'
@@ -38,11 +42,13 @@ class CarrinhoViewClienteNaoAutenticadoTest(TestCase):
         self.assertContains(self.response, btn_cadastro)
         self.assertContains(self.response, label_quantidade_item_carrinho)
 
+    @override_settings(DEBUG=True)
     def test_dados_do_cliente_vazio(self):
         self.assertIsNone(self.response.context['enderecos'])
         self.assertIsNone(self.response.context['cliente'])
         self.assertEqual('', self.response.context['cep_padrao'])
 
+    @override_settings(DEBUG=True)
     def test_carrinho_com_items(self):
         get_fake_carrinho_com_items()
         session = self.client.session
@@ -59,14 +65,16 @@ class CarrinhoViewClienteNaoAutenticadoTest(TestCase):
         self.assertEqual(47.90, float(valor_carrinho))
         self.assertContains(res, label_quantidade_1_carrinho)
 
+    @override_settings(DEBUG=True)
     def test_calculo_frete(self):
         get_fake_carrinho_com_items()
         session = self.client.session
         session['carrinho'] = UUID_FAKE_CARRINHO
         session.save()
-        res1 = self.client.post(reverse('checkout:carrinho'), data={'calcular-frete': 37990000})
+        res1 = self.client.post(reverse('checkout:carrinho'), data={
+                                'calcular-frete': 37990000})
         self.assertEqual('37990000', res1.context['cep_padrao'])
-        res2 = self.client.post(reverse('checkout:carrinho'), data={'calcular-frete': 823899992})
+        res2 = self.client.post(reverse('checkout:carrinho'), data={
+                                'calcular-frete': 823899992})
         self.assertEqual('823899992', res2.context['cep_padrao'])
         self.assertEqual('frete-nao-encontrado', res2.context['frete_items'])
-

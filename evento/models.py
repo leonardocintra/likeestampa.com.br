@@ -34,5 +34,8 @@ class EventoPedido(models.Model):
 
 
 def criar_evento(evento_id, pedido):
-    status = Status.objects.get(pk=evento_id)
-    EventoPedido.objects.create(evento=status, pedido=pedido)
+    # TODO: status pode ir para um redis
+    evento_existe = EventoPedido.objects.filter(pedido=pedido, evento_id=evento_id)
+    if not evento_existe:
+        status = Status.objects.get(pk=evento_id)
+        EventoPedido.objects.create(evento=status, pedido=pedido)

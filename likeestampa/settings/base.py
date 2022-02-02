@@ -203,3 +203,9 @@ LOGIN_REDIRECT_URL = "/usuario/"
 
 # Django Crispy Form
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# DIMONA
+DIMONA_TOKEN = 'gerar-la-no-site-do-dimona'
+
+# TELEGRAM
+TELEGRAM_TOKEN = 'gerar-la-no-telegram'

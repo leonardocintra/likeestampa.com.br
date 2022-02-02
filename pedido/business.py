@@ -1,3 +1,4 @@
+from checkout.models import Carrinho
 from evento.models import criar_evento
 from pagamento.models import PagamentoMercadoPago
 from pedido.email import envia_email
@@ -14,22 +15,17 @@ def _gerar_venda(pagamento_mp):
         enviar_mensagem('Pedido {0} gerando compra dimona ...'.format(str(
             pagamento_mp.pedido.id)), 'Pedido sendo realizado', str(pagamento_mp.pedido.id))
         dimona = None
-
         pedido = Pedido.objects.get(pk=pagamento_mp.pedido.id)
-        if pedido.pago:
-            enviar_mensagem('Pedido {0} ja foi pago e gerado!'.format(str(
-                pagamento_mp.pedido.id)), 'Pedido ja consta pago', str(pagamento_mp.pedido.id))
-        else:
-            dimona = create_order(pedido.request_seller)
-            dimona = dimona['order']
+        dimona = create_order(pedido.request_seller)
+        dimona = dimona['order']
 
-            # Atualiza os dados do pagamento no pedido (pago e o usuario)
-            Pedido.objects.filter(pk=pagamento_mp.pedido.id).update(
-                pago=True,
-                pedido_seller=dimona
-            )
-            enviar_mensagem('Pedido {0} - Dimona: {1} criado com sucesso!'.format(str(
-                pagamento_mp.pedido.id), dimona), 'Pedido realizado', str(pagamento_mp.pedido.id))
+        # Atualiza os dados do pagamento no pedido (pago e o usuario)
+        Pedido.objects.filter(pk=pagamento_mp.pedido.id).update(
+            pago=True,
+            pedido_seller=dimona
+        )
+        enviar_mensagem('Pedido {0} - Dimona: {1} criado com sucesso!'.format(str(
+            pagamento_mp.pedido.id), dimona), 'Pedido realizado', str(pagamento_mp.pedido.id))
     except Exception as e:
         enviar_mensagem('Erro ao gerar venda: ' + str(e))
         enviar_mensagem(
@@ -38,16 +34,26 @@ def _gerar_venda(pagamento_mp):
 
 def concluir_pedido(pedido, payment_id):
     # Aqui finalizamos o pedido (indepentende de estar pago)
+    # Verifica se o pedido ja foi gerado para o seller
+    if pedido.pedido_seller:
+        return
+    
+    Carrinho.objects.filter(pedido=pedido).delete()    
     pago = False
     cliente = Cliente.objects.get(user=pedido.user)
-    enderecos = EnderecoCliente.objects.filter(cliente=cliente)
     items = ItemPedido.objects.filter(pedido=pedido)
-    pagamento = PagamentoMercadoPago.objects.get(pedido=pedido)
     
-    # DIMONA: cria o payload (request)
-    create_payload_order(pedido.id, cliente,
-                        enderecos[0], items, pedido.frete_id)
+    # Verifica se o pedido ja tem um payload montado para quando o pedido receber o pagamento
+    if not pedido.request_seller:
+        enderecos = EnderecoCliente.objects.filter(cliente=cliente)
+        create_payload_order(pedido.id, cliente,
+                            enderecos[0], items, pedido.frete_id)
+    
 
+    # TODO: precisa enviar evento de cancelado quando o boleto nao foi pago
+    # TODO: precisa enviar evento de pagamento com erro em caso de cartao ou pix
+
+    pagamento = PagamentoMercadoPago.objects.get(pedido=pedido)
     if pagamento.mercado_pago_status == 'approved' and confirma_pagamento(payment_id):
         pago = True
         criar_evento(2, pedido)  # Pedido Pago
