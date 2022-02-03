@@ -205,7 +205,7 @@ LOGIN_REDIRECT_URL = "/usuario/"
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # DIMONA
-DIMONA_TOKEN = 'gerar-la-no-site-do-dimona'
+DIMONA_KEY = 'gerar-la-no-site-do-dimona'
 
 # TELEGRAM
-TELEGRAM_TOKEN = 'gerar-la-no-telegram'
+TELEGRAM_TOKEN = '508627689:AAEuLPKs-EhrjrYGnz60bnYNZqakf6HJxc0'
