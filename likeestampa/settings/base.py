@@ -205,7 +205,7 @@ LOGIN_REDIRECT_URL = "/usuario/"
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # DIMONA
-DIMONA_KEY = 'gerar-la-no-site-do-dimona'
+DIMONA_KEY = 'f9bb66ac5feaebd7b97206198866a898'
 
 # TELEGRAM
 TELEGRAM_TOKEN = '508627689:AAEuLPKs-EhrjrYGnz60bnYNZqakf6HJxc0'
