@@ -2,7 +2,7 @@ cloudinary==1.25.0
 coverage==5.5
 dj-database-url==0.5.0
 dj-static==0.0.6
-django==3.2.9
+django==3.2.12
 django-allauth==0.44.0
 django-anymail==8.4
 django-crispy-forms==1.12.0
