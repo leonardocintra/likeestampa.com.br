@@ -144,7 +144,7 @@
                         vendido
                     </div>
                     <!-- Product image-->
-                    <img class="card-img-top" src="{{ produto.imagem_principal.url }}" alt="{{ produto.nome }}" />
+                    {% cloudinary produto.imagem_principal quality="auto:low" class="card-img-top" %}
                     <!-- Product details-->
                     <div class="card-body p-4">
                         <div class="text-center">
