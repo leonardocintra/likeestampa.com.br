@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.views.generic.list import ListView
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
@@ -65,8 +66,13 @@ def produto(request, slug):
     # Adiciona no mockup a imagem principal (pelo menos a imagem 0)
 
     mockups = {0: produto.imagem_principal.url}
+
+    url_cloudinary = "https://res.cloudinary.com/like-estampa"
+    if settings.DEBUG:
+        url_cloudinary = "http://res.cloudinary.com/leonardocintra"
+    
     for imagem in imagens:
-        imagemPerformada = imagem.imagem.url.replace("http://res.cloudinary.com/leonardocintra/image/upload", "http://res.cloudinary.com/leonardocintra/image/upload/q_auto:low")
+        imagemPerformada = imagem.imagem.url.replace("{0}/image/upload".format(url_cloudinary), "{0}/image/upload/q_auto:low".format(url_cloudinary))
         mock = {imagem.id: imagemPerformada}
         mockups.update(mock)
 
