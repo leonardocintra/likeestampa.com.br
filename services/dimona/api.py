@@ -1,6 +1,5 @@
 import requests
 import json
-from random import randint
 from django.conf import settings
 from catalogo.models import SkuDimona
 from pedido.models import Pedido
@@ -87,12 +86,8 @@ def create_payload_order(order_id, cliente, endereco, items, delivery_method_id)
 
 
 def create_order(payload):
-    data = json.loads(payload)
-    if settings.DEBUG:
-        return __get_fake_dimona_order_id()
-    response = requests.post(URL_DIMONA + "/order",
-                             headers=HEADERS, data=data)
-    return json.loads(response.text)
+    return requests.post(URL_DIMONA + "/order",
+                         headers=HEADERS, data=payload)
 
 
 def __monta_payload_item(items, order_id):
@@ -132,11 +127,3 @@ def __get_sku_dimona(skus, modelo_produto, tamanho, cor, order_id):
     enviar_mensagem('SKU DIMONA não encontrado.\n -Modelo: {0} \n -Tamanho: {1} \n -Cor: {2}'.format(
         modelo_produto, tamanho, cor), 'SKU não encontrado', str(order_id))
     return 999999999
-
-
-def __get_fake_dimona_order_id():
-    # Quando nao estiver no ambiente de producao, geraremos um pedido fake
-    range1 = str(randint(100, 999))
-    range2 = str(randint(100, 999))
-    range3 = str(randint(100, 999))
-    return {"order": "{0}-{1}-{2}".format(range1, range2, range3)}
