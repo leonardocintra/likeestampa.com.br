@@ -73,7 +73,7 @@ class Produto(models.Model):
         db_table = 'produto'
         verbose_name_plural = 'produtos'
         verbose_name = 'produto'
-        ordering = ('nome',)
+        ordering = ('-created_at',)
 
     def __str__(self):
         return self.nome
