@@ -31,7 +31,8 @@ class PagamentoMercadoPago(models.Model):
 
 
 class PagamentoMercadoPagoWebhook(models.Model):
-    mercado_pago = models.ForeignKey(PagamentoMercadoPago, on_delete=models.CASCADE)
+    mercado_pago = models.ForeignKey(
+        PagamentoMercadoPago, on_delete=models.CASCADE)
     webhook_request = models.JSONField()
     webhook_data_recebimento = models.DateTimeField(auto_now=True)
     webhook_executado = models.BooleanField(default=False)

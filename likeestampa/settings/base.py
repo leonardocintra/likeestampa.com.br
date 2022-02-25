@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'pedido',
     'seller',
     'usuario',
+    'cupom',
 ]
 
 MIDDLEWARE = [
