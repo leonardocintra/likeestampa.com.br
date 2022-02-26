@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.db import models
 from .models import Categoria, SubCategoria, Produto, ModeloProduto, Modelo, Cor, Tamanho, ProdutoImagem, TamanhoModelo
 
 
@@ -50,6 +49,26 @@ class ProdutoAdmin(admin.ModelAdmin):
     inlines = [ModeloProdutoInline, ProdutoImagemInline, ]
 
     actions = [ativar_produtos, desativar_produtos, ]
+
+    def save_model(self, request, obj, form, change):
+        saved = super().save_model(request, obj, form, change)
+
+        # Caso for selecionado os modelos, nao faz o cadastro manualmente
+        if form.data['modelo_produto-INITIAL_FORMS'] != '0':
+            return saved
+
+        try:
+            tshirt = Modelo.objects.get(descricao='T-Shirt')
+            babylong = Modelo.objects.get(descricao='Baby Long')
+            infantil = Modelo.objects.get(descricao='Classic Infantil')
+
+            ModeloProduto.objects.create(produto=obj, modelo=tshirt)
+            ModeloProduto.objects.create(produto=obj, modelo=babylong)
+            ModeloProduto.objects.create(produto=obj, modelo=infantil)
+        except:
+            print('Erro no cadastro do produto')
+
+        return saved
 
 
 class ModeloAdmin(admin.ModelAdmin):
