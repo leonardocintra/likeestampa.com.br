@@ -12,17 +12,14 @@ from .models import Cor, Produto, ProdutoImagem, SubCategoria, ModeloProduto, Ta
 class ProdutosListView(ListView):
     paginate_by = 30
     template_name = 'index.html'
-    model = Produto
+    context_object_name = 'produto_list'
 
     def get_queryset(self):
-        queryset = Produto.objects.exclude(ativo=False)
         q = self.request.GET.get('q', '')
         if q:
-            queryset = queryset.filter(nome__icontains=q)
+            return Produto.objects.filter(nome__icontains=q).exclude(ativo=False)
         else:
-            queryset = queryset.exclude(mostrar_tela_inicial=False)
-
-        return queryset
+            return Produto.objects.exclude(ativo=False).exclude(mostrar_tela_inicial=False)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -70,9 +67,10 @@ def produto(request, slug):
     url_cloudinary = "https://res.cloudinary.com/like-estampa"
     if settings.DEBUG:
         url_cloudinary = "http://res.cloudinary.com/leonardocintra"
-    
+
     for imagem in imagens:
-        imagemPerformada = imagem.imagem.url.replace("{0}/image/upload".format(url_cloudinary), "{0}/image/upload/q_auto:low".format(url_cloudinary))
+        imagemPerformada = imagem.imagem.url.replace(
+            "{0}/image/upload".format(url_cloudinary), "{0}/image/upload/q_auto:low".format(url_cloudinary))
         mock = {imagem.id: imagemPerformada}
         mockups.update(mock)
 
@@ -84,15 +82,17 @@ def produto(request, slug):
     modelo_array = []
     for m in modelos:
         modelo_array.append(m.modelo_id)
-    tamanhos_modelo = TamanhoModelo.objects.filter(modelo__in=modelo_array).exclude(ativo=False)
-    
+    tamanhos_modelo = TamanhoModelo.objects.filter(
+        modelo__in=modelo_array).exclude(ativo=False)
+
     # Pega o tamanho dos modelos
     tamanhos_do_modelo = []
     for tm in tamanhos_modelo:
         tamanhos_do_modelo.append(tm.tamanho.id)
-               
+
     # Filtra todos os tamanhos do modelo
-    tamanhos = Tamanho.objects.all().filter(id__in=tamanhos_do_modelo).exclude(ativo=False)
+    tamanhos = Tamanho.objects.all().filter(
+        id__in=tamanhos_do_modelo).exclude(ativo=False)
 
     # Monta uma json de tamanhos para controlar a selecao do cliente na tela
     tamanho_modelo_dict = dict()
@@ -104,7 +104,6 @@ def produto(request, slug):
                     if ta.id == tm.tamanho.id:
                         tamanho_list.append(ta.slug)
         tamanho_modelo_dict.update({m.modelo.descricao: tamanho_list})
-
 
     produtos_relacionados = Produto.objects.filter(
         subcategoria=produto.subcategoria)[:8]

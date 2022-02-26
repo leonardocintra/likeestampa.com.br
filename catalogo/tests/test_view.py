@@ -7,7 +7,7 @@ class ProdutoListViewTest(TestCase):
     def setUp(self):
         self.subcategoria = SubCategoria.objects.create(
             nome='Programação', slug='programacao')
-        for produto_id in range(0, 10):
+        for produto_id in range(10):
             Produto.objects.create(
                 nome=f'Camiseta Python Django {produto_id}',
                 descricao='Camiseta 100 de Algodão - Malha Final etc tal',
@@ -16,21 +16,30 @@ class ProdutoListViewTest(TestCase):
                 imagem_principal='Imagem Cloudinary 1',
                 imagem_design='Imagem Cloudinary 2',
             )
-        self.response = self.client.get(r('core:index'))
 
     def test_get(self):
-        self.assertEqual(200, self.response.status_code)
+        response = self.client.get(r('core:index'))
+        self.assertEqual(200, response.status_code)
 
     def test_template(self):
-        self.assertTemplateUsed(self.response, 'index.html')
+        response = self.client.get(r('core:index'))
+        self.assertTemplateUsed(response, 'index.html')
 
     def test_view_url_existe_rota_produto(self):
         response = self.client.get('/')
         self.assertEqual(200, response.status_code)
 
     def test_is_not_paginated(self):
-        self.assertTrue('is_paginated' in self.response.context)
-        self.assertFalse(self.response.context['is_paginated'])
+        response = self.client.get(r('core:index'))
+        self.assertTrue('is_paginated' in response.context)
+        self.assertFalse(response.context['is_paginated'])
+
+    def test_esta_trazendo_produtos_cadastrados_na_listagem(self):
+        response = self.client.get(r('core:index'))
+        self.assertEqual(10, len(Produto.objects.all()))
+        self.assertIsNotNone(response.context['produto_list'])
+        self.assertEqual(10, len(response.context['produto_list']))
+
 
     def test_produto_mostrar_tela_inicial_false(self):
         # Nao deve trazer produtos que esta com mostrar_tela_inicial = False
@@ -44,9 +53,10 @@ class ProdutoListViewTest(TestCase):
             mostrar_tela_inicial=False,
         )
 
+        response = self.client.get(r('core:index'))
         self.assertFalse(produto.mostrar_tela_inicial)
         self.assertEqual(11, len(Produto.objects.all()))
-        self.assertIsNotNone(self.response.context['produto_list'])
+        self.assertIsNotNone(response.context['produto_list'])
         # TODO: PRECISA TESTAR QUE NAO ESTA MOSTRANDO O PRODUTO QUE NAO DEVE MOSTRAR
         # self.assertEqual(len(self.response.context_data['produto_list']), 10)
         # self.assertTrue(len(self.response.context_data['produto_list']) == 10)
