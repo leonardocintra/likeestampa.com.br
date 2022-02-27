@@ -1,3 +1,7 @@
-from django.contrib import admin
+from django.contrib.admin import AdminSite
 
-# Register your models here.
+
+class LikeEstampaSite(AdminSite):
+    AdminSite.site_header = 'Like Estampa Administrativo'
+    AdminSite.index_title = 'Administração Like Estampa'
+    AdminSite.site_title = 'Like Estampa'
