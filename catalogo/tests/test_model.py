@@ -1,6 +1,8 @@
 from datetime import datetime
+from pydoc import describe
 from django.test import TestCase
-from catalogo.models import Categoria, ModeloProduto, Produto, ProdutoImagem, SubCategoria, Modelo, SkuDimona, Cor, Tamanho, TamanhoModelo
+from catalogo.models import (Categoria, ModeloProduto, Produto, ProdutoImagem,
+                             SubCategoria, Modelo, SkuDimona, Cor, Tamanho, TamanhoModelo, CorModelo)
 from django.db import IntegrityError
 
 
@@ -34,6 +36,23 @@ class CorModelTest(TestCase):
         self.assertEqual('Verde Bandeira', str(self.obj))
 
 
+class CorModeloModelTest(TestCase):
+    def setUp(self):
+        self.modelo = Modelo.objects.create(descricao='T-Shirt')
+        self.cor = Cor.objects.create(
+            nome='Verde Bandeira', slug='verde-bandeira')
+        self.obj = CorModelo.objects.create(cor=self.cor, modelo=self.modelo)
+
+    def test_create(self):
+        self.assertTrue(CorModelo.objects.exists())
+
+    def test_str(self):
+        self.assertEqual('Verde Bandeira - T-Shirt', str(self.obj))
+
+    def test_ativo_default(self):
+        self.assertTrue(self.obj.ativo)
+
+
 class TamanhoModeloModelTest(TestCase):
     def setUp(self):
         self.modelo = Modelo.objects.create(descricao='T-Shirt')
@@ -52,6 +71,9 @@ class TamanhoModeloModelTest(TestCase):
 
     def test_str(self):
         self.assertEqual('P - T-Shirt', str(self.obj))
+
+    def test_ativo_defult(self):
+        self.assertTrue(self.obj.ativo)
 
 
 class CategoriaModelTest(TestCase):

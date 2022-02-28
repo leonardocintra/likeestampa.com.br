@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Categoria, SubCategoria, Produto, ModeloProduto, Modelo, Cor, Tamanho, ProdutoImagem, TamanhoModelo
+from .models import (Categoria, SubCategoria, Produto, ModeloProduto,
+                     Modelo, Cor, Tamanho, ProdutoImagem, TamanhoModelo, CorModelo)
 
 
 class TamanhoAdmin(admin.ModelAdmin):
@@ -80,6 +81,10 @@ class TamanhoModeloAdmin(admin.ModelAdmin):
     pass
 
 
+class CorModeloAdmin(admin.ModelAdmin):
+    pass
+
+
 admin.site.register(Categoria, CategoriaAdmin)
 admin.site.register(Modelo, ModeloAdmin)
 admin.site.register(Produto, ProdutoAdmin)
@@ -87,3 +92,4 @@ admin.site.register(SubCategoria, SubCategoriaAdmin)
 admin.site.register(Cor, CorAdmin)
 admin.site.register(Tamanho, TamanhoAdmin)
 admin.site.register(TamanhoModelo, TamanhoModeloAdmin)
+admin.site.register(CorModelo, CorModeloAdmin)

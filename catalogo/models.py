@@ -84,7 +84,8 @@ class Modelo(models.Model):
     "Modelo seria: T-Shirt, mangalonga, etc"
     descricao = models.CharField(max_length=50, default='T-Shirt')
     descricao_cliente = models.CharField(max_length=50, null=True, blank=True)
-    valor = models.DecimalField('Valor', decimal_places=2, max_digits=999, default=51.90)
+    valor = models.DecimalField(
+        'Valor', decimal_places=2, max_digits=999, default=51.90)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
@@ -173,6 +174,28 @@ class TamanhoModelo(models.Model):
 
     def __str__(self):
         return self.tamanho.nome + ' - ' + self.modelo.descricao
+
+
+class CorModelo(models.Model):
+    """
+        As cores são diferentes para todos os tipos de modelos.
+        Por enquanto, usamos apenas o seller dimona
+        Basear nesse catalogo: https://res.cloudinary.com/dimona/image/upload/v1644522960/Dropsimples/Cata%CC%81logo_Drop_2022_Sem_Polo.pdf
+    """
+    cor = models.ForeignKey(Cor, on_delete=models.CASCADE)
+    modelo = models.ForeignKey(Modelo, on_delete=models.CASCADE)
+    ativo = models.BooleanField(default=True)
+    created_at = models.DateTimeField('Criado em', auto_now_add=True)
+    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+
+    class Meta:
+        db_table = 'cor_modelo'
+        verbose_name_plural = 'Cores e Modelos'
+        verbose_name = 'Cor e Modelos'
+        ordering = ('created_at', )
+
+    def __str__(self):
+        return self.cor.nome + ' - ' + self.modelo.descricao
 
 
 class ProdutoImagem(models.Model):
