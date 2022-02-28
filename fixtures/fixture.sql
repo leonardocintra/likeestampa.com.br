@@ -1,5 +1,11 @@
 INSERT INTO seller (id, nome, site, cep, endereco, numero, bairro, complemento, referencia, cidade, uf, observacao, created_at, updated_at, nome_contato, telefone_contato, frete_tipo, frete_token, frete_url, ativo) VALUES(1, 'Dimona', 'https://camisadimona.com.br/loja/conta/pedidos', '13898989', 'Rua 6 de Abril', '1302', 'Centro', NULL, NULL, 'Franca', 'MG', '', now(), now(), 'Nenhum', '392839823989', 'proprio', '', NULL, true);
 
+
+INSERT INTO categoria (nome, slug, created_at, updated_at, ativo) VALUES('Camisetas', 'camisetas', now(), now(), true);
+INSERT INTO categoria (nome, slug, created_at, updated_at, ativo) VALUES('Canecas', 'canecas', now(), now(), true);
+INSERT INTO categoria (nome, slug, created_at, updated_at, ativo) VALUES('Moletons', 'moletons', now(), now(), true);
+
+
 INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES('Branco', '#FFFFFF', 'branco', true, now(), now(), 0);
 INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES('Amarelo Canário', '#FFDE67', 'amarelo-canario', true, now(), now(), 1);
 INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES('Laranja', '#FF9156', 'laranja', true, now(), now(), 2);
@@ -12,6 +18,7 @@ INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibica
 INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES('Azul Marinho', '#00547B', 'azul-marinho', true, now(), now(), 7);
 INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES('Verde Bandeira', '#00803C', 'verde-bandeira', true, now(), now(), 9);
 INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES('Cinza Mescla', '#BEC0C3', 'cinza-mescla', true, now(), now(), 10);
+
 
 INSERT INTO modelo (id, descricao, created_at, updated_at, descricao_cliente, valor) VALUES(1, 'T-Shirt', now(), now(), 'T-Shirt', 51.99);
 INSERT INTO modelo (id, descricao, created_at, updated_at, descricao_cliente, valor) VALUES(2, 'Baby Long', now(), now(), 'T-Shirt Feminina', 51.99);

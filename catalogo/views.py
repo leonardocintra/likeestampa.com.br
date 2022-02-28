@@ -11,7 +11,7 @@ from .models import Cor, Produto, ProdutoImagem, SubCategoria, ModeloProduto, Ta
 
 class SubCategoriaListView(ListView):
     template_name = 'catalogo/list_by_categoria.html'
-    paginate_by = 100
+    paginate_by = 32
     model = Produto
 
     def get_queryset(self):
