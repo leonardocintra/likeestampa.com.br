@@ -9,27 +9,6 @@ from .forms import ProdutoDetalheForm
 from .models import Cor, Produto, ProdutoImagem, SubCategoria, ModeloProduto, Tamanho, TamanhoModelo
 
 
-class ProdutosListView(ListView):
-    paginate_by = 30
-    template_name = 'index.html'
-    context_object_name = 'produto_list'
-
-    def get_queryset(self):
-        q = self.request.GET.get('q', '')
-        if q:
-            return Produto.objects.filter(nome__icontains=q).exclude(ativo=False)
-        else:
-            return Produto.objects.exclude(ativo=False).exclude(mostrar_tela_inicial=False)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        subcategorias = SubCategoria.objects.all().exclude(ativo=False)
-        context['subcategorias'] = subcategorias
-        context['quantidade_item'] = get_quantidade_items_carrinho(
-            self.request)
-        return context
-
-
 class SubCategoriaListView(ListView):
     template_name = 'catalogo/list_by_categoria.html'
     paginate_by = 100
@@ -156,5 +135,4 @@ def adicionar_item_carrinho(request, produto, modelo, cor, tamanho, quantidade):
                      quantidade=quantidade, tamanho=tamanho, cor=cor).save()
 
 
-product_list = ProdutosListView
 lista_por_subcategoria = SubCategoriaListView
