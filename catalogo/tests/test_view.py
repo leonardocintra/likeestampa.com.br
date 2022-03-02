@@ -1,9 +1,30 @@
 from re import S
 from django.test import TestCase, Client
 from django.shortcuts import resolve_url as r
-from catalogo.models import Cor, Modelo, ModeloProduto, Produto, SubCategoria, Tamanho
+from django.urls import reverse
+from catalogo.models import Cor, Modelo, ModeloProduto, Produto, ProdutoImagem, SubCategoria, Tamanho
 
 client = Client()
+
+
+class SubCategoriaListView(TestCase):
+    def setUp(self):
+        self.subcategoria = SubCategoria.objects.create(
+            nome='Programação', slug='programacao')
+        self.response = self.client.get(
+            reverse('catalogo:lista_por_subcategoria', kwargs={'slug': 'programacao'}))
+
+    def test_template(self):
+        self.assertTemplateUsed(
+            self.response, 'catalogo/list_by_categoria.html')
+
+    def test_sub_categoria(self):
+        self.assertIsNotNone(self.response.context['subcategorias'])
+        self.assertIsNotNone(
+            self.response.context['sub_categoria_selecionada'])
+
+    def test_sub_categoria_not_found(self):
+        pass
 
 
 class ProdutoDetailViewTest(TestCase):
@@ -15,9 +36,21 @@ class ProdutoDetailViewTest(TestCase):
             descricao='Camiseta 100 de Algodão - Malha Final etc tal',
             slug=f'camiseta-python-django',
             subcategoria=subcategoria,
-            imagem_principal='Imagem Cloudinary 1',
+            imagem_principal='/image/upload/camiseta-django',
             imagem_design='Imagem Cloudinary 2',
         )
+
+        self.imagens = ProdutoImagem.objects.create(
+            produto=self.obj,
+            imagem='/image/upload/ronaldinho-gaucho',
+        )
+
+        self.tamanho = Tamanho.objects.create(nome='G', slug='g')
+        self.cor = Cor.objects.create(nome='Vermelho', slug='vermelho')
+        self.modelo = Modelo.objects.create(descricao='Cropped')
+
+        self.modelo_produto = ModeloProduto.objects.create(
+            produto=self.obj, modelo=self.modelo)
 
         self.response = self.client.get(r('catalogo:produto', self.obj.slug))
 
@@ -27,6 +60,12 @@ class ProdutoDetailViewTest(TestCase):
     def test_get(self):
         self.assertEqual(200, self.response.status_code)
 
+    def test_imagem_mockup_replace_low(self):
+        self.assertContains(self.response, '/image/upload/q_auto:low/v1//image/upload/ronaldinho-gaucho')
+    
+    def test_imagem_principal_mockup_replace_low(self):
+        self.assertContains(self.response, '/image/upload/q_auto:low/v1//image/upload/camiseta-django')
+
     def test_html(self):
         contents = (self.obj.nome, self.obj.descricao, self.obj.subcategoria)
 
@@ -35,14 +74,8 @@ class ProdutoDetailViewTest(TestCase):
                 self.assertContains(self.response, expected)
 
     def test_post(self):
-        produto = Produto.objects.first()
-        modelo = Modelo.objects.create(descricao='Cropped')
-        modelo_produto = ModeloProduto.objects.create(
-            produto=produto, modelo=modelo)
-        Cor.objects.create(nome='Vermelho', slug='vermelho')
-        Tamanho.objects.create(nome='G', slug='g')
         data = {
-            'modelo': str(modelo_produto.pk),
+            'modelo': str(self.modelo_produto.pk),
             'cor': 'vermelho',
             'tamanho': 'g',
             'quantidade': 5

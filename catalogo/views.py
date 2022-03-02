@@ -28,6 +28,25 @@ class SubCategoriaListView(ListView):
         return context
 
 
+def __get_mockups(produto, imagens):
+    # Monta todos os mockups e da um replace na imagem pra ficar com baixo consumo de banda
+    def replace_low(url):
+        url_cloudinary = settings.CLOUDINARY_BASE_PATH
+        return url.replace(
+            "{0}/image/upload".format(url_cloudinary), "{0}/image/upload/q_auto:low".format(url_cloudinary))
+
+    imagem_princial = replace_low(produto.imagem_principal.url)
+
+    mockups = {0: imagem_princial}
+
+    for imagem in imagens:
+        imagemPerformada = replace_low(imagem.imagem.url)
+        mock = {imagem.id: imagemPerformada}
+        mockups.update(mock)
+
+    return mockups
+
+
 def produto(request, slug):
     """ Pagina de detalhes do produto """
     produto = Produto.objects.get(slug=slug)
@@ -41,17 +60,7 @@ def produto(request, slug):
     imagens = ProdutoImagem.objects.filter(produto=produto)
     # Adiciona no mockup a imagem principal (pelo menos a imagem 0)
 
-    mockups = {0: produto.imagem_principal.url}
-
-    url_cloudinary = "https://res.cloudinary.com/like-estampa"
-    if settings.DEBUG:
-        url_cloudinary = "http://res.cloudinary.com/leonardocintra"
-
-    for imagem in imagens:
-        imagemPerformada = imagem.imagem.url.replace(
-            "{0}/image/upload".format(url_cloudinary), "{0}/image/upload/q_auto:low".format(url_cloudinary))
-        mock = {imagem.id: imagemPerformada}
-        mockups.update(mock)
+    mockups = __get_mockups(produto, imagens)
 
     # TODO: Cachear essas variaveis
     modelos = ModeloProduto.objects.filter(produto=produto)

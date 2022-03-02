@@ -6,19 +6,23 @@ INSERT INTO categoria (nome, slug, created_at, updated_at, ativo) VALUES('Caneca
 INSERT INTO categoria (nome, slug, created_at, updated_at, ativo) VALUES('Moletons', 'moletons', now(), now(), true);
 
 
-INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES('Branco', '#FFFFFF', 'branco', true, now(), now(), 0);
-INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES('Amarelo Canário', '#FFDE67', 'amarelo-canario', true, now(), now(), 1);
-INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES('Laranja', '#FF9156', 'laranja', true, now(), now(), 2);
-INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES('Rosa Pink', '#FF109C', 'rosa-pink', true, now(), now(), 4);
-INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES('Roxo', '#7232EF', 'roxo', true, now(), now(), 5);
-INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES('Azul Royal', '#004BAA', 'azul-royal', true, now(), now(), 6);
-INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES('Azul Turquesa', '#009CED', 'azul-turquesa', true, now(), now(), 8);
-INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES('Cinza Chumbo', '#4C4A4C', 'cinza-chumbo', true, now(), now(), 11);
-INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES('Preto', '#000000', 'preto', true, now(), now(), 12);
-INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES('Azul Marinho', '#00547B', 'azul-marinho', true, now(), now(), 7);
-INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES('Verde Bandeira', '#00803C', 'verde-bandeira', true, now(), now(), 9);
-INSERT INTO cor (nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES('Cinza Mescla', '#BEC0C3', 'cinza-mescla', true, now(), now(), 10);
+INSERT INTO cor (id, nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES(14, 'Branco', '#FFFFFF', 'branco', true, now(), now(), 0);
+INSERT INTO cor (id, nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES(15, 'Amarelo Canário', '#FFDE67', 'amarelo-canario', true, now(), now(), 10);
+INSERT INTO cor (id, nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES(16, 'Laranja', '#FF9156', 'laranja', true, now(), now(), 20);
+INSERT INTO cor (id, nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES(17, 'Rosa Pink', '#FF109C', 'rosa-pink', true, now(), now(), 30);
+INSERT INTO cor (id, nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES(26, 'Vermelho', '#FF1616', 'vermelho', true, now(), now(), 40);
+INSERT INTO cor (id, nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES(27, 'Vinho', '#9C0419', 'vinho', true, now(), now(), 50);
+INSERT INTO cor (id, nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES(18, 'Roxo', '#7232EF', 'roxo', true, now(), now(), 60);
+INSERT INTO cor (id, nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES(19, 'Azul Royal', '#004BAA', 'azul-royal', true, now(), now(), 70);
+INSERT INTO cor (id, nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES(23, 'Azul Marinho', '#00547B', 'azul-marinho', true, now(), now(), 80);
+INSERT INTO cor (id, nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES(20, 'Azul Turquesa', '#009CED', 'azul-turquesa', true, now(), now(), 90);
+INSERT INTO cor (id, nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES(24, 'Verde Bandeira', '#00803C', 'verde-bandeira', true, now(), now(), 100);
+INSERT INTO cor (id, nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES(25, 'Cinza Mescla', '#BEC0C3', 'cinza-mescla', true, now(), now(), 110);
+INSERT INTO cor (id, nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES(21, 'Cinza Chumbo', '#4C4A4C', 'cinza-chumbo', true, now(), now(), 120);
+INSERT INTO cor (id, nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES(22, 'Preto', '#000000', 'preto', true, now(), now(), 140);
+INSERT INTO cor (id, nome, valor, slug, ativo, created_at, updated_at, order_exibicao) VALUES(28, 'Amarelo Ouro', '#F9BD5F', 'amarelo-ouro', true, now(), now(), 15);
 
+-- FAZER SELECT DA TABELA MODELO_COR 
 
 INSERT INTO modelo (id, descricao, created_at, updated_at, descricao_cliente, valor) VALUES(1, 'T-Shirt', now(), now(), 'T-Shirt', 51.99);
 INSERT INTO modelo (id, descricao, created_at, updated_at, descricao_cliente, valor) VALUES(2, 'Baby Long', now(), now(), 'T-Shirt Feminina', 51.99);

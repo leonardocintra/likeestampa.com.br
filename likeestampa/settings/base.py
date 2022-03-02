@@ -172,6 +172,7 @@ CLOUDINARY = {
     'api_key': os.environ.get('CLOUDINARY_API_KEY', '182946961533113'),
     'api_secret': os.environ.get('CLOUDINARY_API_SECRET', 'LAIVTLNHtG5x-TTdUmHgaE3CnsM'),
 }
+CLOUDINARY_BASE_PATH = "http://res.cloudinary.com/leonardocintra"
 
 
 # MERCADO PAGO
