@@ -195,7 +195,7 @@ class CorModelo(models.Model):
         ordering = ('created_at', )
 
     def __str__(self):
-        return self.cor.nome + ' - ' + self.modelo.descricao
+        return self.modelo.descricao  + ' - ' + self.cor.nome
 
 
 class ProdutoImagem(models.Model):

@@ -47,7 +47,7 @@ class CorModeloModelTest(TestCase):
         self.assertTrue(CorModelo.objects.exists())
 
     def test_str(self):
-        self.assertEqual('Verde Bandeira - T-Shirt', str(self.obj))
+        self.assertEqual('T-Shirt - Verde Bandeira', str(self.obj))
 
     def test_ativo_default(self):
         self.assertTrue(self.obj.ativo)
