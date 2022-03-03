@@ -61,10 +61,12 @@ class ProdutoDetailViewTest(TestCase):
         self.assertEqual(200, self.response.status_code)
 
     def test_imagem_mockup_replace_low(self):
-        self.assertContains(self.response, '/image/upload/q_auto:low/v1//image/upload/ronaldinho-gaucho')
+        # Os mockups deve ter o w_75 (width=75)
+        self.assertContains(self.response, '/image/upload/q_auto:low,w_75')
     
     def test_imagem_principal_mockup_replace_low(self):
-        self.assertContains(self.response, '/image/upload/q_auto:low/v1//image/upload/camiseta-django')
+        # A imagem principal nao deve ter o w_75 (width=75)
+        self.assertContains(self.response, '/image/upload/q_auto:low/v1')
 
     def test_html(self):
         contents = (self.obj.nome, self.obj.descricao, self.obj.subcategoria)
