@@ -46,6 +46,3 @@ DIMONA_KEY = env("DIMONA_KEY")
 
 # TELEGRAM
 TELEGRAM_TOKEN = env("TELEGRAM_TOKEN")
-
-# CLOUDINARY
-CLOUDINARY_BASE_PATH = "https://res.cloudinary.com/like-estampa"

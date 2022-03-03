@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.views.generic.list import ListView
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
@@ -30,17 +29,10 @@ class SubCategoriaListView(ListView):
 
 def __get_mockups(produto, imagens):
     # Monta todos os mockups e da um replace na imagem pra ficar com baixo consumo de banda
-    def replace_low(url):
-        url_cloudinary = settings.CLOUDINARY_BASE_PATH
-        return url.replace(
-            "{0}/image/upload".format(url_cloudinary), "{0}/image/upload/q_auto:low".format(url_cloudinary))
-
-    imagem_princial = replace_low(produto.imagem_principal.url)
-
-    mockups = {0: imagem_princial}
+    mockups = {0: produto.imagem_principal.url}
 
     for imagem in imagens:
-        imagemPerformada = replace_low(imagem.imagem.url)
+        imagemPerformada = imagem.imagem.url
         mock = {imagem.id: imagemPerformada}
         mockups.update(mock)
 
