@@ -1,6 +1,5 @@
 from cloudinary.models import CloudinaryField
 from django.db import models
-from django.db.models.base import Model
 
 from seller.models import Seller
 
@@ -195,7 +194,7 @@ class CorModelo(models.Model):
         ordering = ('created_at', )
 
     def __str__(self):
-        return self.modelo.descricao  + ' - ' + self.cor.nome
+        return self.modelo.descricao + ' - ' + self.cor.nome
 
 
 class ProdutoImagem(models.Model):

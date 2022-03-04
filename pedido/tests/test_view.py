@@ -78,3 +78,9 @@ class PedidoFinalizadoMercadoPagoViewTest(TestCase):
         self.assertIsNotNone(pedido.pedido_seller)
         self.assertIsNotNone(pedido.request_seller)
         self.assertTrue(7, len(pedido.pedido_seller))
+
+
+class PedidoDetailViewTest(TestCase):
+    pass
+    # precisa fazer esse teste self.assertContains(response, '/image/upload/q_auto:low/')
+

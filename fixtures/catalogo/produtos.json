@@ -1,0 +1,116 @@
+[
+    {
+        "model": "catalogo.produto",
+        "pk": 2,
+        "fields": {
+            "nome": "Ronaldinho 10",
+            "seller": 1,
+            "descricao": "Ronaldinho",
+            "slug": "ronaldinho-10",
+            "ativo": true,
+            "mostrar_tela_inicial": true,
+            "preco_base": "51.90",
+            "subcategoria": 11,
+            "imagem_principal": "image/upload/v1643834745/ofvujapb9w0puqk5mwpc.png",
+            "imagem_design": "image/upload/NAO_INFORMADO",
+            "genero": "M",
+            "created_at": "2022-02-02T20:45:47.022Z",
+            "updated_at": "2022-02-02T20:46:11.933Z"
+        }
+    },
+    {
+        "model": "catalogo.produto",
+        "pk": 3,
+        "fields": {
+            "nome": "Elixir (Vertical)",
+            "seller": 1,
+            "descricao": "",
+            "slug": "elixir-vertical",
+            "ativo": true,
+            "mostrar_tela_inicial": true,
+            "preco_base": "51.90",
+            "subcategoria": 1,
+            "imagem_principal": "image/upload/v1644629793/mev1lgfyai1yhlluae56.png",
+            "imagem_design": "image/upload/NAO_INFORMADO",
+            "genero": "M",
+            "created_at": "2022-02-12T01:36:33.802Z",
+            "updated_at": "2022-02-12T01:36:33.803Z"
+        }
+    },
+    {
+        "model": "catalogo.produto",
+        "pk": 4,
+        "fields": {
+            "nome": "Fun Mode ON",
+            "seller": 1,
+            "descricao": "adsfasdfas",
+            "slug": "fun-mode-on",
+            "ativo": true,
+            "mostrar_tela_inicial": true,
+            "preco_base": "51.90",
+            "subcategoria": 8,
+            "imagem_principal": "image/upload/v1645885596/e1lzrbnqngpm7uqvlauc.png",
+            "imagem_design": "image/upload/NAO_INFORMADO",
+            "genero": "M",
+            "created_at": "2022-02-26T14:26:37.042Z",
+            "updated_at": "2022-02-26T14:26:55.249Z"
+        }
+    },
+    {
+        "model": "catalogo.produto",
+        "pk": 7,
+        "fields": {
+            "nome": "Maestro",
+            "seller": 1,
+            "descricao": "",
+            "slug": "maestro",
+            "ativo": true,
+            "mostrar_tela_inicial": true,
+            "preco_base": "51.90",
+            "subcategoria": 1,
+            "imagem_principal": "image/upload/v1645888138/fvhktnp5ejsyuezp5xjd.png",
+            "imagem_design": "image/upload/NAO_INFORMADO",
+            "genero": "M",
+            "created_at": "2022-02-26T15:08:59.593Z",
+            "updated_at": "2022-02-26T15:08:59.593Z"
+        }
+    },
+    {
+        "model": "catalogo.produto",
+        "pk": 8,
+        "fields": {
+            "nome": "Adventure",
+            "seller": 1,
+            "descricao": "teste",
+            "slug": "adventure",
+            "ativo": true,
+            "mostrar_tela_inicial": true,
+            "preco_base": "51.90",
+            "subcategoria": 7,
+            "imagem_principal": "image/upload/v1645888369/rtgz520jw1ob8kbe7zbz.png",
+            "imagem_design": "image/upload/NAO_INFORMADO",
+            "genero": "M",
+            "created_at": "2022-02-26T15:12:50.360Z",
+            "updated_at": "2022-02-26T15:14:15.402Z"
+        }
+    },
+    {
+        "model": "catalogo.produto",
+        "pk": 10,
+        "fields": {
+            "nome": "Jenkins",
+            "seller": 1,
+            "descricao": "asdfa fasafa fsda asdfadsa",
+            "slug": "jenkins",
+            "ativo": true,
+            "mostrar_tela_inicial": true,
+            "preco_base": "51.90",
+            "subcategoria": 11,
+            "imagem_principal": "image/upload/v1645891536/kazxlvlnjmxuqio8fwvw.png",
+            "imagem_design": "image/upload/NAO_INFORMADO",
+            "genero": "M",
+            "created_at": "2022-02-26T16:05:37.581Z",
+            "updated_at": "2022-02-26T16:07:34.136Z"
+        }
+    }
+]

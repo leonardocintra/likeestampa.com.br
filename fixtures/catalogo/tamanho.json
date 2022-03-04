@@ -1,0 +1,158 @@
+[
+    {
+        "model": "catalogo.tamanho",
+        "pk": 1,
+        "fields": {
+            "nome": "P",
+            "slug": "p",
+            "ativo": true,
+            "order_exibicao": 0,
+            "descricao_cliente": "P",
+            "created_at": "2022-01-25T20:12:29.318Z",
+            "updated_at": "2022-01-25T20:20:44.070Z"
+        }
+    },
+    {
+        "model": "catalogo.tamanho",
+        "pk": 2,
+        "fields": {
+            "nome": "M",
+            "slug": "m",
+            "ativo": true,
+            "order_exibicao": 1,
+            "descricao_cliente": "M",
+            "created_at": "2022-01-25T20:12:29.324Z",
+            "updated_at": "2022-01-25T20:20:48.836Z"
+        }
+    },
+    {
+        "model": "catalogo.tamanho",
+        "pk": 3,
+        "fields": {
+            "nome": "G",
+            "slug": "g",
+            "ativo": true,
+            "order_exibicao": 2,
+            "descricao_cliente": "G",
+            "created_at": "2022-01-25T20:12:29.328Z",
+            "updated_at": "2022-01-25T20:20:53.285Z"
+        }
+    },
+    {
+        "model": "catalogo.tamanho",
+        "pk": 4,
+        "fields": {
+            "nome": "GG",
+            "slug": "gg",
+            "ativo": true,
+            "order_exibicao": 3,
+            "descricao_cliente": "GG",
+            "created_at": "2022-01-25T20:12:29.331Z",
+            "updated_at": "2022-01-25T20:20:57.653Z"
+        }
+    },
+    {
+        "model": "catalogo.tamanho",
+        "pk": 5,
+        "fields": {
+            "nome": "XGG",
+            "slug": "xgg",
+            "ativo": true,
+            "order_exibicao": 4,
+            "descricao_cliente": "XGG",
+            "created_at": "2022-01-25T20:12:29.334Z",
+            "updated_at": "2022-01-25T20:21:02.331Z"
+        }
+    },
+    {
+        "model": "catalogo.tamanho",
+        "pk": 6,
+        "fields": {
+            "nome": "Tamanho 2",
+            "slug": "tamanho-2",
+            "ativo": true,
+            "order_exibicao": 5,
+            "descricao_cliente": "Tam. 2",
+            "created_at": "2022-01-25T20:19:16.542Z",
+            "updated_at": "2022-01-25T20:19:16.542Z"
+        }
+    },
+    {
+        "model": "catalogo.tamanho",
+        "pk": 7,
+        "fields": {
+            "nome": "Tamanho 4",
+            "slug": "tamanho-4",
+            "ativo": true,
+            "order_exibicao": 6,
+            "descricao_cliente": "Tam. 4",
+            "created_at": "2022-01-25T20:19:16.554Z",
+            "updated_at": "2022-01-25T20:19:16.554Z"
+        }
+    },
+    {
+        "model": "catalogo.tamanho",
+        "pk": 8,
+        "fields": {
+            "nome": "Tamanho 6",
+            "slug": "tamanho-6",
+            "ativo": true,
+            "order_exibicao": 7,
+            "descricao_cliente": "Tam. 6",
+            "created_at": "2022-01-25T20:19:16.557Z",
+            "updated_at": "2022-01-25T20:19:16.557Z"
+        }
+    },
+    {
+        "model": "catalogo.tamanho",
+        "pk": 9,
+        "fields": {
+            "nome": "Tamanho 8",
+            "slug": "tamanho-8",
+            "ativo": true,
+            "order_exibicao": 8,
+            "descricao_cliente": "Tam. 8",
+            "created_at": "2022-01-25T20:19:16.559Z",
+            "updated_at": "2022-01-25T20:19:16.559Z"
+        }
+    },
+    {
+        "model": "catalogo.tamanho",
+        "pk": 10,
+        "fields": {
+            "nome": "Tamanho 10",
+            "slug": "tamanho-10",
+            "ativo": true,
+            "order_exibicao": 9,
+            "descricao_cliente": "Tam. 10",
+            "created_at": "2022-01-25T20:19:16.563Z",
+            "updated_at": "2022-01-25T20:19:16.563Z"
+        }
+    },
+    {
+        "model": "catalogo.tamanho",
+        "pk": 11,
+        "fields": {
+            "nome": "Tamanho 12",
+            "slug": "tamanho-12",
+            "ativo": true,
+            "order_exibicao": 10,
+            "descricao_cliente": "Tam. 12",
+            "created_at": "2022-01-25T20:19:16.566Z",
+            "updated_at": "2022-01-25T20:19:16.566Z"
+        }
+    },
+    {
+        "model": "catalogo.tamanho",
+        "pk": 12,
+        "fields": {
+            "nome": "Tamanho 14",
+            "slug": "tamanho-14",
+            "ativo": true,
+            "order_exibicao": 11,
+            "descricao_cliente": "Tam. 14",
+            "created_at": "2022-01-25T20:19:16.572Z",
+            "updated_at": "2022-01-25T20:19:16.572Z"
+        }
+    }
+]

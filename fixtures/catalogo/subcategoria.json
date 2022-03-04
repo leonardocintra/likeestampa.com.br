@@ -1,0 +1,158 @@
+[
+    {
+        "model": "catalogo.subcategoria",
+        "pk": 1,
+        "fields": {
+            "nome": "Programação",
+            "slug": "programacao",
+            "icone_fontawesome": "laptop-code",
+            "ativo": true,
+            "created_at": "2022-01-25T20:12:29.401Z",
+            "updated_at": "2022-01-25T20:12:29.401Z"
+        }
+    },
+    {
+        "model": "catalogo.subcategoria",
+        "pk": 2,
+        "fields": {
+            "nome": "Banda / Cantores",
+            "slug": "banda-cantores",
+            "icone_fontawesome": "microphone-alt",
+            "ativo": false,
+            "created_at": "2022-01-25T20:12:29.359Z",
+            "updated_at": "2022-01-25T20:12:29.359Z"
+        }
+    },
+    {
+        "model": "catalogo.subcategoria",
+        "pk": 3,
+        "fields": {
+            "nome": "Filmes",
+            "slug": "filmes",
+            "icone_fontawesome": "video",
+            "ativo": true,
+            "created_at": "2022-01-25T20:12:29.385Z",
+            "updated_at": "2022-01-25T20:12:29.385Z"
+        }
+    },
+    {
+        "model": "catalogo.subcategoria",
+        "pk": 4,
+        "fields": {
+            "nome": "Times de Futebol",
+            "slug": "times-de-futebol",
+            "icone_fontawesome": "futbol",
+            "ativo": true,
+            "created_at": "2022-01-25T20:12:29.398Z",
+            "updated_at": "2022-01-25T20:12:29.398Z"
+        }
+    },
+    {
+        "model": "catalogo.subcategoria",
+        "pk": 5,
+        "fields": {
+            "nome": "Religião",
+            "slug": "religiao",
+            "icone_fontawesome": "church",
+            "ativo": false,
+            "created_at": "2022-01-25T20:12:29.363Z",
+            "updated_at": "2022-01-25T20:12:29.363Z"
+        }
+    },
+    {
+        "model": "catalogo.subcategoria",
+        "pk": 6,
+        "fields": {
+            "nome": "Bebidas / Comidas",
+            "slug": "bebidas-comidas",
+            "icone_fontawesome": "hamburger",
+            "ativo": false,
+            "created_at": "2022-01-25T20:12:29.367Z",
+            "updated_at": "2022-01-25T20:12:29.367Z"
+        }
+    },
+    {
+        "model": "catalogo.subcategoria",
+        "pk": 7,
+        "fields": {
+            "nome": "Automoveis",
+            "slug": "automoveis",
+            "icone_fontawesome": "car",
+            "ativo": false,
+            "created_at": "2022-01-25T20:12:29.370Z",
+            "updated_at": "2022-01-25T20:12:29.370Z"
+        }
+    },
+    {
+        "model": "catalogo.subcategoria",
+        "pk": 8,
+        "fields": {
+            "nome": "Universo / Espaço",
+            "slug": "universo-espaco",
+            "icone_fontawesome": "rocket",
+            "ativo": false,
+            "created_at": "2022-01-25T20:12:29.374Z",
+            "updated_at": "2022-01-25T20:12:29.374Z"
+        }
+    },
+    {
+        "model": "catalogo.subcategoria",
+        "pk": 9,
+        "fields": {
+            "nome": "Redes Sociais",
+            "slug": "redes-sociais",
+            "icone_fontawesome": "laptop",
+            "ativo": false,
+            "created_at": "2022-01-25T20:12:29.379Z",
+            "updated_at": "2022-01-25T20:12:29.379Z"
+        }
+    },
+    {
+        "model": "catalogo.subcategoria",
+        "pk": 10,
+        "fields": {
+            "nome": "Vídeo Game",
+            "slug": "video-game",
+            "icone_fontawesome": "gamepad",
+            "ativo": true,
+            "created_at": "2022-01-25T20:12:29.390Z",
+            "updated_at": "2022-01-25T20:12:29.390Z"
+        }
+    },
+    {
+        "model": "catalogo.subcategoria",
+        "pk": 11,
+        "fields": {
+            "nome": "Frases",
+            "slug": "frases",
+            "icone_fontawesome": "quote-right",
+            "ativo": true,
+            "created_at": "2022-01-25T20:12:29.383Z",
+            "updated_at": "2022-01-25T20:12:29.383Z"
+        }
+    },
+    {
+        "model": "catalogo.subcategoria",
+        "pk": 12,
+        "fields": {
+            "nome": "Rostos",
+            "slug": "rostos",
+            "icone_fontawesome": "smile",
+            "ativo": true,
+            "created_at": "2022-01-25T20:12:29.393Z",
+            "updated_at": "2022-01-25T20:12:29.393Z"
+        }
+    },
+    {
+        "model": "catalogo.subcategoria",
+        "pk": 13,
+        "fields": {
+            "nome": "Profissões",
+            "slug": "profissoes",
+            "icone_fontawesome": "briefcase",
+            "ativo": true,
+            "created_at": "2022-01-25T20:12:29.405Z",
+            "updated_at": "2022-01-25T20:12:29.405Z"
+        }
+    }
+]
