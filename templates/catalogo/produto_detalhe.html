@@ -9,6 +9,10 @@
 {% block js_header %}
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script>
+    $(document).ready(function () {
+        $('.img-mockup').width(75);
+    });
+
     function alterarLabelCorSelecionada(cor) {
         $('#cor-selecionada').text(cor);
     }
@@ -18,7 +22,8 @@
     function mostrarMockupSelecionado(e) {
         for (const [key, value] of Object.entries(mockups)) {
             if (parseInt(key) === parseInt(e.id)) {
-                $("#imagemModelo").attr("src", e.src.replace(",w_75", ""));
+                $("#imagemModelo").attr("src", e.src);
+                $('.img-mockup').width(75);
             }
         }
     }
@@ -75,9 +80,9 @@
                     <div style="padding-top: 10px;">
                         {% for imagem in imagens %}
                             {% if forloop.first %}
-                                {% cloudinary produto.imagem_principal id=imagem.id quality="auto:low" width=75 class="rounded" onclick="mostrarMockupSelecionado(this)" %}
+                                {% cloudinary produto.imagem_principal id=imagem.id quality="auto:low" width=75 class="rounded img-mockup" onclick="mostrarMockupSelecionado(this)" %}
                             {% endif %}
-                            {% cloudinary imagem.imagem width=75 quality="auto:low" id=imagem.id onclick="mostrarMockupSelecionado(this)" %}
+                            {% cloudinary imagem.imagem quality="auto:low" id=imagem.id onclick="mostrarMockupSelecionado(this)" class="rounded img-mockup" %}
                         {% endfor %}
                     </div>
                 </div>

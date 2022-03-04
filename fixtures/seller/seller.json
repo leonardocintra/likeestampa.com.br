@@ -1,0 +1,27 @@
+[
+    {
+        "model": "seller.seller",
+        "pk": 1,
+        "fields": {
+            "nome": "Dimona",
+            "site": "https://camisadimona.com.br/loja/conta/pedidos",
+            "nome_contato": "Nenhum",
+            "telefone_contato": "392839823989",
+            "cep": "13898989",
+            "endereco": "Rua 6 de Abril",
+            "numero": "1302",
+            "bairro": "Centro",
+            "ativo": true,
+            "complemento": null,
+            "referencia": null,
+            "cidade": "Franca",
+            "uf": "MG",
+            "frete_tipo": "proprio",
+            "frete_url": null,
+            "frete_token": "",
+            "observacao": "Usado apenas em testes",
+            "created_at": "2022-01-25T20:10:56.084Z",
+            "updated_at": "2022-01-25T20:10:56.084Z"
+        }
+    }
+]

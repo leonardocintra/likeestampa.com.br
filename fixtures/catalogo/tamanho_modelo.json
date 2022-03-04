@@ -1,0 +1,189 @@
+[
+    {
+        "model": "catalogo.tamanhomodelo",
+        "pk": 1,
+        "fields": {
+            "tamanho": 1,
+            "modelo": 1,
+            "ativo": true,
+            "created_at": "2022-01-25T20:24:05.468Z",
+            "updated_at": "2022-01-25T20:24:05.468Z"
+        }
+    },
+    {
+        "model": "catalogo.tamanhomodelo",
+        "pk": 2,
+        "fields": {
+            "tamanho": 2,
+            "modelo": 1,
+            "ativo": true,
+            "created_at": "2022-01-25T20:24:05.476Z",
+            "updated_at": "2022-01-25T20:24:05.476Z"
+        }
+    },
+    {
+        "model": "catalogo.tamanhomodelo",
+        "pk": 3,
+        "fields": {
+            "tamanho": 3,
+            "modelo": 1,
+            "ativo": true,
+            "created_at": "2022-01-25T20:24:05.482Z",
+            "updated_at": "2022-01-25T20:24:05.482Z"
+        }
+    },
+    {
+        "model": "catalogo.tamanhomodelo",
+        "pk": 4,
+        "fields": {
+            "tamanho": 4,
+            "modelo": 1,
+            "ativo": true,
+            "created_at": "2022-01-25T20:24:05.484Z",
+            "updated_at": "2022-01-25T20:24:05.484Z"
+        }
+    },
+    {
+        "model": "catalogo.tamanhomodelo",
+        "pk": 5,
+        "fields": {
+            "tamanho": 5,
+            "modelo": 1,
+            "ativo": true,
+            "created_at": "2022-01-25T20:24:05.487Z",
+            "updated_at": "2022-01-25T20:24:05.487Z"
+        }
+    },
+    {
+        "model": "catalogo.tamanhomodelo",
+        "pk": 6,
+        "fields": {
+            "tamanho": 1,
+            "modelo": 2,
+            "ativo": true,
+            "created_at": "2022-01-25T20:24:05.489Z",
+            "updated_at": "2022-01-25T20:24:05.489Z"
+        }
+    },
+    {
+        "model": "catalogo.tamanhomodelo",
+        "pk": 7,
+        "fields": {
+            "tamanho": 2,
+            "modelo": 2,
+            "ativo": true,
+            "created_at": "2022-01-25T20:24:05.493Z",
+            "updated_at": "2022-01-25T20:24:05.493Z"
+        }
+    },
+    {
+        "model": "catalogo.tamanhomodelo",
+        "pk": 8,
+        "fields": {
+            "tamanho": 3,
+            "modelo": 2,
+            "ativo": true,
+            "created_at": "2022-01-25T20:24:05.495Z",
+            "updated_at": "2022-01-25T20:24:05.495Z"
+        }
+    },
+    {
+        "model": "catalogo.tamanhomodelo",
+        "pk": 9,
+        "fields": {
+            "tamanho": 4,
+            "modelo": 2,
+            "ativo": true,
+            "created_at": "2022-01-25T20:24:05.497Z",
+            "updated_at": "2022-01-25T20:24:05.497Z"
+        }
+    },
+    {
+        "model": "catalogo.tamanhomodelo",
+        "pk": 10,
+        "fields": {
+            "tamanho": 5,
+            "modelo": 2,
+            "ativo": true,
+            "created_at": "2022-01-25T20:24:05.499Z",
+            "updated_at": "2022-01-25T20:24:05.499Z"
+        }
+    },
+    {
+        "model": "catalogo.tamanhomodelo",
+        "pk": 11,
+        "fields": {
+            "tamanho": 6,
+            "modelo": 4,
+            "ativo": true,
+            "created_at": "2022-01-25T20:24:05.501Z",
+            "updated_at": "2022-01-25T20:24:05.501Z"
+        }
+    },
+    {
+        "model": "catalogo.tamanhomodelo",
+        "pk": 12,
+        "fields": {
+            "tamanho": 7,
+            "modelo": 4,
+            "ativo": true,
+            "created_at": "2022-01-25T20:24:05.503Z",
+            "updated_at": "2022-01-25T20:24:05.503Z"
+        }
+    },
+    {
+        "model": "catalogo.tamanhomodelo",
+        "pk": 13,
+        "fields": {
+            "tamanho": 8,
+            "modelo": 4,
+            "ativo": true,
+            "created_at": "2022-01-25T20:24:05.506Z",
+            "updated_at": "2022-01-25T20:24:05.506Z"
+        }
+    },
+    {
+        "model": "catalogo.tamanhomodelo",
+        "pk": 14,
+        "fields": {
+            "tamanho": 9,
+            "modelo": 4,
+            "ativo": true,
+            "created_at": "2022-01-25T20:24:05.509Z",
+            "updated_at": "2022-01-25T20:24:05.509Z"
+        }
+    },
+    {
+        "model": "catalogo.tamanhomodelo",
+        "pk": 15,
+        "fields": {
+            "tamanho": 10,
+            "modelo": 4,
+            "ativo": true,
+            "created_at": "2022-01-25T20:24:05.512Z",
+            "updated_at": "2022-01-25T20:24:05.512Z"
+        }
+    },
+    {
+        "model": "catalogo.tamanhomodelo",
+        "pk": 16,
+        "fields": {
+            "tamanho": 11,
+            "modelo": 4,
+            "ativo": true,
+            "created_at": "2022-01-25T20:24:05.514Z",
+            "updated_at": "2022-01-25T20:24:05.514Z"
+        }
+    },
+    {
+        "model": "catalogo.tamanhomodelo",
+        "pk": 17,
+        "fields": {
+            "tamanho": 12,
+            "modelo": 4,
+            "ativo": true,
+            "created_at": "2022-01-25T20:24:05.517Z",
+            "updated_at": "2022-01-25T20:24:05.517Z"
+        }
+    }
+]
