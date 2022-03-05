@@ -36,6 +36,7 @@ class ProdutoDetailViewTest(TestCase):
         'fixtures/catalogo/cor.json',
         'fixtures/catalogo/tamanho.json',
         'fixtures/catalogo/tamanho_modelo.json',
+        'fixtures/catalogo/produto_imagens.json',
     ]
 
     def setUp(self):
@@ -52,13 +53,44 @@ class ProdutoDetailViewTest(TestCase):
     def test_imagem_low(self):
         self.assertContains(self.response, '/image/upload/q_auto:low/v')
 
+    def test_somente_subcategorias_ativas(self):
+        subCategorias = SubCategoria.objects.all()
+        self.assertEqual(13, len(subCategorias))
+        self.assertIsNotNone(self.response.context['subcategorias'])
+        self.assertEqual(7, len(self.response.context['subcategorias']))
+
+    def test_cores(self):
+        self.assertIsNotNone(self.response.context['cores'])
+        self.assertEqual(12, len(self.response.context['cores']))
+
     def test_modelos(self):
         self.assertIsNotNone(self.response.context['modelos'])
         self.assertEqual(3, len(self.response.context['modelos']))
 
+    def test_tamanho_modelo_dict(self):
+        self.assertIsNotNone(self.response.context['tamanho_modelo_dict'])
+        self.assertEqual(3, len(self.response.context['tamanho_modelo_dict']))
+
+    def test_tamanhos_modelo(self):
+        self.assertIsNotNone(self.response.context['tamanhos_modelo'])
+        self.assertEqual(17, len(self.response.context['tamanhos_modelo']))
+
+    def test_imagens(self):
+        self.assertIsNotNone(self.response.context['imagens'])
+        self.assertEqual(3, len(self.response.context['imagens']))
+
     def test_tamanhos(self):
         self.assertIsNotNone(self.response.context['tamanhos'])
         self.assertEqual(12, len(self.response.context['tamanhos']))
+
+    def test_produtos_relacionados(self):
+        self.assertIsNotNone(self.response.context['produtos_relacionados'])
+        self.assertEqual(
+            1, len(self.response.context['produtos_relacionados']))
+
+    def test_quantidade_item(self):
+        self.assertIsNotNone(self.response.context['quantidade_item'])
+        self.assertEqual(0, self.response.context['quantidade_item'])
 
     def test_html(self):
         contents = (self.obj.nome, self.obj.descricao, self.obj.subcategoria)
