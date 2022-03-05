@@ -1,7 +1,6 @@
 from django.test import TestCase, override_settings
 from checkout.models import Carrinho
 from checkout.tests.test_model import UUID_FAKE_CARRINHO, get_fake_carrinho_com_items
-from evento.tests.test_model import create_fakes_status
 from pagamento.models import PagamentoMercadoPago
 
 from pedido.business import concluir_pedido
@@ -11,8 +10,9 @@ from pedido.tests.test_model import get_fake_pedido
 
 @override_settings(DEBUG=True)
 class ConcluirPedidoTest(TestCase):
+    fixtures = ['fixtures/evento/status.json', ]
+
     def setUp(self):
-        create_fakes_status()
         Pedido.objects.all().delete()
         ItemPedido.objects.all().delete()
         Carrinho.objects.all().delete()

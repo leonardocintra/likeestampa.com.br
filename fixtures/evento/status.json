@@ -1,0 +1,72 @@
+[
+    {
+        "model": "evento.status",
+        "pk": 1,
+        "fields": {
+            "descricao": "Pedido Recebido",
+            "visivel_cliente": true,
+            "created_at": "2022-01-25T20:12:29.337Z",
+            "updated_at": "2022-01-25T20:12:29.337Z"
+        }
+    },
+    {
+        "model": "evento.status",
+        "pk": 2,
+        "fields": {
+            "descricao": "Pedido Pago",
+            "visivel_cliente": true,
+            "created_at": "2022-01-25T20:12:29.341Z",
+            "updated_at": "2022-01-25T20:12:29.341Z"
+        }
+    },
+    {
+        "model": "evento.status",
+        "pk": 3,
+        "fields": {
+            "descricao": "Pedido em produção",
+            "visivel_cliente": true,
+            "created_at": "2022-01-25T20:12:29.343Z",
+            "updated_at": "2022-01-25T20:12:29.343Z"
+        }
+    },
+    {
+        "model": "evento.status",
+        "pk": 4,
+        "fields": {
+            "descricao": "Pedido em rota de entrega",
+            "visivel_cliente": true,
+            "created_at": "2022-01-25T20:12:29.346Z",
+            "updated_at": "2022-01-25T20:12:29.346Z"
+        }
+    },
+    {
+        "model": "evento.status",
+        "pk": 5,
+        "fields": {
+            "descricao": "Pedido entregue",
+            "visivel_cliente": true,
+            "created_at": "2022-01-25T20:12:29.349Z",
+            "updated_at": "2022-01-25T20:12:29.349Z"
+        }
+    },
+    {
+        "model": "evento.status",
+        "pk": 6,
+        "fields": {
+            "descricao": "Aguardando pagamento",
+            "visivel_cliente": true,
+            "created_at": "2022-01-25T20:12:29.352Z",
+            "updated_at": "2022-01-25T20:12:29.352Z"
+        }
+    },
+    {
+        "model": "evento.status",
+        "pk": 7,
+        "fields": {
+            "descricao": "Pedido Cancelado",
+            "visivel_cliente": true,
+            "created_at": "2022-01-25T20:12:29.355Z",
+            "updated_at": "2022-01-25T20:12:29.355Z"
+        }
+    }
+]

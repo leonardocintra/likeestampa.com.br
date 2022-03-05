@@ -8,7 +8,6 @@ from evento.models import EventoPedido
 from pedido.models import Pedido
 from usuario.tests.test_model import get_fake_endereco, get_fake_user
 from usuario.models import Cliente
-from evento.tests.test_model import create_fakes_status
 from pedido.tests.test_model import get_fake_pedido
 from pagamento.models import PagamentoMercadoPago
 
@@ -26,9 +25,10 @@ class PagamentoViewNaoAutenticado(TestCase):
 
 @override_settings(DEBUG=True)
 class PagamentoViewTest(TestCase):
+    fixtures = ['fixtures/evento/status.json', ]
+
     def setUp(self):
         get_fake_carrinho_com_items()
-        create_fakes_status()
         self.client = Client()
         self.user = get_fake_user()
         cliente = Cliente.objects.get(user=self.user)
@@ -95,8 +95,9 @@ class PagamentoViewTest(TestCase):
 
 @override_settings(DEBUG=True)
 class MercadoPagoNotificationsTest(TestCase):
+    fixtures = ['fixtures/evento/status.json', ]
+    
     def setUp(self):
-        create_fakes_status()
         self.client = Client()
 
     def test_notificacao_mp_ipn_pagamento_mp_nao_encontrado(self):

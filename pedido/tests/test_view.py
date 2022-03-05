@@ -6,14 +6,14 @@ from pagamento.models import PagamentoMercadoPago
 from checkout.tests.test_model import get_fake_carrinho_com_items, UUID_FAKE_CARRINHO
 from pedido.tests.test_model import get_fake_pedido
 from usuario.tests.test_model import get_fake_user
-from evento.tests.test_model import create_fakes_status
 from pedido.models import Pedido
 
 
 @override_settings(DEBUG=True)
 class PedidoFinalizadoMercadoPagoViewTest(TestCase):
+    fixtures = ['fixtures/evento/status.json', ]
+
     def setUp(self):
-        create_fakes_status()
         get_fake_carrinho_com_items()
         self.client = Client()
         self.user = get_fake_user()
