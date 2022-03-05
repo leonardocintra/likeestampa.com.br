@@ -5,8 +5,9 @@ from pedido.tests.test_model import get_fake_pedido
 
 
 class StatusModelTest(TestCase):
+    fixtures = ['fixtures/evento/status.json', ]
+    
     def setUp(self):
-        create_fakes_status()
         self.obj = Status.objects.get(id=5)
     
     def tearDown(self):
@@ -20,8 +21,10 @@ class StatusModelTest(TestCase):
 
 
 class EventoPedidoModelTest(TestCase):
+
+    fixtures = ['fixtures/evento/status.json', ]
+
     def setUp(self):
-        create_fakes_status()
         self.pedido = get_fake_pedido()
         self.status = Status.objects.get(pk=1)
     
@@ -49,14 +52,3 @@ class EventoPedidoModelTest(TestCase):
         # Tenta criar novamento um pedido com evento 3
         criar_evento(3, self.pedido)
         self.assertEqual(4, EventoPedido.objects.count())
-
-
-
-def create_fakes_status():
-    Status.objects.create(id=1, descricao='Pedido Recebido')
-    Status.objects.create(id=2, descricao='Pedido Pago')
-    Status.objects.create(id=3, descricao='Pedido em produção')
-    Status.objects.create(id=4, descricao='Pedido em rota de entrega')
-    Status.objects.create(id=5, descricao='Pedido entregue')
-    Status.objects.create(id=6, descricao='Aguardando pagamento')
-    Status.objects.create(id=7, descricao='Pedido Cancelado')
