@@ -31,6 +31,7 @@ class PagamentoMercadoPago(models.Model):
 
 
 class PagamentoMercadoPagoWebhook(models.Model):
+    # DEPRECATED: Tabela nao utilizada e sera removida no futuro
     mercado_pago = models.ForeignKey(
         PagamentoMercadoPago, on_delete=models.CASCADE)
     webhook_request = models.JSONField()

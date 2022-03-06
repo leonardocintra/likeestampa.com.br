@@ -157,11 +157,16 @@ def pagamento(request):
     return render(request, 'pagamento/pagamento.html', context)
 
 
+
 @require_POST
 @csrf_exempt
 def mp_notifications(request):
-    # Notificações do Mercado Pago IPN
-    # Mercado Pago nao notificica em STAGE, entao tem que fazer os POST na mão
+    """
+        Mercado Pago IPN notificacoes
+        -Obs: Mercado Pago IPN não funciona em STAGE, entao tem que fazer os POST na mão.
+              O problema é que a notificação chega num grupo do telegram. Se quiser acesso 
+              precisa entrar em contato com leonardo.ncintra@outlook.com
+    """
     try:
         if request.GET.get('topic') != 'payment' and request.GET.get('topic') != 'merchant_order':
             enviar_mensagem('Recebeu uma notificação IPN do mercado pago mas não foi um topic mapeado: {0} - ID: {1}'.format(
@@ -211,8 +216,11 @@ def mp_notifications(request):
 
     except PagamentoMercadoPago.DoesNotExist:
         return JsonResponse({"payment": "pagamento não encontrado"}, status=200)
+    except Pedido.DoesNotExist:
+        enviar_mensagem('ERRO ao receber IPN: {0} - external_reference: {1}'.format(str(request), external_reference))
+        return JsonResponse({"payment": "pedido não encontrado"}, status=200)
     except Exception as ex:
-        enviar_mensagem('ERRO ao receber IPN: {0} - {1}'.format(str(request)), ex)
+        enviar_mensagem('ERRO ao receber IPN: {0} - {1}'.format(str(request), ex))
         return JsonResponse({"payment": "ocorreu um excetipon ao processar"}, status=200)
 
 

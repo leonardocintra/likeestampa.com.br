@@ -96,9 +96,21 @@ class PagamentoViewTest(TestCase):
 @override_settings(DEBUG=True)
 class MercadoPagoNotificationsTest(TestCase):
     fixtures = ['fixtures/evento/status.json', ]
-    
+
     def setUp(self):
         self.client = Client()
+
+    def test_topico_nao_mapeado(self):
+        response = self.client.post(
+            r('pagamento:mp_notifications') + '?topic=outro-qualquer&id=123456789')
+        self.assertJSONEqual(response.content, {"erro": "topico nao mapeado"})
+        self.assertEqual(200, response.status_code)
+
+    def test_merchant_order_pedido_nao_encontrado(self):
+        response = self.client.post(
+            r('pagamento:mp_notifications') + '?topic=merchant_order&id=4076824593')
+        self.assertJSONEqual(response.content, {"payment": "pedido não encontrado"})
+        self.assertEqual(200, response.status_code)
 
     def test_notificacao_mp_ipn_pagamento_mp_nao_encontrado(self):
         response = self.client.post(
