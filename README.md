@@ -25,11 +25,12 @@ $ make test
 
 ### Executar local
 
-Tem um arquivo `fixture.sql` que possui dados iniciais para voce brincar.
+Tem um arquivo `fixtores/utils/fixture.sql` que possui dados iniciais para voce brincar.
 
 ```
 $ make migrate
 $ python3 manage.py createsuperuser
+$ ... (seguir passos superuser)
 $ make run
 ```
 
