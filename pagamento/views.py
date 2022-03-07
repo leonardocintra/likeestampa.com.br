@@ -18,10 +18,11 @@ from services.dimona.api import get_frete
 from services.telegram.api import enviar_mensagem
 from .models import PagamentoMercadoPago
 import decimal
-import json
+
 
 def _buscar_pedido_by_external_reference(external_reference):
     return Pedido.objects.get(uuid=external_reference)
+
 
 def _create_items_pedido(pedido, items):
     ItemPedido.objects.filter(pedido=pedido).delete()
@@ -34,6 +35,7 @@ def _create_items_pedido(pedido, items):
             modelo_produto=item.modelo_produto,
             quantidade=item.quantidade
         )
+
 
 @login_required
 def pagamento(request):
@@ -157,7 +159,6 @@ def pagamento(request):
     return render(request, 'pagamento/pagamento.html', context)
 
 
-
 @require_POST
 @csrf_exempt
 def mp_notifications(request):
@@ -178,7 +179,8 @@ def mp_notifications(request):
 
         if request.GET.get('topic') == 'merchant_order':
             merchant_order = get_merchant_order(request.GET.get('id'))
-            enviar_mensagem(merchant_order['id'], 'Merchant Order', 'POST IPN MERCADO PAGO')
+            enviar_mensagem(
+                merchant_order['id'], 'Merchant Order', 'POST IPN MERCADO PAGO')
 
             if merchant_order['status'] == 404:
                 enviar_mensagem('IPN Merchant Order não encontrado: {0} - ID: {1}'.format(
@@ -188,16 +190,19 @@ def mp_notifications(request):
             external_reference = merchant_order['external_reference']
             pedido = _buscar_pedido_by_external_reference(external_reference)
             if not pedido:
-                enviar_mensagem(external_reference, 'Pedido não encontrado', 'External Exchange')
+                enviar_mensagem(external_reference,
+                                'Pedido não encontrado', 'External Exchange')
                 return JsonResponse({"pedido": "nao-encontrado"}, status=200)
-            
+
             datas = get_pagamento_by_external_reference(external_reference)
 
             # TODO: as vezes pode ter mais de um resuts. Entao fazer um loog para ppegar sempre o ultimo
             payment_id = datas['results'][0]['id']
-            
-            Pedido.objects.filter(uuid=external_reference).update(session_ativa=False)
-            PagamentoMercadoPago.objects.filter(pedido=pedido).update(payment_id=payment_id)
+
+            Pedido.objects.filter(uuid=external_reference).update(
+                session_ativa=False)
+            PagamentoMercadoPago.objects.filter(
+                pedido=pedido).update(payment_id=payment_id)
 
         payment = get_payment(payment_id)
         if payment['status'] == 404:
@@ -206,21 +211,24 @@ def mp_notifications(request):
         atualizar_pagamento_mp(payment)
         try:
             if pedido is None:
-                pedido = _buscar_pedido_by_external_reference(payment['external_reference'])
+                pedido = _buscar_pedido_by_external_reference(
+                    payment['external_reference'])
             concluir_pedido(pedido, payment_id)
         except Exception as e:
-            print(e)
-            return JsonResponse({"pagamento": "ocorreu um erro no concluir-pedido"}, status=201)
+            enviar_mensagem('Erro ao concluir_pedido. Erro: {0}'.format(e))
+            return JsonResponse({"pagamento": "ocorreu um erro no concluir-pedido."}, status=201)
 
         return JsonResponse({"pagamento": "dado-recebido"}, status=201)
 
     except PagamentoMercadoPago.DoesNotExist:
         return JsonResponse({"payment": "pagamento não encontrado"}, status=200)
     except Pedido.DoesNotExist:
-        enviar_mensagem('ERRO ao receber IPN: {0} - external_reference: {1}'.format(str(request), external_reference))
+        enviar_mensagem(
+            'ERRO ao receber IPN: {0} - external_reference: {1}'.format(str(request), external_reference))
         return JsonResponse({"payment": "pedido não encontrado"}, status=200)
     except Exception as ex:
-        enviar_mensagem('ERRO ao receber IPN: {0} - {1}'.format(str(request), ex))
+        enviar_mensagem(
+            'ERRO ao receber IPN: {0} - {1}'.format(str(request), ex))
         return JsonResponse({"payment": "ocorreu um excetipon ao processar"}, status=200)
 
 
