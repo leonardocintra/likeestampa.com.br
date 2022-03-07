@@ -21,7 +21,10 @@ import decimal
 
 
 def _buscar_pedido_by_external_reference(external_reference):
-    return Pedido.objects.get(uuid=external_reference)
+    try:
+        return Pedido.objects.get(uuid=external_reference)
+    except:
+        return None
 
 
 def _create_items_pedido(pedido, items):
@@ -182,17 +185,12 @@ def mp_notifications(request):
             enviar_mensagem(
                 merchant_order['id'], 'Merchant Order', 'POST IPN MERCADO PAGO')
 
-            if merchant_order['status'] == 404:
-                enviar_mensagem('IPN Merchant Order não encontrado: {0} - ID: {1}'.format(
-                    request.GET.get('topic'), request.GET.get('id')), 'IPN do Mercado pago')
-                return JsonResponse({"merchant_order": "merchant_order nao encontrado. "}, status=200)
-
             external_reference = merchant_order['external_reference']
             pedido = _buscar_pedido_by_external_reference(external_reference)
             if not pedido:
                 enviar_mensagem(external_reference,
                                 'Pedido não encontrado', 'External Exchange')
-                return JsonResponse({"pedido": "nao-encontrado"}, status=200)
+                return JsonResponse({"pedido": "pedido-nao-encontrado"}, status=200)
 
             datas = get_pagamento_by_external_reference(external_reference)
 
@@ -222,10 +220,6 @@ def mp_notifications(request):
 
     except PagamentoMercadoPago.DoesNotExist:
         return JsonResponse({"payment": "pagamento não encontrado"}, status=200)
-    except Pedido.DoesNotExist:
-        enviar_mensagem(
-            'ERRO ao receber IPN: {0} - external_reference: {1}'.format(str(request), external_reference))
-        return JsonResponse({"payment": "pedido não encontrado"}, status=200)
     except Exception as ex:
         enviar_mensagem(
             'ERRO ao receber IPN: {0} - {1}'.format(str(request), ex))
