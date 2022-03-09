@@ -7,12 +7,10 @@ from django.db import IntegrityError
 
 
 class TamanhoModelTest(TestCase):
+    fixtures = ['fixtures/catalogo/tamanho.json', ]
+
     def setUp(self):
-        self.obj = Tamanho(
-            nome='P',
-            slug='p'
-        )
-        self.obj.save()
+        self.obj = Tamanho.objects.get(pk=1)
 
     def test_create(self):
         self.assertTrue(Tamanho.objects.exists())
@@ -39,20 +37,24 @@ class CorModelTest(TestCase):
                            slug='cor-inativa', ativo=False)
         self.assertEqual(13, Cor.objects.count())
         self.assertEqual(12, len(Cor.get_cores_ativas()))
-    
+
     def test_get_cores_ativas_cache(self):
-        Cor.objects.create(nome='Cor no CACHE', valor='#555555', slug='cor-nova-1')
+        Cor.objects.create(nome='Cor no CACHE',
+                           valor='#555555', slug='cor-nova-1')
         self.assertEqual(13, len(Cor.get_cores_ativas()))
-        Cor.objects.create(nome='Cor FORA do cache', valor='#555556', slug='cor-nova-2')
+        Cor.objects.create(nome='Cor FORA do cache',
+                           valor='#555556', slug='cor-nova-2')
         self.assertEqual(13, len(Cor.get_cores_ativas()))
         self.assertEqual(14, Cor.objects.count())
 
 
 class CorModeloModelTest(TestCase):
+    fixtures = ['fixtures/catalogo/modelo.json',
+                'fixtures/catalogo/cor.json', ]
+
     def setUp(self):
-        self.modelo = Modelo.objects.create(descricao='T-Shirt')
-        self.cor = Cor.objects.create(
-            nome='Verde Bandeira', slug='verde-bandeira')
+        self.modelo = Modelo.objects.get(pk=1)
+        self.cor = Cor.objects.get(pk=11)
         self.obj = CorModelo.objects.create(cor=self.cor, modelo=self.modelo)
 
     def test_create(self):
@@ -66,12 +68,12 @@ class CorModeloModelTest(TestCase):
 
 
 class TamanhoModeloModelTest(TestCase):
+    fixtures = ['fixtures/catalogo/modelo.json',
+                'fixtures/catalogo/tamanho.json', ]
+
     def setUp(self):
-        self.modelo = Modelo.objects.create(descricao='T-Shirt')
-        self.tamanho = Tamanho.objects.create(
-            nome='P',
-            slug='p'
-        )
+        self.modelo = Modelo.objects.get(pk=1)
+        self.tamanho = Tamanho.objects.get(pk=1)
         self.obj = TamanhoModelo(
             tamanho=self.tamanho,
             modelo=self.modelo
@@ -89,10 +91,10 @@ class TamanhoModeloModelTest(TestCase):
 
 
 class CategoriaModelTest(TestCase):
+    fixtures = ['fixtures/catalogo/categoria.json', ]
 
-    @classmethod
-    def setUpTestData(cls):
-        Categoria.objects.create(nome='Camisetas', slug='camiseta')
+    def setUp(self) -> None:
+        return super().setUp()
 
     def test_create(self):
         self.assertTrue(Categoria.objects.exists())
@@ -145,18 +147,17 @@ class CategoriaModelTest(TestCase):
 
 
 class SubCategoriaModelTest(TestCase):
+    fixtures = ['fixtures/catalogo/subcategoria.json', ]
+
     def setUp(self):
-        self.obj = SubCategoria(
-            nome='Programação',
-            slug='programacao'
-        )
-        self.obj.save()
+        self.obj = SubCategoria.objects.get(pk=1)
 
     def test_create(self):
         self.assertTrue(SubCategoria.objects.exists())
 
     def test_ativo_default_false(self):
-        self.assertFalse(self.obj.ativo)
+        sub = SubCategoria.objects.create(nome='Nova cat', slug='nova-cat')
+        self.assertFalse(sub.ativo)
 
     def test_created_at(self):
         self.assertIsInstance(self.obj.created_at, datetime)
@@ -166,33 +167,55 @@ class SubCategoriaModelTest(TestCase):
 
 
 class ProdutoModelTest(TestCase):
-    def setUp(self):
-        self.obj = get_fake_produto()
+    fixtures = ['fixtures/seller/seller.json',
+                'fixtures/catalogo/subcategoria.json',
+                'fixtures/catalogo/produtos.json', ]
+
+    def setUp(self) -> None:
+        self.obj = Produto.objects.get(pk=3)
 
     def test_create(self):
         self.assertTrue(Produto.objects.exists())
 
     def test_ativo_default_false(self):
-        self.assertFalse(self.obj.ativo)
+        subcategoria = SubCategoria.objects.get(pk=1)
+        prod = Produto.objects.create(
+            nome='Camiseta NodeJs',
+            descricao='Camiseta feita de algodão 100% 30.1',
+            slug='camiseta-nodejs',
+            subcategoria=subcategoria,
+            imagem_principal='Imagem do cloudinary',
+            imagem_design='Imagem do cloudinary',
+        )
+        self.assertFalse(prod.ativo)
 
     def test_genero(self):
         self.assertEqual('M', self.obj.genero)
 
     def test_preco_base(self):
-        self.assertEqual(51.90, self.obj.preco_base)
+        self.assertEqual(51.90, float(self.obj.preco_base))
 
     def test_created_at(self):
         self.assertIsInstance(self.obj.created_at, datetime)
 
     def test_str(self):
-        self.assertEqual('Camiseta NodeJs', str(self.obj))
+        self.assertEqual('Elixir (Vertical)', str(self.obj))
+
+    def test_get_produto_by_slug(self):
+        cache.delete('elixir-vertical')
+        produto = Produto.get_produto_by_slug('elixir-vertical')
+        self.assertEqual(produto.nome, 'Elixir (Vertical)')
 
 
 class ProdutoImagemModelTest(TestCase):
+    fixtures = ['fixtures/seller/seller.json',
+                'fixtures/catalogo/subcategoria.json',
+                'fixtures/catalogo/produtos.json',
+                'fixtures/catalogo/modelo.json', ]
+
     def setUp(self):
-        produto = get_fake_produto()
         self.obj = ProdutoImagem.objects.create(
-            produto=produto,
+            produto=Produto.objects.get(pk=2),
             imagem='imagem-cloudinary',
         )
 
@@ -203,7 +226,7 @@ class ProdutoImagemModelTest(TestCase):
         self.assertIsInstance(self.obj.created_at, datetime)
 
     def test_str(self):
-        self.assertEqual('Camiseta NodeJs', str(self.obj))
+        self.assertEqual('Ronaldinho 10', str(self.obj))
 
 
 class ModeloModelTest(TestCase):
@@ -219,11 +242,14 @@ class ModeloModelTest(TestCase):
 
 
 class ModeloProdutoModelTest(TestCase):
+    fixtures = ['fixtures/seller/seller.json',
+                'fixtures/catalogo/subcategoria.json',
+                'fixtures/catalogo/produtos.json',
+                'fixtures/catalogo/modelo.json',
+                'fixtures/catalogo/modelo_produto.json', ]
+
     def setUp(self):
-        modelo = Modelo.objects.create(descricao='T-Shirt')
-        produto = get_fake_produto()
-        self.obj = ModeloProduto(produto=produto, modelo=modelo)
-        self.obj.save()
+        self.obj = ModeloProduto.objects.get(pk=8)
 
     def test_create(self):
         self.assertTrue(ModeloProduto.objects.exists())
@@ -233,6 +259,14 @@ class ModeloProdutoModelTest(TestCase):
 
     def test_str(self):
         self.assertEqual('T-Shirt', str(self.obj))
+    
+    def test_get_modelos_do_produto(self):
+        produto = Produto.objects.get(pk=4)
+        cache.delete('modelo-produto-{0}'.format(produto.slug))
+        modelos = ModeloProduto.get_modelos_do_produto(produto)
+        self.assertIsNotNone(modelos)
+        self.assertEqual(3, len(modelos))
+
 
 
 class SkuDimonaModelTest(TestCase):
@@ -257,6 +291,7 @@ class SkuDimonaModelTest(TestCase):
 
 
 def get_fake_produto():
+    # DEPRECATED: usar fixtures (remover do restantes dos testes)
     subcategoria = SubCategoria.objects.create(
         nome='Programação', slug='programacao', )
     return Produto.objects.create(
