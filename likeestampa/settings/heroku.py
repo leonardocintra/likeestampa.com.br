@@ -8,7 +8,8 @@ DEBUG = env.bool("DEBUG", False)
 
 SECRET_KEY = env("SECRET_KEY")
 
-ALLOWED_HOSTS = ["likeestampa.com.br", "www.likeestampa.com.br", "likeestampa.herokuapp.com", ]
+ALLOWED_HOSTS = ["likeestampa.com.br",
+                 "www.likeestampa.com.br", "likeestampa.herokuapp.com", ]
 
 
 # SECURE SSL (HTTPS Sempre)
@@ -28,7 +29,7 @@ MERCADO_PAGO_PUBLIC_KEY = env("MERCADO_PAGO_PUBLIC_KEY")
 MELHOR_ENVIO_TOKEN = env("MELHOR_ENVIO_TOKEN")
 MELHOR_ENVIO_BASE_URL = "https://melhorenvio.com.br"
 
-#LIKE ESTAMPA
+# LIKE ESTAMPA
 MAXIMO_ITENS_CARRINHO = env.int("MAXIMO_ITENS_CARRINHO")
 
 
@@ -46,3 +47,12 @@ DIMONA_KEY = env("DIMONA_KEY")
 
 # TELEGRAM
 TELEGRAM_TOKEN = env("TELEGRAM_TOKEN")
+
+# REDIS
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': env('REDIS_URL'),
+        'TIMEOUT': 2000,
+    }
+}

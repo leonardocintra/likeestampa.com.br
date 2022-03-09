@@ -1,3 +1,4 @@
+from django.core.cache import cache
 from django.views.generic.list import ListView
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
@@ -41,7 +42,7 @@ def __get_mockups(produto, imagens):
 
 def produto(request, slug):
     """ Pagina de detalhes do produto """
-    produto = Produto.objects.get(slug=slug)
+    produto = Produto.get_produto_by_slug(slug)
 
     if request.method == 'POST':
         form = ProdutoDetalheForm(request.POST)
@@ -55,8 +56,8 @@ def produto(request, slug):
     mockups = __get_mockups(produto, imagens)
 
     # TODO: Cachear essas variaveis
-    modelos = ModeloProduto.objects.filter(produto=produto)
-    cores = Cor.objects.all().exclude(ativo=False)
+    modelos = ModeloProduto.get_modelos_do_produto(produto)
+    cores = Cor.get_cores_ativas()
 
     # Busca os modelos
     modelo_array = []

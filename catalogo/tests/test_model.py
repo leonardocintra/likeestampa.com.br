@@ -1,5 +1,5 @@
 from datetime import datetime
-from pydoc import describe
+from django.core.cache import cache
 from django.test import TestCase
 from catalogo.models import (Categoria, ModeloProduto, Produto, ProdutoImagem,
                              SubCategoria, Modelo, SkuDimona, Cor, Tamanho, TamanhoModelo, CorModelo)
@@ -22,18 +22,30 @@ class TamanhoModelTest(TestCase):
 
 
 class CorModelTest(TestCase):
+    fixtures = ['fixtures/catalogo/cor.json', ]
+
     def setUp(self):
-        self.obj = Cor(
-            nome='Verde Bandeira',
-            slug='verde-bandeira'
-        )
-        self.obj.save()
+        cache.delete('cores')
+        self.obj = Cor.objects.get(pk=11)
 
     def test_create(self):
         self.assertTrue(Cor.objects.exists())
 
     def test_str(self):
         self.assertEqual('Verde Bandeira', str(self.obj))
+
+    def test_get_cores_ativas(self):
+        Cor.objects.create(nome='Cor inativa', valor='#444444',
+                           slug='cor-inativa', ativo=False)
+        self.assertEqual(13, Cor.objects.count())
+        self.assertEqual(12, len(Cor.get_cores_ativas()))
+    
+    def test_get_cores_ativas_cache(self):
+        Cor.objects.create(nome='Cor no CACHE', valor='#555555', slug='cor-nova-1')
+        self.assertEqual(13, len(Cor.get_cores_ativas()))
+        Cor.objects.create(nome='Cor FORA do cache', valor='#555556', slug='cor-nova-2')
+        self.assertEqual(13, len(Cor.get_cores_ativas()))
+        self.assertEqual(14, Cor.objects.count())
 
 
 class CorModeloModelTest(TestCase):

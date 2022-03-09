@@ -1,4 +1,5 @@
 from cloudinary.models import CloudinaryField
+from django.core.cache import cache
 from django.db import models
 
 from seller.models import Seller
@@ -78,6 +79,13 @@ class Produto(models.Model):
     def __str__(self):
         return self.nome
 
+    def get_produto_by_slug(slug):
+        produto = cache.get(slug)
+        if produto is None:
+            produto = Produto.objects.get(slug=slug)
+            cache.set(slug, produto)
+        return produto
+
 
 class Modelo(models.Model):
     "Modelo seria: T-Shirt, mangalonga, etc"
@@ -114,6 +122,14 @@ class ModeloProduto(models.Model):
     def __str__(self):
         return self.modelo.descricao
 
+    def get_modelos_do_produto(produto):
+        cache_name = 'modelo-produto-{0}'.format(produto.slug)
+        modelos_produto = cache.get(cache_name)
+        if modelos_produto is None:
+            modelos_produto = ModeloProduto.objects.filter(produto=produto)
+            cache.set(cache_name, modelos_produto)
+        return modelos_produto
+
 
 class Cor(models.Model):
     nome = models.CharField(max_length=50, unique=True)
@@ -132,6 +148,13 @@ class Cor(models.Model):
 
     def __str__(self):
         return self.nome
+
+    def get_cores_ativas():
+        cores = cache.get('cores')
+        if cores is None:
+            cores = Cor.objects.all().exclude(ativo=False)
+            cache.set('cores', cores)
+        return cores
 
 
 class Tamanho(models.Model):

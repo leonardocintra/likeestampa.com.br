@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.shortcuts import resolve_url as r
 from django.urls import reverse
-from catalogo.models import Cor, Modelo, ModeloProduto, Produto, ProdutoImagem, SubCategoria, Tamanho, TamanhoModelo
+from catalogo.models import Produto, SubCategoria
 
 
 class SubCategoriaListView(TestCase):
