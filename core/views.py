@@ -9,7 +9,7 @@ from checkout.views import get_quantidade_items_carrinho
 def index(request):
     # Pagina inicial - Listagem dos ultimos lançamentos
     produtos = __get_produtos(request=request)
-    subcategorias = SubCategoria.objects.all().exclude(ativo=False)
+    subcategorias = SubCategoria.get_subcategorias_ativas()
     quantidade_item = get_quantidade_items_carrinho(request)
     page_obj = __get_page_obj(request, produtos)
 

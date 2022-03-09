@@ -22,7 +22,7 @@ class SubCategoriaListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(SubCategoriaListView, self).get_context_data(**kwargs)
-        context['subcategorias'] = SubCategoria.objects.all().exclude(ativo=False)
+        context['subcategorias'] = SubCategoria.get_subcategorias_ativas()
         context['sub_categoria_selecionada'] = get_object_or_404(
             SubCategoria, slug=self.kwargs['slug'])
         return context
@@ -88,7 +88,7 @@ def produto(request, slug):
 
     produtos_relacionados = Produto.objects.filter(
         subcategoria=produto.subcategoria)[:8]
-    subcategorias = SubCategoria.objects.all().exclude(ativo=False)
+    subcategorias = SubCategoria.get_subcategorias_ativas()
 
     form = ProdutoDetalheForm(initial={
         'quantidade': '1'
