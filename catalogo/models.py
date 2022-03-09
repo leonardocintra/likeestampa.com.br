@@ -50,6 +50,13 @@ class SubCategoria(models.Model):
     def __str__(self):
         return self.nome
 
+    def get_subcategorias_ativas():
+        subcategorias = cache.get('subcategorias')
+        if subcategorias is None:
+            subcategorias = SubCategoria.objects.all().exclude(ativo=False)
+            cache.set('subcategorias', subcategorias)
+        return subcategorias
+
 
 class Produto(models.Model):
     """Ex: camieta sao paulo, camiseta python, etc"""

@@ -150,6 +150,7 @@ class SubCategoriaModelTest(TestCase):
     fixtures = ['fixtures/catalogo/subcategoria.json', ]
 
     def setUp(self):
+        cache.delete('subcategorias') 
         self.obj = SubCategoria.objects.get(pk=1)
 
     def test_create(self):
@@ -164,6 +165,12 @@ class SubCategoriaModelTest(TestCase):
 
     def test_str(self):
         self.assertEqual('Programação', str(self.obj))
+    
+    def test_subcategoria_cacheada(self):
+        self.assertIsNone(cache.get('subcategorias'))
+        subs = SubCategoria.get_subcategorias_ativas()
+        self.assertIsNotNone(cache.get('subcategorias'))
+        self.assertEqual(7, len(subs))
 
 
 class ProdutoModelTest(TestCase):
@@ -172,6 +179,7 @@ class ProdutoModelTest(TestCase):
                 'fixtures/catalogo/produtos.json', ]
 
     def setUp(self) -> None:
+        cache.delete('elixir-vertical')
         self.obj = Produto.objects.get(pk=3)
 
     def test_create(self):
@@ -202,9 +210,10 @@ class ProdutoModelTest(TestCase):
         self.assertEqual('Elixir (Vertical)', str(self.obj))
 
     def test_get_produto_by_slug(self):
-        cache.delete('elixir-vertical')
+        self.assertIsNone(cache.get('elixir-vertical'))
         produto = Produto.get_produto_by_slug('elixir-vertical')
         self.assertEqual(produto.nome, 'Elixir (Vertical)')
+        self.assertIsNotNone(cache.get('elixir-vertical'))
 
 
 class ProdutoImagemModelTest(TestCase):
@@ -266,6 +275,7 @@ class ModeloProdutoModelTest(TestCase):
         modelos = ModeloProduto.get_modelos_do_produto(produto)
         self.assertIsNotNone(modelos)
         self.assertEqual(3, len(modelos))
+        self.assertIsNotNone(cache.get('modelo-produto-{0}'.format(produto.slug)))
 
 
 
