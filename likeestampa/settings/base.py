@@ -27,7 +27,8 @@ SECRET_KEY = 'django-insecure-_&%r6!rao1dl+&wkye8f9bu#mc7gr#^$bn!6^@_5oiurzgkw1j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['likeestampa-test.herokuapp.com', '127.0.0.1', 'localhost', 'testserver', ]
+ALLOWED_HOSTS = ['likeestampa-test.herokuapp.com',
+                 '127.0.0.1', 'localhost', 'testserver', ]
 
 
 # Application definition
@@ -114,6 +115,14 @@ DATABASES = {
 # Update database configuration with $DATABASE_URL.
 DATABASES['default'].update(dj_database_url.config())
 
+# REDIS - CACHE
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': os.environ.get('REDIS_URL', 'redis://default:likeEstampa@127.0.0.1:6379'),
+        'TIMEOUT': 2000,
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -176,7 +185,7 @@ CLOUDINARY = {
 
 # MERCADO PAGO
 MERCADO_PAGO_PUBLIC_KEY = 'TEST-1f3bd514-5066-47ba-bc5a-cc59eedfdf64'
-MERCADO_PAGO_PRIVATE_KEY =  'TEST-7112055085058773-060901-5d4a8146dcccf6e2216931dc77d834fb-4990865'
+MERCADO_PAGO_PRIVATE_KEY = 'TEST-7112055085058773-060901-5d4a8146dcccf6e2216931dc77d834fb-4990865'
 
 # MELHOR ENVIO
 MELHOR_ENVIO_TOKEN = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjZlYTAxNmNiMDc3ZGQ1MTZmYjIxN2VjZDFmMDJhZWEyYzEzNzViZjQxMDViNjRiMDg2MzZjOGYzYjFjYTU0NTQ5Mzc4MDlkYWYwMjAzOGVhIn0.eyJhdWQiOiI5NTYiLCJqdGkiOiI2ZWEwMTZjYjA3N2RkNTE2ZmIyMTdlY2QxZjAyYWVhMmMxMzc1YmY0MTA1YjY0YjA4NjM2YzhmM2IxY2E1NDU0OTM3ODA5ZGFmMDIwMzhlYSIsImlhdCI6MTYyMzk0NjE3NiwibmJmIjoxNjIzOTQ2MTc2LCJleHAiOjE2NTU0ODIxNzYsInN1YiI6ImRlNjhmZDdmLWUyNDQtNDQyOS1hZjdlLTZiNWVhMTlmMmEwMCIsInNjb3BlcyI6WyJjYXJ0LXJlYWQiLCJjYXJ0LXdyaXRlIiwiY29tcGFuaWVzLXJlYWQiLCJjb21wYW5pZXMtd3JpdGUiLCJjb3Vwb25zLXJlYWQiLCJjb3Vwb25zLXdyaXRlIiwibm90aWZpY2F0aW9ucy1yZWFkIiwib3JkZXJzLXJlYWQiLCJwcm9kdWN0cy1yZWFkIiwicHJvZHVjdHMtZGVzdHJveSIsInByb2R1Y3RzLXdyaXRlIiwicHVyY2hhc2VzLXJlYWQiLCJzaGlwcGluZy1jYWxjdWxhdGUiLCJzaGlwcGluZy1jYW5jZWwiLCJzaGlwcGluZy1jaGVja291dCIsInNoaXBwaW5nLWNvbXBhbmllcyIsInNoaXBwaW5nLWdlbmVyYXRlIiwic2hpcHBpbmctcHJldmlldyIsInNoaXBwaW5nLXByaW50Iiwic2hpcHBpbmctc2hhcmUiLCJzaGlwcGluZy10cmFja2luZyIsImVjb21tZXJjZS1zaGlwcGluZyIsInRyYW5zYWN0aW9ucy1yZWFkIiwidXNlcnMtcmVhZCIsInVzZXJzLXdyaXRlIiwid2ViaG9va3MtcmVhZCIsIndlYmhvb2tzLXdyaXRlIl19.G04FCla_B7ZcvjEjVZYtLQ57xTZK_Xju2mKrO7jLPv5Oas1a_uiy6-KpMBfaU8tq8MYvHqb7B0prjnZdzG_RIk_RPQizWIxPOfLwx9QYxphRofq551tkJRuPVUK1nPyUtQ5WInBSmMtETQ42ylewpjyx3tuHzE8ekP1ELqfaR4JWgoFpw21jX1p6A990KTUqHzd_dkzB6gdns9YLWjFwO4M85jZ9I8oycicsB4kXuPtIXEXMI-65xJI5_pVTooJY0ZaR-eIrPbz5Ky7Aqow6q52ze3ZVy3R2__FDs_yvMbEME4ftefjNMlUxxhtrymlr0RYMOlY1na89iSo8Vw-eKwaTRWkJzGX1mOFz6Grs8YnVT5McfUmQS_7JwjJP4BxRM-GakvBUOVfXGNIBx5BNLykwgHaKObIGjvKw51sIAvGtmsisfyG9dP2RF_y9TtlscwhZQsa3e0eh1SseOxExgFL0s5I-xadfe1RMI2UFHuPPgryJ-MnX_6IMaWEoMumOiKlODPanEEw5w2wSVXm4JyLgKDlNlkYC1HMBogbZ_G8DfFTmLXOfpnjb5Fa_VkQmUNqGh7jRWdOPQNGPaEzgfwVm1ZRwHs07aiHynxBY0qXMayXiKZRd8xLnWqtO9aZVUAM6Y6Oagu8kmI_Mm8cVRjGoh3KcP2nxas9qEVFf9kE'
