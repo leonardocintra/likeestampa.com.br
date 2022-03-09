@@ -10,6 +10,20 @@ Seu PC precisa ter instalado
 - make (unix OS)
 - virtualenv
 
+
+### Tecnologias
+- Python3
+- Django
+- Docker
+- Postgress
+- Redis / Heroku-Redis
+- Bootstrap
+- Mailgun (sistema de emails)
+- Cloudinary (sistema de armazenamento de imagens)
+- Mercado Pago (gateway de pagamento)
+- Telegram (logs)
+
+
 ### Inicio e testes unitarios
 
 ```

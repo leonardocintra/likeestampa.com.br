@@ -31,10 +31,11 @@ def __get_page_obj(request, produtos):
 
 def __get_produtos(request):
     q = request.GET.get('q', '')
+    produtos = Produto.get_produtos_ativos()
     if q:
-        return Produto.objects.filter(nome__icontains=q).exclude(
+        return produtos.filter(nome__icontains=q).exclude(
             ativo=False).exclude(mostrar_tela_inicial=False)
-    return Produto.objects.all().exclude(
+    return produtos.all().exclude(
         ativo=False).exclude(mostrar_tela_inicial=False)
 
 

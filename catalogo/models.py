@@ -93,6 +93,15 @@ class Produto(models.Model):
             cache.set(slug, produto)
         return produto
 
+    def get_produtos_ativos():
+        produtos = cache.get('produtos')
+        if produtos is not None:
+            return produtos
+        produtos = Produto.objects.all().exclude(
+            ativo=False)
+        cache.set('produtos', produtos)
+        return produtos
+
 
 class Modelo(models.Model):
     "Modelo seria: T-Shirt, mangalonga, etc"
