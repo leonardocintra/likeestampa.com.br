@@ -180,18 +180,19 @@ class ProdutoModelTest(TestCase):
 
     def setUp(self) -> None:
         cache.delete('elixir-vertical')
+        cache.delete('produtos')
         self.obj = Produto.objects.get(pk=3)
+        self.subcategoria = SubCategoria.objects.get(pk=1)
 
     def test_create(self):
         self.assertTrue(Produto.objects.exists())
 
     def test_ativo_default_false(self):
-        subcategoria = SubCategoria.objects.get(pk=1)
         prod = Produto.objects.create(
             nome='Camiseta NodeJs',
             descricao='Camiseta feita de algodão 100% 30.1',
             slug='camiseta-nodejs',
-            subcategoria=subcategoria,
+            subcategoria=self.subcategoria,
             imagem_principal='Imagem do cloudinary',
             imagem_design='Imagem do cloudinary',
         )
@@ -214,6 +215,19 @@ class ProdutoModelTest(TestCase):
         produto = Produto.get_produto_by_slug('elixir-vertical')
         self.assertEqual(produto.nome, 'Elixir (Vertical)')
         self.assertIsNotNone(cache.get('elixir-vertical'))
+    
+    def test_get_produtos_ativos(self):
+        Produto.objects.create(
+            nome='Camiseta NodeJs',
+            descricao='Camiseta feita de algodão 100% 30.1',
+            slug='camiseta-nodejs',
+            subcategoria=self.subcategoria,
+            imagem_principal='Imagem do cloudinary',
+            imagem_design='Imagem do cloudinary',
+        )
+        self.assertEqual(7, Produto.objects.count())
+        self.assertEqual(6, len(Produto.get_produtos_ativos()))
+        self.assertIsNotNone(cache.get('produtos'))
 
 
 class ProdutoImagemModelTest(TestCase):
