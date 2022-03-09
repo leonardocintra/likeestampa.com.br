@@ -119,7 +119,7 @@ DATABASES['default'].update(dj_database_url.config())
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://default:likeEstampa@127.0.0.1:6379',
+        'LOCATION': os.environ.get('REDIS_URL', 'redis://default:likeEstampa@127.0.0.1:6379'),
         'TIMEOUT': 2000,
     }
 }
