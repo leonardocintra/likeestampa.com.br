@@ -24,6 +24,9 @@ class SubCategoriaListView(TestCase):
     def test_sub_categoria_not_found(self):
         pass
 
+    def test_somente_produtos_da_categoria(self):
+        pass
+
 
 class ProdutoDetailViewTest(TestCase):
 

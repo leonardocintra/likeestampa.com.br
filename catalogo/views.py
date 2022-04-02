@@ -1,5 +1,4 @@
-from django.core.cache import cache
-from django.views.generic.list import ListView
+from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
@@ -9,45 +8,32 @@ from .forms import ProdutoDetalheForm
 from .models import Cor, Produto, ProdutoImagem, SubCategoria, ModeloProduto, Tamanho, TamanhoModelo
 
 
-class SubCategoriaListView(ListView):
-    template_name = 'catalogo/list_by_categoria.html'
-    paginate_by = 32
-    model = Produto
+def lista_por_subcategoria(request, slug):
+    """ Lista os produtos baseado na categoria selecionada """
 
-    def get_queryset(self):
-        queryset = Produto.objects.filter(
-            subcategoria__slug=self.kwargs['slug']).exclude(ativo=False)
+    subcategorias = SubCategoria.get_subcategorias_ativas()
+    sub_categoria_selecionada = get_object_or_404(subcategorias, slug=slug)
+    produtos = Produto.get_produtos_ativos().filter(
+        subcategoria__slug=slug)
+    page_obj = __get_page_obj(request, produtos)
 
-        return queryset
-
-    def get_context_data(self, **kwargs):
-        context = super(SubCategoriaListView, self).get_context_data(**kwargs)
-        context['subcategorias'] = SubCategoria.get_subcategorias_ativas()
-        context['sub_categoria_selecionada'] = get_object_or_404(
-            SubCategoria, slug=self.kwargs['slug'])
-        return context
-
-
-def __get_mockups(produto, imagens):
-    # Monta todos os mockups e da um replace na imagem pra ficar com baixo consumo de banda
-    mockups = {0: produto.imagem_principal.url}
-
-    for imagem in imagens:
-        imagemPerformada = imagem.imagem.url
-        mock = {imagem.id: imagemPerformada}
-        mockups.update(mock)
-
-    return mockups
+    context = {
+        'page_obj': page_obj,
+        'subcategorias': subcategorias,
+        'sub_categoria_selecionada': sub_categoria_selecionada,
+    }
+    return render(request, 'catalogo/list_by_categoria.html', context)
 
 
 def produto(request, slug):
     """ Pagina de detalhes do produto """
+
     produto = Produto.get_produto_by_slug(slug)
 
     if request.method == 'POST':
         form = ProdutoDetalheForm(request.POST)
-        adicionar_item_carrinho(request, produto, form.data['modelo'],
-                                form.data['cor'], form.data['tamanho'], form.data['quantidade'])
+        __adicionar_item_carrinho(request, produto, form.data['modelo'],
+                                  form.data['cor'], form.data['tamanho'], form.data['quantidade'])
         return redirect(reverse("checkout:carrinho"))
 
     imagens = ProdutoImagem.objects.filter(produto=produto)
@@ -110,9 +96,12 @@ def produto(request, slug):
     return render(request, 'catalogo/produto_detalhe.html', context)
 
 
-def adicionar_item_carrinho(request, produto, modelo, cor, tamanho, quantidade):
-    carrinho = Carrinho()
+"""  --------------- PRIVATE AREA --------------------- """
 
+def __adicionar_item_carrinho(request, produto, modelo, cor, tamanho, quantidade):
+    """ Funcao responsavel por adicionar items no carrinho """
+    
+    carrinho = Carrinho()
     modelo = int(modelo)
 
     if 'carrinho' in request.session:
@@ -137,4 +126,21 @@ def adicionar_item_carrinho(request, produto, modelo, cor, tamanho, quantidade):
                      quantidade=quantidade, tamanho=tamanho, cor=cor).save()
 
 
-lista_por_subcategoria = SubCategoriaListView
+def __get_page_obj(request, produtos):
+    """ funcao responsavel por paginacao """
+    paginator = Paginator(produtos, 32)
+    page_number = request.GET.get('page')
+    return paginator.get_page(page_number)
+
+
+def __get_mockups(produto, imagens):
+    """ Monta todos os mockups e da um replace na imagem pra ficar com baixo consumo de banda """
+    
+    mockups = {0: produto.imagem_principal.url}
+
+    for imagem in imagens:
+        imagemPerformada = imagem.imagem.url
+        mock = {imagem.id: imagemPerformada}
+        mockups.update(mock)
+
+    return mockups
