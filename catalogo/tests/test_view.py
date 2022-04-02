@@ -4,25 +4,41 @@ from django.urls import reverse
 from catalogo.models import Produto, SubCategoria
 
 
-class SubCategoriaListView(TestCase):
-    fixtures = ['fixtures/catalogo/subcategoria.json']
+class ProdutosByCategoriaViewTest(TestCase):
+    fixtures = [
+        'fixtures/seller/seller.json',
+        'fixtures/catalogo/subcategoria.json',
+        'fixtures/catalogo/modelo.json',
+        'fixtures/catalogo/produtos.json',
+        'fixtures/catalogo/modelo_produto.json',
+        'fixtures/catalogo/cor.json',
+        'fixtures/catalogo/tamanho.json',
+        'fixtures/catalogo/tamanho_modelo.json',
+        'fixtures/catalogo/produto_imagens.json',
+    ]
 
     def setUp(self):
         self.subcategoria = SubCategoria.objects.get(pk=1)
         self.response = self.client.get(
-            reverse('catalogo:lista_por_subcategoria', kwargs={'slug': 'programacao'}))
+            reverse('catalogo:lista_por_subcategoria', kwargs={'slug': self.subcategoria.slug}))
 
     def test_template(self):
         self.assertTemplateUsed(
             self.response, 'catalogo/list_by_categoria.html')
 
     def test_sub_categoria(self):
-        self.assertIsNotNone(self.response.context['subcategorias'])
+        subcategoria = self.response.context['subcategorias']
+        self.assertIsNotNone(subcategoria)
+        self.assertEqual(7, len(subcategoria))
         self.assertIsNotNone(
             self.response.context['sub_categoria_selecionada'])
 
     def test_sub_categoria_not_found(self):
         pass
+
+    def test_somente_produtos_da_categoria(self):
+        self.assertEqual(6, len(Produto.objects.all()))
+        self.assertEqual(2, len(self.response.context['page_obj']))
 
 
 class ProdutoDetailViewTest(TestCase):

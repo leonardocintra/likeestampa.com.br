@@ -6,5 +6,6 @@ app_name = 'catalogo'
 
 urlpatterns = [
     path('produto/<slug:slug>/', views.produto, name='produto'),
-    path('categoria/<slug:slug>/', views.lista_por_subcategoria.as_view(), name='lista_por_subcategoria'),
+    path('categoria/<slug:slug>/', views.lista_por_subcategoria,
+         name='lista_por_subcategoria'),
 ]

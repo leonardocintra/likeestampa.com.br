@@ -8,9 +8,6 @@ run:
 shell:
 	@python manage.py shell
 
-deploy:
-	@git push origin develop
-
 check:
 	@python3 manage.py check
 
