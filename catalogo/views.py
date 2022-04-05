@@ -4,8 +4,9 @@ from django.urls import reverse
 
 from checkout.views import get_quantidade_items_carrinho
 from checkout.models import Carrinho, ItemCarrinho
+import core
 from .forms import ProdutoDetalheForm
-from .models import Cor, Produto, ProdutoImagem, SubCategoria, ModeloProduto, Tamanho, TamanhoModelo
+from .models import Cor, CorModelo, Produto, ProdutoImagem, SubCategoria, ModeloProduto, Tamanho, TamanhoModelo
 
 
 def lista_por_subcategoria(request, slug):
@@ -41,27 +42,45 @@ def produto(request, slug):
 
     mockups = __get_mockups(produto, imagens)
 
-    modelos = ModeloProduto.get_modelos_do_produto(produto)
-    cores = Cor.get_cores_ativas()
-
     # Busca os modelos
+    modelos = ModeloProduto.get_modelos_do_produto(produto)
     modelo_array = []
     for m in modelos:
         modelo_array.append(m.modelo_id)
+
+    """ Processo de trabalhar a cor dos modelos """
+    # 1 - Pega a cor dos modelos
+    cores_modelo = CorModelo.objects.filter(
+        modelo__in=modelo_array).exclude(ativo=False)
+
+    # 2 - Pega os ids da cor e joga num array
+    cores_do_modelo = []
+    for cm in cores_modelo:
+        cores_do_modelo.append(cm.cor.id)
+
+    # 3 - Filtra as cores baseado nos ids das cores do array
+    cores = Cor.get_cores_ativas().filter(id__in=cores_do_modelo)
+
+
+    """ Processo de trabalhar o tamanho dos modelos """
+    # 1 - Pega o tamanho dos modelos
     tamanhos_modelo = TamanhoModelo.objects.filter(
         modelo__in=modelo_array).exclude(ativo=False)
 
-    # Pega o tamanho dos modelos
+    # 2 - Pega os ids do tamanho e joga num array
     tamanhos_do_modelo = []
     for tm in tamanhos_modelo:
         tamanhos_do_modelo.append(tm.tamanho.id)
 
-    # Filtra todos os tamanhos do modelo
+    # 3 - Filtra os tamanhos baseado nos ids filtrados
     tamanhos = Tamanho.get_tamanhos_ativos().filter(id__in=tamanhos_do_modelo)
 
-    # Monta uma json de tamanhos para controlar a selecao do cliente na tela
+    
+    # FINALMENTE Monta uma json de tamanhos e cores para controlar a selecao do cliente na tela
     tamanho_modelo_dict = dict()
+    cor_modelo_dict = dict()
     for m in modelos:
+        # monta json para o tamanho
         tamanho_list = []
         for tm in tamanhos_modelo:
             if tm.modelo.id == m.modelo.id:
@@ -69,6 +88,15 @@ def produto(request, slug):
                     if ta.id == tm.tamanho.id:
                         tamanho_list.append(ta.slug)
         tamanho_modelo_dict.update({m.modelo.descricao: tamanho_list})
+
+        # monta o json para a cor
+        cor_list = []
+        for cm in cores_modelo:
+            if cm.modelo.id == m.modelo.id:
+                for co in cores:
+                    if co.id == cm.cor.id:
+                        cor_list.append(co.slug)
+        cor_modelo_dict.update({m.modelo.descricao: cor_list})
 
     produtos_relacionados = Produto.objects.filter(
         subcategoria=produto.subcategoria)[:8]
@@ -81,6 +109,8 @@ def produto(request, slug):
         'form': ProdutoDetalheForm(),
         'subcategorias': subcategorias,
         'cores': cores,
+        'cores_modelo': cores_modelo,
+        'cor_modelo_dict': cor_modelo_dict,
         'tamanhos': tamanhos,
         'tamanhos_modelo': tamanhos_modelo,
         'tamanho_modelo_dict': tamanho_modelo_dict,

@@ -29,6 +29,7 @@
     }
     
     const tamanho_modelo_dict = {{ tamanho_modelo_dict|safe }};
+    const cor_modelo_dict = {{cor_modelo_dict|safe}};
 
     function escondeTamanhos() {
         for (const [key, tamanhos] of Object.entries(tamanho_modelo_dict)) {
@@ -59,6 +60,43 @@
                 }
             }            
         }
+    }
+
+    function escondeCores() {
+        for (const [key, cores] of Object.entries(cor_modelo_dict)) {
+            for (let cor = 0; cor < cores.length; cor++) {
+                const element = cores[cor];
+                
+                let elementRadio = "#" + element;
+                let elementLabel = "#label-" + element;
+    
+                $(elementRadio).hide();
+                $(elementLabel).hide();            
+            }            
+        }
+    }
+
+    function mostrarCoresDoModelo(e) {
+        escondeCores();
+        for (const [key, cores] of Object.entries(cor_modelo_dict)) {
+            for (let cor = 0; cor < cores.length; cor++) {
+                const element = cores[cor];
+                
+                let elementRadio = "#" + element;
+                let elementLabel = "#label-" + element;
+
+                if (e === key) {
+                    $(elementRadio).show();
+                    $(elementLabel).show();
+                }
+            }            
+        }
+
+    }
+
+    function modeloSelecionado(element) {
+        mostrarTamanhosDoModelo(element);
+        mostrarCoresDoModelo(element);
     }
 </script>
 {% endblock js_header %}
@@ -96,31 +134,15 @@
                     </div>
                     <p class="lead">{{ produto.descricao|linebreaks }}</p>
                     <div class="fs-5 mb-2">
-                        <div class="text-center" style="padding: 10px;">
-                            Modelo:
-                            <br />
-                            {% for modelo in modelos %}
-                                {% render_field form.modelo value=modelo.id id=modelo.id type="radio" class="btn-check" %}
-                                <label class="btn btn-outline-dark btn-sm" for="{{ modelo.id }}" onclick="mostrarTamanhosDoModelo('{{ modelo.modelo.descricao }}');">
-                                    {{ modelo.modelo.descricao_cliente }} (R$ {{ modelo.modelo.valor }} )
-                                </label>
-                            {% endfor %}
-                        </div>
+                        
+                        {% include 'catalogo/includes/_modelos.html' %}
 
-                        <div class="text-center">
-                            Selecione a cor: <span id="cor-selecionada" style="margin-bottom: 10px;" class="badge bg-light text-dark">Branco</span>
-                            <br />
-
-                            {% for cor in cores %}
-                                {% render_field form.cor value=cor.slug id=cor.slug type="radio" class="btn-check" %}
-                                <label onclick="alterarLabelCorSelecionada('{{ cor.nome }}')" class="btn btn-outline-primary btn-sm" for="{{ cor.slug }}" style="padding:10px; background-color:{{ cor.valor }};">
-                                    &nbsp;
-                                </label>
-                            {% endfor %}
-                        </div>
-                        <br />
+                        {% include 'catalogo/includes/_cores.html' %}
 
                         {% include 'catalogo/includes/_tamanhos.html' %}
+                        
+                        <br />
+                        <i>Tabela de medidas no final da pagina</i>
                     </div>
                     <div class="d-flex">
                         {% if modelos %}
@@ -183,5 +205,6 @@
 {% block js_footer %}
 <script>
     escondeTamanhos();
+    escondeCores();
 </script>
 {% endblock %}

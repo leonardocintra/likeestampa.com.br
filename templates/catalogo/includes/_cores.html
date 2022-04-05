@@ -1,0 +1,13 @@
+{% load widget_tweaks %}
+
+<div class="text-center">
+    Selecione a cor: <span id="cor-selecionada" style="margin-bottom: 10px;" class="badge bg-light text-dark">Branco</span>
+    <br />
+
+    {% for cor in cores %}
+        {% render_field form.cor value=cor.slug id=cor.slug type="radio" class="btn-check" %}
+        <label id="label-{{ cor.slug }}" onclick="alterarLabelCorSelecionada('{{ cor.nome }}')" class="btn btn-outline-primary btn-sm" for="{{ cor.slug }}" style="padding:10px; background-color:{{ cor.valor }};">
+            &nbsp;
+        </label>
+    {% endfor %}
+</div>
