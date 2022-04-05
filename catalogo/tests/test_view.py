@@ -4,19 +4,21 @@ from django.urls import reverse
 from catalogo.forms import ProdutoDetalheForm
 from catalogo.models import Produto, SubCategoria
 
+fixtures_geral = [
+    'fixtures/seller/seller.json',
+    'fixtures/catalogo/subcategoria.json',
+    'fixtures/catalogo/modelo.json',
+    'fixtures/catalogo/produtos.json',
+    'fixtures/catalogo/modelo_produto.json',
+    'fixtures/catalogo/cor.json',
+    'fixtures/catalogo/tamanho.json',
+    'fixtures/catalogo/tamanho_modelo.json',
+    'fixtures/catalogo/produto_imagens.json',
+]
+
 
 class ListaPorSubCategoriaViewTest(TestCase):
-    fixtures = [
-        'fixtures/seller/seller.json',
-        'fixtures/catalogo/subcategoria.json',
-        'fixtures/catalogo/modelo.json',
-        'fixtures/catalogo/produtos.json',
-        'fixtures/catalogo/modelo_produto.json',
-        'fixtures/catalogo/cor.json',
-        'fixtures/catalogo/tamanho.json',
-        'fixtures/catalogo/tamanho_modelo.json',
-        'fixtures/catalogo/produto_imagens.json',
-    ]
+    fixtures = fixtures_geral
 
     def setUp(self):
         self.subcategoria = SubCategoria.objects.get(pk=1)
@@ -36,8 +38,9 @@ class ListaPorSubCategoriaViewTest(TestCase):
         self.assertEqual(
             'Programação', str(self.response.context['sub_categoria_selecionada']))
 
-    def test_sub_categoria_not_found(self):
-        pass
+    def test_subcategoria_inativa_nao_pode_aparecer(self):
+        self.assertContains(self.response, 'Programação')
+        self.assertNotContains(self.response, 'Universo / Espaço')
 
     def test_somente_produtos_da_categoria(self):
         self.assertEqual(6, len(Produto.objects.all()))
@@ -45,18 +48,7 @@ class ListaPorSubCategoriaViewTest(TestCase):
 
 
 class ProdutoViewTest(TestCase):
-
-    fixtures = [
-        'fixtures/seller/seller.json',
-        'fixtures/catalogo/subcategoria.json',
-        'fixtures/catalogo/modelo.json',
-        'fixtures/catalogo/produtos.json',
-        'fixtures/catalogo/modelo_produto.json',
-        'fixtures/catalogo/cor.json',
-        'fixtures/catalogo/tamanho.json',
-        'fixtures/catalogo/tamanho_modelo.json',
-        'fixtures/catalogo/produto_imagens.json',
-    ]
+    fixtures = fixtures_geral
 
     def setUp(self):
         self.client = Client()
@@ -65,6 +57,10 @@ class ProdutoViewTest(TestCase):
 
     def test_template(self):
         self.assertTemplateUsed(self.response, 'catalogo/produto_detalhe.html')
+
+    def test_subcategoria_inativa_nao_pode_aparecer(self):
+        self.assertContains(self.response, 'Programação')
+        self.assertNotContains(self.response, 'Universo / Espaço')
 
     def test_get(self):
         self.assertEqual(200, self.response.status_code)
@@ -105,7 +101,7 @@ class ProdutoViewTest(TestCase):
     def test_produtos_relacionados(self):
         self.assertIsNotNone(self.response.context['produtos_relacionados'])
         self.assertEqual(
-            1, len(self.response.context['produtos_relacionados']))
+            2, len(self.response.context['produtos_relacionados']))
 
     def test_quantidade_item(self):
         self.assertIsNotNone(self.response.context['quantidade_item'])
