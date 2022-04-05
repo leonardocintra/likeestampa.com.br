@@ -76,14 +76,11 @@ def produto(request, slug):
         subcategoria=produto.subcategoria)[:8]
     subcategorias = SubCategoria.get_subcategorias_ativas()
 
-    form = ProdutoDetalheForm(initial={
-        'quantidade': '1'
-    })
     context = {
         'produto': produto,
         'imagens': imagens,
         'mockups': mockups,
-        'form': form,
+        'form': ProdutoDetalheForm(),
         'subcategorias': subcategorias,
         'cores': cores,
         'tamanhos': tamanhos,

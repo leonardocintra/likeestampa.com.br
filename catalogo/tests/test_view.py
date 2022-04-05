@@ -1,10 +1,11 @@
 from django.test import TestCase, Client
 from django.shortcuts import resolve_url as r
 from django.urls import reverse
+from catalogo.forms import ProdutoDetalheForm
 from catalogo.models import Produto, SubCategoria
 
 
-class ProdutosByCategoriaViewTest(TestCase):
+class ListaPorSubCategoriaViewTest(TestCase):
     fixtures = [
         'fixtures/seller/seller.json',
         'fixtures/catalogo/subcategoria.json',
@@ -32,6 +33,8 @@ class ProdutosByCategoriaViewTest(TestCase):
         self.assertEqual(7, len(subcategoria))
         self.assertIsNotNone(
             self.response.context['sub_categoria_selecionada'])
+        self.assertEqual(
+            'Programação', str(self.response.context['sub_categoria_selecionada']))
 
     def test_sub_categoria_not_found(self):
         pass
@@ -41,7 +44,7 @@ class ProdutosByCategoriaViewTest(TestCase):
         self.assertEqual(2, len(self.response.context['page_obj']))
 
 
-class ProdutoDetailViewTest(TestCase):
+class ProdutoViewTest(TestCase):
 
     fixtures = [
         'fixtures/seller/seller.json',
@@ -114,6 +117,10 @@ class ProdutoDetailViewTest(TestCase):
         with self.subTest():
             for expected in contents:
                 self.assertContains(self.response, expected)
+
+    def test_form_quantidade_inicia_com_um(self):
+        self.assertEqual(
+            1, self.response.context['form']['quantidade'].value())
 
     def test_post(self):
         data = {
