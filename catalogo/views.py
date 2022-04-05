@@ -41,7 +41,6 @@ def produto(request, slug):
 
     mockups = __get_mockups(produto, imagens)
 
-    # TODO: Cachear essas variaveis
     modelos = ModeloProduto.get_modelos_do_produto(produto)
     cores = Cor.get_cores_ativas()
 
@@ -58,8 +57,7 @@ def produto(request, slug):
         tamanhos_do_modelo.append(tm.tamanho.id)
 
     # Filtra todos os tamanhos do modelo
-    tamanhos = Tamanho.objects.all().filter(
-        id__in=tamanhos_do_modelo).exclude(ativo=False)
+    tamanhos = Tamanho.get_tamanhos_ativos().filter(id__in=tamanhos_do_modelo)
 
     # Monta uma json de tamanhos para controlar a selecao do cliente na tela
     tamanho_modelo_dict = dict()
@@ -95,9 +93,10 @@ def produto(request, slug):
 
 """  --------------- PRIVATE AREA --------------------- """
 
+
 def __adicionar_item_carrinho(request, produto, modelo, cor, tamanho, quantidade):
     """ Funcao responsavel por adicionar items no carrinho """
-    
+
     carrinho = Carrinho()
     modelo = int(modelo)
 
@@ -132,7 +131,7 @@ def __get_page_obj(request, produtos):
 
 def __get_mockups(produto, imagens):
     """ Monta todos os mockups e da um replace na imagem pra ficar com baixo consumo de banda """
-    
+
     mockups = {0: produto.imagem_principal.url}
 
     for imagem in imagens:

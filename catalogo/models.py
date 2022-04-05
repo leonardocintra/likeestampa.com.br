@@ -191,6 +191,13 @@ class Tamanho(models.Model):
     def __str__(self):
         return self.nome
 
+    def get_tamanhos_ativos():
+        tamanhos = cache.get('tamanhos')
+        if tamanhos is None:
+            tamanhos = Tamanho.objects.all().exclude(ativo=False)
+            cache.set('tamanhos', tamanhos)
+        return tamanhos
+
 
 class TamanhoModelo(models.Model):
     """ 
