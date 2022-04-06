@@ -11,6 +11,7 @@ fixtures_geral = [
     'fixtures/catalogo/produtos.json',
     'fixtures/catalogo/modelo_produto.json',
     'fixtures/catalogo/cor.json',
+    'fixtures/catalogo/cor_modelo.json',
     'fixtures/catalogo/tamanho.json',
     'fixtures/catalogo/tamanho_modelo.json',
     'fixtures/catalogo/produto_imagens.json',
@@ -76,7 +77,7 @@ class ProdutoViewTest(TestCase):
 
     def test_cores(self):
         self.assertIsNotNone(self.response.context['cores'])
-        self.assertEqual(12, len(self.response.context['cores']))
+        self.assertEqual(10, len(self.response.context['cores']))
 
     def test_modelos(self):
         self.assertIsNotNone(self.response.context['modelos'])

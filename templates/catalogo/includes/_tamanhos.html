@@ -1,5 +1,42 @@
 {% load widget_tweaks %}
 
+{% block js_header %}
+    <script>
+        const tamanho_modelo_dict = {{ tamanho_modelo_dict|safe }};
+
+        function escondeTamanhos() {
+            for (const [key, tamanhos] of Object.entries(tamanho_modelo_dict)) {
+                for (let tamanho = 0; tamanho < tamanhos.length; tamanho++) {
+                    const element = tamanhos[tamanho];
+                    
+                    let elementRadio = "#" + element;
+                    let elementLabel = "#label-" + element;
+        
+                    $(elementRadio).hide();
+                    $(elementLabel).hide();            
+                }            
+            }
+        }
+    
+        function mostrarTamanhosDoModelo(e) {
+            escondeTamanhos();
+            for (const [key, tamanhos] of Object.entries(tamanho_modelo_dict)) {
+                for (let tamanho = 0; tamanho < tamanhos.length; tamanho++) {
+                    const element = tamanhos[tamanho];
+                    
+                    let elementRadio = "#" + element;
+                    let elementLabel = "#label-" + element;
+    
+                    if (e === key) {
+                        $(elementRadio).show();
+                        $(elementLabel).show();
+                    }
+                }            
+            }
+        }
+    </script>
+{% endblock %}
+
 <div class="text-center">
     Selecione o tamanho:
     <br />

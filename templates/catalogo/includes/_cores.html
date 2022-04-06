@@ -1,5 +1,47 @@
 {% load widget_tweaks %}
 
+{% block js_header %}
+    <script>
+        function alterarLabelCorSelecionada(cor) {
+            $('#cor-selecionada').text(cor);
+        }
+
+        const cor_modelo_dict = {{cor_modelo_dict|safe}};
+
+        function escondeCores() {
+            for (const [key, cores] of Object.entries(cor_modelo_dict)) {
+                for (let cor = 0; cor < cores.length; cor++) {
+                    const element = cores[cor];
+                    
+                    let elementRadio = "#" + element;
+                    let elementLabel = "#label-" + element;
+        
+                    $(elementRadio).hide();
+                    $(elementLabel).hide();            
+                }            
+            }
+        }
+
+        function mostrarCoresDoModelo(e) {
+            escondeCores();
+            for (const [key, cores] of Object.entries(cor_modelo_dict)) {
+                for (let cor = 0; cor < cores.length; cor++) {
+                    const element = cores[cor];
+                    
+                    let elementRadio = "#" + element;
+                    let elementLabel = "#label-" + element;
+
+                    if (e === key) {
+                        $(elementRadio).show();
+                        $(elementLabel).show();
+                    }
+                }            
+            }
+
+        }
+    </script>
+{% endblock %}
+
 <div class="text-center">
     Selecione a cor: <span id="cor-selecionada" style="margin-bottom: 10px;" class="badge bg-light text-dark">Branco</span>
     <br />
