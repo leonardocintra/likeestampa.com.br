@@ -1,4 +1,7 @@
 # LikeEstampa - Store
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a91ffbdc0959414b836d5ff2848edf73)](https://app.codacy.com/gh/leonardocintra/likeestampa?utm_source=github.com&utm_medium=referral&utm_content=leonardocintra/likeestampa&utm_campaign=Badge_Grade_Settings)
+
 Like Estampa - Store T-Shirts
 
 ## Como usar
