@@ -9,7 +9,7 @@ DEBUG = env.bool("DEBUG", False)
 SECRET_KEY = env("SECRET_KEY")
 
 ALLOWED_HOSTS = ["likeestampa.com.br",
-                 "www.likeestampa.com.br", "likeestampa.herokuapp.com", ]
+                 "www.likeestampa.com.br", "likeestampa.herokuapp.com", "owiyahueln.us10.qoddiapp.com", ]
 
 
 # SECURE SSL (HTTPS Sempre)
