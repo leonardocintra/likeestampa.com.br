@@ -50,11 +50,14 @@ class SubCategoria(models.Model):
     def __str__(self):
         return self.nome
 
-    def get_subcategorias_ativas():
+    @classmethod
+    def get_subcategorias_ativas(cls):
         subcategorias = cache.get('subcategorias')
-        if subcategorias is None:
-            subcategorias = SubCategoria.objects.all().exclude(ativo=False)
-            cache.set('subcategorias', subcategorias)
+        if subcategorias is not None:
+            return subcategorias
+
+        subcategorias = cls.objects.all().exclude(ativo=False)
+        cache.set('subcategorias', subcategorias)
         return subcategorias
 
 
@@ -86,18 +89,20 @@ class Produto(models.Model):
     def __str__(self):
         return self.nome
 
-    def get_produto_by_slug(slug):
+    @classmethod
+    def get_produto_by_slug(cls, slug):
         produto = cache.get(slug)
         if produto is None:
-            produto = Produto.objects.get(slug=slug)
+            produto = cls.objects.get(slug=slug)
             cache.set(slug, produto)
         return produto
 
-    def get_produtos_ativos():
+    @classmethod
+    def get_produtos_ativos(cls):
         produtos = cache.get('produtos')
         if produtos is not None:
             return produtos
-        produtos = Produto.objects.all().exclude(
+        produtos = cls.objects.all().exclude(
             ativo=False)
         cache.set('produtos', produtos)
         return produtos
@@ -138,11 +143,12 @@ class ModeloProduto(models.Model):
     def __str__(self):
         return self.modelo.descricao
 
-    def get_modelos_do_produto(produto):
+    @classmethod
+    def get_modelos_do_produto(cls, produto):
         cache_name = 'modelo-produto-{0}'.format(produto.slug)
         modelos_produto = cache.get(cache_name)
         if modelos_produto is None:
-            modelos_produto = ModeloProduto.objects.filter(produto=produto)
+            modelos_produto = cls.objects.filter(produto=produto)
             cache.set(cache_name, modelos_produto)
         return modelos_produto
 
@@ -165,10 +171,11 @@ class Cor(models.Model):
     def __str__(self):
         return self.nome
 
-    def get_cores_ativas():
+    @classmethod
+    def get_cores_ativas(cls):
         cores = cache.get('cores')
         if cores is None:
-            cores = Cor.objects.all().exclude(ativo=False)
+            cores = cls.objects.all().exclude(ativo=False)
             cache.set('cores', cores)
         return cores
 
@@ -191,10 +198,11 @@ class Tamanho(models.Model):
     def __str__(self):
         return self.nome
 
-    def get_tamanhos_ativos():
+    @classmethod
+    def get_tamanhos_ativos(cls):
         tamanhos = cache.get('tamanhos')
         if tamanhos is None:
-            tamanhos = Tamanho.objects.all().exclude(ativo=False)
+            tamanhos = cls.objects.all().exclude(ativo=False)
             cache.set('tamanhos', tamanhos)
         return tamanhos
 
