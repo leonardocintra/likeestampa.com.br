@@ -15,6 +15,14 @@ migrate:
 	@python manage.py makemigrations
 	@python manage.py migrate
 
+deploy-stage:
+	@git push stage main
+	@heroku run python manage.py migrate --remote stage
+
+deploy-prod:
+	@git push prod main
+	@heroku run python manage.py migrate --remote prod
+
 test:
 	@python3 manage.py test -v 2
 
