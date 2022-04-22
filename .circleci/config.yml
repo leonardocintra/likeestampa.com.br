@@ -23,6 +23,10 @@ jobs:
     docker:
       - image: cimg/python:3.10.2
       - image: cimg/postgres:13.6
+        environment:
+          - POSTGRES_USER=likeestampa
+          - POSTGRES_PASSWORD=likeestampa
+          - POSTGRES_DB=likeestampa
       - image: cimg/redis:6.2.6
     # Checkout the code as the first step. This is a dedicated CircleCI step.
     # The python orb's install-packages step will install the dependencies from a Pipfile via Pipenv by default.
