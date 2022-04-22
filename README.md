@@ -6,7 +6,7 @@
 
 [![CircleCI](https://circleci.com/gh/leonardocintra/likeestampa/tree/main.svg?style=svg)](https://circleci.com/gh/leonardocintra/likeestampa/tree/main)
 
-Like Estampa - Store T-Shirts
+Like Estampa - Store T-Shirts - Camisetas
 
 ## Como usar
 
