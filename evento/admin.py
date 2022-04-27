@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Status
+from .models import Status, EventoPedido
 
 
 class StatusAdmin(admin.ModelAdmin):
@@ -8,4 +8,9 @@ class StatusAdmin(admin.ModelAdmin):
     search_fields = ['descricao', ]
 
 
+class EventoPedidoAdmin(admin.ModelAdmin):
+    list_display =['pedido', ]
+
+
 admin.site.register(Status, StatusAdmin)
+admin.site.register(EventoPedido, EventoPedidoAdmin)

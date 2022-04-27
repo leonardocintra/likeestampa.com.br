@@ -1,3 +1,5 @@
+from datetime import datetime
+from django.utils import timezone
 from django.test import TestCase
 from evento.models import Status, EventoPedido, criar_evento
 from pedido.models import Pedido
@@ -52,3 +54,13 @@ class EventoPedidoModelTest(TestCase):
         # Tenta criar novamento um pedido com evento 3
         criar_evento(3, self.pedido)
         self.assertEqual(4, EventoPedido.objects.count())
+    
+    def test_data_ocorrencia(self):
+        criar_evento(1, self.pedido)
+        evento = EventoPedido.objects.get(pedido=self.pedido)
+        self.assertIsNotNone(evento)
+        self.assertIsNone(evento.data_ocorrencia)
+        datetime.now()
+        EventoPedido.objects.filter(pedido=self.pedido).update(data_ocorrencia=datetime.now(tz=timezone.utc))
+        evento = EventoPedido.objects.get(pedido=self.pedido)
+        self.assertIsNotNone(evento.data_ocorrencia)
