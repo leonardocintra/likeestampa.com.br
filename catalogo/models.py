@@ -1,6 +1,7 @@
 from cloudinary.models import CloudinaryField
 from django.core.cache import cache
 from django.db import models
+from core.constants import CACHE_PRODUTOS_TELA_INICIAL
 
 from seller.models import Seller
 
@@ -100,11 +101,18 @@ class Produto(models.Model):
     @classmethod
     def get_produtos_ativos(cls):
         produtos = cache.get('produtos')
-        if produtos is not None:
-            return produtos
-        produtos = cls.objects.all().exclude(
-            ativo=False)
-        cache.set('produtos', produtos)
+        if produtos is None:
+            produtos = cls.objects.all().exclude(ativo=False)
+            cache.set('produtos', produtos)
+        return produtos
+
+    @classmethod
+    def get_produtos_ativos_e_tela_inicial_true(cls):
+        produtos = cache.get(CACHE_PRODUTOS_TELA_INICIAL)
+        if produtos is None or len(produtos) < 1:
+            produtos = cls.objects.all().exclude(
+                ativo=False).exclude(mostrar_tela_inicial=False)
+            cache.set(CACHE_PRODUTOS_TELA_INICIAL, produtos)
         return produtos
 
 

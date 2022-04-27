@@ -1,7 +1,6 @@
 from django.test import TestCase, Client
 from django.shortcuts import resolve_url as r
 from django.urls import reverse
-from catalogo.forms import ProdutoDetalheForm
 from catalogo.models import Produto, SubCategoria
 
 fixtures_geral = [

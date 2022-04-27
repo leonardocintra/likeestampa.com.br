@@ -150,7 +150,7 @@ class SubCategoriaModelTest(TestCase):
     fixtures = ['fixtures/catalogo/subcategoria.json', ]
 
     def setUp(self):
-        cache.delete('subcategorias') 
+        cache.delete('subcategorias')
         self.obj = SubCategoria.objects.get(pk=1)
 
     def test_create(self):
@@ -165,12 +165,21 @@ class SubCategoriaModelTest(TestCase):
 
     def test_str(self):
         self.assertEqual('Programação', str(self.obj))
-    
-    def test_subcategoria_cacheada(self):
+
+    def test_cache(self):
         self.assertIsNone(cache.get('subcategorias'))
         subs = SubCategoria.get_subcategorias_ativas()
         self.assertIsNotNone(cache.get('subcategorias'))
         self.assertEqual(7, len(subs))
+
+    def test_cache_diferente_banco(self):
+        subcategorias = SubCategoria.get_subcategorias_ativas()
+        self.assertEqual('Filmes', str(subcategorias[0]))
+        self.assertEqual(3, subcategorias[0].id)
+        SubCategoria.objects.filter(id=3).update(nome='Movies')
+        subcategoria_bd = SubCategoria.objects.filter(id=3).first()
+        self.assertEqual('Movies', subcategoria_bd.nome)  # no banco
+        self.assertEqual('Filmes', str(subcategorias[0]))  # no cache
 
 
 class ProdutoModelTest(TestCase):
@@ -215,7 +224,7 @@ class ProdutoModelTest(TestCase):
         produto = Produto.get_produto_by_slug('elixir-vertical')
         self.assertEqual(produto.nome, 'Elixir (Vertical)')
         self.assertIsNotNone(cache.get('elixir-vertical'))
-    
+
     def test_get_produtos_ativos(self):
         Produto.objects.create(
             nome='Camiseta NodeJs',
@@ -282,15 +291,15 @@ class ModeloProdutoModelTest(TestCase):
 
     def test_str(self):
         self.assertEqual('T-Shirt', str(self.obj))
-    
+
     def test_get_modelos_do_produto(self):
         produto = Produto.objects.get(pk=4)
         cache.delete('modelo-produto-{0}'.format(produto.slug))
         modelos = ModeloProduto.get_modelos_do_produto(produto)
         self.assertIsNotNone(modelos)
         self.assertEqual(3, len(modelos))
-        self.assertIsNotNone(cache.get('modelo-produto-{0}'.format(produto.slug)))
-
+        self.assertIsNotNone(
+            cache.get('modelo-produto-{0}'.format(produto.slug)))
 
 
 class SkuDimonaModelTest(TestCase):
