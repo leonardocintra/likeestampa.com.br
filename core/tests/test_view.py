@@ -1,11 +1,9 @@
+from django.core.cache import cache
 from django.test import TestCase, Client
 from django.shortcuts import resolve_url as r
 from django.urls import reverse
-from django.db.models.query import QuerySet
 from catalogo.models import Produto, SubCategoria
-
-quantidade_produtos = 50
-
+from core.constants import CACHE_PRODUTOS_TELA_INICIAL
 
 def create_produto(nome, slug, subcategoria, ativo=True, mostrar_tela_inicial=True):
     Produto.objects.create(
@@ -23,15 +21,17 @@ def create_produto(nome, slug, subcategoria, ativo=True, mostrar_tela_inicial=Tr
 class IndexViewTest(TestCase):
     def setUp(self):
         self.client = Client()
+        cache.delete(CACHE_PRODUTOS_TELA_INICIAL)
         self.subcategoria = SubCategoria.objects.create(
-            nome='Programação', slug='programacao')
-        self.response = self.client.get(r('core:index'))
+            nome='Programação', slug='programacao', ativo=True)
 
     def test_get(self):
-        self.assertEqual(200, self.response.status_code)
+        response = self.client.get(reverse('core:index'))
+        self.assertEqual(200, response.status_code)
 
     def test_template(self):
-        self.assertTemplateUsed(self.response, 'index.html')
+        response = self.client.get(reverse('core:index'))
+        self.assertTemplateUsed(response, 'index.html')
 
     def test_view_url_existe_rota_produto(self):
         response = self.client.get('/')
@@ -44,31 +44,33 @@ class IndexViewTest(TestCase):
 
     def test_pagina_com_produto_sem_paginacao(self):
         create_produto('Produto 1', 'algumacoisa', self.subcategoria)
-        self.assertFalse('is_paginated' in self.response.context)
-        self.assertIsNotNone(self.response.context['produtos'])
-        self.assertEqual(1, len(
-            self.response.context['produtos']))
+        response = self.client.get(reverse('core:index'))
+        self.assertFalse('is_paginated' in response.context)
+        self.assertIsNotNone(response.context['produtos'])
+        self.assertEqual(1, len(response.context['produtos']))
 
     def test_esta_trazendo_produtos_cadastrados_na_listagem(self):
+        quantidade_produtos = 50
         for produto_id in range(quantidade_produtos):
-            create_produto(f'Camiseta {produto_id}',
-                           f'camiseta-{produto_id}', self.subcategoria)
+            create_produto(f'Camiseta {produto_id}', f'camiseta-{produto_id}', self.subcategoria)
+        response = self.client.get(reverse('core:index'))
         self.assertEqual(quantidade_produtos, len(Produto.objects.all()))
-        self.assertIsNotNone(self.response.context['produtos'])
-        self.assertEqual(quantidade_produtos, len(
-            self.response.context['produtos']))
+        self.assertIsNotNone(response.context['produtos'])
+        cache.delete(CACHE_PRODUTOS_TELA_INICIAL)
+        self.assertEqual(quantidade_produtos, len(response.context['produtos']))
 
     def test_nao_mostrar_produtos_ativo_false(self):
         create_produto('Caneca Ativa', 'caneca-a', self.subcategoria)
         create_produto('Desativada', 'caneca-d',
                        self.subcategoria, False)
-        self.assertEqual(1, len(self.response.context['produtos']))
+        response = self.client.get(reverse('core:index'))
+        self.assertEqual(1, len(response.context['produtos']))
 
-    def test_nao_mostrar_produtos_mostrar_pagina_incial_false(self):
+    def test_nao_mostrar_produtos_com_parametro_pagina_incial_false(self):
         create_produto('Caneca A', 'caneca-a', self.subcategoria)
         create_produto('Caneca B', 'caneca-b', self.subcategoria, True, False)
         response = self.client.get(reverse('core:index'))
-        self.assertEqual(1, len(self.response.context['produtos']))
+        self.assertEqual(1, len(response.context['produtos']))
         self.assertContains(response, 'Caneca A')
         self.assertNotContains(response, 'Caneca B')
 
@@ -80,6 +82,44 @@ class IndexViewTest(TestCase):
         self.assertNotContains(response, 'Caneca Django')
         self.assertNotContains(response, 'Caneca Linux')
         self.assertContains(response, 'Caneca React')
+
+    def test_produtos_cacheados(self):
+        # deleta todos os produto e cache
+        Produto.objects.all().delete()
+
+        # cria o produto
+        create_produto('Produto para cache',
+                       'produto-para-cache', self.subcategoria)
+        self.assertEqual(1, Produto.objects.count())
+        self.assertEqual('Produto para cache', str(Produto.objects.first()))
+
+        # busca o produto e bota no cache
+        produtos_cacheados = Produto.get_produtos_ativos_e_tela_inicial_true()
+        self.assertEqual(1, len(produtos_cacheados))
+        self.assertEqual(str(produtos_cacheados.first()), 'Produto para cache')
+
+        # atualiza o produto e refaz o request do cache
+        Produto.objects.filter(
+            slug='produto-para-cache').update(nome='Nome cache alterado')
+        self.assertEqual('Nome cache alterado', str(Produto.objects.first()))
+        produtos_cacheados2 = Produto.get_produtos_ativos_e_tela_inicial_true()
+
+        # Ainda deve estar mostrando o valor cacheado e nao o valor alterado no banco
+        self.assertEqual(str(produtos_cacheados2.first()), 'Produto para cache')
+        response = self.client.get(reverse('core:index'))
+        self.assertContains(response, 'Produto para cache')
+
+        # deleta o cache para pegar valor atualizado
+        cache.delete(CACHE_PRODUTOS_TELA_INICIAL)
+
+        # Apos delete do cache deve mostrar o valor cacheado do ultimo update
+        produtos_cacheados3 = Produto.get_produtos_ativos_e_tela_inicial_true()
+        self.assertEqual(str(produtos_cacheados3.first()), 'Nome cache alterado')
+
+        # No request na pagina deve mostrar o valor cacheado alterado
+        response = self.client.get(reverse('core:index'))
+        self.assertContains(response, 'Nome cache alterado')
+        self.assertNotContains(response, 'Produto para cache')
 
     def test_sem_paginacao(self):
         pass

@@ -1,3 +1,5 @@
+CACHE_PRODUTOS_TELA_INICIAL = 'produtos-tela-inicial'
+
 TIPO_FRETE = (
     ('proprio', 'Frete proprio'),
     ('mercado_envio', 'Mercado Envios'),
