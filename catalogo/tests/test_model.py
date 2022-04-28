@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.core.cache import cache
 from django.test import TestCase
-from catalogo.models import (Categoria, ModeloProduto, Produto, ProdutoImagem,
+from catalogo.models import (TipoProduto, ModeloProduto, Produto, ProdutoImagem,
                              SubCategoria, Modelo, SkuDimona, Cor, Tamanho, TamanhoModelo, CorModelo)
 from django.db import IntegrityError
 
@@ -90,60 +90,60 @@ class TamanhoModeloModelTest(TestCase):
         self.assertTrue(self.obj.ativo)
 
 
-class CategoriaModelTest(TestCase):
-    fixtures = ['fixtures/catalogo/categoria.json', ]
+class TipoProdutoModelTest(TestCase):
+    fixtures = ['fixtures/catalogo/tipo_produto.json', ]
 
     def setUp(self) -> None:
         return super().setUp()
 
     def test_create(self):
-        self.assertTrue(Categoria.objects.exists())
+        self.assertTrue(TipoProduto.objects.exists())
 
     def test_str(self):
-        categoria = Categoria.objects.get(id=1)
-        self.assertEqual('Camisetas', str(categoria))
+        tipo_produto = TipoProduto.objects.get(id=1)
+        self.assertEqual('Camisetas', str(tipo_produto))
 
     def test_created_at(self):
-        categoria = Categoria.objects.get(id=1)
-        self.assertIsInstance(categoria.created_at, datetime)
+        tipo_produto = TipoProduto.objects.get(id=1)
+        self.assertIsInstance(tipo_produto.created_at, datetime)
 
     def test_slug_label(self):
-        categoria = Categoria.objects.get(id=1)
-        field_label = categoria._meta.get_field('slug').verbose_name
+        tipo_produto = TipoProduto.objects.get(id=1)
+        field_label = tipo_produto._meta.get_field('slug').verbose_name
         self.assertEquals(field_label, 'Identificador')
 
     def test_created_at_label(self):
-        categoria = Categoria.objects.get(id=1)
-        field_label = categoria._meta.get_field('created_at').verbose_name
+        tipo_produto = TipoProduto.objects.get(id=1)
+        field_label = tipo_produto._meta.get_field('created_at').verbose_name
         self.assertEquals(field_label, 'Criado em')
 
     def test_updated_at_label(self):
-        categoria = Categoria.objects.get(id=1)
-        field_label = categoria._meta.get_field('updated_at').verbose_name
+        tipo_produto = TipoProduto.objects.get(id=1)
+        field_label = tipo_produto._meta.get_field('updated_at').verbose_name
         self.assertEquals(field_label, 'Modificado em')
 
     def test_nome_max_length(self):
-        categoria = Categoria.objects.get(id=1)
-        max_length = categoria._meta.get_field('nome').max_length
+        tipo_produto = TipoProduto.objects.get(id=1)
+        max_length = tipo_produto._meta.get_field('nome').max_length
         self.assertEquals(max_length, 100)
 
     def test_slug_max_length(self):
-        categoria = Categoria.objects.get(id=1)
-        max_length = categoria._meta.get_field('slug').max_length
+        tipo_produto = TipoProduto.objects.get(id=1)
+        max_length = tipo_produto._meta.get_field('slug').max_length
         self.assertEquals(max_length, 100)
 
     def test_first_name_max_length(self):
-        categoria = Categoria.objects.get(id=1)
-        max_length = categoria._meta.get_field('nome').max_length
+        tipo_produto = TipoProduto.objects.get(id=1)
+        max_length = tipo_produto._meta.get_field('nome').max_length
         self.assertEquals(max_length, 100)
 
     def test_ativo_default_true(self):
-        categoria = Categoria.objects.get(id=1)
-        self.assertEquals(True, categoria.ativo)
+        tipo_produto = TipoProduto.objects.get(id=1)
+        self.assertEquals(True, tipo_produto.ativo)
 
-    def test_categoria_slug_unique(self):
+    def test_tipo_produto_slug_unique(self):
         with self.assertRaises(IntegrityError):
-            Categoria.objects.create(nome='Camisetas', slug='camiseta')
+            TipoProduto.objects.create(nome='Camisetas', slug='camiseta')
 
 
 class SubCategoriaModelTest(TestCase):
@@ -173,13 +173,13 @@ class SubCategoriaModelTest(TestCase):
         self.assertEqual(7, len(subs))
 
     def test_cache_diferente_banco(self):
-        subcategorias = SubCategoria.get_subcategorias_ativas()
-        self.assertEqual('Filmes', str(subcategorias[0]))
-        self.assertEqual(3, subcategorias[0].id)
+        subs = SubCategoria.get_subcategorias_ativas()
+        self.assertEqual('Filmes', str(subs[0]))
+        self.assertEqual(3, subs[0].id)
         SubCategoria.objects.filter(id=3).update(nome='Movies')
-        subcategoria_bd = SubCategoria.objects.filter(id=3).first()
-        self.assertEqual('Movies', subcategoria_bd.nome)  # no banco
-        self.assertEqual('Filmes', str(subcategorias[0]))  # no cache
+        bd = SubCategoria.objects.filter(id=3).first()
+        self.assertEqual('Movies', bd.nome)  # no banco
+        self.assertEqual('Filmes', str(subs[0]))   # no cache
 
 
 class ProdutoModelTest(TestCase):

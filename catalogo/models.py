@@ -14,7 +14,7 @@ GENERO = (
 )
 
 
-class Categoria(models.Model):
+class TipoProduto(models.Model):
     """ Ex: camiseta, caneca, bones """
     nome = models.CharField(max_length=100, unique=True)
     slug = models.SlugField('Identificador', max_length=100, unique=True)
@@ -24,9 +24,8 @@ class Categoria(models.Model):
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
     class Meta:
-        db_table = 'categoria'
-        verbose_name_plural = 'categorias'
-        verbose_name = 'categoria'
+        db_table = 'tipo_produto'
+        verbose_name = 'Tipo produto'
         ordering = ('-created_at',)
 
     def __str__(self):
