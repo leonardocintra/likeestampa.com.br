@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import (Categoria, SubCategoria, Produto, ModeloProduto,
+from .models import (TipoProduto, SubCategoria, Produto, ModeloProduto,
                      Modelo, Cor, Tamanho, ProdutoImagem, TamanhoModelo, CorModelo)
 
 
@@ -14,7 +14,7 @@ class CorAdmin(admin.ModelAdmin):
     list_display = ['nome', 'ativo', 'order_exibicao', 'valor', ]
 
 
-class CategoriaAdmin(admin.ModelAdmin):
+class TipoProdutoAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('nome',)}
 
 
@@ -85,7 +85,7 @@ class CorModeloAdmin(admin.ModelAdmin):
     list_display=['cor', 'modelo', 'ativo']
 
 
-admin.site.register(Categoria, CategoriaAdmin)
+admin.site.register(TipoProduto, TipoProdutoAdmin)
 admin.site.register(Modelo, ModeloAdmin)
 admin.site.register(Produto, ProdutoAdmin)
 admin.site.register(SubCategoria, SubCategoriaAdmin)
