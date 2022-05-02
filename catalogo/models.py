@@ -1,4 +1,3 @@
-from curses import can_change_color
 from cloudinary.models import CloudinaryField
 from django.core.cache import cache
 from django.db import models
@@ -37,13 +36,10 @@ class TipoProduto(models.Model):
     def get_tipos_produto_ativo(cls):
         tipos_produto = cache.get(CACHE_TIPOS_PRODUTOS)
         if tipos_produto is not None:
-            return tipos_produto        
+            return tipos_produto
         tipos_produto = cls.objects.all().exclude(ativo=False)
         cache.set(CACHE_TIPOS_PRODUTOS, tipos_produto)
         return tipos_produto
-
-
-
 
 
 class SubCategoria(models.Model):

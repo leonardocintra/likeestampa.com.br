@@ -1,4 +1,3 @@
-from csv import list_dialects
 from django.contrib import admin
 from .models import (TipoProduto, SubCategoria, Produto, ModeloProduto,
                      Modelo, Cor, Tamanho, ProdutoImagem, TamanhoModelo, CorModelo)
