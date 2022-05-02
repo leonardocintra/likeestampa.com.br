@@ -5,7 +5,7 @@
         "nome": "Camisetas",
         "slug": "camisetas",
         "ativo": true,
-        "icone_fontawesome": null,
+        "icone_fontawesome": "camiseta",
         "created_at": "2022-02-28T14:58:38.492Z",
         "updated_at": "2022-02-28T14:58:38.492Z"
     }
@@ -16,7 +16,7 @@
         "nome": "Canecas",
         "slug": "canecas",
         "ativo": true,
-        "icone_fontawesome": null,
+        "icone_fontawesome": "caneca",
         "created_at": "2022-02-28T14:58:44.009Z",
         "updated_at": "2022-02-28T14:58:44.009Z"
     }
@@ -27,8 +27,30 @@
         "nome": "Moletons",
         "slug": "moletons",
         "ativo": true,
-        "icone_fontawesome": null,
+        "icone_fontawesome": "moletons",
         "created_at": "2022-02-28T14:58:52.750Z",
         "updated_at": "2022-02-28T14:58:52.750Z"
+    }
+}, {
+    "model": "catalogo.tipoproduto",
+    "pk": 4,
+    "fields": {
+        "nome": "Bonés",
+        "slug": "bone",
+        "ativo": true,
+        "icone_fontawesome": "bones",
+        "created_at": "2022-02-28T14:58:44.009Z",
+        "updated_at": "2022-02-28T14:58:44.009Z"
+    }
+}, {
+    "model": "catalogo.tipoproduto",
+    "pk": 5,
+    "fields": {
+        "nome": "Tenis",
+        "slug": "tenis",
+        "ativo": false,
+        "icone_fontawesome": "tenis",
+        "created_at": "2022-04-28T14:58:44.009Z",
+        "updated_at": "2022-04-28T14:58:44.009Z"
     }
 }]

@@ -1,4 +1,5 @@
 CACHE_PRODUTOS_TELA_INICIAL = 'produtos-tela-inicial'
+CACHE_TIPOS_PRODUTOS = 'tipos_produto'
 
 TIPO_FRETE = (
     ('proprio', 'Frete proprio'),

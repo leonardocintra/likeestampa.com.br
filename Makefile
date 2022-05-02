@@ -12,16 +12,16 @@ check:
 	@python3 manage.py check
 
 migrate:
-	@python manage.py makemigrations
-	@python manage.py migrate
+	@python3 manage.py makemigrations
+	@python3 manage.py migrate
 
 deploy-stage:
 	@git push stage main
-	@heroku run python manage.py migrate --remote stage
+	@heroku run python3 manage.py migrate --remote stage
 
 deploy-prod:
 	@git push prod main
-	@heroku run python manage.py migrate --remote prod
+	@heroku run python3 manage.py migrate --remote prod
 
 test:
 	@python3 manage.py test -v 2

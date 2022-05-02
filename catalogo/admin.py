@@ -16,6 +16,7 @@ class CorAdmin(admin.ModelAdmin):
 
 class TipoProdutoAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('nome',)}
+    list_display = ['nome', 'icone_fontawesome', 'ativo', ]
 
 
 class SubCategoriaAdmin(admin.ModelAdmin):

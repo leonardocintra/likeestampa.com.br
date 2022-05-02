@@ -1,7 +1,7 @@
 from cloudinary.models import CloudinaryField
 from django.core.cache import cache
 from django.db import models
-from core.constants import CACHE_PRODUTOS_TELA_INICIAL
+from core.constants import CACHE_PRODUTOS_TELA_INICIAL, CACHE_TIPOS_PRODUTOS
 
 from seller.models import Seller
 
@@ -20,6 +20,7 @@ class TipoProduto(models.Model):
     slug = models.SlugField('Identificador', max_length=100, unique=True)
     ativo = models.BooleanField(default=True)
     icone_fontawesome = models.CharField(max_length=50, null=True)
+    descricao = models.TextField(default='Descrição não informada')
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
@@ -30,6 +31,15 @@ class TipoProduto(models.Model):
 
     def __str__(self):
         return self.nome
+
+    @classmethod
+    def get_tipos_produto_ativo(cls):
+        tipos_produto = cache.get(CACHE_TIPOS_PRODUTOS)
+        if tipos_produto is not None:
+            return tipos_produto
+        tipos_produto = cls.objects.all().exclude(ativo=False)
+        cache.set(CACHE_TIPOS_PRODUTOS, tipos_produto)
+        return tipos_produto
 
 
 class SubCategoria(models.Model):

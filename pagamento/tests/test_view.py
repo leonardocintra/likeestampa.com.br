@@ -25,7 +25,10 @@ class PagamentoViewNaoAutenticado(TestCase):
 
 @override_settings(DEBUG=True)
 class PagamentoViewTest(TestCase):
-    fixtures = ['fixtures/evento/status.json', ]
+    fixtures = [
+        'fixtures/catalogo/tipo_produto.json',
+        'fixtures/evento/status.json',
+    ]
 
     def setUp(self):
         get_fake_carrinho_com_items()
@@ -109,7 +112,8 @@ class MercadoPagoNotificationsTest(TestCase):
     def test_merchant_order_pedido_nao_encontrado(self):
         response = self.client.post(
             r('pagamento:mp_notifications') + '?topic=merchant_order&id=4076824593')
-        self.assertJSONEqual(response.content, {"pedido": "pedido-nao-encontrado"})
+        self.assertJSONEqual(response.content, {
+                             "pedido": "pedido-nao-encontrado"})
         self.assertEqual(200, response.status_code)
 
     def test_notificacao_mp_ipn_pagamento_mp_nao_encontrado(self):

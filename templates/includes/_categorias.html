@@ -3,7 +3,8 @@
         <h4>Clique numa <span class="badge bg-success"><i class="bi bi-app"></i> categoria</span> abaixo</h4>
 
         {% for categoria in subcategorias %}
-        <a style="margin-top: 4px;" href="{% url 'catalogo:lista_por_subcategoria' categoria.slug %}" class="btn btn-outline-secondary btn-sm">
+        <a style="margin-top: 4px;" href="{% url 'catalogo:lista_por_subcategoria' categoria.slug %}"
+            class="btn btn-outline-secondary btn-sm">
             <i class="fas fa-{{ categoria.icone_fontawesome }}"></i> {{ categoria.nome }}
         </a>
         {% empty %}
