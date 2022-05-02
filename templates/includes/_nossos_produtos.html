@@ -1,0 +1,35 @@
+{% load static %}
+{% load catalogo_extras %}
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+<style>
+    .nossoProduto {
+        font-family: "Sofia", sans-serif;icone_fontawesome
+    }
+</style>
+
+<div class="container">
+    <h1 class="text-center nossoProduto">Nossos produtos</h1>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        {% for tipo in tipos_produto %}
+        <div class="col">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{% imagemTipoProduto tipo.id %}" class="img-fluid rounded-start" alt="{{ tipo.icone_fontawesome }}">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ tipo }}</h5>
+                            <p class="card-text">{{ tipo.descricao }}</p>
+                            <a href="#" class="stretched-link">Mais detalhes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

@@ -13,8 +13,9 @@
     </div>
 </div>
 
-
-{% load static %}
+{% if tipos_produto %}
+    {% include "includes/_nossos_produtos.html" %}
+{% endif %}
 
 {% include "catalogo/produtos.html" %}
 

@@ -5,6 +5,8 @@ from catalogo.models import (TipoProduto, ModeloProduto, Produto, ProdutoImagem,
                              SubCategoria, Modelo, SkuDimona, Cor, Tamanho, TamanhoModelo, CorModelo)
 from django.db import IntegrityError
 
+from core.constants import CACHE_TIPOS_PRODUTOS
+
 
 class TamanhoModelTest(TestCase):
     fixtures = ['fixtures/catalogo/tamanho.json', ]
@@ -94,7 +96,7 @@ class TipoProdutoModelTest(TestCase):
     fixtures = ['fixtures/catalogo/tipo_produto.json', ]
 
     def setUp(self) -> None:
-        return super().setUp()
+        cache.delete(CACHE_TIPOS_PRODUTOS)
 
     def test_create(self):
         self.assertTrue(TipoProduto.objects.exists())
@@ -144,6 +146,17 @@ class TipoProdutoModelTest(TestCase):
     def test_tipo_produto_slug_unique(self):
         with self.assertRaises(IntegrityError):
             TipoProduto.objects.create(nome='Camisetas', slug='camiseta')
+
+    def test_cache(self):
+        tipo_produto = TipoProduto.get_tipos_produto_ativo()
+        self.assertIsNotNone(tipo_produto)
+        self.assertEqual(4, len(tipo_produto))
+        TipoProduto.objects.create(nome='Teste', slug='teste')
+        novo_get = TipoProduto.get_tipos_produto_ativo()
+        self.assertEqual(4, len(novo_get))
+        cache.delete(CACHE_TIPOS_PRODUTOS)
+        novo_get2 = TipoProduto.get_tipos_produto_ativo()
+        self.assertEqual(5, len(novo_get2))
 
 
 class SubCategoriaModelTest(TestCase):

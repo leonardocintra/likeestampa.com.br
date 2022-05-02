@@ -2,8 +2,9 @@ from django.core.cache import cache
 from django.test import TestCase, Client
 from django.shortcuts import resolve_url as r
 from django.urls import reverse
-from catalogo.models import Produto, SubCategoria
-from core.constants import CACHE_PRODUTOS_TELA_INICIAL
+from catalogo.models import Produto, SubCategoria, TipoProduto
+from core.constants import CACHE_PRODUTOS_TELA_INICIAL, CACHE_TIPOS_PRODUTOS
+
 
 def create_produto(nome, slug, subcategoria, ativo=True, mostrar_tela_inicial=True):
     Produto.objects.create(
@@ -19,6 +20,10 @@ def create_produto(nome, slug, subcategoria, ativo=True, mostrar_tela_inicial=Tr
 
 
 class IndexViewTest(TestCase):
+    fixtures = [
+        'fixtures/catalogo/tipo_produto.json',
+    ]
+
     def setUp(self):
         self.client = Client()
         cache.delete(CACHE_PRODUTOS_TELA_INICIAL)
@@ -52,12 +57,14 @@ class IndexViewTest(TestCase):
     def test_esta_trazendo_produtos_cadastrados_na_listagem(self):
         quantidade_produtos = 50
         for produto_id in range(quantidade_produtos):
-            create_produto(f'Camiseta {produto_id}', f'camiseta-{produto_id}', self.subcategoria)
+            create_produto(f'Camiseta {produto_id}',
+                           f'camiseta-{produto_id}', self.subcategoria)
         response = self.client.get(reverse('core:index'))
         self.assertEqual(quantidade_produtos, len(Produto.objects.all()))
         self.assertIsNotNone(response.context['produtos'])
         cache.delete(CACHE_PRODUTOS_TELA_INICIAL)
-        self.assertEqual(quantidade_produtos, len(response.context['produtos']))
+        self.assertEqual(quantidade_produtos, len(
+            response.context['produtos']))
 
     def test_nao_mostrar_produtos_ativo_false(self):
         create_produto('Caneca Ativa', 'caneca-a', self.subcategoria)
@@ -105,7 +112,8 @@ class IndexViewTest(TestCase):
         produtos_cacheados2 = Produto.get_produtos_ativos_e_tela_inicial_true()
 
         # Ainda deve estar mostrando o valor cacheado e nao o valor alterado no banco
-        self.assertEqual(str(produtos_cacheados2.first()), 'Produto para cache')
+        self.assertEqual(str(produtos_cacheados2.first()),
+                         'Produto para cache')
         response = self.client.get(reverse('core:index'))
         self.assertContains(response, 'Produto para cache')
 
@@ -114,12 +122,38 @@ class IndexViewTest(TestCase):
 
         # Apos delete do cache deve mostrar o valor cacheado do ultimo update
         produtos_cacheados3 = Produto.get_produtos_ativos_e_tela_inicial_true()
-        self.assertEqual(str(produtos_cacheados3.first()), 'Nome cache alterado')
+        self.assertEqual(str(produtos_cacheados3.first()),
+                         'Nome cache alterado')
 
         # No request na pagina deve mostrar o valor cacheado alterado
         response = self.client.get(reverse('core:index'))
         self.assertContains(response, 'Nome cache alterado')
         self.assertNotContains(response, 'Produto para cache')
+
+    def test_frase_nossos_produtos(self):
+        response = self.client.get(reverse('core:index'))
+        frase = 'Nossos produtos'
+        self.assertContains(response, frase)
+
+    def test_tipos_produto(self):
+        response = self.client.get(reverse('core:index'))
+        self.assertIsNotNone(response.context['tipos_produto'])
+        self.assertEqual(4, len(response.context['tipos_produto']))
+
+    def test_tipos_produtos_somente_ativos(self):
+        response = self.client.get(reverse('core:index'))
+        self.assertEqual(4, len(response.context['tipos_produto']))
+        self.assertEqual(5, TipoProduto.objects.count())
+
+    def test_tipos_produtos_todos_desativados(self):
+        objs = TipoProduto.objects.filter(ativo=True)
+        for o in objs:
+            TipoProduto.objects.filter(pk=o.id).update(ativo=False)
+        cache.delete(CACHE_TIPOS_PRODUTOS)
+        response = self.client.get(reverse('core:index'))
+        self.assertEqual(0, len(response.context['tipos_produto']))
+        frase = 'Nossos produtos'
+        self.assertNotContains(response, frase)
 
     def test_sem_paginacao(self):
         pass

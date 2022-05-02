@@ -2,7 +2,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
 
-from catalogo.models import Produto, SubCategoria
+from catalogo.models import Produto, SubCategoria, TipoProduto
 from checkout.views import get_quantidade_items_carrinho
 
 
@@ -12,8 +12,10 @@ def index(request):
     subcategorias = SubCategoria.get_subcategorias_ativas()
     quantidade_item = get_quantidade_items_carrinho(request)
     page_obj = __get_page_obj(request, produtos)
+    tipos_produto = TipoProduto.get_tipos_produto_ativo()
 
     context = {
+        'tipos_produto': tipos_produto,
         'produtos': produtos,
         'page_obj': page_obj,
         'subcategorias': subcategorias,
