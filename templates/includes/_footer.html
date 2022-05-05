@@ -1,4 +1,5 @@
 {% load static %}
+
 <footer class="py-5 bg-light">
     <footer class="container py-5">
         <div class="row">
@@ -21,7 +22,11 @@
             <div class="col-6 col-md">
                 <h5>Contato</h5>
                 <ul class="list-unstyled text-small">
-                    <li><a class="link-secondary" href="https://wa.me/message/X45SNP5DPVQ5O1">Whatsapp</a></li>
+                    <li>
+                        <a class="link-secondary" href="https://wa.me/message/X45SNP5DPVQ5O1">
+                            <img src="{% static 'img/zapzap.png' %}" alt="Whastapp" width="100px">
+                        </a>
+                    </li>
                     <li><a class="link-secondary" href="mailto:likeestampa@gmail.com">Email</a></li>
                 </ul>
             </div>
@@ -36,15 +41,27 @@
         </div>
     </footer>
     <div class="container">
-        <p class="m-0 text-center">Copyright &copy; Like Estampa 2021 - 2022 | Desenvolvido por:
-            <a href="https://github.com/leonardocintra/likeestampa" target="_blank">leonardocintra</a>
-        </p>
+        <div class="row" style="background-color: white; border-radius: 100px;">
+            <div class="col-md text-center">
+                <img src="{% static 'img/mercadopago.png' %}" alt="Mercado pago">
+            </div>
+        </div>
         <br />
-        <div class="text-center">
-            <a class="btn btn-primary" href="https://www.facebook.com/likeestampa"> <i class="fab fa-facebook"></i>
-                Facebook</a>
-            <a class="btn btn-danger" href="https://www.instagram.com/likeestampa/"><i class="fab fa-instagram"></i>
-                Instagram</a>
+        <div class="row">
+            <p class="m-0 text-center">Copyright &copy; Like Estampa 2021 - 2022 | Desenvolvido por:
+                <a href="https://github.com/leonardocintra/likeestampa" target="_blank">leonardocintra</a>
+            </p>
+            <br />
+            <br />
+            <div class="text-center">
+                <a class="btn btn-primary" href="https://www.facebook.com/likeestampa"> <i class="fab fa-facebook"></i>
+                    Facebook</a>
+                <a class="btn btn-danger" href="https://www.instagram.com/likeestampa/"><i class="fab fa-instagram"></i>
+                    Instagram</a>
+                <a class="btn btn-dark" href="https://github.com/leonardocintra/likeestampa"><i
+                        class="fab fa-instagram"></i>
+                    Github</a>
+            </div>
         </div>
     </div>
 </footer>

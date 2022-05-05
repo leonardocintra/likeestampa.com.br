@@ -26,11 +26,11 @@
             {% cloudinary prod.imagem_principal quality="auto:low" class="card-img-top" width=270 %}
         </a>
         <!-- Product details-->
-        <div class="card-body p-4">
+        <div class="card-body">
             <div class="text-center">
                 <span class="badge bg-dark"> {{ prod.subcategoria }} </span>
                 <!-- <a class="stretched-link" href="{% url 'catalogo:produto' prod.slug %}"></a> -->
-                <h6 class="py-2">{{ prod.nome }}</h6>
+                <h6 class="py-1">{{ prod.nome }}</h6>
             </div>
         </div>
     </div>
