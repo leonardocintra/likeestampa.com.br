@@ -72,7 +72,7 @@ class SubCategoria(models.Model):
 
 
 class Produto(models.Model):
-    """Ex: camieta sao paulo, camiseta python, etc"""
+    """Ex: camiseta sao paulo, camiseta python, moleton flutter etc"""
     nome = models.CharField(max_length=100)
     seller = models.ForeignKey(Seller, on_delete=models.PROTECT, null=True)
     descricao = models.TextField('Descrição', blank=True)
@@ -123,6 +123,20 @@ class Produto(models.Model):
                 ativo=False).exclude(mostrar_tela_inicial=False)
             cache.set(CACHE_PRODUTOS_TELA_INICIAL, produtos)
         return produtos
+
+
+class ProdutoTipoProduto(models.Model):
+    produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    tipo_produto = models.ForeignKey(TipoProduto, on_delete=models.CASCADE)
+    created_at = models.DateTimeField('Criado em', auto_now_add=True)
+    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+
+    class Meta:
+        db_table = 'produto_tipo_produto'
+        ordering = ('created_at',)
+
+    def __str__(self):
+        return self.tipo_produto.nome + ' - ' + self.produto.nome
 
 
 class Modelo(models.Model):

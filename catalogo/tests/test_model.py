@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.core.cache import cache
 from django.test import TestCase
-from catalogo.models import (TipoProduto, ModeloProduto, Produto, ProdutoImagem,
+from catalogo.models import (ProdutoTipoProduto, TipoProduto, ModeloProduto, Produto, ProdutoImagem,
                              SubCategoria, Modelo, SkuDimona, Cor, Tamanho, TamanhoModelo, CorModelo)
 from django.db import IntegrityError
 
@@ -98,7 +98,7 @@ class TipoProdutoModelTest(TestCase):
     def setUp(self) -> None:
         cache.delete(CACHE_TIPOS_PRODUTOS)
 
-    def test_create(self):
+    def test_exists(self):
         self.assertTrue(TipoProduto.objects.exists())
 
     def test_str(self):
@@ -157,6 +157,30 @@ class TipoProdutoModelTest(TestCase):
         cache.delete(CACHE_TIPOS_PRODUTOS)
         novo_get2 = TipoProduto.get_tipos_produto_ativo()
         self.assertEqual(5, len(novo_get2))
+
+
+class ProdutoTipoProdutoModelTest(TestCase):
+    fixtures = [
+        'fixtures/seller/seller.json',
+        'fixtures/catalogo/subcategoria.json',
+        'fixtures/catalogo/produtos.json',
+        'fixtures/catalogo/tipo_produto.json',
+        'fixtures/catalogo/produto_tipo_produto.json',
+    ]
+
+    def setUp(self) -> None:
+        cache.delete(CACHE_TIPOS_PRODUTOS)
+        self.obj = ProdutoTipoProduto.objects.first()
+
+    def test_exists(self):
+        self.assertTrue(ProdutoTipoProduto.objects.exists())
+
+    def test_created_at(self):
+        self.assertIsInstance(self.obj.created_at, datetime)
+        self.assertIsInstance(self.obj.updated_at, datetime)
+    
+    def test_str(self):
+        self.assertEqual('Camisetas - Ronaldinho 10', str(self.obj))
 
 
 class SubCategoriaModelTest(TestCase):

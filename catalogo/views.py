@@ -4,9 +4,12 @@ from django.urls import reverse
 
 from checkout.views import get_quantidade_items_carrinho
 from checkout.models import Carrinho, ItemCarrinho
-import core
 from .forms import ProdutoDetalheForm
 from .models import Cor, CorModelo, Produto, ProdutoImagem, SubCategoria, ModeloProduto, Tamanho, TamanhoModelo
+
+
+def list_tipos_produto(request, slug):
+    pass
 
 
 def lista_por_subcategoria(request, slug):
@@ -61,7 +64,6 @@ def produto(request, slug):
     # 3 - Filtra as cores baseado nos ids das cores do array
     cores = Cor.get_cores_ativas().filter(id__in=cores_do_modelo)
 
-
     """ Processo de trabalhar o tamanho dos modelos """
     # 1 - Pega o tamanho dos modelos
     tamanhos_modelo = TamanhoModelo.objects.filter(
@@ -75,7 +77,6 @@ def produto(request, slug):
     # 3 - Filtra os tamanhos baseado nos ids filtrados
     tamanhos = Tamanho.get_tamanhos_ativos().filter(id__in=tamanhos_do_modelo)
 
-    
     # FINALMENTE Monta uma json de tamanhos e cores para controlar a selecao do cliente na tela
     tamanho_modelo_dict = dict()
     cor_modelo_dict = dict()
