@@ -280,6 +280,7 @@ class ProdutoImagemModelTest(TestCase):
     fixtures = ['fixtures/seller/seller.json',
                 'fixtures/catalogo/subcategoria.json',
                 'fixtures/catalogo/produtos.json',
+                'fixtures/catalogo/tipo_produto.json',
                 'fixtures/catalogo/modelo.json', ]
 
     def setUp(self):

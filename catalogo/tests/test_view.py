@@ -13,6 +13,7 @@ fixtures_geral = [
     'fixtures/catalogo/cor_modelo.json',
     'fixtures/catalogo/tamanho.json',
     'fixtures/catalogo/tamanho_modelo.json',
+    'fixtures/catalogo/tipo_produto.json',
     'fixtures/catalogo/produto_imagens.json',
 ]
 

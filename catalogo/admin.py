@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import (TipoProduto, SubCategoria, Produto, ModeloProduto,
-                     Modelo, Cor, Tamanho, ProdutoImagem, TamanhoModelo, CorModelo)
+                     Modelo, Cor, Tamanho, ProdutoImagem, TamanhoModelo, CorModelo, ProdutoTipoProduto)
 
 
 class TamanhoAdmin(admin.ModelAdmin):
@@ -43,13 +43,18 @@ class ModeloProdutoInline(admin.TabularInline):
     extra = 1
 
 
+class ProdutoTipoProdutoInline(admin.TabularInline):
+    model = ProdutoTipoProduto
+    extra = 1
+    min_num = 1
+
+
 class ProdutoAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('nome',)}
     search_fields = ['nome', ]
     list_filter = ['ativo', 'subcategoria', 'genero', ]
     list_display = ['nome', 'subcategoria', 'ativo', 'genero', ]
-    inlines = [ModeloProdutoInline, ProdutoImagemInline, ]
-
+    inlines = [ModeloProdutoInline, ProdutoImagemInline, ProdutoTipoProdutoInline ]
     actions = [ativar_produtos, desativar_produtos, ]
 
     def save_model(self, request, obj, form, change):
@@ -60,9 +65,9 @@ class ProdutoAdmin(admin.ModelAdmin):
             return saved
 
         try:
-            tshirt=Modelo.objects.get(descricao='T-Shirt')
-            babylong=Modelo.objects.get(descricao='Baby Long')
-            infantil=Modelo.objects.get(descricao='Classic Infantil')
+            tshirt = Modelo.objects.get(descricao='T-Shirt')
+            babylong = Modelo.objects.get(descricao='Baby Long')
+            infantil = Modelo.objects.get(descricao='Classic Infantil')
 
             ModeloProduto.objects.create(produto=obj, modelo=tshirt)
             ModeloProduto.objects.create(produto=obj, modelo=babylong)
@@ -74,8 +79,8 @@ class ProdutoAdmin(admin.ModelAdmin):
 
 
 class ModeloAdmin(admin.ModelAdmin):
-    list_display=['descricao', 'descricao_cliente', 'valor', 'id', ]
-    search_fields=['descricao', ]
+    list_display = ['descricao', 'descricao_cliente', 'valor', 'id', ]
+    search_fields = ['descricao', ]
 
 
 class TamanhoModeloAdmin(admin.ModelAdmin):
@@ -83,7 +88,7 @@ class TamanhoModeloAdmin(admin.ModelAdmin):
 
 
 class CorModeloAdmin(admin.ModelAdmin):
-    list_display=['cor', 'modelo', 'ativo']
+    list_display = ['cor', 'modelo', 'ativo']
 
 
 admin.site.register(TipoProduto, TipoProdutoAdmin)

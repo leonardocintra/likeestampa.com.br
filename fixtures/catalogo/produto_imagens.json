@@ -6,6 +6,7 @@
             "produto": 3,
             "imagem": "image/upload/v1644629796/ifnbj1cqspeaulytwado.png",
             "order_exibicao": 0,
+            "tipo_produto": 1,
             "created_at": "2022-02-12T01:36:37.171Z",
             "updated_at": "2022-02-12T01:36:37.171Z"
         }
@@ -17,6 +18,7 @@
             "produto": 3,
             "imagem": "image/upload/v1644629798/rnzmgyyw4vgy3nzujbks.png",
             "order_exibicao": 0,
+            "tipo_produto": 1,
             "created_at": "2022-02-12T01:36:39.437Z",
             "updated_at": "2022-02-12T01:36:39.437Z"
         }
@@ -28,6 +30,7 @@
             "produto": 4,
             "imagem": "image/upload/v1645885597/umgwuzzfm43m6rgrwrdp.png",
             "order_exibicao": 0,
+            "tipo_produto": 1,
             "created_at": "2022-02-26T14:26:38.750Z",
             "updated_at": "2022-02-26T14:26:38.750Z"
         }
@@ -39,6 +42,7 @@
             "produto": 4,
             "imagem": "image/upload/v1645885599/tyante774fmh6gv0ceui.png",
             "order_exibicao": 0,
+            "tipo_produto": 1,
             "created_at": "2022-02-26T14:26:40.931Z",
             "updated_at": "2022-02-26T14:26:40.931Z"
         }
@@ -50,6 +54,7 @@
             "produto": 4,
             "imagem": "image/upload/v1645885601/m3284t7bfgwhx4ggdoyk.png",
             "order_exibicao": 0,
+            "tipo_produto": 1,
             "created_at": "2022-02-26T14:26:42.662Z",
             "updated_at": "2022-02-26T14:26:42.662Z"
         }
@@ -61,6 +66,7 @@
             "produto": 7,
             "imagem": "image/upload/v1645888154/lzmbt0fqzgmanxuct3wn.png",
             "order_exibicao": 0,
+            "tipo_produto": 1,
             "created_at": "2022-02-26T15:09:15.133Z",
             "updated_at": "2022-02-26T15:09:15.134Z"
         }

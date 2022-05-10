@@ -287,6 +287,7 @@ class ProdutoImagem(models.Model):
         Produto, on_delete=models.CASCADE, related_name='produto_imagem')
     imagem = CloudinaryField('Mockup')
     order_exibicao = models.PositiveIntegerField(default=0)
+    tipo_produto = models.ForeignKey(TipoProduto, on_delete=models.PROTECT, default=1)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
