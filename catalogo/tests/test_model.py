@@ -178,7 +178,7 @@ class ProdutoTipoProdutoModelTest(TestCase):
     def test_created_at(self):
         self.assertIsInstance(self.obj.created_at, datetime)
         self.assertIsInstance(self.obj.updated_at, datetime)
-    
+
     def test_str(self):
         self.assertEqual('Camisetas - Ronaldinho 10', str(self.obj))
 
