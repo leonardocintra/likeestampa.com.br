@@ -29,6 +29,9 @@
         // cor padrao de todos os modelos seria branco
         $('#cor-selecionada').text('Branco');
 
+        $('#btnAddCarrinho').show();
+        $('#btnAddCarrinhoSpinner').hide();
+
 
         // catalogo/includes/_tamanhos.html
         mostrarTamanhosDoModelo(element);
@@ -89,7 +92,7 @@
                                 <i class="bi-cart-fill me-1"></i> Adicionar ao carrinho
                             </button>
 
-                            <button id="btnAddCarrinhoSpinner" class="btn btn-outline-dark" type="button" disabled>
+                            <button id="btnAddCarrinhoSpinner" class="btn btn-outline-dark" type="submit" disabled>
                                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                 Adicionando item ...
                             </button>

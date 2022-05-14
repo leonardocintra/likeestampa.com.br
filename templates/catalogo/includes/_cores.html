@@ -4,6 +4,8 @@
     <script>
         function alterarLabelCorSelecionada(cor) {
             $('#cor-selecionada').text(cor);
+            $('#btnAddCarrinho').show();
+            $('#btnAddCarrinhoSpinner').hide();
         }
 
         const cor_modelo_dict = {{cor_modelo_dict|safe}};

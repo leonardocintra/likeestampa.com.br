@@ -34,6 +34,11 @@
                 }            
             }
         }
+
+        function botaoCarrinhoSpinner() {
+            $('#btnAddCarrinho').show();
+            $('#btnAddCarrinhoSpinner').hide();
+        }
     </script>
 {% endblock %}
 
@@ -43,7 +48,7 @@
 
     {% for tamanho in tamanhos %}
         {% render_field form.tamanho value=tamanho.slug id=tamanho.slug type="radio" class="btn-check"%}
-        <label id="label-{{ tamanho.slug }}" class="btn btn-outline-danger" for="{{ tamanho.slug }}">
+        <label id="label-{{ tamanho.slug }}" class="btn btn-outline-danger" for="{{ tamanho.slug }}" onclick="botaoCarrinhoSpinner();" >
             {{ tamanho.descricao_cliente }}
         </label>
     {% endfor %}
