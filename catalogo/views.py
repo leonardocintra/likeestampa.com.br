@@ -5,11 +5,25 @@ from django.urls import reverse
 from checkout.views import get_quantidade_items_carrinho
 from checkout.models import Carrinho, ItemCarrinho
 from .forms import ProdutoDetalheForm
-from .models import Cor, CorModelo, Produto, ProdutoImagem, SubCategoria, ModeloProduto, Tamanho, TamanhoModelo
+from .models import Cor, CorModelo, Produto, ProdutoImagem, SubCategoria, ModeloProduto, Tamanho, TamanhoModelo, TipoProduto, ProdutoTipoProduto
 
 
 def list_tipos_produto(request, slug):
-    pass
+    """ Lista os produtos baseado na tipo selecionado """
+    subcategorias = SubCategoria.get_subcategorias_ativas()
+    sub_categoria_selecionada = None #get_object_or_404(subcategorias, slug=slug)
+    tipo_produto = TipoProduto.get_tipos_produto_ativo().filter(slug=slug)
+    produtos_tipo_produto = ProdutoTipoProduto.objects.all().filter(
+        tipo_produto=tipo_produto)
+    produtos = Produto.get_produtos_ativos()
+    page_obj = __get_page_obj(request, produtos)
+
+    context = {
+        'page_obj': page_obj,
+        'subcategorias': subcategorias,
+        'sub_categoria_selecionada': sub_categoria_selecionada,
+    }
+    return render(request, 'catalogo/list_by_categoria.html', context)
 
 
 def lista_por_subcategoria(request, slug):
