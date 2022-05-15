@@ -171,6 +171,9 @@ def mp_notifications(request):
               O problema é que a notificação chega num grupo do telegram. Se quiser acesso 
               precisa entrar em contato com leonardo.ncintra@outlook.com
     """
+
+    enviar_mensagem('INICIO MP ', str(request.GET.get('topic')))
+
     try:
         if request.GET.get('topic') != 'payment' and request.GET.get('topic') != 'merchant_order':
             enviar_mensagem('Recebeu uma notificação IPN do mercado pago mas não foi um topic mapeado: {0} - ID: {1}'.format(
