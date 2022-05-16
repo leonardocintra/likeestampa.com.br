@@ -172,8 +172,6 @@ def mp_notifications(request):
               precisa entrar em contato com leonardo.ncintra@outlook.com
     """
 
-    enviar_mensagem('INICIO MP ', str(request.GET.get('topic')))
-
     try:
         if request.GET.get('topic') != 'payment' and request.GET.get('topic') != 'merchant_order':
             enviar_mensagem('Recebeu uma notificação IPN do mercado pago mas não foi um topic mapeado: {0} - ID: {1}'.format(
@@ -196,7 +194,6 @@ def mp_notifications(request):
                 return JsonResponse({"pedido": "pedido-nao-encontrado"}, status=200)
 
             datas = get_pagamento_by_external_reference(external_reference)
-            enviar_mensagem('Passamos aqui Leonardo linha 196')
 
             # TODO: as vezes pode ter mais de um resuts. Entao fazer um loog para ppegar sempre o ultimo
             payment_id = datas['results'][0]['id']
@@ -205,21 +202,17 @@ def mp_notifications(request):
                 session_ativa=False)
             PagamentoMercadoPago.objects.filter(
                 pedido=pedido).update(payment_id=payment_id)
-            enviar_mensagem('Passamos aqui Leonardo linha 205')
 
         payment = get_payment(payment_id)
-        enviar_mensagem('Passamos aqui Leonardo linha 208')
         if payment['status'] == 404:
             return JsonResponse({"pagamento": "nao-encontrado"}, status=200)
 
         atualizar_pagamento_mp(payment)
-        enviar_mensagem('Passamos aqui Leonardo linha 213')
         try:
             if pedido is None:
                 pedido = _buscar_pedido_by_external_reference(
                     payment['external_reference'])
             concluir_pedido(pedido, payment_id)
-            enviar_mensagem('Passamos aqui Leonardo linha 219')
         except Exception as e:
             enviar_mensagem('Erro ao concluir_pedido. Erro: {0}'.format(e))
             return JsonResponse({"pagamento": "ocorreu um erro no concluir-pedido."}, status=201)
