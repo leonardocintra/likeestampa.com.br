@@ -11,7 +11,10 @@ from pedido.models import Pedido
 
 @override_settings(DEBUG=True)
 class PedidoFinalizadoMercadoPagoViewTest(TestCase):
-    fixtures = ['fixtures/evento/status.json', ]
+    fixtures = [
+        'fixtures/catalogo/tipo_produto.json', 
+        'fixtures/evento/status.json', 
+    ]
 
     def setUp(self):
         get_fake_carrinho_com_items()

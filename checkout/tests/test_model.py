@@ -1,6 +1,6 @@
 from django.test import TestCase
 from checkout.models import Carrinho, ItemCarrinho
-from catalogo.models import Cor, Modelo, ModeloProduto, Tamanho
+from catalogo.models import Cor, Modelo, ModeloProduto, Tamanho, TipoProduto
 from catalogo.tests.test_model import get_fake_produto
 
 UUID_FAKE_CARRINHO = 'f2ce90d6-422b-45d6-8345-a31d223d75d0'
@@ -20,6 +20,8 @@ class CarrinhoModelTest(TestCase):
 
 
 class ItemCarrinhoModelTest(TestCase):
+    fixtures = ['fixtures/catalogo/tipo_produto.json', ]
+
     def setUp(self):
         self.obj = get_fake_carrinho_com_items()
 
@@ -33,7 +35,6 @@ class ItemCarrinhoModelTest(TestCase):
 def get_fake_carrinho_com_items():
     carrinho = Carrinho.objects.create(uuid=UUID_FAKE_CARRINHO)
     produto = get_fake_produto()
-
     modelo = Modelo.objects.create(descricao='T-Shirt', valor=47.90)
     modelo_produto = ModeloProduto.objects.create(
         produto=produto, modelo=modelo)

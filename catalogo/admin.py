@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import (TipoProduto, SubCategoria, Produto, ModeloProduto,
-                     Modelo, Cor, Tamanho, ProdutoImagem, TamanhoModelo, CorModelo, ProdutoTipoProduto)
+                     Modelo, Cor, Tamanho, ProdutoImagem, TamanhoModelo, CorModelo)
 
 
 class TamanhoAdmin(admin.ModelAdmin):
@@ -43,18 +43,12 @@ class ModeloProdutoInline(admin.TabularInline):
     extra = 1
 
 
-class ProdutoTipoProdutoInline(admin.TabularInline):
-    model = ProdutoTipoProduto
-    extra = 1
-    min_num = 1
-
-
 class ProdutoAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('nome',)}
     search_fields = ['nome', ]
     list_filter = ['ativo', 'subcategoria', 'genero', ]
     list_display = ['nome', 'subcategoria', 'ativo', 'genero', ]
-    inlines = [ModeloProdutoInline, ProdutoImagemInline, ProdutoTipoProdutoInline ]
+    inlines = [ModeloProdutoInline, ProdutoImagemInline, ]
     actions = [ativar_produtos, desativar_produtos, ]
 
     def save_model(self, request, obj, form, change):

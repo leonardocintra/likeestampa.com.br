@@ -7,6 +7,10 @@ from checkout.forms import FreteForm
 
 
 class CarrinhoViewClienteNaoAutenticadoTest(TestCase):
+    fixtures = [
+        'fixtures/catalogo/tipo_produto.json',
+    ]
+
     def setUp(self):
         self.client = Client()
         self.response = self.client.get(reverse('checkout:carrinho'))

@@ -140,9 +140,12 @@ class ProdutoTipoProduto(models.Model):
 
 
 class Modelo(models.Model):
-    "Modelo seria: T-Shirt, mangalonga, etc"
+    """
+    Modelo Seria: T-Shirt (camiseta), infantil (camiseta), porcelana (caneca), etc
+    """
     descricao = models.CharField(max_length=50, default='T-Shirt')
     descricao_cliente = models.CharField(max_length=50, null=True, blank=True)
+    tipo_produto = models.ForeignKey(TipoProduto, on_delete=models.PROTECT, default=1)
     valor = models.DecimalField(
         'Valor', decimal_places=2, max_digits=999, default=51.90)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)

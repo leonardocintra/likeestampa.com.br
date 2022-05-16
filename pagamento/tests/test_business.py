@@ -10,7 +10,10 @@ from pedido.tests.test_model import get_fake_pedido
 
 @override_settings(DEBUG=True)
 class ConcluirPedidoTest(TestCase):
-    fixtures = ['fixtures/evento/status.json', ]
+    fixtures = [
+        'fixtures/evento/status.json', 
+        'fixtures/catalogo/tipo_produto.json', 
+    ]
 
     def setUp(self):
         Pedido.objects.all().delete()

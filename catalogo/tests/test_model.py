@@ -51,8 +51,11 @@ class CorModelTest(TestCase):
 
 
 class CorModeloModelTest(TestCase):
-    fixtures = ['fixtures/catalogo/modelo.json',
-                'fixtures/catalogo/cor.json', ]
+    fixtures = [
+        'fixtures/catalogo/tipo_produto.json',
+        'fixtures/catalogo/modelo.json',
+        'fixtures/catalogo/cor.json',
+    ]
 
     def setUp(self):
         self.modelo = Modelo.objects.get(pk=1)
@@ -70,8 +73,11 @@ class CorModeloModelTest(TestCase):
 
 
 class TamanhoModeloModelTest(TestCase):
-    fixtures = ['fixtures/catalogo/modelo.json',
-                'fixtures/catalogo/tamanho.json', ]
+    fixtures = [
+        'fixtures/catalogo/tipo_produto.json',
+        'fixtures/catalogo/modelo.json',
+        'fixtures/catalogo/tamanho.json',
+    ]
 
     def setUp(self):
         self.modelo = Modelo.objects.get(pk=1)
@@ -300,6 +306,8 @@ class ProdutoImagemModelTest(TestCase):
 
 
 class ModeloModelTest(TestCase):
+    fixtures = ['fixtures/catalogo/tipo_produto.json', ]
+
     def setUp(self):
         self.obj = Modelo.objects.create(descricao='T-Shirt')
 
@@ -315,6 +323,7 @@ class ModeloProdutoModelTest(TestCase):
     fixtures = ['fixtures/seller/seller.json',
                 'fixtures/catalogo/subcategoria.json',
                 'fixtures/catalogo/produtos.json',
+                'fixtures/catalogo/tipo_produto.json',
                 'fixtures/catalogo/modelo.json',
                 'fixtures/catalogo/modelo_produto.json', ]
 
@@ -341,6 +350,8 @@ class ModeloProdutoModelTest(TestCase):
 
 
 class SkuDimonaModelTest(TestCase):
+    fixtures = ['fixtures/catalogo/tipo_produto.json', ]
+
     def setUp(self):
         modelo = Modelo.objects.create(descricao='T-Shirt')
         self.obj = SkuDimona.objects.create(

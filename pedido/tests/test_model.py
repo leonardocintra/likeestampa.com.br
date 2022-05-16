@@ -16,6 +16,8 @@ class PedidoModelTest(TestCase):
 
 
 class ItemPedidoModelTest(TestCase):
+    fixtures = ['fixtures/catalogo/tipo_produto.json', ]
+    
     def setUp(self):
         pedido = get_fake_pedido()
         produto = get_fake_produto()
