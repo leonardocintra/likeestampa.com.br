@@ -73,7 +73,7 @@ class ProdutoAdmin(admin.ModelAdmin):
 
 
 class ModeloAdmin(admin.ModelAdmin):
-    list_display = ['descricao', 'descricao_cliente', 'valor', 'id', ]
+    list_display = ['descricao', 'descricao_cliente', 'tipo_produto', 'valor', 'id', ]
     search_fields = ['descricao', ]
 
 

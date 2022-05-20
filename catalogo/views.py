@@ -6,24 +6,27 @@ from django.urls import reverse
 from checkout.views import get_quantidade_items_carrinho
 from checkout.models import Carrinho, ItemCarrinho
 from .forms import ProdutoDetalheForm
-from .models import Cor, CorModelo, Produto, ProdutoImagem, SubCategoria, ModeloProduto, Tamanho, TamanhoModelo, TipoProduto, ProdutoTipoProduto
+from .models import Cor, CorModelo, Modelo, Produto, ProdutoImagem, SubCategoria, ModeloProduto, Tamanho, TamanhoModelo, TipoProduto, ProdutoTipoProduto
 
 
 @require_GET
 def list_tipos_produto(request, slug):
     """ Lista os produtos baseado na tipo selecionado """
-    subcategorias = SubCategoria.get_subcategorias_ativas()
-    sub_categoria_selecionada = None #get_object_or_404(subcategorias, slug=slug)
     tipo_produto = TipoProduto.get_tipos_produto_ativo().filter(slug=slug)
-    produtos_tipo_produto = ProdutoTipoProduto.objects.all().filter(
-        tipo_produto=tipo_produto)
-    produtos = Produto.get_produtos_ativos()
+    get_object_or_404(tipo_produto, slug=slug)
+    subcategorias = SubCategoria.get_subcategorias_ativas()
+    modelos = Modelo.objects.filter(tipo_produto__in=tipo_produto)
+    modelo_produto = ModeloProduto.objects.filter(modelo__in=modelos)
+    ids_produto = []
+    for x in modelo_produto:
+        ids_produto.append(x.produto.id)
+
+    produtos = Produto.objects.filter(id__in=ids_produto)
     page_obj = __get_page_obj(request, produtos)
 
     context = {
         'page_obj': page_obj,
         'subcategorias': subcategorias,
-        'sub_categoria_selecionada': sub_categoria_selecionada,
     }
     return render(request, 'catalogo/list_by_categoria.html', context)
 
@@ -33,7 +36,7 @@ def lista_por_subcategoria(request, slug):
     """ Lista os produtos baseado na categoria selecionada """
 
     subcategorias = SubCategoria.get_subcategorias_ativas()
-    sub_categoria_selecionada = get_object_or_404(subcategorias, slug=slug)
+    get_object_or_404(subcategorias, slug=slug)
     produtos = Produto.get_produtos_ativos().filter(
         subcategoria__slug=slug)
     page_obj = __get_page_obj(request, produtos)
@@ -41,7 +44,6 @@ def lista_por_subcategoria(request, slug):
     context = {
         'page_obj': page_obj,
         'subcategorias': subcategorias,
-        'sub_categoria_selecionada': sub_categoria_selecionada,
     }
     return render(request, 'catalogo/list_by_categoria.html', context)
 
@@ -59,8 +61,8 @@ def produto(request, slug):
         return redirect(reverse("checkout:carrinho"))
 
     imagens = ProdutoImagem.objects.filter(produto=produto)
-    # Adiciona no mockup a imagem principal (pelo menos a imagem 0)
 
+    # Adiciona no mockup a imagem principal (pelo menos a imagem 0)
     mockups = __get_mockups(produto, imagens)
 
     # Busca os modelos

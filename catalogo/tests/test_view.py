@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.shortcuts import resolve_url as r
 from django.urls import reverse
-from catalogo.models import Produto, SubCategoria
+from catalogo.models import ModeloProduto, Produto, SubCategoria, TipoProduto
 
 fixtures_geral = [
     'fixtures/seller/seller.json',
@@ -16,6 +16,32 @@ fixtures_geral = [
     'fixtures/catalogo/tipo_produto.json',
     'fixtures/catalogo/produto_imagens.json',
 ]
+
+
+class ListaPorTipoProduto(TestCase):
+    fixtures = fixtures_geral
+
+    def setUp(self) -> None:
+        self.client = Client()
+        self.obj = TipoProduto.objects.get(pk=2)
+        self.response = self.client.get(
+            reverse('catalogo:tipo_produto', kwargs={'slug': self.obj.slug}))
+
+    def test_self_obj(self):
+        self.assertEqual('Canecas', str(self.obj))
+
+    def test_template(self):
+        self.assertTemplateUsed(
+            self.response, 'catalogo/list_by_categoria.html')
+
+    def test_somente_produtos_do_tipo_produto_selecionado_deve_aparecer(self):
+        self.assertEqual(6, len(Produto.objects.all()))
+        self.assertEqual(3, len(self.response.context['page_obj']))
+
+    def test_tipo_produto_not_found(self):
+        response = self.client.get(
+            reverse('catalogo:tipo_produto', kwargs={'slug': 'nao-existe'}))
+        self.assertEqual(404, response.status_code)
 
 
 class ListaPorSubCategoriaViewTest(TestCase):
@@ -34,10 +60,6 @@ class ListaPorSubCategoriaViewTest(TestCase):
         subcategoria = self.response.context['subcategorias']
         self.assertIsNotNone(subcategoria)
         self.assertEqual(7, len(subcategoria))
-        self.assertIsNotNone(
-            self.response.context['sub_categoria_selecionada'])
-        self.assertEqual(
-            'Programação', str(self.response.context['sub_categoria_selecionada']))
 
     def test_subcategoria_inativa_nao_pode_aparecer(self):
         self.assertContains(self.response, 'Programação')
@@ -46,6 +68,11 @@ class ListaPorSubCategoriaViewTest(TestCase):
     def test_somente_produtos_da_categoria(self):
         self.assertEqual(6, len(Produto.objects.all()))
         self.assertEqual(2, len(self.response.context['page_obj']))
+
+    def test_subcategoria_not_found(self):
+        response = self.client.get(
+            reverse('catalogo:lista_por_subcategoria', kwargs={'slug': 'nao-existe'}))
+        self.assertEqual(404, response.status_code)
 
 
 class ProdutoViewTest(TestCase):
