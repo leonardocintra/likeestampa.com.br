@@ -20,6 +20,7 @@ class TipoProduto(models.Model):
     slug = models.SlugField('Identificador', max_length=100, unique=True)
     ativo = models.BooleanField(default=True)
     icone_fontawesome = models.CharField(max_length=50, null=True)
+    imagem = models.CharField(max_length=100, null=True)
     descricao = models.TextField(default='Descrição não informada')
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
@@ -35,7 +36,7 @@ class TipoProduto(models.Model):
     @classmethod
     def get_tipos_produto_ativo(cls):
         tipos_produto = cache.get(CACHE_TIPOS_PRODUTOS)
-        if tipos_produto is not None:
+        if tipos_produto is not None and len(tipos_produto) > 0:
             return tipos_produto
         tipos_produto = cls.objects.all().exclude(ativo=False)
         cache.set(CACHE_TIPOS_PRODUTOS, tipos_produto)
@@ -126,6 +127,7 @@ class Produto(models.Model):
 
 
 class ProdutoTipoProduto(models.Model):
+    # Excluir esssa tabela pois nao esta sendo mais usado para negocio
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     tipo_produto = models.ForeignKey(TipoProduto, on_delete=models.CASCADE)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)

@@ -1,11 +1,48 @@
 {% load widget_tweaks %}
 
+<script>
+
+    const modelo_e_tipo_produto_dict = {{ modelo_e_tipo_produto_dict|safe }};
+
+    function escondeModelos() {
+
+        for (const [modelo, tipo_modelo] of Object.entries(modelo_e_tipo_produto_dict)) {
+            const element = "";
+
+            const elementRadio = "#" + modelo;
+            const elementLabel = "#modelo-" + modelo;
+
+            $(elementRadio).hide();
+            $(elementLabel).hide();
+        }
+
+    }
+
+    function mostrarModeloByTipoProduto(tipoProdutoId) {
+        escondeModelos();
+
+        for (const [modelo, tipo_modelo] of Object.entries(modelo_e_tipo_produto_dict)) {
+
+            if (tipoProdutoId === tipo_modelo) {
+                
+                const element = "";
+                
+                const elementRadio = "#" + modelo;
+                const elementLabel = "#modelo-" + modelo;
+                
+                $(elementRadio).show();
+                $(elementLabel).show();
+            }   
+        }
+    }
+</script>
+
 <div class="text-center" style="padding: 10px;">
     Modelo:
     <br />
     {% for modelo in modelos %}
         {% render_field form.modelo value=modelo.id id=modelo.id type="radio" class="btn-check" %}
-        <label class="btn btn-outline-dark btn-sm" for="{{ modelo.id }}" onclick="this.form.reset(); modeloSelecionado('{{ modelo.modelo.descricao }}');">
+        <label id="modelo-{{ modelo.id }}" class="btn btn-outline-dark btn-sm" for="{{ modelo.id }}" onclick="this.form.reset(); modeloSelecionado('{{ modelo.modelo.descricao }}');">
             {{ modelo.modelo.descricao_cliente }} (R$ {{ modelo.modelo.valor }} )
         </label>
     {% endfor %}

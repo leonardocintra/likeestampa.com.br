@@ -26,6 +26,7 @@ class ListaPorTipoProduto(TestCase):
         self.obj = TipoProduto.objects.get(pk=2)
         self.response = self.client.get(
             reverse('catalogo:tipo_produto', kwargs={'slug': self.obj.slug}))
+        self.session = self.client.session
 
     def test_self_obj(self):
         self.assertEqual('Canecas', str(self.obj))
@@ -36,12 +37,15 @@ class ListaPorTipoProduto(TestCase):
 
     def test_somente_produtos_do_tipo_produto_selecionado_deve_aparecer(self):
         self.assertEqual(6, len(Produto.objects.all()))
-        self.assertEqual(3, len(self.response.context['page_obj']))
+        self.assertEqual(4, len(self.response.context['page_obj']))
 
     def test_tipo_produto_not_found(self):
         response = self.client.get(
             reverse('catalogo:tipo_produto', kwargs={'slug': 'nao-existe'}))
         self.assertEqual(404, response.status_code)
+    
+    def test_session(self):
+        self.assertEqual('canecas', self.session['tipo_produto'])
 
 
 class ListaPorSubCategoriaViewTest(TestCase):
@@ -108,11 +112,11 @@ class ProdutoViewTest(TestCase):
 
     def test_modelos(self):
         self.assertIsNotNone(self.response.context['modelos'])
-        self.assertEqual(3, len(self.response.context['modelos']))
+        self.assertEqual(4, len(self.response.context['modelos']))
 
     def test_tamanho_modelo_dict(self):
         self.assertIsNotNone(self.response.context['tamanho_modelo_dict'])
-        self.assertEqual(3, len(self.response.context['tamanho_modelo_dict']))
+        self.assertEqual(4, len(self.response.context['tamanho_modelo_dict']))
 
     def test_tamanhos_modelo(self):
         self.assertIsNotNone(self.response.context['tamanhos_modelo'])
@@ -156,3 +160,7 @@ class ProdutoViewTest(TestCase):
         self.response = self.client.post(
             r('catalogo:produto', self.obj.slug), data=data)
         self.assertEqual(302, self.response.status_code)
+    
+    def test_tipo_produto(self):
+        self.assertIsNotNone(self.response.context['tipo_produtos'])
+        self.assertEqual(2, len(self.response.context['tipo_produtos']))

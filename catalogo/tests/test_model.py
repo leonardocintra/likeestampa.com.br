@@ -344,7 +344,7 @@ class ModeloProdutoModelTest(TestCase):
         cache.delete('modelo-produto-{0}'.format(produto.slug))
         modelos = ModeloProduto.get_modelos_do_produto(produto)
         self.assertIsNotNone(modelos)
-        self.assertEqual(3, len(modelos))
+        self.assertEqual(4, len(modelos))
         self.assertIsNotNone(
             cache.get('modelo-produto-{0}'.format(produto.slug)))
 

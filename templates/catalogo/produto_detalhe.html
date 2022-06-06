@@ -4,8 +4,6 @@
 
 {% load widget_tweaks %}
 
-{% load cloudinary %}
-
 {% block js_header %}
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script>
@@ -53,17 +51,9 @@
             {{ form.source }}
 
             <div class="row gx-4 gx-lg-5 align-items-center">
-                <div class="col-md-6 text-center">
-                    {% cloudinary produto.imagem_principal quality="auto:low" id="imagemModelo" class="card-img-top mb-5 mb-md-0" %}
-                    <div style="padding-top: 10px;">
-                        {% for imagem in imagens %}
-                            {% if forloop.first %}
-                                {% cloudinary produto.imagem_principal id=imagem.id quality="auto:low" class="rounded img-mockup" onclick="mostrarMockupSelecionado(this)" %}
-                            {% endif %}
-                            {% cloudinary imagem.imagem quality="auto:low" id=imagem.id onclick="mostrarMockupSelecionado(this)" class="rounded img-mockup" %}
-                        {% endfor %}
-                    </div>
-                </div>
+                
+                {% include 'catalogo/includes/_mockup.html' %}
+
                 <div class="col-md-6">
                     <div class="small mb-1 text-muted">SKU: {{ produto.id }}</div>
                     <h1 class="display-4 fw-bolder">{{ produto.nome }}</h1>
@@ -75,6 +65,8 @@
                     <p class="lead">{{ produto.descricao|linebreaks }}</p>
                     <div class="fs-5 mb-2">
                         
+                        {% include 'catalogo/includes/_tipo_produto.html' %}
+
                         {% include 'catalogo/includes/_modelos.html' %}
 
                         {% include 'catalogo/includes/_cores.html' %}
@@ -104,41 +96,7 @@
     </div>
 </section>
 
-<!-- Related items section-->
-<section class="py-5 bg-light">
-    <div class="container px-4 px-lg-5 mt-5">
-        <h2 class="fw-bolder mb-4">Produtos relacionados</h2>
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            {% for produto in produtos_relacionados %}
-            <div class="col mb-5">
-                <div class="card h-100">
-                    <!-- Sale badge-->
-                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
-                        novidade!
-                    </div>
-                    <!-- Product image-->
-                    {% cloudinary produto.imagem_principal quality="auto:low" class="card-img-top" %}
-                    <!-- Product details-->
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            <!-- Product name-->
-                            <h5 class="fw-bolder">{{ produto.nome }}</h5>
-                            <!-- Product price-->
-                            <span class="text-muted text-decoration-line-through">R$ 59,90</span>
-                            R$ {{ produto.preco_base }}
-                        </div>
-                    </div>
-                    <!-- Product actions-->
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto"
-                                href="{% url 'catalogo:produto' produto.slug %}">Comprar</a></div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
+{% include 'catalogo/includes/_produtos_relacionados.html' %}
 
 <section class="py-1">
     <div class="container px-4 px-lg-5 mt-5 text-center">
@@ -150,6 +108,7 @@
 
 {% block js_footer %}
 <script>
+    escondeModelos();
     escondeTamanhos();
     escondeCores();
 

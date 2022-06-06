@@ -1,0 +1,13 @@
+{% load widget_tweaks %}
+
+
+<div class="text-center" style="padding: 10px;">
+    Produto:
+    <br />
+    {% for tipo in tipo_produtos %}
+        
+        <label class="btn btn-outline-dark btn-sm" for="{{ tipo.id }}" onclick="mostrarModeloByTipoProduto({{ tipo.id }});">
+            {{ tipo.nome }}
+        </label>
+    {% endfor %}
+</div>

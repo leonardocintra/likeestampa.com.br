@@ -68,7 +68,7 @@ def pagamento(request):
     # monta o frete
     frete_items = get_frete(cep, quantidade_total)
     valor_frete = 15.0
-    transportadora = ''
+    transportadora = 'DEFAULT-LIKEESTAMPA'
     delivery_method_id = 0
     if 'cotacao_frete' in request.session:
         delivery_method_id = int(request.session['cotacao_frete'])
@@ -137,14 +137,14 @@ def pagamento(request):
     preference_id = preference['id']
 
     # Atualiza informações na tabela de pagamento
-    frase_padrao = 'PEDIDO_NAO_FINALIZADO'
+    FRASE_PADRAO = 'PEDIDO_NAO_FINALIZADO'
     PagamentoMercadoPago.objects.filter(pedido=pedido).delete()
     PagamentoMercadoPago.objects.create(
         pedido=pedido,
         mercado_pago_id=preference_id,
-        mercado_pago_status=frase_padrao,
-        mercado_pago_status_detail=frase_padrao,
-        payment_method_id=frase_padrao
+        mercado_pago_status=FRASE_PADRAO,
+        mercado_pago_status_detail=FRASE_PADRAO,
+        payment_method_id=FRASE_PADRAO
     )
     Carrinho.objects.filter(uuid=uuid).update(pedido=pedido)
     request.session['mercado_pago_id'] = preference_id

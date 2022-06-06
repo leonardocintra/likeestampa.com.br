@@ -106,7 +106,7 @@ Para debugar o teste, basta comentar ele e incluir "test" :D
 ### Dump data
 Exemplo
 ```
-python3 manage.py dumpdata catalogo.produtotipoproduto > teste.json
+python3 manage.py dumpdata catalogo.catgoria > categoria.json
 ```
 
 ## Historia

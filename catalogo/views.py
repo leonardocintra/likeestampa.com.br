@@ -6,7 +6,7 @@ from django.urls import reverse
 from checkout.views import get_quantidade_items_carrinho
 from checkout.models import Carrinho, ItemCarrinho
 from .forms import ProdutoDetalheForm
-from .models import Cor, CorModelo, Modelo, Produto, ProdutoImagem, SubCategoria, ModeloProduto, Tamanho, TamanhoModelo, TipoProduto, ProdutoTipoProduto
+from .models import Cor, CorModelo, Modelo, Produto, ProdutoImagem, SubCategoria, ModeloProduto, Tamanho, TamanhoModelo, TipoProduto
 
 
 @require_GET
@@ -23,6 +23,8 @@ def list_tipos_produto(request, slug):
 
     produtos = Produto.objects.filter(id__in=ids_produto)
     page_obj = __get_page_obj(request, produtos)
+
+    request.session['tipo_produto'] = slug
 
     context = {
         'page_obj': page_obj,
@@ -65,11 +67,17 @@ def produto(request, slug):
     # Adiciona no mockup a imagem principal (pelo menos a imagem 0)
     mockups = __get_mockups(produto, imagens)
 
-    # Busca os modelos
+    # Busca os modelos e o tipos de produto (caneca, camiseta, avental, etc)
     modelos = ModeloProduto.get_modelos_do_produto(produto)
+
     modelo_array = []
+    tipo_produto_array = []
     for m in modelos:
+        tipo_produto_array.append(m.modelo.tipo_produto.id)
         modelo_array.append(m.modelo_id)
+    
+
+    tipo_produtos = TipoProduto.objects.filter(id__in=tipo_produto_array)
 
     """ Processo de trabalhar a cor dos modelos """
     # 1 - Pega a cor dos modelos
@@ -100,7 +108,10 @@ def produto(request, slug):
     # FINALMENTE Monta uma json de tamanhos e cores para controlar a selecao do cliente na tela
     tamanho_modelo_dict = dict()
     cor_modelo_dict = dict()
+    modelo_e_tipo_produto_dict = dict()
     for m in modelos:
+        modelo_e_tipo_produto_dict.update({m.id: m.modelo.tipo_produto.id})
+
         # monta json para o tamanho
         tamanho_list = []
         for tm in tamanhos_modelo:
@@ -124,6 +135,7 @@ def produto(request, slug):
     subcategorias = SubCategoria.get_subcategorias_ativas()
 
     context = {
+        'tipo_produtos': tipo_produtos,
         'produto': produto,
         'imagens': imagens,
         'mockups': mockups,
@@ -136,6 +148,7 @@ def produto(request, slug):
         'tamanhos_modelo': tamanhos_modelo,
         'tamanho_modelo_dict': tamanho_modelo_dict,
         'modelos': modelos,
+        'modelo_e_tipo_produto_dict': modelo_e_tipo_produto_dict,
         'quantidade_item': get_quantidade_items_carrinho(request),
         'produtos_relacionados': produtos_relacionados
     }
