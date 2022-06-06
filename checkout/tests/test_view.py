@@ -42,10 +42,19 @@ class CarrinhoViewClienteNaoAutenticadoTest(TestCase):
         self.assertContains(self.response, btn_login)
         self.assertContains(self.response, btn_cadastro)
         self.assertContains(self.response, label_quantidade_item_carrinho)
-    
-    def test_spinner_excluir_existe_na_pagina(self):
-        spinner = '<button class="btn btn-danger btn-sm btn-excluir-spinner" type="button" disabled="" id="btn-excluir-spinner-'
-        self.assertContains(self.response, spinner)
+
+    def test_spinner_excluir_nao_existe_na_pagina_sem_item_carrinho(self):
+        spinner = '<button class="btn btn-danger btn-sm btn-excluir-spinner" type="button" disabled id="btn-excluir-spinner-'
+        self.assertNotContains(self.response, spinner)
+
+    def test_spinner_excluir_existe_na_pagina_com_item_carrinho(self):
+        get_fake_carrinho_com_items()
+        session = self.client.session
+        session['carrinho'] = UUID_FAKE_CARRINHO
+        session.save()
+        res = self.client.get(reverse('checkout:carrinho'))
+        spinner = '<button class="btn btn-danger btn-sm btn-excluir-spinner" type="button" disabled id="btn-excluir-spinner-'
+        self.assertContains(res, spinner)
 
     def test_dados_do_cliente_vazio(self):
         self.assertIsNone(self.response.context['enderecos'])
@@ -80,4 +89,3 @@ class CarrinhoViewClienteNaoAutenticadoTest(TestCase):
                                 'calcular-frete': 823899992})
         self.assertEqual('823899992', res2.context['cep_padrao'])
         self.assertEqual('frete-nao-encontrado', res2.context['frete_items'])
-

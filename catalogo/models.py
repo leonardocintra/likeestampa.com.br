@@ -126,21 +126,6 @@ class Produto(models.Model):
         return produtos
 
 
-class ProdutoTipoProduto(models.Model):
-    # Excluir esssa tabela pois nao esta sendo mais usado para negocio
-    produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
-    tipo_produto = models.ForeignKey(TipoProduto, on_delete=models.CASCADE)
-    created_at = models.DateTimeField('Criado em', auto_now_add=True)
-    updated_at = models.DateTimeField('Modificado em', auto_now=True)
-
-    class Meta:
-        db_table = 'produto_tipo_produto'
-        ordering = ('created_at',)
-
-    def __str__(self):
-        return self.tipo_produto.nome + ' - ' + self.produto.nome
-
-
 class Modelo(models.Model):
     """
     Modelo Seria: T-Shirt (camiseta), infantil (camiseta), porcelana (caneca), etc
