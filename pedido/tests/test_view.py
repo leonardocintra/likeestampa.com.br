@@ -12,8 +12,8 @@ from pedido.models import Pedido
 @override_settings(DEBUG=True)
 class PedidoFinalizadoMercadoPagoViewTest(TestCase):
     fixtures = [
-        'fixtures/catalogo/tipo_produto.json', 
-        'fixtures/evento/status.json', 
+        'fixtures/catalogo/tipo_produto.json',
+        'fixtures/evento/status.json',
     ]
 
     def setUp(self):
@@ -86,4 +86,3 @@ class PedidoFinalizadoMercadoPagoViewTest(TestCase):
 class PedidoDetailViewTest(TestCase):
     pass
     # precisa fazer esse teste self.assertContains(response, '/image/upload/q_auto:low/')
-

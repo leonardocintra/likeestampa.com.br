@@ -11,7 +11,8 @@ from .models import Cor, CorModelo, Modelo, Produto, ProdutoImagem, SubCategoria
 
 @require_GET
 def list_tipos_produto(request, slug):
-    """ Lista os produtos baseado na tipo selecionado """
+    """Lista os produtos baseado na tipo selecionado"""
+
     tipo_produto = TipoProduto.get_tipos_produto_ativo().filter(slug=slug)
     get_object_or_404(tipo_produto, slug=slug)
     subcategorias = SubCategoria.get_subcategorias_ativas()

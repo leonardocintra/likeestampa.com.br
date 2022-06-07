@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.shortcuts import resolve_url as r
 from django.urls import reverse
-from catalogo.models import ModeloProduto, Produto, SubCategoria, TipoProduto
+from catalogo.models import Produto, SubCategoria, TipoProduto
 
 fixtures_geral = [
     'fixtures/seller/seller.json',
@@ -43,7 +43,7 @@ class ListaPorTipoProduto(TestCase):
         response = self.client.get(
             reverse('catalogo:tipo_produto', kwargs={'slug': 'nao-existe'}))
         self.assertEqual(404, response.status_code)
-    
+
     def test_session(self):
         self.assertEqual('canecas', self.session['tipo_produto'])
 
@@ -160,7 +160,7 @@ class ProdutoViewTest(TestCase):
         self.response = self.client.post(
             r('catalogo:produto', self.obj.slug), data=data)
         self.assertEqual(302, self.response.status_code)
-    
+
     def test_tipo_produto(self):
         self.assertIsNotNone(self.response.context['tipo_produtos'])
         self.assertEqual(2, len(self.response.context['tipo_produtos']))
