@@ -73,8 +73,8 @@ class SubCategoria(models.Model):
 
 
 class Produto(models.Model):
-    
-    """Ex: camiseta sao paulo, camiseta python, moleton flutter etc"""
+
+    """Ex: camiseta sao paulo, camiseta python, moleton flutter etc """
 
     nome = models.CharField(max_length=100)
     seller = models.ForeignKey(Seller, on_delete=models.PROTECT, null=True)
@@ -134,7 +134,8 @@ class Modelo(models.Model):
     """
     descricao = models.CharField(max_length=50, default='T-Shirt')
     descricao_cliente = models.CharField(max_length=50, null=True, blank=True)
-    tipo_produto = models.ForeignKey(TipoProduto, on_delete=models.PROTECT, default=1)
+    tipo_produto = models.ForeignKey(
+        TipoProduto, on_delete=models.PROTECT, default=1)
     valor = models.DecimalField(
         'Valor', decimal_places=2, max_digits=999, default=51.90)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
