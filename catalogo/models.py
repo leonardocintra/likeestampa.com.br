@@ -74,7 +74,7 @@ class SubCategoria(models.Model):
 
 class Produto(models.Model):
     """
-    Ex: camiseta sao paulo, camiseta python, moleton flutter etc 
+    Ex: camiseta sao paulo, camiseta python, moleton flutter etc
     """
 
     nome = models.CharField(max_length=100)

@@ -161,7 +161,9 @@ def produto(request, slug):
 
 
 def __adicionar_item_carrinho(request, produto, modelo, cor, tamanho, quantidade):
-    """ Funcao responsavel por adicionar items no carrinho """
+    """ 
+    Funcao responsavel por adicionar items no carrinho
+    """
 
     carrinho = Carrinho()
     modelo = int(modelo)
