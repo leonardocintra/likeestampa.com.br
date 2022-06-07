@@ -51,8 +51,11 @@ class CorModelTest(TestCase):
 
 
 class CorModeloModelTest(TestCase):
-    fixtures = ['fixtures/catalogo/modelo.json',
-                'fixtures/catalogo/cor.json', ]
+    fixtures = [
+        'fixtures/catalogo/tipo_produto.json',
+        'fixtures/catalogo/modelo.json',
+        'fixtures/catalogo/cor.json',
+    ]
 
     def setUp(self):
         self.modelo = Modelo.objects.get(pk=1)
@@ -70,8 +73,11 @@ class CorModeloModelTest(TestCase):
 
 
 class TamanhoModeloModelTest(TestCase):
-    fixtures = ['fixtures/catalogo/modelo.json',
-                'fixtures/catalogo/tamanho.json', ]
+    fixtures = [
+        'fixtures/catalogo/tipo_produto.json',
+        'fixtures/catalogo/modelo.json',
+        'fixtures/catalogo/tamanho.json',
+    ]
 
     def setUp(self):
         self.modelo = Modelo.objects.get(pk=1)
@@ -98,7 +104,7 @@ class TipoProdutoModelTest(TestCase):
     def setUp(self) -> None:
         cache.delete(CACHE_TIPOS_PRODUTOS)
 
-    def test_create(self):
+    def test_exists(self):
         self.assertTrue(TipoProduto.objects.exists())
 
     def test_str(self):
@@ -256,6 +262,7 @@ class ProdutoImagemModelTest(TestCase):
     fixtures = ['fixtures/seller/seller.json',
                 'fixtures/catalogo/subcategoria.json',
                 'fixtures/catalogo/produtos.json',
+                'fixtures/catalogo/tipo_produto.json',
                 'fixtures/catalogo/modelo.json', ]
 
     def setUp(self):
@@ -275,6 +282,8 @@ class ProdutoImagemModelTest(TestCase):
 
 
 class ModeloModelTest(TestCase):
+    fixtures = ['fixtures/catalogo/tipo_produto.json', ]
+
     def setUp(self):
         self.obj = Modelo.objects.create(descricao='T-Shirt')
 
@@ -290,6 +299,7 @@ class ModeloProdutoModelTest(TestCase):
     fixtures = ['fixtures/seller/seller.json',
                 'fixtures/catalogo/subcategoria.json',
                 'fixtures/catalogo/produtos.json',
+                'fixtures/catalogo/tipo_produto.json',
                 'fixtures/catalogo/modelo.json',
                 'fixtures/catalogo/modelo_produto.json', ]
 
@@ -310,12 +320,14 @@ class ModeloProdutoModelTest(TestCase):
         cache.delete('modelo-produto-{0}'.format(produto.slug))
         modelos = ModeloProduto.get_modelos_do_produto(produto)
         self.assertIsNotNone(modelos)
-        self.assertEqual(3, len(modelos))
+        self.assertEqual(4, len(modelos))
         self.assertIsNotNone(
             cache.get('modelo-produto-{0}'.format(produto.slug)))
 
 
 class SkuDimonaModelTest(TestCase):
+    fixtures = ['fixtures/catalogo/tipo_produto.json', ]
+
     def setUp(self):
         modelo = Modelo.objects.create(descricao='T-Shirt')
         self.obj = SkuDimona.objects.create(

@@ -49,7 +49,6 @@ class ProdutoAdmin(admin.ModelAdmin):
     list_filter = ['ativo', 'subcategoria', 'genero', ]
     list_display = ['nome', 'subcategoria', 'ativo', 'genero', ]
     inlines = [ModeloProdutoInline, ProdutoImagemInline, ]
-
     actions = [ativar_produtos, desativar_produtos, ]
 
     def save_model(self, request, obj, form, change):
@@ -60,9 +59,9 @@ class ProdutoAdmin(admin.ModelAdmin):
             return saved
 
         try:
-            tshirt=Modelo.objects.get(descricao='T-Shirt')
-            babylong=Modelo.objects.get(descricao='Baby Long')
-            infantil=Modelo.objects.get(descricao='Classic Infantil')
+            tshirt = Modelo.objects.get(descricao='T-Shirt')
+            babylong = Modelo.objects.get(descricao='Baby Long')
+            infantil = Modelo.objects.get(descricao='Classic Infantil')
 
             ModeloProduto.objects.create(produto=obj, modelo=tshirt)
             ModeloProduto.objects.create(produto=obj, modelo=babylong)
@@ -74,8 +73,8 @@ class ProdutoAdmin(admin.ModelAdmin):
 
 
 class ModeloAdmin(admin.ModelAdmin):
-    list_display=['descricao', 'descricao_cliente', 'valor', 'id', ]
-    search_fields=['descricao', ]
+    list_display = ['descricao', 'descricao_cliente', 'tipo_produto', 'valor', 'id', ]
+    search_fields = ['descricao', ]
 
 
 class TamanhoModeloAdmin(admin.ModelAdmin):
@@ -83,7 +82,7 @@ class TamanhoModeloAdmin(admin.ModelAdmin):
 
 
 class CorModeloAdmin(admin.ModelAdmin):
-    list_display=['cor', 'modelo', 'ativo']
+    list_display = ['cor', 'modelo', 'ativo']
 
 
 admin.site.register(TipoProduto, TipoProdutoAdmin)

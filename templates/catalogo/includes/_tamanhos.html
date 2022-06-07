@@ -9,23 +9,24 @@
                 for (let tamanho = 0; tamanho < tamanhos.length; tamanho++) {
                     const element = tamanhos[tamanho];
                     
-                    let elementRadio = "#" + element;
-                    let elementLabel = "#label-" + element;
+                    const elementRadio = "#" + element;
+                    const elementLabel = "#label-" + element;
         
                     $(elementRadio).hide();
-                    $(elementLabel).hide();            
-                }            
+                    $(elementLabel).hide();
+                }
             }
         }
     
         function mostrarTamanhosDoModelo(e) {
             escondeTamanhos();
+
             for (const [key, tamanhos] of Object.entries(tamanho_modelo_dict)) {
                 for (let tamanho = 0; tamanho < tamanhos.length; tamanho++) {
                     const element = tamanhos[tamanho];
                     
-                    let elementRadio = "#" + element;
-                    let elementLabel = "#label-" + element;
+                    const elementRadio = "#" + element;
+                    const elementLabel = "#label-" + element;
     
                     if (e === key) {
                         $(elementRadio).show();

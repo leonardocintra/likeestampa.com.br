@@ -14,6 +14,8 @@ def index(request):
     page_obj = __get_page_obj(request, produtos)
     tipos_produto = TipoProduto.get_tipos_produto_ativo()
 
+    request.session['tipo_produto'] = None
+
     context = {
         'tipos_produto': tipos_produto,
         'produtos': produtos,

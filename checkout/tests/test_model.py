@@ -20,6 +20,8 @@ class CarrinhoModelTest(TestCase):
 
 
 class ItemCarrinhoModelTest(TestCase):
+    fixtures = ['fixtures/catalogo/tipo_produto.json', ]
+
     def setUp(self):
         self.obj = get_fake_carrinho_com_items()
 
@@ -33,7 +35,6 @@ class ItemCarrinhoModelTest(TestCase):
 def get_fake_carrinho_com_items():
     carrinho = Carrinho.objects.create(uuid=UUID_FAKE_CARRINHO)
     produto = get_fake_produto()
-
     modelo = Modelo.objects.create(descricao='T-Shirt', valor=47.90)
     modelo_produto = ModeloProduto.objects.create(
         produto=produto, modelo=modelo)

@@ -1,19 +1,47 @@
 from django.core.paginator import Paginator
+from django.views.decorators.http import require_GET, require_http_methods
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
 from checkout.views import get_quantidade_items_carrinho
 from checkout.models import Carrinho, ItemCarrinho
-import core
 from .forms import ProdutoDetalheForm
-from .models import Cor, CorModelo, Produto, ProdutoImagem, SubCategoria, ModeloProduto, Tamanho, TamanhoModelo
+from .models import Cor, CorModelo, Modelo, Produto, ProdutoImagem, SubCategoria, ModeloProduto, Tamanho, TamanhoModelo, TipoProduto
 
 
+@require_GET
+def list_tipos_produto(request, slug):
+    """
+    Lista os produtos baseado na tipo selecionado
+    """
+
+    tipo_produto = TipoProduto.get_tipos_produto_ativo().filter(slug=slug)
+    get_object_or_404(tipo_produto, slug=slug)
+    subcategorias = SubCategoria.get_subcategorias_ativas()
+    modelos = Modelo.objects.filter(tipo_produto__in=tipo_produto)
+    modelo_produto = ModeloProduto.objects.filter(modelo__in=modelos)
+    ids_produto = []
+    for x in modelo_produto:
+        ids_produto.append(x.produto.id)
+
+    produtos = Produto.objects.filter(id__in=ids_produto)
+    page_obj = __get_page_obj(request, produtos)
+
+    request.session['tipo_produto'] = slug
+
+    context = {
+        'page_obj': page_obj,
+        'subcategorias': subcategorias,
+    }
+    return render(request, 'catalogo/list_by_categoria.html', context)
+
+
+@require_GET
 def lista_por_subcategoria(request, slug):
     """ Lista os produtos baseado na categoria selecionada """
 
     subcategorias = SubCategoria.get_subcategorias_ativas()
-    sub_categoria_selecionada = get_object_or_404(subcategorias, slug=slug)
+    get_object_or_404(subcategorias, slug=slug)
     produtos = Produto.get_produtos_ativos().filter(
         subcategoria__slug=slug)
     page_obj = __get_page_obj(request, produtos)
@@ -21,11 +49,11 @@ def lista_por_subcategoria(request, slug):
     context = {
         'page_obj': page_obj,
         'subcategorias': subcategorias,
-        'sub_categoria_selecionada': sub_categoria_selecionada,
     }
     return render(request, 'catalogo/list_by_categoria.html', context)
 
 
+@require_http_methods(["GET", "POST"])
 def produto(request, slug):
     """ Pagina de detalhes do produto """
 
@@ -38,15 +66,20 @@ def produto(request, slug):
         return redirect(reverse("checkout:carrinho"))
 
     imagens = ProdutoImagem.objects.filter(produto=produto)
-    # Adiciona no mockup a imagem principal (pelo menos a imagem 0)
 
+    # Adiciona no mockup a imagem principal (pelo menos a imagem 0)
     mockups = __get_mockups(produto, imagens)
 
-    # Busca os modelos
+    # Busca os modelos e o tipos de produto (caneca, camiseta, avental, etc)
     modelos = ModeloProduto.get_modelos_do_produto(produto)
+
     modelo_array = []
+    tipo_produto_array = []
     for m in modelos:
+        tipo_produto_array.append(m.modelo.tipo_produto.id)
         modelo_array.append(m.modelo_id)
+
+    tipo_produtos = TipoProduto.objects.filter(id__in=tipo_produto_array)
 
     """ Processo de trabalhar a cor dos modelos """
     # 1 - Pega a cor dos modelos
@@ -61,7 +94,6 @@ def produto(request, slug):
     # 3 - Filtra as cores baseado nos ids das cores do array
     cores = Cor.get_cores_ativas().filter(id__in=cores_do_modelo)
 
-
     """ Processo de trabalhar o tamanho dos modelos """
     # 1 - Pega o tamanho dos modelos
     tamanhos_modelo = TamanhoModelo.objects.filter(
@@ -75,11 +107,13 @@ def produto(request, slug):
     # 3 - Filtra os tamanhos baseado nos ids filtrados
     tamanhos = Tamanho.get_tamanhos_ativos().filter(id__in=tamanhos_do_modelo)
 
-    
     # FINALMENTE Monta uma json de tamanhos e cores para controlar a selecao do cliente na tela
     tamanho_modelo_dict = dict()
     cor_modelo_dict = dict()
+    modelo_e_tipo_produto_dict = dict()
     for m in modelos:
+        modelo_e_tipo_produto_dict.update({m.id: m.modelo.tipo_produto.id})
+
         # monta json para o tamanho
         tamanho_list = []
         for tm in tamanhos_modelo:
@@ -103,6 +137,7 @@ def produto(request, slug):
     subcategorias = SubCategoria.get_subcategorias_ativas()
 
     context = {
+        'tipo_produtos': tipo_produtos,
         'produto': produto,
         'imagens': imagens,
         'mockups': mockups,
@@ -115,6 +150,7 @@ def produto(request, slug):
         'tamanhos_modelo': tamanhos_modelo,
         'tamanho_modelo_dict': tamanho_modelo_dict,
         'modelos': modelos,
+        'modelo_e_tipo_produto_dict': modelo_e_tipo_produto_dict,
         'quantidade_item': get_quantidade_items_carrinho(request),
         'produtos_relacionados': produtos_relacionados
     }
@@ -125,7 +161,9 @@ def produto(request, slug):
 
 
 def __adicionar_item_carrinho(request, produto, modelo, cor, tamanho, quantidade):
-    """ Funcao responsavel por adicionar items no carrinho """
+    """ 
+    Funcao responsavel por adicionar items no carrinho
+    """
 
     carrinho = Carrinho()
     modelo = int(modelo)

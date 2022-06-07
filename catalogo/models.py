@@ -20,6 +20,7 @@ class TipoProduto(models.Model):
     slug = models.SlugField('Identificador', max_length=100, unique=True)
     ativo = models.BooleanField(default=True)
     icone_fontawesome = models.CharField(max_length=50, null=True)
+    imagem = models.CharField(max_length=100, null=True)
     descricao = models.TextField(default='Descrição não informada')
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
@@ -35,7 +36,7 @@ class TipoProduto(models.Model):
     @classmethod
     def get_tipos_produto_ativo(cls):
         tipos_produto = cache.get(CACHE_TIPOS_PRODUTOS)
-        if tipos_produto is not None:
+        if tipos_produto is not None and len(tipos_produto) > 0:
             return tipos_produto
         tipos_produto = cls.objects.all().exclude(ativo=False)
         cache.set(CACHE_TIPOS_PRODUTOS, tipos_produto)
@@ -72,7 +73,10 @@ class SubCategoria(models.Model):
 
 
 class Produto(models.Model):
-    """Ex: camieta sao paulo, camiseta python, etc"""
+    """
+    Ex: camiseta sao paulo, camiseta python, moleton flutter etc
+    """
+
     nome = models.CharField(max_length=100)
     seller = models.ForeignKey(Seller, on_delete=models.PROTECT, null=True)
     descricao = models.TextField('Descrição', blank=True)
@@ -126,9 +130,13 @@ class Produto(models.Model):
 
 
 class Modelo(models.Model):
-    "Modelo seria: T-Shirt, mangalonga, etc"
+    """
+    Modelo Seria: T-Shirt (camiseta), infantil (camiseta), porcelana (caneca), etc
+    """
     descricao = models.CharField(max_length=50, default='T-Shirt')
     descricao_cliente = models.CharField(max_length=50, null=True, blank=True)
+    tipo_produto = models.ForeignKey(
+        TipoProduto, on_delete=models.PROTECT, default=1)
     valor = models.DecimalField(
         'Valor', decimal_places=2, max_digits=999, default=51.90)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
@@ -273,6 +281,8 @@ class ProdutoImagem(models.Model):
         Produto, on_delete=models.CASCADE, related_name='produto_imagem')
     imagem = CloudinaryField('Mockup')
     order_exibicao = models.PositiveIntegerField(default=0)
+    tipo_produto = models.ForeignKey(
+        TipoProduto, on_delete=models.PROTECT, default=1)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
 

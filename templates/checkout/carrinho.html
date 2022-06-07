@@ -27,10 +27,19 @@
                                         <i class="bi bi-arrow-up-right-circle-fill"></i>
                                     </a>
                                 </h6>
+                                <button class="btn btn-danger btn-sm btn-excluir-spinner" type="button" disabled id="btn-excluir-spinner-{{ item.id }}" >
+                                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                    <span class="sr-only">Loading...</span>
+                                </button>
                                 <a href="{% url 'checkout:excluir_item_carrinho' item.id %}"
+                                    id="btn-excluir-{{ item.id }}"
+                                    onclick="spinnerButtonExcluirItem({{ item.id }})"
                                     class="btn btn-danger btn-sm">
                                     <i class="bi bi-trash"></i>
                                 </a>
+                                <small class="text-muted">
+                                    {{ item.modelo_produto.modelo.tipo_produto }}
+                                </small> -
                                 <small class="text-muted">
                                     Qtd: {{ item.quantidade }} |
                                     {{ item.cor }} |
@@ -116,6 +125,15 @@
 
 {% block js_footer %}
 <script>
+    $(document).ready(function () {
+        $('.btn-excluir-spinner').hide();
+    });
+
+    function spinnerButtonExcluirItem(buttonId) {
+        $('#btn-excluir-spinner-' + buttonId).show();
+        $('#btn-excluir-' + buttonId).hide();    
+    }
+
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (function () {
         'use strict'

@@ -5,6 +5,7 @@
         "fields": {
             "descricao": "T-Shirt",
             "descricao_cliente": "T-Shirt",
+            "tipo_produto": 1,
             "valor": "51.99",
             "created_at": "2022-01-25T20:12:24.035Z",
             "updated_at": "2022-01-25T20:12:24.035Z"
@@ -16,6 +17,7 @@
         "fields": {
             "descricao": "Baby Long",
             "descricao_cliente": "T-Shirt Feminina",
+            "tipo_produto": 1,
             "valor": "51.99",
             "created_at": "2022-01-25T20:12:24.041Z",
             "updated_at": "2022-01-25T20:12:24.041Z"
@@ -27,6 +29,7 @@
         "fields": {
             "descricao": "Cropped",
             "descricao_cliente": "Cropped",
+            "tipo_produto": 1,
             "valor": "51.99",
             "created_at": "2022-01-25T20:12:24.044Z",
             "updated_at": "2022-01-25T20:12:24.044Z"
@@ -38,6 +41,19 @@
         "fields": {
             "descricao": "Classic Infantil",
             "descricao_cliente": "Infantil",
+            "tipo_produto": 1,
+            "valor": "51.99",
+            "created_at": "2022-01-25T20:12:24.047Z",
+            "updated_at": "2022-01-25T20:12:24.047Z"
+        }
+    },
+    {
+        "model": "catalogo.modelo",
+        "pk": 5,
+        "fields": {
+            "descricao": "Porcelana",
+            "descricao_cliente": "Porcelana",
+            "tipo_produto": 2,
             "valor": "51.99",
             "created_at": "2022-01-25T20:12:24.047Z",
             "updated_at": "2022-01-25T20:12:24.047Z"
