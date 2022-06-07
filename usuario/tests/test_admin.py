@@ -12,7 +12,5 @@ class ClienteAdminModelTest(TestCase):
             first_name='Leonardo',
             email='leonardo@leonardo.com',
             password='123kkkuuu#')
-        
-        self.model_admin = ClienteAdmin(Cliente, admin.site)
 
- 
+        self.model_admin = ClienteAdmin(Cliente, admin.site)

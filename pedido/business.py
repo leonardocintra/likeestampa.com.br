@@ -27,8 +27,9 @@ def __create_pedido_dimona(payload, pedido_id):
     if (post.status_code == 200):
         dimona = json.loads(post.text)
     else:
-        enviar_mensagem('Pedido {0} - Com erro!'.format(str(
-            pedido_id), dimona), 'Pedido erro no dimona', str(pedido_id))
+        titulo = 'Pedido {0}'.format(str(pedido_id))
+        mensagem = 'Erro: '.format(str(dimona))
+        enviar_mensagem(mensagem=mensagem, titulo=titulo)
         dimona = {"order": "ERRO-VERIFICAR"}
 
     dimona = dimona['order']

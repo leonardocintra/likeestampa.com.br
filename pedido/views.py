@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.views.generic.detail import DetailView
 
-from checkout.models import Carrinho, ItemCarrinho
+from checkout.models import Carrinho
 from evento.models import EventoPedido
 from pagamento.models import PagamentoMercadoPago
 from services.dimona.api import get_tracking_url

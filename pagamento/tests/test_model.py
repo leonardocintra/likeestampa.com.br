@@ -14,6 +14,6 @@ class PagamentoMercadoPagoModelTest(TestCase):
 
     def test_create(self):
         self.assertTrue(PagamentoMercadoPago.objects.exists())
-    
+
     def test_str(self):
         self.assertTrue('823948asakfjaslkjfalssasa', str(self.obj))

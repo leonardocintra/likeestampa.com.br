@@ -17,14 +17,13 @@ class PedidoModelTest(TestCase):
 
 class ItemPedidoModelTest(TestCase):
     fixtures = ['fixtures/catalogo/tipo_produto.json', ]
-    
+
     def setUp(self):
         pedido = get_fake_pedido()
         produto = get_fake_produto()
         modelo = Modelo.objects.create(descricao='T-Shirt')
         modelo_produto = ModeloProduto.objects.create(
             produto=produto, modelo=modelo)
-
 
         cor = Cor.objects.create(nome='Roxo', )
         tamanho = Tamanho.objects.create(nome='G', )
@@ -39,7 +38,7 @@ class ItemPedidoModelTest(TestCase):
 
     def test_create(self):
         self.assertTrue(ItemPedido.objects.exists())
-    
+
     def test_str(self):
         self.assertEqual('Camiseta NodeJs', str(self.obj))
 
