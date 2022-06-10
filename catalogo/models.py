@@ -135,6 +135,7 @@ class Modelo(models.Model):
     """
     descricao = models.CharField(max_length=50, default='T-Shirt')
     descricao_cliente = models.CharField(max_length=50, null=True, blank=True)
+    descricao_produto = models.TextField('Descrição produto', default='SEM_INFORMACAO')
     tipo_produto = models.ForeignKey(
         TipoProduto, on_delete=models.PROTECT, default=1)
     valor = models.DecimalField(
