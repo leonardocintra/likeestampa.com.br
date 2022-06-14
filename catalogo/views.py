@@ -211,7 +211,7 @@ def __montar_dados_modelo(modelos):
 
             data.append(
                 {
-                    "modelo": m.modelo.id,
+                    "id": m.modelo.id,
                     "nome": m.modelo.descricao,
                     "cores": __cores(m),
                     "preco": float(m.modelo.valor),

@@ -14,6 +14,8 @@
     const mockups = {{ mockups|safe }};
 
     const dados_modelo = {{ dados_modelo|safe }}
+
+    console.log(dados_modelo);
     
     function mostrarMockupSelecionado(e) {
         for (const [key, value] of Object.entries(mockups)) {
@@ -22,6 +24,18 @@
                 $('.img-mockup').width(75);
             }
         }
+    }
+
+    function modeloSelecionadoNovo(modelo_slug) {
+        // cor padrao de todos os modelos seria branco
+        $('#cor-selecionada').text('Branco');
+        
+        $('#btnAddCarrinho').show();
+        $('#btnAddCarrinhoSpinner').hide();
+
+        $('#descricaoProduto').text('Ronaldinho')
+
+
     }
 
     function modeloSelecionado(element) {
@@ -63,7 +77,10 @@
                         <span class="text-decoration-line-through">R$59.90</span>
                         <span>R$ {{ produto.preco_base }}</span>
                     </div>
-                    <p class="lead">{{ produto.descricao|linebreaks }}</p>
+                    <p id="descricaoProduto" class="lead">
+                        {{ produto.descricao }}
+                    </p>
+
                     <div class="fs-5 mb-2">
                         
                         {% include 'catalogo/includes/_tipo_produto.html' %}
