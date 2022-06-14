@@ -120,7 +120,7 @@ class ProdutoViewTest(TestCase):
 
     def test_tamanhos_modelo(self):
         self.assertIsNotNone(self.response.context['tamanhos_modelo'])
-        self.assertEqual(17, len(self.response.context['tamanhos_modelo']))
+        self.assertEqual(18, len(self.response.context['tamanhos_modelo']))
 
     def test_imagens(self):
         self.assertIsNotNone(self.response.context['imagens'])
@@ -128,7 +128,7 @@ class ProdutoViewTest(TestCase):
 
     def test_tamanhos(self):
         self.assertIsNotNone(self.response.context['tamanhos'])
-        self.assertEqual(12, len(self.response.context['tamanhos']))
+        self.assertEqual(13, len(self.response.context['tamanhos']))
 
     def test_produtos_relacionados(self):
         self.assertIsNotNone(self.response.context['produtos_relacionados'])
@@ -164,3 +164,28 @@ class ProdutoViewTest(TestCase):
     def test_tipo_produto(self):
         self.assertIsNotNone(self.response.context['tipo_produtos'])
         self.assertEqual(2, len(self.response.context['tipo_produtos']))
+
+    def test_dados_modelo_context(self):
+        self.assertIsNotNone(self.response.context['dados_modelo'])
+
+    def test_dados_modelo_tipo_produto(self):
+        dados = self.response.context['dados_modelo']
+        self.assertIn("tipoProduto", dados[0])
+        self.assertIn("nome", dados[0])
+        self.assertIn("modelos", dados[0])
+        self.assertEqual(2, len(dados))
+
+    def test_dados_modelo_tamanho_nao_vazio(self):
+        dados = self.response.context['dados_modelo']
+        self.assertIn("unico", dados[0]["modelos"][0]["tamanhos"])
+
+    def test_dados_modelo_cores_nao_vazio(self):
+        dados = self.response.context['dados_modelo']
+        self.assertIn("branco", dados[0]["modelos"][0]["cores"])
+
+    def test_dados_modelo(self):
+        dados = self.response.context['dados_modelo']
+        self.assertIn("preco", dados[0]["modelos"][0])
+        self.assertIn("cores", dados[0]["modelos"][0])
+        self.assertIn("tamanhos", dados[0]["modelos"][0])
+        self.assertIn("descricaoProduto", dados[0]["modelos"][0])

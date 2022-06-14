@@ -12,6 +12,8 @@
     });
     
     const mockups = {{ mockups|safe }};
+
+    const dados_modelo = {{ dados_modelo|safe }}
     
     function mostrarMockupSelecionado(e) {
         for (const [key, value] of Object.entries(mockups)) {
