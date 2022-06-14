@@ -4,6 +4,7 @@
         "pk": 1,
         "fields": {
             "descricao": "T-Shirt",
+            "slug": "tshirt",
             "descricao_cliente": "T-Shirt",
             "tipo_produto": 1,
             "valor": "51.99",
@@ -16,6 +17,7 @@
         "pk": 2,
         "fields": {
             "descricao": "Baby Long",
+            "slug": "baby-long",
             "descricao_cliente": "T-Shirt Feminina",
             "tipo_produto": 1,
             "valor": "51.99",
@@ -28,6 +30,7 @@
         "pk": 3,
         "fields": {
             "descricao": "Cropped",
+            "slug": "cropped",
             "descricao_cliente": "Cropped",
             "tipo_produto": 1,
             "valor": "51.99",
@@ -40,6 +43,7 @@
         "pk": 4,
         "fields": {
             "descricao": "Classic Infantil",
+            "slug": "classic-infantil",
             "descricao_cliente": "Infantil",
             "tipo_produto": 1,
             "valor": "51.99",
@@ -52,6 +56,7 @@
         "pk": 5,
         "fields": {
             "descricao": "Porcelana",
+            "slug": "porcelana",
             "descricao_cliente": "Porcelana",
             "tipo_produto": 2,
             "valor": "51.99",

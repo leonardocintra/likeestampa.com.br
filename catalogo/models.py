@@ -137,7 +137,7 @@ class Modelo(models.Model):
     descricao_cliente = models.CharField(max_length=50, null=True, blank=True)
     descricao_produto = models.TextField(
         'Descrição produto', default='SEM_INFORMACAO')
-    slug = models.SlugField(max_length=100, default='informar-manualmente')
+    slug = models.SlugField(max_length=100, unique=True)
     tipo_produto = models.ForeignKey(
         TipoProduto, on_delete=models.PROTECT, default=1)
     valor = models.DecimalField(
