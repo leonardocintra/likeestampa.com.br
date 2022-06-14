@@ -42,7 +42,7 @@
     <br />
     {% for modelo in modelos %}
         {% render_field form.modelo value=modelo.id id=modelo.id type="radio" class="btn-check" %}
-        <label id="modelo-{{ modelo.id }}" class="btn btn-outline-dark btn-sm" for="{{ modelo.id }}" onclick="this.form.reset(); modeloSelecionado('{{ modelo.modelo.descricao }}');">
+        <label id="modelo-{{ modelo.id }}" class="btn btn-outline-dark btn-sm" for="{{ modelo.id }}" onclick="this.form.reset(); modeloSelecionado('{{ modelo.modelo.descricao }}'); modeloSelecionadoNovo('{{ modelo.modelo.slug }}');">
             {{ modelo.modelo.descricao_cliente }} (R$ {{ modelo.modelo.valor }} )
         </label>
     {% endfor %}

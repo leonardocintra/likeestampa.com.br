@@ -70,6 +70,7 @@ def produto(request, slug):
 
     # Busca os modelos e o tipos de produto (caneca, camiseta, avental, etc)
     modelos = ModeloProduto.get_modelos_do_produto(produto)
+    dados_modelo = __montar_dados_modelo(modelos)
 
     modelo_array = []
     tipo_produto_array = []
@@ -135,6 +136,7 @@ def produto(request, slug):
     subcategorias = SubCategoria.get_subcategorias_ativas()
 
     context = {
+        'dados_modelo': dados_modelo,
         'tipo_produtos': tipo_produtos,
         'produto': produto,
         'imagens': imagens,
@@ -156,6 +158,80 @@ def produto(request, slug):
 
 
 """  --------------- PRIVATE AREA --------------------- """
+
+
+def __montar_dados_modelo(modelos):
+    dados = []
+
+    modelo_array = []
+    tipo_produto_array = []
+    for m in modelos:
+        tipo_produto_array.append(m.modelo.tipo_produto.id)
+        modelo_array.append(m.modelo_id)
+
+    tipo_produtos = TipoProduto.objects.filter(id__in=tipo_produto_array)
+
+    def __cores(modelo: Modelo):
+        cores_modelo = CorModelo.objects.filter(
+            modelo__in=modelo_array).exclude(ativo=False)
+        cores_do_modelo = []
+        for cm in cores_modelo:
+            cores_do_modelo.append(cm.cor.id)
+        cores = Cor.get_cores_ativas().filter(id__in=cores_do_modelo)
+
+        data = []
+        for cm in cores_modelo:
+            if cm.modelo.id == modelo.modelo.id:
+                for co in cores:
+                    if co.id == cm.cor.id:
+                        data.append(co.slug)
+        return data
+    
+    def __tamanhos(modelo: Modelo):
+        tamanhos_modelo = TamanhoModelo.objects.filter(
+            modelo__in=modelo_array).exclude(ativo=False)
+        tamanhos_do_modelo = []
+        for tm in tamanhos_modelo:
+            tamanhos_do_modelo.append(tm.tamanho.id)
+        tamanhos = Tamanho.get_tamanhos_ativos().filter(id__in=tamanhos_do_modelo)
+
+        data = []
+        for tm in tamanhos_modelo:
+            if tm.modelo.id == modelo.modelo.id:
+                for ta in tamanhos:
+                    if ta.id == tm.tamanho.id:
+                        data.append(ta.slug)
+        return data
+
+    def __modelos(tipo_produto_id):
+        data = []
+        for m in modelos:
+            if tipo_produto_id != m.modelo.tipo_produto.id:
+                continue
+
+            data.append(
+                {
+                    "id": m.modelo.id,
+                    "nome": m.modelo.descricao,
+                    "cores": __cores(m),
+                    "preco": float(m.modelo.valor),
+                    "tamanhos": __tamanhos(m),
+                    "descricaoProduto": m.modelo.descricao_produto
+                }
+            )
+
+        return data
+
+    for t in tipo_produtos:
+        dados.append(
+            {
+                "tipoProduto": t.id,
+                "nome": t.nome,
+                "modelos": __modelos(t.id)
+            }
+        )
+
+    return dados
 
 
 def __adicionar_item_carrinho(request, produto, modelo, cor, tamanho, quantidade):
