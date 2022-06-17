@@ -213,6 +213,7 @@ def __montar_dados_modelo(modelos):
                 {
                     "id": m.modelo.id,
                     "nome": m.modelo.descricao,
+                    "slug": m.modelo.slug,
                     "cores": __cores(m),
                     "preco": float(m.modelo.valor),
                     "tamanhos": __tamanhos(m),

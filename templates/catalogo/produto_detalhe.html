@@ -27,8 +27,17 @@
     }
 
     function modeloSelecionadoNovo(modelo_slug) {
-        // cor padrao de todos os modelos seria branco
-        console.log(modelo_slug);
+        let descricaoProduto = "";
+
+        dados_modelo.map(d => {
+            d.modelos.map(m => {
+                if (m.slug === modelo_slug) {
+                    descricaoProduto = m.descricaoProduto;
+                }
+            });
+        });
+
+        $('#descricaoProduto').text(descricaoProduto);
 
     }
 
@@ -71,15 +80,16 @@
                         <span class="text-decoration-line-through">R$59.90</span>
                         <span>R$ {{ produto.preco_base }}</span>
                     </div>
+                    
+                    {% include 'catalogo/includes/_tipo_produto.html' %}
+
+                    {% include 'catalogo/includes/_modelos.html' %}
+                    
                     <p id="descricaoProduto" class="lead">
                         {{ produto.descricao }}
                     </p>
 
-                    <div class="fs-5 mb-2">
-                        
-                        {% include 'catalogo/includes/_tipo_produto.html' %}
-
-                        {% include 'catalogo/includes/_modelos.html' %}
+                    <div class="fs-5 mb-2">                        
 
                         {% include 'catalogo/includes/_cores.html' %}
 
