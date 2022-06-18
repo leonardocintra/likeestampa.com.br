@@ -2,7 +2,6 @@ from distutils.command.upload import upload
 from cloudinary.models import CloudinaryField
 from django.core.cache import cache
 from django.db import models
-from django.forms import CharField, ImageField
 from core.constants import CACHE_PRODUTOS_TELA_INICIAL, CACHE_TIPOS_PRODUTOS
 
 from seller.models import Seller
