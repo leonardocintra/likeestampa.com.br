@@ -1,4 +1,3 @@
-from distutils.command.upload import upload
 from cloudinary.models import CloudinaryField
 from django.core.cache import cache
 from django.db import models
