@@ -9,13 +9,12 @@
     $(document).ready(function () {
         $('.img-mockup').width(75);
         $('#btnAddCarrinhoSpinner').hide();
+        $('.div-tabela-medidas').hide();
     });
     
     const mockups = {{ mockups|safe }};
 
     const dados_modelo = {{ dados_modelo|safe }}
-
-    console.log(dados_modelo);
     
     function mostrarMockupSelecionado(e) {
         for (const [key, value] of Object.entries(mockups)) {
@@ -28,6 +27,8 @@
 
     function modeloSelecionadoNovo(modelo_slug) {
         let descricaoProduto = "";
+
+        mostrarMedidaDoModeloSelecionado(modelo_slug);
 
         dados_modelo.map(d => {
             d.modelos.map(m => {
@@ -89,14 +90,13 @@
                         {{ produto.descricao }}
                     </p>
 
-                    <div class="fs-5 mb-2">                        
+                    <div class="fs-5 mb-2">
 
                         {% include 'catalogo/includes/_cores.html' %}
 
                         {% include 'catalogo/includes/_tamanhos.html' %}
                         
                         <br />
-                        <i>Tabela de medidas no final da pagina</i>
                     </div>
                     <div class="d-flex">
                         {% if modelos %}
@@ -118,13 +118,9 @@
     </div>
 </section>
 
-{% include 'catalogo/includes/_produtos_relacionados.html' %}
+{% include 'catalogo/includes/_tabela_de_medidas.html' %}
 
-<section class="py-1">
-    <div class="container px-4 px-lg-5 mt-5 text-center">
-        <img src="{% static 'img/tabela-medidas.png' %}" class="img-thumbnail" alt="Tabela medidas">
-    </div>
-</section>
+{% include 'catalogo/includes/_produtos_relacionados.html' %}
 
 {% endblock %}
 
