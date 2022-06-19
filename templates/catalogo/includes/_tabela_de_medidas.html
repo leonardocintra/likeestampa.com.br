@@ -1,0 +1,284 @@
+{% load static %}
+
+
+<script>
+    function mostrarMedidaDoModeloSelecionado(modelo_slug) {
+        $('.tabela-medida').hide();
+        $('.div-tabela-medidas').show();
+        $('#' + modelo_slug).show();
+    }
+</script>
+
+
+<section class="py-1">
+    <div class="container px-4 px-lg-5 mt-5 text-center">
+        <div class="row">
+            <div class="col div-tabela-medidas">
+                <img id="imagem-medida-mockup" src="{% static 'img/dimona/tradicional.png' %}" alt="tabela-medida" width="270px;" />
+            </div>
+            <div class="col div-tabela-medidas">
+
+                <table class="table table-hover tabela-medida" id="ziper-unisex" >
+                    <thead>
+                        <tr>
+                            <th scope="col">Tam</th>
+                            <th scope="col">Largura (cm)</th>
+                            <th scope="col">Comprimento (cm)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">P</th>
+                            <td>46-50</td>
+                            <td>65-69</td>                    
+                        </tr>
+                        <tr>
+                            <th scope="row">M</th>
+                            <td>48-52</td>
+                            <td>67-71</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">G</th>
+                            <td>53-57</td>
+                            <td>69-73</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">GG</th>
+                            <td>56-60</td>
+                            <td>72-76</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">XGG</th>
+                            <td>59-63</td>
+                            <td>73-77</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table table-hover tabela-medida" id="canguru-unisex" >
+                    <thead>
+                        <tr>
+                            <th scope="col">Tam</th>
+                            <th scope="col">Largura (cm)</th>
+                            <th scope="col">Comprimento (cm)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">P</th>
+                            <td>46-50</td>
+                            <td>65-69</td>                    
+                        </tr>
+                        <tr>
+                            <th scope="row">M</th>
+                            <td>48-52</td>
+                            <td>67-71</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">G</th>
+                            <td>53-57</td>
+                            <td>69-73</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">GG</th>
+                            <td>56-60</td>
+                            <td>72-76</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">XGG</th>
+                            <td>59-63</td>
+                            <td>73-77</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table table-hover tabela-medida" id="blusao-unisex" >
+                    <thead>
+                        <tr>
+                            <th scope="col">Tam</th>
+                            <th scope="col">Largura (cm)</th>
+                            <th scope="col">Comprimento (cm)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">P</th>
+                            <td>46-50</td>
+                            <td>65-69</td>                    
+                        </tr>
+                        <tr>
+                            <th scope="row">M</th>
+                            <td>48-52</td>
+                            <td>67-71</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">G</th>
+                            <td>53-57</td>
+                            <td>69-73</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">GG</th>
+                            <td>56-60</td>
+                            <td>72-76</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">XGG</th>
+                            <td>59-63</td>
+                            <td>73-77</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table table-hover tabela-medida" id="cropped" >
+                    <thead>
+                        <tr>
+                            <th scope="col">Tam</th>
+                            <th scope="col">Largura (cm)</th>
+                            <th scope="col">Comprimento (cm)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">P</th>
+                            <td>46-50</td>
+                            <td>65-69</td>                    
+                        </tr>
+                        <tr>
+                            <th scope="row">M</th>
+                            <td>48-52</td>
+                            <td>67-71</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">G</th>
+                            <td>53-57</td>
+                            <td>69-73</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">GG</th>
+                            <td>56-60</td>
+                            <td>72-76</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">XGG</th>
+                            <td>59-63</td>
+                            <td>73-77</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table table-hover tabela-medida" id="classic-infantil" >
+                    <thead>
+                        <tr>
+                            <th scope="col">Tam</th>
+                            <th scope="col">Largura (cm)</th>
+                            <th scope="col">Comprimento (cm)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">P</th>
+                            <td>46-50</td>
+                            <td>65-69</td>                    
+                        </tr>
+                        <tr>
+                            <th scope="row">M</th>
+                            <td>48-52</td>
+                            <td>67-71</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">G</th>
+                            <td>53-57</td>
+                            <td>69-73</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">GG</th>
+                            <td>56-60</td>
+                            <td>72-76</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">XGG</th>
+                            <td>59-63</td>
+                            <td>73-77</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table table-hover tabela-medida" id="baby-long" >
+                    <thead>
+                        <tr>
+                            <th scope="col">Tam</th>
+                            <th scope="col">Largura (cm)</th>
+                            <th scope="col">Comprimento (cm)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">P</th>
+                            <td>38-42</td>
+                            <td>57-61</td>                    
+                        </tr>
+                        <tr>
+                            <th scope="row">M</th>
+                            <td>41-45</td>
+                            <td>60-64</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">G</th>
+                            <td>43-47</td>
+                            <td>62-66</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">GG</th>
+                            <td>45-49</td>
+                            <td>63-67</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">XGG</th>
+                            <td>N/A</td>
+                            <td>N/A</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table table-hover tabela-medida" id="tshirt" >
+                    <thead>
+                        <tr>
+                            <th scope="col">Tam</th>
+                            <th scope="col">Largura (cm)</th>
+                            <th scope="col">Comprimento (cm)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">P</th>
+                            <td>46-50</td>
+                            <td>65-69</td>                    
+                        </tr>
+                        <tr>
+                            <th scope="row">M</th>
+                            <td>48-52</td>
+                            <td>67-71</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">G</th>
+                            <td>53-57</td>
+                            <td>69-73</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">GG</th>
+                            <td>56-60</td>
+                            <td>72-76</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">XGG</th>
+                            <td>59-63</td>
+                            <td>73-77</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p> Encolhimento pós lavagem 3,50% </p>
+            </div>
+        </div>
+    </div>
+</section>
