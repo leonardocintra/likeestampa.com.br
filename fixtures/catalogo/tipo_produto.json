@@ -6,6 +6,7 @@
         "slug": "camisetas",
         "ativo": true,
         "icone_fontawesome": "camiseta",
+        "imagem": "camiseta",
         "created_at": "2022-02-28T14:58:38.492Z",
         "updated_at": "2022-02-28T14:58:38.492Z"
     }
@@ -17,6 +18,7 @@
         "slug": "canecas",
         "ativo": true,
         "icone_fontawesome": "caneca",
+        "imagem": "caneca",
         "created_at": "2022-02-28T14:58:44.009Z",
         "updated_at": "2022-02-28T14:58:44.009Z"
     }
@@ -28,6 +30,7 @@
         "slug": "moletons",
         "ativo": true,
         "icone_fontawesome": "moletons",
+        "imagem": "moletons",
         "created_at": "2022-02-28T14:58:52.750Z",
         "updated_at": "2022-02-28T14:58:52.750Z"
     }
@@ -39,6 +42,7 @@
         "slug": "bone",
         "ativo": true,
         "icone_fontawesome": "bones",
+        "imagem": "bones",
         "created_at": "2022-02-28T14:58:44.009Z",
         "updated_at": "2022-02-28T14:58:44.009Z"
     }
@@ -50,6 +54,7 @@
         "slug": "tenis",
         "ativo": false,
         "icone_fontawesome": "tenis",
+        "imagem": "tenis",
         "created_at": "2022-04-28T14:58:44.009Z",
         "updated_at": "2022-04-28T14:58:44.009Z"
     }
