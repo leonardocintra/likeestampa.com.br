@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'anymail',
+    'fontawesomefree',
 
     # LOCAL
     'core',
