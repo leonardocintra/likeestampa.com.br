@@ -93,7 +93,7 @@ class PagamentoViewTest(TestCase):
         response = self.client.get(r('pagamento:pagamento'))
         self.assertTrue(200, response.status_code)
         self.assertEqual(1, Pedido.objects.count())
-        self.assertContains(response, '/image/upload/q_auto:low/')
+        self.assertContains(response, '/image/upload/f_avif/')
 
 
 @override_settings(DEBUG=True)

@@ -3,6 +3,8 @@ from django.views.decorators.http import require_GET, require_http_methods
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
+import cloudinary
+
 from checkout.views import get_quantidade_items_carrinho
 from checkout.models import Carrinho, ItemCarrinho
 from .forms import ProdutoDetalheForm
@@ -64,6 +66,8 @@ def produto(request, slug):
         return redirect(reverse("checkout:carrinho"))
 
     imagens = ProdutoImagem.objects.filter(produto=produto)
+
+    imagem_principal_jpg = cloudinary.CloudinaryImage(str(produto.imagem_principal)).build_url(format='jpg')
 
     # Adiciona no mockup a imagem principal (pelo menos a imagem 0)
     mockups = __get_mockups(produto, imagens)
@@ -136,6 +140,7 @@ def produto(request, slug):
     subcategorias = SubCategoria.get_subcategorias_ativas()
 
     context = {
+        'imagem_principal_jpg': imagem_principal_jpg,
         'dados_modelo': dados_modelo,
         'tipo_produtos': tipo_produtos,
         'produto': produto,

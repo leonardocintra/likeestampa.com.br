@@ -1,11 +1,11 @@
 {% load cloudinary %}
 
 <div class="col-md-6 text-center">
-    {% cloudinary produto.imagem_principal fetch_format="avif" id="imagemModelo" class="card-img-top mb-5 mb-md-0" %}
+    {% cloudinary imagem_principal_jpg id="imagemModelo" class="card-img-top mb-5 mb-md-0" %}
     <div style="padding-top: 10px;">
         {% for imagem in imagens %}
             {% if forloop.first %}
-                {% cloudinary produto.imagem_principal id=imagem.id fetch_format="avif" class="rounded img-mockup" onclick="mostrarMockupSelecionado(this)" %}
+                {% cloudinary imagem_principal_jpg id=imagem.id class="rounded img-mockup" onclick="mostrarMockupSelecionado(this)" %}
             {% endif %}
             {% cloudinary imagem.imagem fetch_format="avif" id=imagem.id onclick="mostrarMockupSelecionado(this)" class="rounded img-mockup" %}
         {% endfor %}
