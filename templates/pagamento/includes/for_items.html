@@ -7,9 +7,9 @@
     <div class="row g-0">
         <div class="col-md-4">
             {% if item.cor.imagem %}
-                {% cloudinary item.cor.imagem class="img-fluid rounded-start" quality="auto:low" alt=item %}
+                {% cloudinary item.cor.imagem class="img-fluid rounded-start" fetch_format="avif" alt=item %}
             {% else %}
-                {% cloudinary item.modelo_produto.produto.imagem_principal class="img-fluid rounded-start" quality="auto:low" alt=item %}
+                {% cloudinary item.modelo_produto.produto.imagem_principal class="img-fluid rounded-start" fetch_format="avif" alt=item %}
             {% endif %}
         </div>
         <div class="col-md-8">
