@@ -14,7 +14,7 @@
         </div>
         <!-- Product image-->
         <a href="{% url 'catalogo:produto' prod.slug %}" class="stretched-link">
-            {% cloudinary prod.imagem_principal fetch_format="avif" class="card-img-top" width=270 %}
+            {% cloudinary prod.imagem_principal fetch_format="jpg" class="card-img-top" width=270 %}
         </a>
         <!-- Product details-->
         <div class="card-body">

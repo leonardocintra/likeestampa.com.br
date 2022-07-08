@@ -7,7 +7,7 @@
             {% if forloop.first %}
                 {% cloudinary imagem_principal_jpg id=imagem.id class="rounded img-mockup" onclick="mostrarMockupSelecionado(this)" %}
             {% endif %}
-            {% cloudinary imagem.imagem fetch_format="avif" id=imagem.id onclick="mostrarMockupSelecionado(this)" class="rounded img-mockup" %}
+            {% cloudinary imagem.imagem fetch_format="jpg" id=imagem.id onclick="mostrarMockupSelecionado(this)" class="rounded img-mockup" %}
         {% endfor %}
     </div>
 </div>

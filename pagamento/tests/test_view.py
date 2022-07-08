@@ -86,14 +86,14 @@ class PagamentoViewTest(TestCase):
         carrinho = Carrinho.objects.get(uuid=UUID_FAKE_CARRINHO)
         self.assertIsNotNone(carrinho.pedido)
 
-    def test_imagem_low(self):
+    def test_imagem_jpg(self):
         session = self.client.session
         session['carrinho'] = UUID_FAKE_CARRINHO
         session.save()
         response = self.client.get(r('pagamento:pagamento'))
         self.assertTrue(200, response.status_code)
         self.assertEqual(1, Pedido.objects.count())
-        self.assertContains(response, '/image/upload/f_avif/')
+        self.assertContains(response, '/image/upload/f_jpg/')
 
 
 @override_settings(DEBUG=True)
