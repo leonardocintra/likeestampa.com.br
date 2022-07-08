@@ -67,7 +67,7 @@ def produto(request, slug):
 
     imagens = ProdutoImagem.objects.filter(produto=produto)
 
-    imagem_principal_jpg = cloudinary.CloudinaryImage(str(produto.imagem_principal)).build_url(format='jpg')
+    imagem_principal_jpg = cloudinary.CloudinaryImage(str(produto.imagem_principal)).build_url(format='jpg', secure=True)
 
     # Adiciona no mockup a imagem principal (pelo menos a imagem 0)
     mockups = __get_mockups(produto, imagens)
