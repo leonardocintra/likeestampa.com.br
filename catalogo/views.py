@@ -12,6 +12,11 @@ from .models import Cor, CorModelo, Modelo, Produto, ProdutoImagem, SubCategoria
 
 
 @require_GET
+def produtos_dimona(request):
+    return render(request, 'catalogo/produtos_dimona.html')
+
+
+@require_GET
 def list_tipos_produto(request, slug):
     " Lista os produtos baseado na tipo selecionado "
 
@@ -67,7 +72,8 @@ def produto(request, slug):
 
     imagens = ProdutoImagem.objects.filter(produto=produto)
 
-    imagem_principal_jpg = cloudinary.CloudinaryImage(str(produto.imagem_principal)).build_url(format='jpg', secure=True)
+    imagem_principal_jpg = cloudinary.CloudinaryImage(
+        str(produto.imagem_principal)).build_url(format='jpg', secure=True)
 
     # Adiciona no mockup a imagem principal (pelo menos a imagem 0)
     mockups = __get_mockups(produto, imagens)
@@ -191,7 +197,7 @@ def __montar_dados_modelo(modelos):
                     if co.id == cm.cor.id:
                         data.append(co.slug)
         return data
-    
+
     def __tamanhos(modelo: Modelo):
         tamanhos_modelo = TamanhoModelo.objects.filter(
             modelo__in=modelo_array).exclude(ativo=False)
