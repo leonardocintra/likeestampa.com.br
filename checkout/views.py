@@ -4,12 +4,15 @@ from django.urls import reverse
 from services.dimona.api import get_frete
 from services.telegram.api import enviar_mensagem
 from usuario.models import Cliente, EnderecoCliente
+from sentry_sdk import capture_message
 from .forms import FreteForm
 from .models import Carrinho, ItemCarrinho
 
 
 def carrinho(request):
     cep = ''
+
+    capture_message(str(request))
 
     if request.method == 'POST':
         form = FreteForm(request.POST)
