@@ -29,6 +29,7 @@ Seu PC precisa ter instalado
 - Cloudinary (sistema de armazenamento de imagens)
 - Mercado Pago (gateway de pagamento)
 - Telegram (logs)
+- Sentry (logs e eventos)
 
 
 ### Inicio e testes unitarios

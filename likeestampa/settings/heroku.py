@@ -1,6 +1,9 @@
 import environ
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 from likeestampa.settings.base import *
+
 
 env = environ.Env()
 
@@ -56,3 +59,9 @@ CACHES = {
         'TIMEOUT': env.int('REDIS_TIMEOUT', 2000),
     }
 }
+
+# SENTRY
+sentry_sdk.init(
+    dsn=env('SENTRY_DSN'),
+    integrations=[DjangoIntegration()]
+)
