@@ -1,5 +1,3 @@
-# from django.utils.functional import cached_property
-from nis import cat
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponseRedirect
