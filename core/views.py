@@ -1,6 +1,7 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
+from sentry_sdk import capture_message
 
 from catalogo.models import Produto, SubCategoria, TipoProduto
 from checkout.views import get_quantidade_items_carrinho
@@ -37,6 +38,7 @@ def __get_produtos(request):
     produtos = Produto.get_produtos_ativos_e_tela_inicial_true()
     q = request.GET.get('q', '')
     if q:
+        capture_message('Pesquisa: ' + q, level="INFO")
         return produtos.filter(nome__icontains=q).exclude(
             ativo=False).exclude(mostrar_tela_inicial=False)
     return produtos

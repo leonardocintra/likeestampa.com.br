@@ -1,4 +1,6 @@
 from django.contrib import admin
+from sentry_sdk import capture_exception
+
 from .models import (TipoProduto, SubCategoria, Produto, ModeloProduto,
                      Modelo, Cor, Tamanho, ProdutoImagem, TamanhoModelo, CorModelo)
 
@@ -66,7 +68,8 @@ class ProdutoAdmin(admin.ModelAdmin):
             ModeloProduto.objects.create(produto=obj, modelo=tshirt)
             ModeloProduto.objects.create(produto=obj, modelo=babylong)
             ModeloProduto.objects.create(produto=obj, modelo=infantil)
-        except:
+        except Exception as e:
+            capture_exception(e)
             print('Erro no cadastro do produto')
 
         return saved
