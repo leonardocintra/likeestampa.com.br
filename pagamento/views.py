@@ -23,8 +23,8 @@ import decimal
 def _buscar_pedido_by_external_reference(external_reference):
     try:
         return Pedido.objects.get(uuid=external_reference)
-    except:
-        capture_message('[Mercado Pago] - External reference ('+ str(external_reference) +') não encontrado', level="WARN")
+    except Exception as e:
+        capture_exception(e)
         return None
 
 

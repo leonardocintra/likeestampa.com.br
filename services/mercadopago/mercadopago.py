@@ -4,7 +4,10 @@ import json
 from django.conf import settings
 from sentry_sdk import capture_exception
 
+URL = 'https://api.mercadopago.com'
+
 sdk = mercadopago.SDK(settings.MERCADO_PAGO_PRIVATE_KEY)
+
 headers = {
     'Authorization': 'Bearer ' + settings.MERCADO_PAGO_PRIVATE_KEY
 }
@@ -24,7 +27,7 @@ def __montar_payload_items(items):
     item_data = []
     for item in items:
         imagem = item.produto.imagem_principal.url
-        
+
         item_data.append({
             "id": item.produto.slug,
             "title": item.produto.nome,
@@ -93,24 +96,26 @@ def create_preference(preference_data):
 
 
 def get_payment(payment_id):
-    url = 'https://api.mercadopago.com/v1/payments/' + str(payment_id)
+    url = URL + '/v1/payments/' + str(payment_id)
     r = requests.get(url, headers=headers)
     return json.loads(r.text)
 
 
 def get_merchant_order(merchant_order_id):
-    url = 'https://api.mercadopago.com/merchant_orders/' + str(merchant_order_id)
+    url = URL + '/merchant_orders/' + str(merchant_order_id)
     r = requests.get(url, headers=headers)
     return json.loads(r.text)
 
 
 def get_preference(preference_id):
-    url = 'https://api.mercadopago.com/checkout/preferences/' + str(preference_id)
+    url = URL + '/checkout/preferences/' + str(preference_id)
     r = requests.get(url, headers=headers)
     return json.loads(r.text)
 
+
 def get_pagamento_by_external_reference(external_reference):
-    url = 'https://api.mercadopago.com/v1/payments/search?sort=date_created&criteria=desc&external_reference=' + str(external_reference)
+    url = URL + '/v1/payments/search?sort=date_created&criteria=desc&external_reference=' + \
+        str(external_reference)
     r = requests.get(url, headers=headers)
     return json.loads(r.text)
 
