@@ -5,6 +5,7 @@ from sentry_sdk import capture_message
 
 from catalogo.models import Produto, SubCategoria, TipoProduto
 from checkout.views import get_quantidade_items_carrinho
+from core.constants import LEVEL_INFO
 
 
 def index(request):
@@ -38,7 +39,7 @@ def __get_produtos(request):
     produtos = Produto.get_produtos_ativos_e_tela_inicial_true()
     q = request.GET.get('q', '')
     if q:
-        capture_message('Pesquisa: ' + q, level="INFO")
+        capture_message('Pesquisa: ' + q, level=LEVEL_INFO)
         return produtos.filter(nome__icontains=q).exclude(
             ativo=False).exclude(mostrar_tela_inicial=False)
     return produtos

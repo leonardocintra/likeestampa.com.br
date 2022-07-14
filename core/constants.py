@@ -40,3 +40,5 @@ UF = (
     ('SE', 'Sergipe'),
     ('TO', 'Tocantins'),
 )
+
+LEVEL_INFO = "info"

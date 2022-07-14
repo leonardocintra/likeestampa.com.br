@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from sentry_sdk import capture_exception, capture_message
+from core.constants import LEVEL_INFO
 
 from evento.models import criar_evento
 from checkout.models import Carrinho, ItemCarrinho
@@ -128,7 +129,7 @@ def pagamento(request):
         criar_evento(1, pedido)
 
     _create_items_pedido(pedido, items)
-    capture_message('Pedido: ' + str(pedido.id), level="INFO")
+    capture_message('Pedido: ' + str(pedido.id), level=LEVEL_INFO)
     request.session['pedido_uuid'] = str(pedido.uuid)
 
     # Monta o payload para enviar pro mercado pago
