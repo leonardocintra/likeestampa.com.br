@@ -1,5 +1,6 @@
 import json
 from random import randint
+from sentry_sdk import capture_exception
 
 from django.conf import settings
 from checkout.models import Carrinho
@@ -53,6 +54,7 @@ def _gerar_venda(pagamento_mp):
         enviar_mensagem('Pedido {0} - Dimona: {1} criado com sucesso!'.format(str(
             pagamento_mp.pedido.id), dimona), 'Pedido realizado', str(pagamento_mp.pedido.id))
     except Exception as e:
+        capture_exception(e)
         enviar_mensagem('Erro ao gerar venda: ' + str(e))
         enviar_mensagem(
             'Pedido {0} - ERRO'.format(str(pagamento_mp.pedido.id)), 'ERRO', str(pagamento_mp.pedido.id))

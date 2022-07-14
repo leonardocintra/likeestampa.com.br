@@ -12,7 +12,7 @@ from .models import Carrinho, ItemCarrinho
 def carrinho(request):
     cep = ''
 
-    capture_message(str(request))
+    capture_message(str(request), level="INFO")
 
     if request.method == 'POST':
         form = FreteForm(request.POST)

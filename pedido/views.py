@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.views.generic.detail import DetailView
+from sentry_sdk import capture_exception
 
 from checkout.models import Carrinho
 from evento.models import EventoPedido
@@ -54,7 +55,8 @@ class PedidoDetailView(LoginRequiredMixin, DetailView):
         tracking = get_tracking_url(self.object.pedido_seller)
         try:
             url_rastreio = tracking['tracking_url']
-        except:
+        except Exception as e:
+            capture_exception(e)
             enviar_mensagem('Erro ao buscar a URL de rastreio do pedido ' + str(self.object))
             url_rastreio = ''
         

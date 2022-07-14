@@ -1,6 +1,8 @@
 import requests
 import json
 from django.conf import settings
+from sentry_sdk import capture_exception
+
 from catalogo.models import SkuDimona
 from pedido.models import Pedido
 from services.telegram.api import enviar_mensagem
@@ -20,7 +22,8 @@ def get_tracking_url(pedido_dimona):
         response = requests.get(
             URL_DIMONA + '/order/' + pedido_dimona, headers=HEADERS)
         return json.loads(response.text)
-    except:
+    except Exception as e:
+        capture_exception(e)
         return {
             "tracking_url": "",
         }
@@ -31,7 +34,8 @@ def get_timeline(pedido_dimona):
         response = requests.get(URL_DIMONA + '/order/' +
                                 pedido_dimona + '/timeline', headers=HEADERS)
         return json.loads(response.text)
-    except print(0):
+    except Exception as e:
+        capture_exception(e)
         return None
 
 
