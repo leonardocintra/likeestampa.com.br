@@ -1,4 +1,5 @@
 # from django.utils.functional import cached_property
+from nis import cat
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponseRedirect
@@ -6,6 +7,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
+from sentry_sdk import capture_exception, capture_message
 
 from evento.models import criar_evento
 from checkout.models import Carrinho, ItemCarrinho
@@ -24,6 +26,7 @@ def _buscar_pedido_by_external_reference(external_reference):
     try:
         return Pedido.objects.get(uuid=external_reference)
     except:
+        capture_message('[Mercado Pago] - External reference ('+ str(external_reference) +') não encontrado', level="WARN")
         return None
 
 
@@ -109,6 +112,7 @@ def pagamento(request):
                     endereco_cliente=endereco,
             )
         except Exception as e:
+            capture_exception(e)
             pedido = None
 
     if pedido is None:
@@ -126,6 +130,7 @@ def pagamento(request):
         criar_evento(1, pedido)
 
     _create_items_pedido(pedido, items)
+    capture_message('Pedido: ' + str(pedido.id), level="INFO")
     request.session['pedido_uuid'] = str(pedido.uuid)
 
     # Monta o payload para enviar pro mercado pago
@@ -214,6 +219,7 @@ def mp_notifications(request):
                     payment['external_reference'])
             concluir_pedido(pedido, payment_id)
         except Exception as e:
+            capture_exception(e)
             enviar_mensagem('Erro ao concluir_pedido. Erro: {0}'.format(e))
             return JsonResponse({"pagamento": "ocorreu um erro no concluir-pedido."}, status=201)
 
@@ -222,6 +228,7 @@ def mp_notifications(request):
     except PagamentoMercadoPago.DoesNotExist:
         return JsonResponse({"payment": "pagamento não encontrado"}, status=200)
     except Exception as ex:
+        capture_exception(ex)
         enviar_mensagem(
             'ERRO ao receber IPN: {0} - {1}'.format(str(request), ex))
         return JsonResponse({"payment": "ocorreu um excetipon ao processar"}, status=200)

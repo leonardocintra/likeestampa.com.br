@@ -2,6 +2,7 @@ import mercadopago
 import requests
 import json
 from django.conf import settings
+from sentry_sdk import capture_exception
 
 sdk = mercadopago.SDK(settings.MERCADO_PAGO_PRIVATE_KEY)
 headers = {
@@ -120,7 +121,8 @@ def confirma_pagamento(payment_id):
         pagamento = get_payment(payment_id)
         if pagamento['status'] == 'approved':
             return True
-    except:
+    except Exception as e:
+        capture_exception(e)
         return False
 
     return False
