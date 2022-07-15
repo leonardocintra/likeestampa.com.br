@@ -41,4 +41,5 @@ UF = (
     ('TO', 'Tocantins'),
 )
 
+# Sentry LEVEL
 LEVEL_INFO = "info"

@@ -1,6 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from core.constants import LEVEL_INFO
 from services.dimona.api import get_frete
 from services.telegram.api import enviar_mensagem
 from usuario.models import Cliente, EnderecoCliente
@@ -11,8 +12,6 @@ from .models import Carrinho, ItemCarrinho
 
 def carrinho(request):
     cep = ''
-
-    capture_message(str(request), level="INFO")
 
     if request.method == 'POST':
         form = FreteForm(request.POST)
@@ -75,6 +74,7 @@ def carrinho(request):
 
 def excluir_item_carrinho(request, id):
     if not 'carrinho' in request.session:
+        capture_message('Sessions do basket id esta null ou não existe', level=LEVEL_INFO)
         return HttpResponseRedirect(redirect_to='/')
 
     uuid = request.session['carrinho']
