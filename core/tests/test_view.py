@@ -161,6 +161,9 @@ class IndexViewTest(TestCase):
         self.assertContains(response, 'fa-solid fa-mug-saucer')
         self.assertContains(response, 'fa-solid fa-mitten')
 
+    def test_tipo_produtos_com_descricao_informada(self):
+        response = self.client.get(reverse('core:index'))
+        self.assertContains(response, 'Camiseta 100% algodão feita com amor pra voce!')
 
     def test_sem_paginacao(self):
         pass

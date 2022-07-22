@@ -70,7 +70,7 @@
             {{ form.source }}
 
             <div class="row gx-4 gx-lg-5 align-items-center">
-                
+
                 {% include 'catalogo/includes/_mockup.html' %}
 
                 <div class="col-md-6">
@@ -81,11 +81,11 @@
                         <span class="text-decoration-line-through">R$59.90</span>
                         <span>R$ {{ produto.preco_base }}</span>
                     </div>
-                    
+
                     {% include 'catalogo/includes/_tipo_produto.html' %}
 
                     {% include 'catalogo/includes/_modelos.html' %}
-                    
+
                     <p id="descricaoProduto" class="lead">
                         {{ produto.descricao }}
                     </p>
@@ -95,13 +95,13 @@
                         {% include 'catalogo/includes/_cores.html' %}
 
                         {% include 'catalogo/includes/_tamanhos.html' %}
-                        
+
                         <br />
                     </div>
                     <div class="d-flex">
                         {% if modelos %}
                             {% render_field form.quantidade style="max-width: 4rem" class="form-control text-center me-2" %}
-                            
+
                             <button id="btnAddCarrinho" type="submit" class="btn btn-outline-dark flex-shrink-0" onclick="adicionarCarrinhoSpinner()">
                                 <i class="bi-cart-fill me-1"></i> Adicionar ao carrinho
                             </button>
