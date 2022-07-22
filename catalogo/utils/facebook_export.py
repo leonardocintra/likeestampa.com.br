@@ -45,7 +45,7 @@ def facebook_produtos_csv():
 
 
 def __titulo_item(nome_produto: String):
-    if nome_produto.isupper():
+    if nome_produto.replace(" ", "").strip().isupper():
         return 'Camiseta ' + nome_produto
     return nome_produto
 
