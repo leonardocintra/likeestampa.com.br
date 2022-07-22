@@ -155,6 +155,13 @@ class IndexViewTest(TestCase):
         frase = 'Nossos produtos'
         self.assertNotContains(response, frase)
 
+    def test_tipo_produtos_com_icone_fontawesome(self):
+        response = self.client.get(reverse('core:index'))
+        self.assertContains(response, 'fa-solid fa-shirt')
+        self.assertContains(response, 'fa-solid fa-mug-saucer')
+        self.assertContains(response, 'fa-solid fa-mitten')
+
+
     def test_sem_paginacao(self):
         pass
 
