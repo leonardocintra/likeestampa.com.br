@@ -236,7 +236,7 @@ class Tamanho(models.Model):
 
 
 class TamanhoModelo(models.Model):
-    """ 
+    """
         O tamanho P M G GG por exemplo nao se aplica a canecas e roupas infantis
         Nesse caso aqui serve para amarrar o tamnho de acordo com o modelo vendido
         Modelos podem ser caneca, camiseta, avental sacou ?

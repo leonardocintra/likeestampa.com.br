@@ -1,6 +1,8 @@
 from django.contrib import admin
 from sentry_sdk import capture_exception
 
+from catalogo.utils.facebook_export import facebook_produtos_csv
+
 from .models import (TipoProduto, SubCategoria, Produto, ModeloProduto,
                      Modelo, Cor, Tamanho, ProdutoImagem, TamanhoModelo, CorModelo)
 
@@ -36,6 +38,11 @@ def desativar_produtos(modeladmin, request, queryset):
     queryset.update(ativo=False)
 
 
+@admin.action(description='Download CSV Produtos')
+def download_csv(self, request, queryset):
+    return facebook_produtos_csv()
+
+
 class ProdutoImagemInline(admin.TabularInline):
     model = ProdutoImagem
 
@@ -51,7 +58,7 @@ class ProdutoAdmin(admin.ModelAdmin):
     list_filter = ['ativo', 'subcategoria', 'genero', ]
     list_display = ['nome', 'subcategoria', 'ativo', 'genero', ]
     inlines = [ModeloProdutoInline, ProdutoImagemInline, ]
-    actions = [ativar_produtos, desativar_produtos, ]
+    actions = [ativar_produtos, desativar_produtos, download_csv, ]
 
     def save_model(self, request, obj, form, change):
         saved = super().save_model(request, obj, form, change)
@@ -76,7 +83,8 @@ class ProdutoAdmin(admin.ModelAdmin):
 
 
 class ModeloAdmin(admin.ModelAdmin):
-    list_display = ['descricao', 'descricao_cliente', 'tipo_produto', 'valor', 'slug', ]
+    list_display = ['descricao', 'descricao_cliente',
+                    'tipo_produto', 'valor', 'slug', ]
     search_fields = ['descricao', ]
     prepopulated_fields = {'slug': ('descricao',)}
 
