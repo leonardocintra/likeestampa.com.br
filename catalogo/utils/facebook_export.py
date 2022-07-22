@@ -23,7 +23,7 @@ def facebook_produtos_csv():
                      'image_link',
                      'brand',
                      'additional_image_link',
-                     'fb_product_category'
+                     'fb_product_category',
                      'material'])
     imagens = ProdutoImagem.objects.all()
     produtos = Produto.get_produtos_ativos()
@@ -38,7 +38,7 @@ def facebook_produtos_csv():
                          p.imagem_principal.url,
                          'Like Estampa',
                          __imagens_adicionais(imagens, p.id),
-                         'roupas e acessórios > roupas > roupas masculinas > camisas e camisetas'
+                         'roupas e acessórios > roupas > roupas masculinas > camisas e camisetas',
                          '100% Algodão'])
 
     return response
