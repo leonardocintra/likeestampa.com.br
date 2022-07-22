@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
 <style>
     .nossoProduto {
-        font-family: "Sofia", sans-serif;icone_fontawesome
+        font-family: "Sofia", sans-serif;
     }
 </style>
 
@@ -18,11 +18,15 @@
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img src="{% imagem_tipo_produto tipo.id %}" class="img-fluid rounded-start" alt="{{ tipo.imagem }}">
+                        <img src="{% imagem_tipo_produto tipo.id %}" class="img-fluid rounded-start"
+                            alt="{{ tipo.imagem }}">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">{{ tipo }}</h5>
+                            <h5 class="card-title">
+                                <i class="fa-solid {{ tipo.icone_fontawesome }}"></i>
+                                {{ tipo }}
+                            </h5>
                             <p class="card-text">{{ tipo.descricao }}</p>
                             <a href="{% url 'catalogo:tipo_produto' tipo.slug %}" class="stretched-link"></a>
                         </div>
