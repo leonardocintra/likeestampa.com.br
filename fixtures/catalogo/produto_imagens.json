@@ -70,5 +70,29 @@
             "created_at": "2022-02-26T15:09:15.133Z",
             "updated_at": "2022-02-26T15:09:15.134Z"
         }
+    },
+    {
+        "model": "catalogo.produtoimagem",
+        "pk": 7,
+        "fields": {
+            "produto": 11,
+            "imagem": "image/upload/v1645888154/lzmbt0fqzgmanxuct3wn.png",
+            "order_exibicao": 0,
+            "tipo_produto": 1,
+            "created_at": "2022-06-26T15:09:15.133Z",
+            "updated_at": "2022-06-26T15:09:15.134Z"
+        }
+    },
+    {
+        "model": "catalogo.produtoimagem",
+        "pk": 8,
+        "fields": {
+            "produto": 11,
+            "imagem": "image/upload/v1645888154/lzmbt0fqzgmanxuct3wn.png",
+            "order_exibicao": 0,
+            "tipo_produto": 1,
+            "created_at": "2022-06-26T15:09:15.133Z",
+            "updated_at": "2022-06-26T15:09:15.134Z"
+        }
     }
 ]

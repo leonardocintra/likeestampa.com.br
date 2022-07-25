@@ -253,8 +253,8 @@ class ProdutoModelTest(TestCase):
             imagem_principal='Imagem do cloudinary',
             imagem_design='Imagem do cloudinary',
         )
-        self.assertEqual(7, Produto.objects.count())
-        self.assertEqual(6, len(Produto.get_produtos_ativos()))
+        self.assertEqual(8, Produto.objects.count())
+        self.assertEqual(7, len(Produto.get_produtos_ativos()))
         self.assertIsNotNone(cache.get('produtos'))
 
 

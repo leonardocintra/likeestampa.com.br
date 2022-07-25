@@ -36,7 +36,7 @@ class ListaPorTipoProduto(TestCase):
             self.response, 'catalogo/list_by_categoria.html')
 
     def test_somente_produtos_do_tipo_produto_selecionado_deve_aparecer(self):
-        self.assertEqual(6, len(Produto.objects.all()))
+        self.assertEqual(7, len(Produto.objects.all()))
         self.assertEqual(4, len(self.response.context['page_obj']))
 
     def test_tipo_produto_not_found(self):
@@ -70,7 +70,7 @@ class ListaPorSubCategoriaViewTest(TestCase):
         self.assertNotContains(self.response, 'Universo / Espaço')
 
     def test_somente_produtos_da_categoria(self):
-        self.assertEqual(6, len(Produto.objects.all()))
+        self.assertEqual(7, len(Produto.objects.all()))
         self.assertEqual(2, len(self.response.context['page_obj']))
 
     def test_subcategoria_not_found(self):

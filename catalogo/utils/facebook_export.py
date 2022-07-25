@@ -29,8 +29,9 @@ def facebook_produtos_csv():
     produtos = Produto.get_produtos_ativos()
 
     for p in produtos:
-        writer.writerow([p.id, p,
-                        __titulo_item(p.descricao),
+        writer.writerow([p.id,
+                        __titulo_item(p.nome),
+                        p.descricao,
                         'in stock',
                          'new',
                          '51.90 BRL',
@@ -45,8 +46,8 @@ def facebook_produtos_csv():
 
 
 def __titulo_item(nome_produto: String):
-    if nome_produto.replace(" ", "").strip().isupper():
-        return 'Camiseta ' + nome_produto
+    if nome_produto.isupper():
+        nome_produto = 'Camiseta ' + nome_produto
     return nome_produto
 
 
