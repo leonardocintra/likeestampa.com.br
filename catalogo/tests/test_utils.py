@@ -2,7 +2,6 @@ import csv
 import io
 from django.http import HttpResponse
 from django.test import TestCase
-from catalogo.models import Produto
 from catalogo.utils.facebook_export import facebook_produtos_csv
 
 fixtures_geral = [
