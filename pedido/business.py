@@ -29,7 +29,7 @@ def __create_pedido_dimona(payload, pedido_id):
         dimona = json.loads(post.text)
     else:
         titulo = 'Pedido {0}'.format(str(pedido_id))
-        mensagem = 'Erro: '.format(str(dimona))
+        mensagem = 'Erro: {0}'.format(str(dimona))
         enviar_mensagem(mensagem=mensagem, titulo=titulo)
         dimona = {"order": "ERRO-VERIFICAR"}
 

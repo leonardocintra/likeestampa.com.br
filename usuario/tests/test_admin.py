@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from usuario.models import Cliente, EnderecoCliente
+from usuario.models import Cliente
 from usuario.admin import ClienteAdmin, admin
 
 

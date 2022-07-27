@@ -1,5 +1,4 @@
 from django.test import TestCase
-from usuario.models import Cliente, EnderecoCliente
 from usuario.forms import SignupForm
 
 
