@@ -204,14 +204,15 @@ def mp_notifications(request):
             try:
                 # TODO: as vezes pode ter mais de um resuts. Entao fazer um loop para pegar sempre o ultimo
                 payment_id = datas['results'][0]['id']
-
-                Pedido.objects.filter(uuid=external_reference).update(
-                    session_ativa=False)
-                PagamentoMercadoPago.objects.filter(
-                    pedido=pedido).update(payment_id=payment_id)
             except Exception as e:
                 capture_exception(e)
                 return JsonResponse({"payment_id": "payment_id-nao-encontrado"}, status=200)
+
+            Pedido.objects.filter(uuid=external_reference).update(
+                session_ativa=False)
+            PagamentoMercadoPago.objects.filter(
+                pedido=pedido).update(payment_id=payment_id)
+
 
         payment = get_payment(payment_id)
         if payment['status'] == 404:
