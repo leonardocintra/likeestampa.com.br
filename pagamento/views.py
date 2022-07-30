@@ -1,3 +1,4 @@
+import decimal
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponseRedirect
@@ -18,7 +19,6 @@ from services.mercadopago.mercadopago import create_preference, montar_payload_p
 from services.dimona.api import get_frete
 from services.telegram.api import enviar_mensagem
 from .models import PagamentoMercadoPago
-import decimal
 
 
 def _buscar_pedido_by_external_reference(external_reference):
@@ -193,19 +193,25 @@ def mp_notifications(request):
             external_reference = merchant_order['external_reference']
             pedido = _buscar_pedido_by_external_reference(external_reference)
             if not pedido:
+                capture_message('Pedido não encontrado. External Reference: ' +
+                                str(external_reference), level=LEVEL_INFO)
                 enviar_mensagem(external_reference,
-                                'Pedido não encontrado', 'External Exchange')
+                                'Pedido não encontrado', 'External Reference')
                 return JsonResponse({"pedido": "pedido-nao-encontrado"}, status=200)
 
             datas = get_pagamento_by_external_reference(external_reference)
 
-            # TODO: as vezes pode ter mais de um resuts. Entao fazer um loog para ppegar sempre o ultimo
-            payment_id = datas['results'][0]['id']
+            try:
+                # TODO: as vezes pode ter mais de um resuts. Entao fazer um loop para pegar sempre o ultimo
+                payment_id = datas['results'][0]['id']
 
-            Pedido.objects.filter(uuid=external_reference).update(
-                session_ativa=False)
-            PagamentoMercadoPago.objects.filter(
-                pedido=pedido).update(payment_id=payment_id)
+                Pedido.objects.filter(uuid=external_reference).update(
+                    session_ativa=False)
+                PagamentoMercadoPago.objects.filter(
+                    pedido=pedido).update(payment_id=payment_id)
+            except Exception as e:
+                capture_exception(e)
+                return JsonResponse({"payment_id": "payment_id-nao-encontrado"}, status=200)
 
         payment = get_payment(payment_id)
         if payment['status'] == 404:
