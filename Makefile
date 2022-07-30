@@ -24,7 +24,7 @@ deploy-prod:
 	@heroku run python3 manage.py migrate --remote prod
 
 test:
-	@python3 manage.py test -v 2 --parallel 2
+	@python3 manage.py test -v 2 --parallel 1
 
 coverage:
 	@coverage run --source='.' manage.py test -v 2 && coverage report && coverage html

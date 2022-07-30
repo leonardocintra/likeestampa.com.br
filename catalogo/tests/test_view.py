@@ -98,7 +98,7 @@ class ProdutoViewTest(TestCase):
         self.assertEqual(200, self.response.status_code)
 
     def test_imagem_jpg(self):
-        self.assertContains(self.response, '/image/upload/f_jpg/v')
+        self.assertContains(self.response, '.jpg')
 
     def test_somente_subcategorias_ativas(self):
         subCategorias = SubCategoria.objects.all()

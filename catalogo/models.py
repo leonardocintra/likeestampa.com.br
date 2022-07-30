@@ -88,7 +88,7 @@ class Produto(models.Model):
     subcategoria = models.ForeignKey(
         SubCategoria, on_delete=models.CASCADE, related_name='produto_subcategoria')
     imagem_principal = CloudinaryField(
-        'Imagem principal', default='NAO_INFORMADO')
+        'Imagem principal', default='NAO_INFORMADO', allowed_formats=['jpg'])
     imagem_design = CloudinaryField('Imagem design', default='NAO_INFORMADO')
     genero = models.CharField(max_length=1, choices=GENERO, default='M')
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
@@ -282,7 +282,7 @@ class CorModelo(models.Model):
 class ProdutoImagem(models.Model):
     produto = models.ForeignKey(
         Produto, on_delete=models.CASCADE, related_name='produto_imagem')
-    imagem = CloudinaryField('Mockup')
+    imagem = CloudinaryField('Mockup', allowed_formats=['jpg'])
     order_exibicao = models.PositiveIntegerField(default=0)
     tipo_produto = models.ForeignKey(
         TipoProduto, on_delete=models.PROTECT, default=1)
