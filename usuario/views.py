@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.http.response import HttpResponseRedirect
 from django.views.generic.edit import UpdateView
-from checkout.views import get_quantidade_items_carrinho
+from apps.checkout.views import get_quantidade_items_carrinho
 from pedido.models import Pedido
 from evento.models import EventoPedido
 from .models import Cliente, EnderecoCliente

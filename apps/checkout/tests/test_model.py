@@ -1,5 +1,5 @@
 from django.test import TestCase
-from checkout.models import Carrinho, ItemCarrinho
+from apps.checkout.models import Carrinho, ItemCarrinho
 from apps.catalogo.models import Cor, Modelo, ModeloProduto, Tamanho
 from apps.catalogo.tests.test_model import get_fake_produto
 

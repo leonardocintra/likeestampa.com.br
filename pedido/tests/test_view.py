@@ -3,7 +3,7 @@ from django.test import TestCase, Client
 from django.test.utils import override_settings
 from pagamento.models import PagamentoMercadoPago
 
-from checkout.tests.test_model import get_fake_carrinho_com_items, UUID_FAKE_CARRINHO
+from apps.checkout.tests.test_model import get_fake_carrinho_com_items, UUID_FAKE_CARRINHO
 from pedido.tests.test_model import get_fake_pedido
 from usuario.tests.test_model import get_fake_user
 from pedido.models import Pedido

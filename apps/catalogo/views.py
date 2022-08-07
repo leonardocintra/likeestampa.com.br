@@ -3,10 +3,8 @@ from django.views.decorators.http import require_GET, require_http_methods
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
-import cloudinary
-
-from checkout.views import get_quantidade_items_carrinho
-from checkout.models import Carrinho, ItemCarrinho
+from apps.checkout.views import get_quantidade_items_carrinho
+from apps.checkout.models import Carrinho, ItemCarrinho
 from .forms import ProdutoDetalheForm
 from .models import Cor, CorModelo, Modelo, Produto, ProdutoImagem, SubCategoria, ModeloProduto, Tamanho, TamanhoModelo, TipoProduto
 

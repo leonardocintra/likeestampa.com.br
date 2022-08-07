@@ -58,7 +58,7 @@ INSTALLED_APPS = [
     # LOCAL
     'core',
     'apps.catalogo',
-    'checkout',
+    'apps.checkout',
     'evento',
     'pagamento',
     'pedido',

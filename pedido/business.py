@@ -3,7 +3,7 @@ from random import randint
 from sentry_sdk import capture_exception
 
 from django.conf import settings
-from checkout.models import Carrinho
+from apps.checkout.models import Carrinho
 from evento.models import criar_evento
 from pagamento.models import PagamentoMercadoPago
 from pedido.email import envia_email

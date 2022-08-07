@@ -2,8 +2,8 @@ import json
 from django.test import TestCase, Client
 from django.test.utils import override_settings
 from django.urls import reverse as r
-from checkout.models import Carrinho
-from checkout.tests.test_model import get_fake_carrinho_com_items, UUID_FAKE_CARRINHO
+from apps.checkout.models import Carrinho
+from apps.checkout.tests.test_model import get_fake_carrinho_com_items, UUID_FAKE_CARRINHO
 from evento.models import EventoPedido
 from pedido.models import Pedido
 from usuario.tests.test_model import get_fake_endereco, get_fake_user

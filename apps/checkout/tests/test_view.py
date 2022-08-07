@@ -1,9 +1,9 @@
 from django.test import TestCase, Client, override_settings
 from django.urls import reverse
-from checkout.models import Carrinho, ItemCarrinho
+from apps.checkout.models import Carrinho, ItemCarrinho
 
-from checkout.tests.test_model import UUID_FAKE_CARRINHO, get_fake_carrinho_com_items
-from checkout.forms import FreteForm
+from apps.checkout.tests.test_model import UUID_FAKE_CARRINHO, get_fake_carrinho_com_items
+from apps.checkout.forms import FreteForm
 
 
 @override_settings(DEBUG=True)

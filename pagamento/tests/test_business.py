@@ -1,6 +1,6 @@
 from django.test import TestCase, override_settings
-from checkout.models import Carrinho
-from checkout.tests.test_model import UUID_FAKE_CARRINHO, get_fake_carrinho_com_items
+from apps.checkout.models import Carrinho
+from apps.checkout.tests.test_model import UUID_FAKE_CARRINHO, get_fake_carrinho_com_items
 from pagamento.models import PagamentoMercadoPago
 
 from pedido.business import concluir_pedido

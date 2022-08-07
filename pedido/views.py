@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 from django.views.generic.detail import DetailView
 from sentry_sdk import capture_exception
 
-from checkout.models import Carrinho
+from apps.checkout.models import Carrinho
 from evento.models import EventoPedido
 from pagamento.models import PagamentoMercadoPago
 from services.dimona.api import get_tracking_url
