@@ -5,7 +5,7 @@ from django.views.generic.detail import DetailView
 from sentry_sdk import capture_exception
 
 from apps.checkout.models import Carrinho
-from evento.models import EventoPedido
+from apps.evento.models import EventoPedido
 from pagamento.models import PagamentoMercadoPago
 from services.dimona.api import get_tracking_url
 from services.telegram.api import enviar_mensagem

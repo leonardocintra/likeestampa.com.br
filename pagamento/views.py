@@ -9,7 +9,7 @@ from django.views.decorators.http import require_POST
 from sentry_sdk import capture_exception, capture_message
 from core.constants import LEVEL_INFO
 
-from evento.models import criar_evento
+from apps.evento.models import criar_evento
 from apps.checkout.models import Carrinho, ItemCarrinho
 from pagamento.business import atualizar_pagamento_mp
 from pedido.business import concluir_pedido

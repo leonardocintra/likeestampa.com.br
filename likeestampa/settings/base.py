@@ -59,7 +59,7 @@ INSTALLED_APPS = [
     'core',
     'apps.catalogo',
     'apps.checkout',
-    'evento',
+    'apps.evento',
     'pagamento',
     'pedido',
     'seller',

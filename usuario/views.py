@@ -5,7 +5,7 @@ from django.http.response import HttpResponseRedirect
 from django.views.generic.edit import UpdateView
 from apps.checkout.views import get_quantidade_items_carrinho
 from pedido.models import Pedido
-from evento.models import EventoPedido
+from apps.evento.models import EventoPedido
 from .models import Cliente, EnderecoCliente
 
 
