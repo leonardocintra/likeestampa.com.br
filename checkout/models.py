@@ -1,6 +1,6 @@
 import uuid
 from django.db import models
-from catalogo.models import Cor, Produto, ModeloProduto, Tamanho
+from apps.catalogo.models import Cor, Produto, ModeloProduto, Tamanho
 from pedido.models import Pedido
 
 

@@ -2,7 +2,7 @@ import csv
 from tokenize import String
 from django.http import HttpResponse
 
-from catalogo.models import Produto, ProdutoImagem
+from apps.catalogo.models import Produto, ProdutoImagem
 
 
 def facebook_produtos_csv():

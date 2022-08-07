@@ -1,7 +1,7 @@
 from django.test import TestCase
 from checkout.models import Carrinho, ItemCarrinho
-from catalogo.models import Cor, Modelo, ModeloProduto, Tamanho
-from catalogo.tests.test_model import get_fake_produto
+from apps.catalogo.models import Cor, Modelo, ModeloProduto, Tamanho
+from apps.catalogo.tests.test_model import get_fake_produto
 
 UUID_FAKE_CARRINHO = 'f2ce90d6-422b-45d6-8345-a31d223d75d0'
 

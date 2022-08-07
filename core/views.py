@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views.generic.base import TemplateView
 from sentry_sdk import capture_message
 
-from catalogo.models import Produto, SubCategoria, TipoProduto
+from apps.catalogo.models import Produto, SubCategoria, TipoProduto
 from checkout.views import get_quantidade_items_carrinho
 from core.constants import LEVEL_INFO
 

@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.shortcuts import resolve_url as r
 from django.urls import reverse
-from catalogo.models import Produto, SubCategoria, TipoProduto
+from apps.catalogo.models import Produto, SubCategoria, TipoProduto
 
 fixtures_geral = [
     'fixtures/seller/seller.json',

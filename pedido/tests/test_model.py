@@ -2,9 +2,9 @@ from django.test import TestCase
 from usuario.models import Cliente
 from pedido.models import Pedido, ItemPedido
 
-from catalogo.tests.test_model import get_fake_produto
+from apps.catalogo.tests.test_model import get_fake_produto
 from usuario.tests.test_model import get_fake_endereco, get_fake_user
-from catalogo.models import Cor, Modelo, ModeloProduto, Tamanho
+from apps.catalogo.models import Cor, Modelo, ModeloProduto, Tamanho
 
 
 class PedidoModelTest(TestCase):

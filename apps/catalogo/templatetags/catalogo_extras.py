@@ -1,6 +1,6 @@
 from django import template
 from django.templatetags.static import static
-from catalogo.models import TipoProduto
+from apps.catalogo.models import TipoProduto
 
 register = template.Library()
 

@@ -2,7 +2,7 @@ from django.core.cache import cache
 from django.test import TestCase, Client
 from django.shortcuts import resolve_url as r
 from django.urls import reverse
-from catalogo.models import Produto, SubCategoria, TipoProduto
+from apps.catalogo.models import Produto, SubCategoria, TipoProduto
 from core.constants import CACHE_PRODUTOS_TELA_INICIAL, CACHE_TIPOS_PRODUTOS
 
 

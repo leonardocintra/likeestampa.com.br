@@ -1,7 +1,7 @@
 import uuid
 from django.contrib.auth.models import User
 from django.db import models
-from catalogo.models import Cor, ModeloProduto, Produto, Tamanho
+from apps.catalogo.models import Cor, ModeloProduto, Produto, Tamanho
 from usuario.models import EnderecoCliente
 
 

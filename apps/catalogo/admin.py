@@ -1,7 +1,7 @@
 from django.contrib import admin
 from sentry_sdk import capture_exception
 
-from catalogo.utils.facebook_export import facebook_produtos_csv
+from apps.catalogo.utils.facebook_export import facebook_produtos_csv
 
 from .models import (TipoProduto, SubCategoria, Produto, ModeloProduto,
                      Modelo, Cor, Tamanho, ProdutoImagem, TamanhoModelo, CorModelo)

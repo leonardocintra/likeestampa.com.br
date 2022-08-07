@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.core.cache import cache
 from django.test import TestCase
-from catalogo.models import (TipoProduto, ModeloProduto, Produto, ProdutoImagem,
+from apps.catalogo.models import (TipoProduto, ModeloProduto, Produto, ProdutoImagem,
                              SubCategoria, Modelo, SkuDimona, Cor, Tamanho, TamanhoModelo, CorModelo)
 from django.db import IntegrityError
 
