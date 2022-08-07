@@ -12,9 +12,14 @@
         $('.div-tabela-medidas').hide();
     });
 
-    const mockups = {{ mockups| safe }};
+    const currencyBr = Intl.NumberFormat('pt-BR', {
+        style: "currency",
+        currency: "BRL",
+    });
 
+    const mockups = {{ mockups| safe }};
     const dados_modelo = {{ dados_modelo| safe }}
+    let tipo_produto = 1;
 
     function mostrarMockupSelecionado(e) {
         for (const [key, value] of Object.entries(mockups)) {
@@ -26,11 +31,6 @@
     }
 
     function modeloSelecionadoNovo(modelo_slug) {
-        const currencyBr = Intl.NumberFormat('pt-BR', {
-            style: "currency",
-            currency: "BRL",
-        });
-
         let descricaoProduto = "";
         let precoProduto = 51.9;
 
@@ -47,7 +47,6 @@
 
         $('#descricaoProduto').text(descricaoProduto);
         $('#precoProduto').text(currencyBr.format(precoProduto));
-
     }
 
     function modeloSelecionado(element) {
