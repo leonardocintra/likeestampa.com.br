@@ -1,10 +1,10 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from core.constants import LEVEL_INFO
+from apps.core.constants import LEVEL_INFO
 from services.dimona.api import get_frete
 from services.telegram.api import enviar_mensagem
-from usuario.models import Cliente, EnderecoCliente
+from apps.usuario.models import Cliente, EnderecoCliente
 from sentry_sdk import capture_message
 from .forms import FreteForm
 from .models import Carrinho, ItemCarrinho

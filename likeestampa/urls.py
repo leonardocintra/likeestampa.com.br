@@ -17,12 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('', include('core.urls')),
+    path('', include('apps.core.urls')),
     path('catalogo/', include('apps.catalogo.urls')),
     path('checkout/', include('apps.checkout.urls')),
-    path('pagamento/', include('pagamento.urls')),
-    path('pedido/', include('pedido.urls')),
-    path('usuario/', include('usuario.urls')),
+    path('pagamento/', include('apps.pagamento.urls')),
+    path('pedido/', include('apps.pedido.urls')),
+    path('usuario/', include('apps.usuario.urls')),
     path('admin/', admin.site.urls),
     # django-allauth
     path('accounts/', include('allauth.urls')),

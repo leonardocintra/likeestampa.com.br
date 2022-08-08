@@ -5,7 +5,7 @@ from apps.catalogo.models import (TipoProduto, ModeloProduto, Produto, ProdutoIm
                              SubCategoria, Modelo, SkuDimona, Cor, Tamanho, TamanhoModelo, CorModelo)
 from django.db import IntegrityError
 
-from core.constants import CACHE_TIPOS_PRODUTOS
+from apps.core.constants import CACHE_TIPOS_PRODUTOS
 
 
 class TamanhoModelTest(TestCase):

@@ -1,7 +1,7 @@
 import uuid
 from django.db import models
 from apps.catalogo.models import Cor, Produto, ModeloProduto, Tamanho
-from pedido.models import Pedido
+from apps.pedido.models import Pedido
 
 
 class Carrinho(models.Model):

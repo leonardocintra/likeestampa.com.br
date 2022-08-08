@@ -1,9 +1,9 @@
 from cloudinary.models import CloudinaryField
 from django.core.cache import cache
 from django.db import models
-from core.constants import CACHE_PRODUTOS_TELA_INICIAL, CACHE_TIPOS_PRODUTOS
+from apps.core.constants import CACHE_PRODUTOS_TELA_INICIAL, CACHE_TIPOS_PRODUTOS
 
-from seller.models import Seller
+from apps.seller.models import Seller
 
 
 GENERO = (

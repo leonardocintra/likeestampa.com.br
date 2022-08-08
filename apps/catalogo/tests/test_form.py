@@ -1,5 +1,5 @@
 from django.test import TestCase
-from catalogo.forms import ProdutoDetalheForm
+from apps.catalogo.forms import ProdutoDetalheForm
 
 
 class ProdutoDetalheFormTest(TestCase):

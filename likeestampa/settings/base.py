@@ -56,15 +56,14 @@ INSTALLED_APPS = [
     'fontawesomefree',
 
     # LOCAL
-    'core',
+    'apps.core',
     'apps.catalogo',
     'apps.checkout',
     'apps.evento',
-    'pagamento',
-    'pedido',
-    'seller',
-    'usuario',
-    'cupom',
+    'apps.pagamento',
+    'apps.pedido',
+    'apps.seller',
+    'apps.usuario',
 ]
 
 MIDDLEWARE = [
@@ -202,7 +201,7 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
-ACCOUNT_SIGNUP_FORM_CLASS = 'usuario.forms.SignupForm'
+ACCOUNT_SIGNUP_FORM_CLASS = 'apps.usuario.forms.SignupForm'
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False

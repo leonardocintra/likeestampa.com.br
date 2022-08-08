@@ -1,9 +1,9 @@
 from datetime import datetime
 from django.utils import timezone
 from django.test import TestCase
-from evento.models import Status, EventoPedido, criar_evento
-from pedido.models import Pedido
-from pedido.tests.test_model import get_fake_pedido
+from apps.evento.models import Status, EventoPedido, criar_evento
+from apps.pedido.models import Pedido
+from apps.pedido.tests.test_model import get_fake_pedido
 
 
 class StatusModelTest(TestCase):

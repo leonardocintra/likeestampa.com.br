@@ -1,5 +1,5 @@
 from django.db import models
-from pedido.models import Pedido
+from apps.pedido.models import Pedido
 
 
 class Status(models.Model):
