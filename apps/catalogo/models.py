@@ -121,6 +121,7 @@ class Produto(models.Model):
 
     @classmethod
     def get_produtos_ativos_e_tela_inicial_true(cls):
+        cache.delete(CACHE_PRODUTOS_TELA_INICIAL)
         produtos = cache.get(CACHE_PRODUTOS_TELA_INICIAL)
         if produtos is None or len(produtos) < 1:
             produtos = cls.objects.all().exclude(
