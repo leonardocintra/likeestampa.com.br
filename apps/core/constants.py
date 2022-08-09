@@ -43,3 +43,7 @@ UF = (
 
 # Sentry LEVEL
 LEVEL_INFO = "info"
+
+# Models - descricao label (help_text)
+TXT_CRIADO_EM = 'Criado em'
+TXT_MODIFICADO_EM = 'Modificado em'

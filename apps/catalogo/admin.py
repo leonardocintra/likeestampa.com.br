@@ -75,11 +75,11 @@ class ProdutoAdmin(admin.ModelAdmin):
             ModeloProduto.objects.create(produto=obj, modelo=tshirt)
             ModeloProduto.objects.create(produto=obj, modelo=babylong)
             ModeloProduto.objects.create(produto=obj, modelo=infantil)
+            return saved
+
         except Exception as e:
             capture_exception(e)
             print('Erro no cadastro do produto')
-
-        return saved
 
 
 class ModeloAdmin(admin.ModelAdmin):

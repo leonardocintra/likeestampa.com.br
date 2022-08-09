@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from apps.catalogo.models import Cor, Produto, ModeloProduto, Tamanho
+from apps.core.constants import TXT_MODIFICADO_EM, TXT_CRIADO_EM
 from apps.pedido.models import Pedido
 
 
@@ -9,8 +10,8 @@ class Carrinho(models.Model):
     abandonado = models.BooleanField(default=True)
     finalizado = models.BooleanField(default=False)
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, null=True)
-    created_at = models.DateTimeField('Criado em', auto_now_add=True)
-    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField(TXT_CRIADO_EM, auto_now_add=True)
+    updated_at = models.DateTimeField(TXT_MODIFICADO_EM, auto_now=True)
 
     class Meta:
         db_table = 'carrinho'
@@ -28,8 +29,8 @@ class ItemCarrinho(models.Model):
     tamanho = models.ForeignKey(Tamanho, on_delete=models.SET_NULL, null=True, related_name="item_tamanho")
     modelo_produto = models.ForeignKey(ModeloProduto, on_delete=models.SET_NULL, null=True, related_name="item_modelo")
     quantidade = models.PositiveIntegerField(default=1)
-    created_at = models.DateTimeField('Criado em', auto_now_add=True)
-    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField(TXT_CRIADO_EM, auto_now_add=True)
+    updated_at = models.DateTimeField(TXT_MODIFICADO_EM, auto_now=True)
 
 
     class Meta:

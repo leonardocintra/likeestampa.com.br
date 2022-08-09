@@ -1,5 +1,5 @@
 from django.db import models
-from apps.core.constants import TIPO_FRETE
+from apps.core.constants import TIPO_FRETE, TXT_CRIADO_EM, TXT_MODIFICADO_EM
 
 
 class Seller(models.Model):
@@ -20,8 +20,8 @@ class Seller(models.Model):
     frete_url = models.CharField(max_length=200, null=True, blank=True)
     frete_token = models.TextField(null=True, blank=True)
     observacao = models.TextField(null=True, blank=True)
-    created_at = models.DateTimeField('Criado em', auto_now_add=True)
-    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField(TXT_CRIADO_EM, auto_now_add=True)
+    updated_at = models.DateTimeField(TXT_MODIFICADO_EM, auto_now=True)
 
     class Meta:
         db_table = 'seller'

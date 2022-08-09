@@ -2,6 +2,7 @@ import uuid
 from django.contrib.auth.models import User
 from django.db import models
 from apps.catalogo.models import Cor, ModeloProduto, Produto, Tamanho
+from apps.core.constants import TXT_CRIADO_EM, TXT_MODIFICADO_EM
 from apps.usuario.models import EnderecoCliente
 
 
@@ -29,8 +30,8 @@ class Pedido(models.Model):
     pedido_seller = models.CharField(max_length=100, null=True)
     request_seller = models.JSONField('Request feito no seller', null=True, blank=True)
     session_ativa = models.BooleanField(default=False)
-    created_at = models.DateTimeField('Criado em', auto_now_add=True)
-    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField(TXT_CRIADO_EM, auto_now_add=True)
+    updated_at = models.DateTimeField(TXT_MODIFICADO_EM, auto_now=True)
 
     class Meta:
         db_table = 'pedido'
@@ -50,8 +51,8 @@ class ItemPedido(models.Model):
     modelo_produto = models.ForeignKey(
         ModeloProduto, on_delete=models.PROTECT, related_name='item_pedido_modelo')
     quantidade = models.PositiveIntegerField(default=1)
-    created_at = models.DateTimeField('Criado em', auto_now_add=True)
-    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField(TXT_CRIADO_EM, auto_now_add=True)
+    updated_at = models.DateTimeField(TXT_MODIFICADO_EM, auto_now=True)
 
     class Meta:
         db_table = 'item_pedido'

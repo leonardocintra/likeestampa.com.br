@@ -1,12 +1,13 @@
 from django.db import models
+from apps.core.constants import TXT_CRIADO_EM, TXT_MODIFICADO_EM
 from apps.pedido.models import Pedido
 
 
 class Status(models.Model):
     descricao = models.CharField(max_length=100)
     visivel_cliente = models.BooleanField(default=True)
-    created_at = models.DateTimeField('Criado em', auto_now_add=True)
-    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField(TXT_CRIADO_EM, auto_now_add=True)
+    updated_at = models.DateTimeField(TXT_MODIFICADO_EM, auto_now=True)
 
     class Meta:
         db_table = 'status'
@@ -25,8 +26,8 @@ class EventoPedido(models.Model):
     evento_atual = models.BooleanField(default=False)
     origem = models.SlugField(max_length=100, default='likeestampa')
     data_ocorrencia = models.DateTimeField(null=True, blank=True)
-    created_at = models.DateTimeField('Criado em', auto_now_add=True)
-    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField(TXT_CRIADO_EM, auto_now_add=True)
+    updated_at = models.DateTimeField(TXT_MODIFICADO_EM, auto_now=True)
 
     class Meta:
         db_table = 'evento_pedido'

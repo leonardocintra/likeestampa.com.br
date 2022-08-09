@@ -4,13 +4,15 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from localflavor.br.models import BRCPFField, BRStateField, BRPostalCodeField
 
+from apps.core.constants import TXT_CRIADO_EM, TXT_MODIFICADO_EM
+
 
 class Cliente(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     cpf = BRCPFField("CPF", unique=True)
     telefone = models.CharField(max_length=15, null=True)
-    created_at = models.DateTimeField('Criado em', auto_now_add=True)
-    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField(TXT_CRIADO_EM, auto_now_add=True)
+    updated_at = models.DateTimeField(TXT_MODIFICADO_EM, auto_now=True)
 
     class Meta:
         db_table = 'cliente'
@@ -31,8 +33,8 @@ class EnderecoCliente(models.Model):
     referencia = models.CharField(max_length=100)
     pais = models.CharField(max_length=60, default='Brasil')
     ativo = models.BooleanField(default=True)
-    created_at = models.DateTimeField('Criado em', auto_now_add=True)
-    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField(TXT_CRIADO_EM, auto_now_add=True)
+    updated_at = models.DateTimeField(TXT_MODIFICADO_EM, auto_now=True)
 
     class Meta:
         db_table = 'endereco_cliente'

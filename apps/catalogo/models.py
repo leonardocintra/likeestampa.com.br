@@ -1,7 +1,7 @@
 from cloudinary.models import CloudinaryField
 from django.core.cache import cache
 from django.db import models
-from apps.core.constants import CACHE_PRODUTOS_TELA_INICIAL, CACHE_TIPOS_PRODUTOS
+from apps.core.constants import CACHE_PRODUTOS_TELA_INICIAL, CACHE_TIPOS_PRODUTOS, TXT_CRIADO_EM, TXT_MODIFICADO_EM
 
 from apps.seller.models import Seller
 
@@ -22,8 +22,8 @@ class TipoProduto(models.Model):
     icone_fontawesome = models.CharField(max_length=50, null=True)
     imagem = models.CharField(max_length=100, null=True)
     descricao = models.TextField(default='Descrição não informada')
-    created_at = models.DateTimeField('Criado em', auto_now_add=True)
-    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField(TXT_CRIADO_EM, auto_now_add=True)
+    updated_at = models.DateTimeField(TXT_MODIFICADO_EM, auto_now=True)
 
     class Meta:
         db_table = 'tipo_produto'
@@ -49,8 +49,8 @@ class SubCategoria(models.Model):
     slug = models.SlugField('Identificador', max_length=100, unique=True)
     icone_fontawesome = models.CharField(max_length=100, null=True)
     ativo = models.BooleanField(default=False)
-    created_at = models.DateTimeField('Criado em', auto_now_add=True)
-    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField(TXT_CRIADO_EM, auto_now_add=True)
+    updated_at = models.DateTimeField(TXT_MODIFICADO_EM, auto_now=True)
 
     class Meta:
         db_table = 'subcategoria'
@@ -91,8 +91,8 @@ class Produto(models.Model):
         'Imagem principal', default='NAO_INFORMADO', allowed_formats=['jpg'])
     imagem_design = CloudinaryField('Imagem design', default='NAO_INFORMADO')
     genero = models.CharField(max_length=1, choices=GENERO, default='M')
-    created_at = models.DateTimeField('Criado em', auto_now_add=True)
-    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField(TXT_CRIADO_EM, auto_now_add=True)
+    updated_at = models.DateTimeField(TXT_MODIFICADO_EM, auto_now=True)
 
     class Meta:
         db_table = 'produto'
@@ -142,8 +142,8 @@ class Modelo(models.Model):
         TipoProduto, on_delete=models.PROTECT, default=1)
     valor = models.DecimalField(
         'Valor', decimal_places=2, max_digits=999, default=51.90)
-    created_at = models.DateTimeField('Criado em', auto_now_add=True)
-    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField(TXT_CRIADO_EM, auto_now_add=True)
+    updated_at = models.DateTimeField(TXT_MODIFICADO_EM, auto_now=True)
 
     class Meta:
         db_table = 'modelo'
@@ -159,8 +159,8 @@ class ModeloProduto(models.Model):
     produto = models.ForeignKey(
         Produto, on_delete=models.CASCADE, related_name='modelo_produto')
     modelo = models.ForeignKey(Modelo, on_delete=models.PROTECT, default=1)
-    created_at = models.DateTimeField('Criado em', auto_now_add=True)
-    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField(TXT_CRIADO_EM, auto_now_add=True)
+    updated_at = models.DateTimeField(TXT_MODIFICADO_EM, auto_now=True)
 
     class Meta:
         db_table = 'modelo_produto'
@@ -187,8 +187,8 @@ class Cor(models.Model):
     slug = models.SlugField(max_length=60, unique=True)
     ativo = models.BooleanField(default=True)
     order_exibicao = models.PositiveIntegerField(default=0)
-    created_at = models.DateTimeField('Criado em', auto_now_add=True)
-    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField(TXT_CRIADO_EM, auto_now_add=True)
+    updated_at = models.DateTimeField(TXT_MODIFICADO_EM, auto_now=True)
 
     class Meta:
         db_table = 'cor'
@@ -214,8 +214,8 @@ class Tamanho(models.Model):
     ativo = models.BooleanField(default=True)
     order_exibicao = models.PositiveIntegerField(default=0)
     descricao_cliente = models.CharField(max_length=20, null=True, blank=True)
-    created_at = models.DateTimeField('Criado em', auto_now_add=True)
-    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField(TXT_CRIADO_EM, auto_now_add=True)
+    updated_at = models.DateTimeField(TXT_MODIFICADO_EM, auto_now=True)
 
     class Meta:
         db_table = 'tamanho'
@@ -244,8 +244,8 @@ class TamanhoModelo(models.Model):
     tamanho = models.ForeignKey(Tamanho, on_delete=models.CASCADE)
     modelo = models.ForeignKey(Modelo, on_delete=models.CASCADE)
     ativo = models.BooleanField(default=True)
-    created_at = models.DateTimeField('Criado em', auto_now_add=True)
-    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField(TXT_CRIADO_EM, auto_now_add=True)
+    updated_at = models.DateTimeField(TXT_MODIFICADO_EM, auto_now=True)
 
     class Meta:
         db_table = 'tamanho_modelo'
@@ -266,8 +266,8 @@ class CorModelo(models.Model):
     cor = models.ForeignKey(Cor, on_delete=models.CASCADE)
     modelo = models.ForeignKey(Modelo, on_delete=models.CASCADE)
     ativo = models.BooleanField(default=True)
-    created_at = models.DateTimeField('Criado em', auto_now_add=True)
-    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField(TXT_CRIADO_EM, auto_now_add=True)
+    updated_at = models.DateTimeField(TXT_MODIFICADO_EM, auto_now=True)
 
     class Meta:
         db_table = 'cor_modelo'
@@ -286,8 +286,8 @@ class ProdutoImagem(models.Model):
     order_exibicao = models.PositiveIntegerField(default=0)
     tipo_produto = models.ForeignKey(
         TipoProduto, on_delete=models.PROTECT, default=1)
-    created_at = models.DateTimeField('Criado em', auto_now_add=True)
-    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField(TXT_CRIADO_EM, auto_now_add=True)
+    updated_at = models.DateTimeField(TXT_MODIFICADO_EM, auto_now=True)
 
     class Meta:
         db_table = 'produto_imagem'
@@ -305,8 +305,8 @@ class SkuDimona(models.Model):
     estilo = models.ForeignKey(Modelo, on_delete=models.CASCADE)
     cor = models.CharField(max_length=50)
     tamanho = models.CharField(max_length=50)
-    created_at = models.DateTimeField('Criado em', auto_now_add=True)
-    updated_at = models.DateTimeField('Modificado em', auto_now=True)
+    created_at = models.DateTimeField(TXT_CRIADO_EM, auto_now_add=True)
+    updated_at = models.DateTimeField(TXT_MODIFICADO_EM, auto_now=True)
 
     class Meta:
         db_table = 'sku_dimona'
