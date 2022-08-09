@@ -1,5 +1,6 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render
+from django.views.decorators.http import require_GET
 from django.views.generic.base import TemplateView
 from sentry_sdk import capture_message
 
@@ -8,6 +9,7 @@ from apps.checkout.views import get_quantidade_items_carrinho
 from apps.core.constants import LEVEL_INFO
 
 
+@require_GET
 def index(request):
     # Pagina inicial - Listagem dos ultimos lançamentos
     produtos = __get_produtos(request=request)
