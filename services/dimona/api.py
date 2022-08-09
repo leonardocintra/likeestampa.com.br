@@ -3,8 +3,8 @@ import json
 from django.conf import settings
 from sentry_sdk import capture_exception
 
-from catalogo.models import SkuDimona
-from pedido.models import Pedido
+from apps.catalogo.models import SkuDimona
+from apps.pedido.models import Pedido
 from services.telegram.api import enviar_mensagem
 
 
