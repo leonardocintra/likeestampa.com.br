@@ -1,0 +1,95 @@
+[
+    {
+        "tipoProduto": 2,
+        "nome": "Canecas",
+        "modelos": [
+            {
+                "id": 5,
+                "nome": "Porcelana",
+                "slug": "porcelana",
+                "cores": [
+                    "branco"
+                ],
+                "preco": 41.9,
+                "tamanhos": [
+                    "unico"
+                ],
+                "descricaoProduto": "Caneca branca, em porcelana. Tamanho único."
+            }
+        ]
+    },
+    {
+        "tipoProduto": 1,
+        "nome": "Camisetas",
+        "modelos": [
+            {
+                "id": 4,
+                "nome": "Classic Infantil",
+                "slug": "classic-infantil",
+                "cores": [
+                    "branco",
+                    "amarelo-canario",
+                    "azul-royal",
+                    "preto"
+                ],
+                "preco": 41.99,
+                "tamanhos": [
+                    "tamanho-2",
+                    "tamanho-4",
+                    "tamanho-6",
+                    "tamanho-8",
+                    "tamanho-10",
+                    "tamanho-12",
+                    "tamanho-14"
+                ],
+                "descricaoProduto": "Qualidade excelente para as crianças\r\n\r\nMalha penteada fio 30.1, 100% algodão. Costura\r\nreforçada com acabamento em viés ombro a ombro,\r\ngola em ribana. Modelagem mais ajustada ao corpo.\r\n\r\nPercentual de encolhimento apos lavagem 3.5%"
+            },
+            {
+                "id": 2,
+                "nome": "Baby Long",
+                "slug": "baby-long",
+                "cores": [
+                    "branco",
+                    "amarelo-canario",
+                    "laranja",
+                    "rosa-pink",
+                    "azul-turquesa"
+                ],
+                "preco": 51.99,
+                "tamanhos": [
+                    "p",
+                    "m",
+                    "g",
+                    "gg",
+                    "xgg"
+                ],
+                "descricaoProduto": "Excelente qualidade!\r\n\r\nMalha penteada fio 30.1, 100% algodão. Costura\r\nreforçada com acabamento em viés ombro a ombro,\r\ngola em ribana. Modelagem mais ajustada ao corpo.\r\n\r\nPercentual de encolhimento apos lavagem 3.5%"
+            },
+            {
+                "id": 1,
+                "nome": "T-Shirt",
+                "slug": "tshirt",
+                "cores": [
+                    "branco",
+                    "amarelo-canario",
+                    "laranja",
+                    "rosa-pink",
+                    "azul-royal",
+                    "azul-marinho",
+                    "preto",
+                    "cinza-mescla",
+                    "cinza-chumbo"
+                ],
+                "preco": 51.99,
+                "tamanhos": [
+                    "p",
+                    "m",
+                    "g",
+                    "gg",
+                    "xgg"
+                ],
+                "descricaoProduto": "Excelente qualidade!\r\n\r\nMalha penteada fio 30.1, 100% algodão. Costura\r\nreforçada com acabamento em viés ombro a ombro,\r\ngola em ribana. Modelagem com caimento reto.\r\n\r\nPercentual de encolhimento pós lavagem 3,50%"
+            }
+        ]
+    }
+]
