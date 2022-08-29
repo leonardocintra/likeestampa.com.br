@@ -61,7 +61,8 @@ CACHES = {
 }
 
 # SENTRY
-sentry_sdk.init(
-    dsn=env('SENTRY_DSN'),
-    integrations=[DjangoIntegration()]
-)
+if not DEBUG:
+    sentry_sdk.init(
+        dsn=env('SENTRY_DSN'),
+        integrations=[DjangoIntegration()]
+    )
