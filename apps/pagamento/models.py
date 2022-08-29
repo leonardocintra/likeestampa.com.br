@@ -1,4 +1,5 @@
 from django.db import models
+from apps.core.constants import TXT_CRIADO_EM
 from apps.pedido.models import Pedido
 
 
@@ -18,7 +19,7 @@ class PagamentoMercadoPago(models.Model):
     mercado_pago_status_detail = models.CharField(
         max_length=250, blank=True, default='accredited')
     payment_id = models.PositiveBigIntegerField(null=True)
-    created_at = models.DateTimeField('Criado em', auto_now_add=True)
+    created_at = models.DateTimeField(TXT_CRIADO_EM, auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
     class Meta:
@@ -37,7 +38,7 @@ class PagamentoMercadoPagoWebhook(models.Model):
     webhook_request = models.JSONField()
     webhook_data_recebimento = models.DateTimeField(auto_now=True)
     webhook_executado = models.BooleanField(default=False)
-    created_at = models.DateTimeField('Criado em', auto_now_add=True)
+    created_at = models.DateTimeField(TXT_CRIADO_EM, auto_now_add=True)
     updated_at = models.DateTimeField('Modificado em', auto_now=True)
 
     class Meta:
