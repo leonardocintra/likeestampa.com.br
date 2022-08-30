@@ -1,3 +1,4 @@
 -r base.txt
+psycopg-binary
 psycopg2
 django-heroku
