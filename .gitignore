@@ -8,6 +8,7 @@ __pycache__/
 
 # Like Estampa Project
 staticfiles/
+static/
 
 # Distribution / packaging
 .Python
