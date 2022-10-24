@@ -56,15 +56,6 @@ DIMONA_KEY = env("DIMONA_KEY")
 # TELEGRAM
 TELEGRAM_TOKEN = env("TELEGRAM_TOKEN")
 
-# REDIS
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': env('REDIS_URL'),
-        'TIMEOUT': env.int('REDIS_TIMEOUT', 2000),
-    }
-}
-
 # SENTRY
 if not DEBUG:
     sentry_sdk.init(
