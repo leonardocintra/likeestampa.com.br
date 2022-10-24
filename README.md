@@ -23,7 +23,6 @@ Seu PC precisa ter instalado
 - Django
 - Docker
 - Postgress
-- Redis / Heroku-Redis
 - Bootstrap
 - Mailgun (sistema de emails)
 - Cloudinary (sistema de armazenamento de imagens)

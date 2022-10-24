@@ -1,11 +1,6 @@
 version: '3.5'
 
 services:
-  redis:
-    image: redis
-    command: redis-server --requirepass likeEstampa
-    ports:
-      - "6379:6379"
   postgres:
     container_name: likeestampa_container
     image: postgres
