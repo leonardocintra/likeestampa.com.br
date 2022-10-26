@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             name='Pagamento',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('valor_pedido', models.DecimalField(decimal_places=2, max_digits=999)),
+                ('valor_pedido', models.DecimalField(decimal_places=2, max_digits=10)),
                 ('parcelas', models.IntegerField(default=1)),
                 ('metodo_pagamento', models.CharField(max_length=250)),
                 ('email', models.EmailField(max_length=254)),

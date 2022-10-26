@@ -17,12 +17,21 @@ Seu PC precisa ter instalado
 - make (unix OS)
 - virtualenv
 
+#### Banco de dados MySQL
+Caso estiver no Ubuntu
+```
+$ sudo apt-get install default-libmysqlclient-dev build-essential
+```
+
+Outros sitemas operacionais consulte: https://pypi.org/project/mysqlclient/
+
+
 
 ### Tecnologias
 - Python3
 - Django
 - Docker
-- Postgress
+- MySQL Database
 - Bootstrap
 - Mailgun (sistema de emails)
 - Cloudinary (sistema de armazenamento de imagens)

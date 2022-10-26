@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
             name='Items',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('quantidade', models.DecimalField(decimal_places=2, default=1, max_digits=999)),
+                ('quantidade', models.DecimalField(decimal_places=2, default=1, max_digits=10)),
                 ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Criado em')),
                 ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Modificado em')),
                 ('carrinho', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='checkout.carrinho')),

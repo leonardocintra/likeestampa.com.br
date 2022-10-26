@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='pedido',
             name='valor_total',
-            field=models.DecimalField(decimal_places=2, max_digits=999, null=True),
+            field=models.DecimalField(decimal_places=2, max_digits=10, null=True),
         ),
     ]

@@ -84,7 +84,7 @@ class Produto(models.Model):
     ativo = models.BooleanField(default=False)
     mostrar_tela_inicial = models.BooleanField(default=True)
     preco_base = models.DecimalField(
-        'Preço base', decimal_places=2, max_digits=999, default=51.90)
+        'Preço base', decimal_places=2, max_digits=10, default=51.90)
     subcategoria = models.ForeignKey(
         SubCategoria, on_delete=models.CASCADE, related_name='produto_subcategoria')
     imagem_principal = CloudinaryField(
@@ -141,7 +141,7 @@ class Modelo(models.Model):
     tipo_produto = models.ForeignKey(
         TipoProduto, on_delete=models.PROTECT, default=1)
     valor = models.DecimalField(
-        'Valor', decimal_places=2, max_digits=999, default=51.90)
+        'Valor', decimal_places=2, max_digits=10, default=51.90)
     created_at = models.DateTimeField(TXT_CRIADO_EM, auto_now_add=True)
     updated_at = models.DateTimeField(TXT_MODIFICADO_EM, auto_now=True)
 

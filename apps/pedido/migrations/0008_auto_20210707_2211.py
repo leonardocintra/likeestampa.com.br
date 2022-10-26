@@ -13,16 +13,16 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='pedido',
             name='valor_frete',
-            field=models.DecimalField(decimal_places=2, default=1, max_digits=999),
+            field=models.DecimalField(decimal_places=2, default=1, max_digits=10),
         ),
         migrations.AddField(
             model_name='pedido',
             name='valor_items',
-            field=models.DecimalField(decimal_places=2, default=1, max_digits=999),
+            field=models.DecimalField(decimal_places=2, default=1, max_digits=10),
         ),
         migrations.AlterField(
             model_name='pedido',
             name='valor_total',
-            field=models.DecimalField(decimal_places=2, default=1, max_digits=999),
+            field=models.DecimalField(decimal_places=2, default=1, max_digits=10),
         ),
     ]
