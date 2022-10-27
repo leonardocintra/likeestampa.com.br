@@ -1,12 +1,15 @@
+import environ
+env = environ.Env()
+
 from likeestampa.settings.base import *
 
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "likeestampa",
-        "USER": "likeestampa",
-        "PASSWORD": "likeestampa",
-        "HOST": "0.0.0.0",
-        "PORT": 3306
+        'NAME': os.environ["MYSQL_NAME"],
+        'USER': os.environ["MYSQL_USER"],
+        'PASSWORD': os.environ["MYSQL_PASSWORD"],
+        'HOST': os.environ["MYSQL_HOST"],
+        'PORT': os.environ["MYSQL_PORT"],
     }
 }
