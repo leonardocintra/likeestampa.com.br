@@ -1,11 +1,7 @@
-import environ
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
 from likeestampa.settings.base import *
-
-
-env = environ.Env()
 
 DEBUG = env.bool("DEBUG", False)
 

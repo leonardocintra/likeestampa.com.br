@@ -25,6 +25,20 @@ $ sudo apt-get install default-libmysqlclient-dev build-essential
 
 Outros sitemas operacionais consulte: https://pypi.org/project/mysqlclient/
 
+### Passo a passo primeira vez
+
+Windows: TODO
+
+Linux:
+
+```
+$ virtualenv env -p python3
+$ source env/bin/activate
+$ pip install -r requirements/requirements.development.txt
+$ sudo docker-compose up -d
+$ make run
+```
+
 
 
 ### Tecnologias

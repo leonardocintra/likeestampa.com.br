@@ -10,12 +10,16 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import environ
 import os
 import dj_database_url
 from pathlib import Path
 
+env = environ.Env()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
+env.read_env(os.path.join(BASE_DIR, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -100,19 +104,19 @@ WSGI_APPLICATION = 'likeestampa.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "likeestampa",
-#         "USER": "likeestampa",
-#         "PASSWORD": "likeestampa",
-#         "HOST": "localhost",
-#         "PORT": 5432,
-#     }
-# }
+DATABASES = {
+    "default": {
+        "ENGINE": env("DATABASE_ENGINE"),
+        'NAME': env("MYSQL_NAME"),
+        'USER': env("MYSQL_USER"),
+        'PASSWORD': env("MYSQL_PASSWORD"),
+        'HOST': env("MYSQL_HOST"),
+        'PORT': env("MYSQL_PORT"),
+    }
+}
 
-# # Update database configuration with $DATABASE_URL.
-# DATABASES['default'].update(dj_database_url.config())
+# Update database configuration with $DATABASE_URL.
+DATABASES['default'].update(dj_database_url.config())
 
 # CACHE
 CACHES = {
