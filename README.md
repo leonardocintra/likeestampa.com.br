@@ -132,6 +132,11 @@ Exemplo
 python3 manage.py dumpdata catalogo.categoria > categoria.json
 ```
 
+Recuperar em produção
+```
+heroku run python3 manage.py dumpdata > db.json --indent 2 --exclude account --exclude pedido --exclude evento --exclude usuario --exclude auth --exclude contenttypes --exclude sessions --exclude pagamento --remote prod
+```
+
 ## Historia
 ### Fundado em 20/04/2021
 
