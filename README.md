@@ -45,7 +45,7 @@ $ make run
 - Python3
 - Django
 - Docker
-- MySQL Database
+- MySQL Database (prod) | Postgres (dev)
 - Bootstrap
 - Mailgun (sistema de emails)
 - Cloudinary (sistema de armazenamento de imagens)
@@ -134,7 +134,7 @@ python3 manage.py dumpdata catalogo.categoria > categoria.json
 
 Recuperar em produção
 ```
-heroku run python3 manage.py dumpdata > db.json --indent 2 --exclude account --exclude pedido --exclude evento --exclude usuario --exclude auth --exclude contenttypes --exclude sessions --exclude pagamento --remote prod
+$ python3 manage.py dumpdata > db.json --indent 2 --exclude account --exclude pedido --exclude evento --exclude usuario --exclude auth --exclude contenttypes --exclude sessions --exclude pagamento --remote prod
 ```
 
 ## Historia
