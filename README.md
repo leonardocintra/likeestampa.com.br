@@ -17,12 +17,35 @@ Seu PC precisa ter instalado
 - make (unix OS)
 - virtualenv
 
+#### Banco de dados MySQL
+Caso estiver no Ubuntu
+```
+$ sudo apt-get install default-libmysqlclient-dev build-essential
+```
+
+Outros sitemas operacionais consulte: https://pypi.org/project/mysqlclient/
+
+### Passo a passo primeira vez
+
+Windows: TODO
+
+Linux:
+
+```
+$ virtualenv env -p python3
+$ source env/bin/activate
+$ pip install -r requirements/requirements.development.txt
+$ sudo docker-compose up -d
+$ make run
+```
+
+
 
 ### Tecnologias
 - Python3
 - Django
 - Docker
-- Postgress
+- MySQL Database
 - Bootstrap
 - Mailgun (sistema de emails)
 - Cloudinary (sistema de armazenamento de imagens)
@@ -107,6 +130,11 @@ Para debugar o teste, basta comentar ele e incluir "test" :D
 Exemplo
 ```
 python3 manage.py dumpdata catalogo.categoria > categoria.json
+```
+
+Recuperar em produção
+```
+heroku run python3 manage.py dumpdata > db.json --indent 2 --exclude account --exclude pedido --exclude evento --exclude usuario --exclude auth --exclude contenttypes --exclude sessions --exclude pagamento --remote prod
 ```
 
 ## Historia

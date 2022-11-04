@@ -18,11 +18,11 @@ class Pedido(models.Model):
     endereco_cliente = models.ForeignKey(EnderecoCliente, on_delete=models.PROTECT, null=True)
     pago = models.BooleanField(default=False)
     valor_total = models.DecimalField(
-        max_digits=999, decimal_places=2, default=1)
+        max_digits=10, decimal_places=2, default=1)
     valor_items = models.DecimalField(
-        max_digits=999, decimal_places=2, default=1)
+        max_digits=10, decimal_places=2, default=1)
     valor_frete = models.DecimalField(
-        max_digits=999, decimal_places=2, default=1)
+        max_digits=10, decimal_places=2, default=1)
     gateway_pagamento = models.CharField(
         choices=GATEWAY_PAGAMENTO, default='mercado_pago', max_length=20)
     frete_id = models.PositiveIntegerField(default=0)

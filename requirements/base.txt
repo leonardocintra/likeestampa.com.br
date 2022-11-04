@@ -6,13 +6,14 @@ django==4.1.2
 django-allauth==0.50.0
 django-anymail==8.4
 django-crispy-forms==1.12.0
-django-environ==0.4.5
+django-environ==0.9.0
 django-localflavor==3.1
 django-mathfilters==1.0.0
 django-widget-tweaks==1.4.8
 fontawesomefree==6.1.1
 gunicorn==20.1.0
 mercadopago==2.0.10
+mysqlclient==2.1.1
 pytest==6.2.4
 python-telegram-bot==13.7
 requests==2.25.1

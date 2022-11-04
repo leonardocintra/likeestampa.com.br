@@ -10,12 +10,16 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import environ
 import os
 import dj_database_url
 from pathlib import Path
 
+env = environ.Env()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
+env.read_env(os.path.join(BASE_DIR, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -102,12 +106,12 @@ WSGI_APPLICATION = 'likeestampa.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "likeestampa",
-        "USER": "likeestampa",
-        "PASSWORD": "likeestampa",
-        "HOST": "localhost",
-        "PORT": 5432,
+        "ENGINE": env("DATABASE_ENGINE"),
+        'NAME': env("MYSQL_NAME"),
+        'USER': env("MYSQL_USER"),
+        'PASSWORD': env("MYSQL_PASSWORD"),
+        'HOST': env("MYSQL_HOST"),
+        'PORT': env("MYSQL_PORT"),
     }
 }
 
@@ -175,9 +179,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CLOUDINARY CONFIGS
 CLOUDINARY = {
-    'cloud_name': os.environ.get('CLOUDINARY_CLOUD_NAME', 'leonardocintra'),
-    'api_key': os.environ.get('CLOUDINARY_API_KEY', '182946961533113'),
-    'api_secret': os.environ.get('CLOUDINARY_API_SECRET', 'LAIVTLNHtG5x-TTdUmHgaE3CnsM'),
+    'cloud_name': env('CLOUDINARY_CLOUD_NAME'),
+    'api_key': env('CLOUDINARY_API_KEY'),
+    'api_secret': env('CLOUDINARY_API_SECRET'),
 }
 
 

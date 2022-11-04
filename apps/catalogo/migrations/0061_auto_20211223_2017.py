@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='modelo',
             name='valor',
-            field=models.DecimalField(decimal_places=2, default=51.9, max_digits=999, verbose_name='Valor'),
+            field=models.DecimalField(decimal_places=2, default=51.9, max_digits=10, verbose_name='Valor'),
         ),
         migrations.DeleteModel(
             name='PrecoModelo',

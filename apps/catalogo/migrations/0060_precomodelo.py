@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
             name='PrecoModelo',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('valor', models.DecimalField(decimal_places=2, default=51.9, max_digits=999, verbose_name='Valor')),
+                ('valor', models.DecimalField(decimal_places=2, default=51.9, max_digits=10, verbose_name='Valor')),
                 ('ativo', models.BooleanField(default=True)),
                 ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Criado em')),
                 ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Modificado em')),
