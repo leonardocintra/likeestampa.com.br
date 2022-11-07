@@ -115,8 +115,6 @@ DATABASES = {
     }
 }
 
-# Update database configuration with $DATABASE_URL.
-DATABASES['default'].update(dj_database_url.config())
 
 # CACHE
 CACHES = {
