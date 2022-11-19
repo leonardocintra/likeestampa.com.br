@@ -114,14 +114,6 @@ class ProdutoViewTest(TestCase):
         self.assertIsNotNone(self.response.context['modelos'])
         self.assertEqual(4, len(self.response.context['modelos']))
 
-    def test_tamanho_modelo_dict(self):
-        self.assertIsNotNone(self.response.context['tamanho_modelo_dict'])
-        self.assertEqual(4, len(self.response.context['tamanho_modelo_dict']))
-
-    def test_tamanhos_modelo(self):
-        self.assertIsNotNone(self.response.context['tamanhos_modelo'])
-        self.assertEqual(18, len(self.response.context['tamanhos_modelo']))
-
     def test_imagens(self):
         self.assertIsNotNone(self.response.context['imagens'])
         self.assertEqual(3, len(self.response.context['imagens']))
@@ -177,11 +169,25 @@ class ProdutoViewTest(TestCase):
 
     def test_dados_modelo_tamanho_nao_vazio(self):
         dados = self.response.context['dados_modelo']
-        self.assertIn("unico", dados[0]["modelos"][0]["tamanhos"])
+        self.assertTrue(len(dados) > 0)
+
+    def test_dados_modelo_tamanho_contem_objetos_necessarios(self):
+        dados = self.response.context['dados_modelo']
+        self.assertEqual("unico", dados[0]
+                         ["modelos"][0]["tamanhos"][0]["slug"])
+        self.assertEqual(
+            "Único", dados[0]["modelos"][0]["tamanhos"][0]["descricao"])
 
     def test_dados_modelo_cores_nao_vazio(self):
         dados = self.response.context['dados_modelo']
-        self.assertIn("branco", dados[0]["modelos"][0]["cores"])
+        self.assertTrue(len(dados) > 0)
+
+    def test_dados_modelo_cores_contem_objetos_necessarios(self):
+        dados = self.response.context['dados_modelo']
+        self.assertEqual("branco", dados[0]["modelos"][0]["cores"][0]["slug"])
+        self.assertEqual("Branco", dados[0]["modelos"][0]["cores"][0]["nome"])
+        self.assertEqual("#FFFFFF", dados[0]
+                         ["modelos"][0]["cores"][0]["valor"])
 
     def test_dados_modelo(self):
         dados = self.response.context['dados_modelo']

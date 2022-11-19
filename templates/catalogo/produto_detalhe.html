@@ -6,15 +6,30 @@
 
 {% block js_header %}
 <script>
+    function botaoCarrinhoSpinnerShowHide(showBtnAddCarinho, showBtnSpinner) {
+        $('#btnAddCarrinho').hide();
+        $('#btnAddCarrinhoSpinner').hide();
+
+        if (showBtnAddCarinho) {
+            $('#btnAddCarrinho').show();
+        }
+
+        if (showBtnSpinner) {
+            $('#btnAddCarrinhoSpinner').show();
+        }
+    }
+
     $(document).ready(function () {
         $('.img-mockup').width(75);
-        $('#btnAddCarrinhoSpinner').hide();
+        botaoCarrinhoSpinnerShowHide(false, false);
         $('.div-tabela-medidas').hide();
     });
 
     const mockups = {{ mockups| safe }};
 
-    const dados_modelo = {{ dados_modelo| safe }}
+    const dados_modelo = {{ dados_modelo| safe }};
+    
+    let tamanhos = [];
 
     function mostrarMockupSelecionado(e) {
         for (const [key, value] of Object.entries(mockups)) {
@@ -30,9 +45,9 @@
             style: "currency",
             currency: "BRL",
         });
-
+        
         let descricaoProduto = "";
-        let precoProduto = 51.9;
+        let precoProduto = 54.9;
 
         mostrarMedidaDoModeloSelecionado(modelo_slug);
 
@@ -41,9 +56,12 @@
                 if (m.slug === modelo_slug) {
                     descricaoProduto = m.descricaoProduto;
                     precoProduto = m.preco;
+                    tamanhos = m.tamanhos;
                 }
             });
         });
+
+        mostrarTamanhosDoModelo(modelo_slug);
 
         $('#descricaoProduto').text(descricaoProduto);
         $('#precoProduto').text(currencyBr.format(precoProduto));
@@ -54,12 +72,8 @@
         // cor padrao de todos os modelos seria branco
         $('#cor-selecionada').text('Branco');
 
-        $('#btnAddCarrinho').show();
-        $('#btnAddCarrinhoSpinner').hide();
+        botaoCarrinhoSpinnerShowHide(true, false)
 
-
-        // catalogo/includes/_tamanhos.html
-        mostrarTamanhosDoModelo(element);
         // catalogo/includes/_cores.html
         mostrarCoresDoModelo(element);
     }
@@ -138,9 +152,6 @@
     escondeTamanhos();
     escondeCores();
 
-    function adicionarCarrinhoSpinner() {
-        $('#btnAddCarrinho').hide();
-        $('#btnAddCarrinhoSpinner').show();
-    }
+    botaoCarrinhoSpinnerShowHide(false, true)
 </script>
 {% endblock %}
