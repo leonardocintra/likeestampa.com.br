@@ -29,10 +29,9 @@ env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = 'django-insecure-_&%r6!rao1dl+&wkye8f9bu#mc7gr#^$bn!6^@_5oiurzgkw1j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool("DEBUG", False)
+DEBUG = env.bool("DEBUG")
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
-
 
 # Application definition
 
@@ -216,7 +215,7 @@ LOGIN_REDIRECT_URL = "/usuario/"
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # DIMONA
-DIMONA_KEY = 'f9bb66ac5feaebd7b97206198866a898'
+DIMONA_KEY = env("DIMONA_KEY")
 
 # TELEGRAM
-TELEGRAM_TOKEN = '508627689:AAEuLPKs-EhrjrYGnz60bnYNZqakf6HJxc0'
+TELEGRAM_TOKEN = env("TELEGRAM_TOKEN")
