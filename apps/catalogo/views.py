@@ -142,7 +142,6 @@ def produto(request, slug):
         'cores_modelo': cores_modelo,
         'cor_modelo_dict': cor_modelo_dict,
         'tamanhos': tamanhos,
-        'tamanhos_modelo': tamanhos_modelo,
         'modelos': modelos,
         'modelo_e_tipo_produto_dict': modelo_e_tipo_produto_dict,
         'quantidade_item': get_quantidade_items_carrinho(request),

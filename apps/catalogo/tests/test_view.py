@@ -114,10 +114,6 @@ class ProdutoViewTest(TestCase):
         self.assertIsNotNone(self.response.context['modelos'])
         self.assertEqual(4, len(self.response.context['modelos']))
 
-    def test_tamanhos_modelo(self):
-        self.assertIsNotNone(self.response.context['tamanhos_modelo'])
-        self.assertEqual(18, len(self.response.context['tamanhos_modelo']))
-
     def test_imagens(self):
         self.assertIsNotNone(self.response.context['imagens'])
         self.assertEqual(3, len(self.response.context['imagens']))
