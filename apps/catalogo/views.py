@@ -111,22 +111,12 @@ def produto(request, slug):
     # 3 - Filtra os tamanhos baseado nos ids filtrados
     tamanhos = Tamanho.get_tamanhos_ativos().filter(id__in=tamanhos_do_modelo)
 
-    # FINALMENTE Monta uma json de tamanhos e cores para controlar a selecao do cliente na tela
-    tamanho_modelo_dict = dict()
+    # FINALMENTE Monta uma json de cores para controlar a selecao do cliente na tela
     cor_modelo_dict = dict()
     modelo_e_tipo_produto_dict = dict()
     for m in modelos:
         modelo_e_tipo_produto_dict.update({m.id: m.modelo.tipo_produto.id})
-
-        # monta json para o tamanho
-        tamanho_list = []
-        for tm in tamanhos_modelo:
-            if tm.modelo.id == m.modelo.id:
-                for ta in tamanhos:
-                    if ta.id == tm.tamanho.id:
-                        tamanho_list.append(ta.slug)
-        tamanho_modelo_dict.update({m.modelo.descricao: tamanho_list})
-
+        
         # monta o json para a cor
         cor_list = []
         for cm in cores_modelo:
@@ -153,7 +143,6 @@ def produto(request, slug):
         'cor_modelo_dict': cor_modelo_dict,
         'tamanhos': tamanhos,
         'tamanhos_modelo': tamanhos_modelo,
-        'tamanho_modelo_dict': tamanho_modelo_dict,
         'modelos': modelos,
         'modelo_e_tipo_produto_dict': modelo_e_tipo_produto_dict,
         'quantidade_item': get_quantidade_items_carrinho(request),
@@ -189,7 +178,11 @@ def __montar_dados_modelo(modelos):
             if cm.modelo.id == modelo.modelo.id:
                 for co in cores:
                     if co.id == cm.cor.id:
-                        data.append(co.slug)
+                        data.append({
+                            "slug": co.slug,
+                            "nome": co.nome,
+                            "valor": co.valor
+                        })
         return data
 
     def __tamanhos(modelo: Modelo):
@@ -205,7 +198,10 @@ def __montar_dados_modelo(modelos):
             if tm.modelo.id == modelo.modelo.id:
                 for ta in tamanhos:
                     if ta.id == tm.tamanho.id:
-                        data.append(ta.slug)
+                        data.append({
+                            "slug": ta.slug,
+                            "descricao": ta.descricao_cliente
+                        })
         return data
 
     def __modelos(tipo_produto_id):

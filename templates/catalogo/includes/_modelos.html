@@ -2,7 +2,7 @@
 
 <script>
 
-    const modelo_e_tipo_produto_dict = {{ modelo_e_tipo_produto_dict|safe }};
+    const modelo_e_tipo_produto_dict = {{ modelo_e_tipo_produto_dict| safe }};
 
     function escondeModelos() {
 
@@ -41,9 +41,10 @@
     Modelo:
     <br />
     {% for modelo in modelos %}
-        {% render_field form.modelo value=modelo.id id=modelo.id type="radio" class="btn-check" %}
-        <label id="modelo-{{ modelo.id }}" class="btn btn-outline-dark btn-sm" for="{{ modelo.id }}" onclick="this.form.reset(); modeloSelecionado('{{ modelo.modelo.descricao }}'); modeloSelecionadoNovo('{{ modelo.modelo.slug }}');">
-            {{ modelo.modelo.descricao_cliente }} (R$ {{ modelo.modelo.valor }} )
-        </label>
+    {% render_field form.modelo value=modelo.id id=modelo.id type="radio" class="btn-check" %}
+    <label id="modelo-{{ modelo.id }}" class="btn btn-outline-dark btn-sm" for="{{ modelo.id }}"
+        onclick="this.form.reset(); modeloSelecionado('{{ modelo.modelo.descricao }}'); modeloSelecionadoNovo('{{ modelo.modelo.slug }}');">
+        {{ modelo.modelo.descricao_cliente }} (R$ {{ modelo.modelo.valor }} )
+    </label>
     {% endfor %}
 </div>
