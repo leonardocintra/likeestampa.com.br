@@ -116,7 +116,7 @@ def produto(request, slug):
     modelo_e_tipo_produto_dict = dict()
     for m in modelos:
         modelo_e_tipo_produto_dict.update({m.id: m.modelo.tipo_produto.id})
-        
+
         # monta o json para a cor
         cor_list = []
         for cm in cores_modelo:
