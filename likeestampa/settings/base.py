@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import environ
 import os
-import dj_database_url
 from pathlib import Path
 
 env = environ.Env()
