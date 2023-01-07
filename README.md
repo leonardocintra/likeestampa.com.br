@@ -4,7 +4,8 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a91ffbdc0959414b836d5ff2848edf73)](https://app.codacy.com/gh/leonardocintra/likeestampa?utm_source=github.com&utm_medium=referral&utm_content=leonardocintra/likeestampa&utm_campaign=Badge_Grade_Settings)
 
 
-[![CircleCI](https://circleci.com/gh/leonardocintra/likeestampa/tree/main.svg?style=svg)](https://circleci.com/gh/leonardocintra/likeestampa/tree/main)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/leonardocintra/likeestampa.com.br/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/leonardocintra/likeestampa.com.br/tree/main)
+
 
 Like Estampa - Store T-Shirts - Camisetas
 
