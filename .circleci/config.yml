@@ -22,12 +22,11 @@ jobs:
     # Change the version below to your required version of python
     docker:
       - image: cimg/python:3.10.2
-      - image: cimg/postgres:13.6
+      - image: cimg/mysql:8.0
         environment:
-          - POSTGRES_USER=likeestampa
-          - POSTGRES_PASSWORD=likeestampa
+          - POSTGRES_USER=root
+          - POSTGRES_PASSWORD=root
           - POSTGRES_DB=likeestampa
-      - image: cimg/redis:6.2.6
     # Checkout the code as the first step. This is a dedicated CircleCI step.
     # The python orb's install-packages step will install the dependencies from a Pipfile via Pipenv by default.
     # Here we're making sure we use just use the system-wide pip. By default it uses the project root's requirements.txt.

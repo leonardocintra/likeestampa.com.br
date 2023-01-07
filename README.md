@@ -49,9 +49,9 @@ $ make run
 - Python3
 - Django
 - Docker
-- MySQL Database (prod) | Postgres (dev)
-- Bootstrap
-- Mailgun (sistema de emails)
+- MySQL Database
+- Bootstrap v5
+- Sendgrid (sistema de emails)
 - Cloudinary (sistema de armazenamento de imagens)
 - Mercado Pago (gateway de pagamento)
 - Telegram (logs)
