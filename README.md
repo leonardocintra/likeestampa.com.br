@@ -17,15 +17,19 @@ Seu PC precisa ter instalado
 - make (unix OS)
 - virtualenv
 
-#### Banco de dados MySQL
+#### MySQL
 Caso estiver no Ubuntu
 ```
 $ sudo apt-get install default-libmysqlclient-dev build-essential
+$ docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql
 ```
 
 Outros sitemas operacionais consulte: https://pypi.org/project/mysqlclient/
 
 ### Passo a passo primeira vez
+
+- Criar o banco de dados manualmente
+- Caso use o DBEaver ativar o allowPublicKeyRetrieval=True
 
 Windows: TODO
 
@@ -35,7 +39,7 @@ Linux:
 $ virtualenv env -p python3
 $ source env/bin/activate
 $ pip install -r requirements/requirements.development.txt
-$ sudo docker-compose up -d
+$ make migrate
 $ make run
 ```
 
