@@ -24,7 +24,8 @@ jobs:
       - image: cimg/python:3.10.2
       - image: cimg/mysql:5.7
         environment:
-          - MYSQL_ROOT_PASSWORD=root
+          - MYSQL_ROOT_PASSWORD: root
+          - MYSQL_ROOT_HOST: 127.0.0.1
     # Checkout the code as the first step. This is a dedicated CircleCI step.
     # The python orb's install-packages step will install the dependencies from a Pipfile via Pipenv by default.
     # Here we're making sure we use just use the system-wide pip. By default it uses the project root's requirements.txt.
