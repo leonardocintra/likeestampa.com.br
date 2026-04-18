@@ -1,0 +1,15 @@
+# Custom React Hooks
+
+This folder will contain custom React hooks for state management and side effects.
+
+## Structure
+- `use-cart.ts` - Cart state management
+- `use-auth.ts` - Authentication state
+- `use-favorites.ts` - Wishlist management
+- `use-local-storage.ts` - Local storage utilities
+- `use-debounce.ts` - Debounced values
+
+## Usage
+```typescript
+import { useCart } from '@/lib/hooks/use-cart'
+```

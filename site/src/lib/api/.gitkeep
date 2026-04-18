@@ -1,0 +1,15 @@
+# API Client Functions
+
+This folder will contain typed API client functions that interact with the backend REST API.
+
+## Structure
+- `products.ts` - Product-related API calls
+- `cart.ts` - Cart management API calls
+- `orders.ts` - Order management API calls
+- `auth.ts` - Authentication API calls
+- `users.ts` - User profile API calls
+
+## Usage
+```typescript
+import { getProducts, getProduct } from '@/lib/api/products'
+```
