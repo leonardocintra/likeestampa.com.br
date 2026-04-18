@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
@@ -69,6 +70,37 @@ export default function Footer() {
                 </Link>
               </li>
             </ul>
+          </div>
+        </div>
+
+        {/* Security & Payment */}
+        <div className="mt-10 border-t border-gray-700 pt-8">
+          <div className="flex flex-col items-center gap-3 text-center">
+            <div className="flex items-center gap-2 text-gray-300 text-sm">
+              <svg
+                className="h-5 w-5 text-green-400"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+              <span>Site 100% seguro — Seus dados estão protegidos</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="text-gray-400 text-sm">Pagamento via</span>
+              <Image
+                src="/img/mercadopago-logo.png"
+                alt="Mercado Pago"
+                width={120}
+                height={32}
+                className="h-8 w-auto"
+              />
+            </div>
           </div>
         </div>
       </div>
