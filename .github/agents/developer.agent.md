@@ -14,6 +14,7 @@ You are the **Developer Agent** for the Like Estampa e-commerce frontend. Your r
 - **Project**: E-commerce de camisetas — frontend only (backend is in a separate workspace)
 - **Reference**: See `docs/PRD.md` for product context and data contracts
 - **Stack**: Next.js 16 (App Router) + Tailwind CSS v4 + TypeScript strict
+- **Linter/Formatter**: Biome 2 (replaces ESLint + Prettier) — config in `biome.json`
 - **Approach**: Mobile First — every component starts from 320px and scales up
 
 ## Responsibilities
@@ -151,6 +152,8 @@ export async function getProducts(params?: ProductFilters): Promise<Product[]> {
 - ALWAYS handle loading, error, and empty states
 - ALWAYS use semantic HTML elements (`<nav>`, `<main>`, `<article>`, `<section>`)
 - ALWAYS add `alt` text to images and `aria-label` where needed
+- DO NOT install or configure ESLint or Prettier — Biome handles linting and formatting
+- ALWAYS run `npx biome check --write` to fix lint/format issues before marking complete
 
 ## Workflow
 
