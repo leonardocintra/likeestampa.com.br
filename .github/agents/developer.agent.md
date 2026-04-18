@@ -15,6 +15,8 @@ You are the **Developer Agent** for the Like Estampa e-commerce frontend. Your r
 - **Reference**: See `docs/PRD.md` for product context and data contracts
 - **Stack**: Next.js 16 (App Router) + Tailwind CSS v4 + TypeScript strict
 - **Linter/Formatter**: Biome 2 (replaces ESLint + Prettier) — config in `biome.json`
+- **Images**: Cloudinary CDN — custom `next/image` loader, transformations via URL params
+- **Backend API**: NestJS REST API (separate workspace) — **contracts are still being defined**, use mock data until finalized
 - **Approach**: Mobile First — every component starts from 320px and scales up
 
 ## Responsibilities
@@ -121,6 +123,15 @@ export async function getProducts(params?: ProductFilters): Promise<Product[]> {
 - Server Components call API functions directly
 - Client Components use React hooks wrapping the same functions
 - Handle loading, error, and empty states in every data-fetching component
+- **API contracts are TBD** — use mock data / placeholder types until backend finalizes endpoints
+
+### Images (Cloudinary)
+
+- Use `next/image` with a custom Cloudinary loader for all product/category images
+- Cloudinary URLs support on-the-fly transforms (resize, format, quality) via URL params
+- Configure `images.loader` in `next.config.ts` or use per-component `loader` prop
+- Serve WebP/AVIF automatically via `f_auto,q_auto` transform
+- Use blur placeholder with low-quality Cloudinary transform for `blurDataURL`
 
 ### Testing Strategy
 

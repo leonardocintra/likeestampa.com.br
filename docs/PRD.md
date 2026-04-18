@@ -39,6 +39,8 @@
 |--------|-----------|---------------|
 | **Framework** | Next.js 16 (App Router) | SSR/SSG híbrido, React Server Components, otimização de imagens nativa |
 | **Estilização** | Tailwind CSS v4 | Utility-first, design tokens via CSS variables, mobile-first nativo |
+| **Imagens** | Cloudinary | CDN de imagens, transformações on-the-fly, WebP/AVIF automático |
+| **Linter/Formatter** | Biome 2 | Substitui ESLint + Prettier — config em `biome.json` |
 | **Pagamento** | MercadoPago SDK | PIX, cartão de crédito, boleto — foco no mercado brasileiro |
 | **Deploy** | Vercel | Edge functions, preview deploys, otimização automática |
 
@@ -51,7 +53,8 @@
 | **Banco de dados** | PostgreSQL 17 |
 | **Cache** | Redis |
 
-> O backend é desenvolvido e mantido em outro repositório. O frontend consome a API via REST. A estrutura de dados abaixo serve como **contrato de referência**.
+> O backend é desenvolvido e mantido em outro repositório. O frontend consome a API via REST.
+> **Os contratos da API ainda estão sendo definidos.** A estrutura de dados abaixo é um **rascunho de referência** e será ajustada conforme o backend for implementado.
 
 ---
 
@@ -139,13 +142,19 @@
 ┌─────────────────────────────────────────────────────┐
 │              FRONTEND (Next.js 16) — Este Workspace  │
 │  App Router / RSC / Client Components / Server Actions│
-│  Tailwind CSS v4 / Mobile First                      │
+│  Tailwind CSS v4 / Mobile First / Biome 2            │
 └──────────────────────┬──────────────────────────────┘
                        │ REST API (fetch / Server Components)
                        │
 ┌──────────────────────▼──────────────────────────────┐
 │          BACKEND (NestJS 11) — Outro Workspace       │
 │  Auth / Catalog / Orders / Shipping / Payments       │
+│  (contratos da API em definição)                     │
+└──────────────────────┬──────────────────────────────┘
+                       │
+┌──────────────────────▼──────────────────────────────┐
+│              CLOUDINARY — CDN de Imagens             │
+│  Upload via backend / Consumo direto via next/image  │
 └─────────────────────────────────────────────────────┘
 ```
 
@@ -307,7 +316,7 @@ O cálculo de frete é feito pelo backend (integração com Correios/Jadlog/Melh
 | **SEO** | SSR para páginas de produto, sitemap dinâmico, structured data (JSON-LD) |
 | **Segurança** | OWASP Top 10, LGPD compliance, HTTPS only |
 | **Disponibilidade** | 99.5% uptime mensal |
-| **Imagens** | WebP/AVIF via `next/image`, lazy loading, blur placeholder |
+| **Imagens** | Cloudinary CDN + `next/image` loader customizado, WebP/AVIF automático, lazy loading, blur placeholder |
 | **Bundle size** | JS bundle < 150kb (first load, gzipped) |
 
 ---
@@ -315,15 +324,15 @@ O cálculo de frete é feito pelo backend (integração com Correios/Jadlog/Melh
 ## 8. Fases de Entrega
 
 ### Fase 1 — MVP (Semanas 1-4)
-- [ ] Setup do projeto (Next.js 16 + Tailwind v4 + TypeScript)
+- [x] Setup do projeto (Next.js 16 + Tailwind v4 + TypeScript + Biome)
+- [x] Deploy em staging (Vercel — rodando com página default)
 - [ ] Design system base (componentes UI primitivos)
 - [ ] Layout responsivo (Header, Footer, MobileNav)
 - [ ] Home page com seções de destaque
 - [ ] Listagem de produtos (grid, filtros, busca)
 - [ ] Página de detalhe do produto (PDP)
 - [ ] Carrinho (add, remove, update quantity)
-- [ ] Integração com API do backend (client API typed)
-- [ ] Deploy em staging (Vercel)
+- [ ] Integração com API do backend (client API typed — contratos TBD)
 
 ### Fase 2 — Checkout & Pagamento (Semanas 5-7)
 - [ ] Fluxo de checkout completo

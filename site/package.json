@@ -1,5 +1,11 @@
 {
-  "name": "site",
+  "name": "like-estampa",
+  "author": {
+    "name": "Leonardo Nascimento Cintra"
+  },
+  "engines": {
+    "node": "24"
+  },
   "version": "0.1.0",
   "private": true,
   "scripts": {
