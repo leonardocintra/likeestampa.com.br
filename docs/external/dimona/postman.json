@@ -1,0 +1,1665 @@
+{
+	"info": {
+		"_postman_id": "377c2814-d7d5-49f1-819d-007cd25da663",
+		"name": "Dimona API V2",
+		"description": "API Dimona Digital.  \nThe easiest way to print and ship T-Shirts and Accessories. Shipping globally and printing locally in Brazil and in the US. 20000 sqf in Rio de Janeiro, Brazil and 7500 sqf in Dania Beach, Florida, and 10000 sqf in Elk Grove Village, IL.  \nApi Base Domain: [https://admin.camisadimona.com.br](https://camisadimona.com.br)  \nAPI KEY: create an account in camisadimona.com.br",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2596698"
+	},
+	"item": [
+		{
+			"name": "Requests",
+			"item": [
+				{
+					"name": "Order",
+					"item": [
+						{
+							"name": "Create Order",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "api-key",
+										"value": "{{api-key}}"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"shipping_speed\": \"pac\",\n    \"delivery_method_id\": \"177\",\n    \"order_id\": \"{{$timestamp}}\",\n    \"customer_name\": \"Fulano da Silva\",\n    \"customer_document\": \"123.456.789-13\",\n    \"customer_email\": \"exemplo@gmail.com\",\n    \"webhook_url\":\"https://option_webhook_url.com\",\n    \"items\": [\n        {\n            \"name\": \"Camisa Polo P Branca\",\n            \"sku\": \"12345\",\n            \"qty\": 2,\n            \"dimona_sku_id\": \"010603110108\",\n            \"designs\": [\n                \"url_front\",\n                \"url_back\"\n            ],\n            \"mocks\": [\n                \"mock_front\",\n                \"mock_back\"\n            ]\n        },\n        {\n            \"name\": \"Camisa Polo M Branca\",\n            \"sku\": \"12346\",\n            \"qty\": 2,\n            \"dimona_sku_id\": \"010603110109\",\n            \"designs\": [\n                \"url_front\",\n                \"url_back\"\n            ],\n            \"mocks\": [\n                \"mock_front\",\n                \"mock_back\"\n            ]\n        },\n        {\n            \"name\": \"Camisa Polo G Branca\",\n            \"sku\": \"12347\",\n            \"qty\": 2,\n            \"dimona_sku_id\": \"010603110110\",\n            \"designs\": [\n                \"url_front\",\n                \"url_back\"\n            ],\n            \"mocks\": [\n                \"mock_front\",\n                \"mock_back\"\n            ]\n        }\n    ],\n    \"nfe\": {\n        \"chave\": \"chave_com_44_digitos\",\n        \"serie\": \"1\",\n        \"numero\": \"1234\",\n        \"link\": \"https://link_para_nfe\"\n    },\n    \"address\": {\n        \"name\": \"Receiver Name\",\n        \"street\": \"Rua Buenos Aires\",\n        \"number\": \"334\",\n        \"complement\": \"Loja\",\n        \"city\": \"Rio de Janeiro\",\n        \"state\": \"RJ\",\n        \"zipcode\": \"20061000\",\n        \"neighborhood\": \"Centro\",\n        \"phone\": \"21 21093661\",\n        \"country\": \"BR\"\n    }\n}\n"
+								},
+								"url": {
+									"raw": "{{api-domain}}/api/v2/order",
+									"host": [
+										"{{api-domain}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"order"
+									]
+								},
+								"description": "**Items:**<br/>\nArray of SKUs. You should use the field \"name\", but it's not mandatory.<br/>\n**Delivery:**<br/>\nshipping_speed: PAC or SEDEX \ndelivery_method_id: optional. If you integrated with the Quote Endpoint, you can pass the delivery_method_id here. The shipping_speed field will be ignored"
+							},
+							"response": [
+								{
+									"name": "Erro: Pedido já existe",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "api-key",
+												"value": "{{api-key}}"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"shipping_speed\": \"sedex\",\n    \"order_id\": \"1234\",\n    \"customer_name\": \"Fulano da Silva\",\n    \"items\": [\n            {\"name\":\"Camisa P Amarela\", \"sku\":\"12345\", \"qty\":2},\n            {\"name\":\"Camisa M Verde\", \"sku\":\"12346\", \"qty\":1},\n            {\"name\":\"Camisa G Vermelha\", \"sku\":\"12347\", \"qty\":1}\n        ],\n\t\"address\":\n\t\t{\n\t\t\t\"street\":\"Rua Buenos Aires\", \n\t\t\t\"number\":\"334\",\n\t\t\t\"complement\":\"Loja\", \n\t\t\t\"city\":\"Rio de Janeiro\",\n\t\t\t\"state\":\"RJ\",\n\t\t\t\"zipcode\":\"20061001\",\n\t\t\t\"neighborhood\":\"Centro\"\n\t\t}\n}"
+										},
+										"url": {
+											"raw": "{{api-domain}}/api/v2/order",
+											"host": [
+												"{{api-domain}}"
+											],
+											"path": [
+												"api",
+												"v2",
+												"order"
+											]
+										}
+									},
+									"status": "Unprocessable Entity",
+									"code": 422,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "CF-RAY",
+											"value": "408e7be3ef084afd-GRU",
+											"name": "CF-RAY",
+											"description": "Custom header"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private",
+											"name": "Cache-Control",
+											"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 09 Apr 2018 16:52:25 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "Expect-CT",
+											"value": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+											"name": "Expect-CT",
+											"description": "Custom header"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare",
+											"name": "Server",
+											"description": "A name for the server"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "laravel_session=eyJpdiI6IjhtblZEUmhZc3hpVDBndW9BMHZVc0E9PSIsInZhbHVlIjoiQ0xoNVZWZEtxaTBpTlZNZ045WE1zN3A2QWxlTEE4UUg1NWZ0YmlrTTdzNmhFSWlBSDRlaFZ0T3NhSVNOQVZaK3lLZTcrMDVzK3hDY0RVNk5IYjJxb0E9PSIsIm1hYyI6IjQwOTAxYzQ5ZDk2YmZhYTI2MTAwNDU1YjE2NzVkNmQxYWUzMzM1MWE4MjdjNGE0OWI0OTlhNDhjZmUyYzg4OWEifQ%3D%3D; expires=Mon, 09-Apr-2018 18:52:25 GMT; Max-Age=7200; path=/; HttpOnly",
+											"name": "Set-Cookie",
+											"description": "an HTTP cookie"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked",
+											"name": "Transfer-Encoding",
+											"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60",
+											"name": "X-RateLimit-Limit",
+											"description": "Custom header"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "59",
+											"name": "X-RateLimit-Remaining",
+											"description": "Custom header"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"httpOnly": true,
+											"domain": "camisadimona.com.br",
+											"path": "/",
+											"secure": false,
+											"value": "d6f1a22752a6159c9468ca3bd41273d7a1511818280",
+											"key": "__cfduid"
+										},
+										{
+											"expires": "Invalid Date",
+											"httpOnly": true,
+											"domain": "camisadimona.com.br",
+											"path": "/",
+											"secure": false,
+											"value": "eyJpdiI6IjhtblZEUmhZc3hpVDBndW9BMHZVc0E9PSIsInZhbHVlIjoiQ0xoNVZWZEtxaTBpTlZNZ045WE1zN3A2QWxlTEE4UUg1NWZ0YmlrTTdzNmhFSWlBSDRlaFZ0T3NhSVNOQVZaK3lLZTcrMDVzK3hDY0RVNk5IYjJxb0E9PSIsIm1hYyI6IjQwOTAxYzQ5ZDk2YmZhYTI2MTAwNDU1YjE2NzVkNmQxYWUzMzM1MWE4MjdjNGE0OWI0OTlhNDhjZmUyYzg4OWEifQ%3D%3D",
+											"key": "laravel_session"
+										}
+									],
+									"body": "\"O pedido 1234 j\\u00e1 existe\""
+								},
+								{
+									"name": "Pedido Criado com Sucesso",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "api-key",
+												"value": "{{api-key}}"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"shipping_speed\": \"sedex\",\n    \"order_id\": \"{{$timestamp}}\",\n    \"customer_name\": \"Fulano da Silva\",\n    \"items\": [\n            {\"name\":\"Camisa P Amarela\", \"sku\":\"12345\", \"qty\":2},\n            {\"name\":\"Camisa M Verde\", \"sku\":\"12346\", \"qty\":1},\n            {\"name\":\"Camisa G Vermelha\", \"sku\":\"12347\", \"qty\":1}\n        ],\n\t\"address\":\n\t\t{\n\t\t\t\"street\":\"Rua Buenos Aires\", \n\t\t\t\"number\":\"334\",\n\t\t\t\"complement\":\"Loja\", \n\t\t\t\"city\":\"Rio de Janeiro\",\n\t\t\t\"state\":\"RJ\",\n\t\t\t\"zipcode\":\"20061001\",\n\t\t\t\"neighborhood\":\"Centro\"\n\t\t}\n}"
+										},
+										"url": {
+											"raw": "{{api-domain}}/api/v2/order",
+											"host": [
+												"{{api-domain}}"
+											],
+											"path": [
+												"api",
+												"v2",
+												"order"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "CF-RAY",
+											"value": "408e7717e9af4afd-GRU",
+											"name": "CF-RAY",
+											"description": "Custom header"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private",
+											"name": "Cache-Control",
+											"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip",
+											"name": "Content-Encoding",
+											"description": "The type of encoding used on the data."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 09 Apr 2018 16:49:09 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "Expect-CT",
+											"value": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+											"name": "Expect-CT",
+											"description": "Custom header"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare",
+											"name": "Server",
+											"description": "A name for the server"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "laravel_session=eyJpdiI6IklOWGFVVjJTV0Q1YVRPcFdZUEU1Y3c9PSIsInZhbHVlIjoibjZqVGNNM2VPekJHTFwvMGtGQWFhUG8zejhFdk9yaVhJeWo3XC9kdDA3Zm91SElVaXV4SnlQNStMVjJOd2tnc1doaEowcGc2QzlkSENzMDRCeDBNQ2dxZz09IiwibWFjIjoiNDYwZTRiYjQ4Mjk2ZGVjOWFmYTM4MzVmMGY3MmQ2YmI2MmNiMmJlYjgyYWMwZThiNzQ3M2IwMjNkM2VhNWM4NCJ9; expires=Mon, 09-Apr-2018 18:49:08 GMT; Max-Age=7200; path=/; HttpOnly",
+											"name": "Set-Cookie",
+											"description": "an HTTP cookie"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked",
+											"name": "Transfer-Encoding",
+											"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding",
+											"name": "Vary",
+											"description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff",
+											"name": "X-Content-Type-Options",
+											"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN",
+											"name": "X-Frame-Options",
+											"description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60",
+											"name": "X-RateLimit-Limit",
+											"description": "Custom header"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "59",
+											"name": "X-RateLimit-Remaining",
+											"description": "Custom header"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block",
+											"name": "X-XSS-Protection",
+											"description": "Cross-site scripting (XSS) filter"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"httpOnly": true,
+											"domain": "camisadimona.com.br",
+											"path": "/",
+											"secure": false,
+											"value": "d6f1a22752a6159c9468ca3bd41273d7a1511818280",
+											"key": "__cfduid"
+										},
+										{
+											"expires": "Invalid Date",
+											"httpOnly": true,
+											"domain": "camisadimona.com.br",
+											"path": "/",
+											"secure": false,
+											"value": "eyJpdiI6IklOWGFVVjJTV0Q1YVRPcFdZUEU1Y3c9PSIsInZhbHVlIjoibjZqVGNNM2VPekJHTFwvMGtGQWFhUG8zejhFdk9yaVhJeWo3XC9kdDA3Zm91SElVaXV4SnlQNStMVjJOd2tnc1doaEowcGc2QzlkSENzMDRCeDBNQ2dxZz09IiwibWFjIjoiNDYwZTRiYjQ4Mjk2ZGVjOWFmYTM4MzVmMGY3MmQ2YmI2MmNiMmJlYjgyYWMwZThiNzQ3M2IwMjNkM2VhNWM4NCJ9",
+											"key": "laravel_session"
+										}
+									],
+									"body": "{\"order\":\"064-435-556\"}"
+								}
+							]
+						},
+						{
+							"name": "Show Orders",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "api-key",
+										"value": "{{api-key}}"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{api-domain}}/api/v2/orders",
+									"host": [
+										"{{api-domain}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"orders"
+									]
+								},
+								"description": "List all orders"
+							},
+							"response": []
+						},
+						{
+							"name": "Show Order",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "api-key",
+										"value": "{{api-key}}"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{api-domain}}/api/v2/order/{{order-id}}",
+									"host": [
+										"{{api-domain}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"order",
+										"{{order-id}}"
+									]
+								},
+								"description": "Show one order"
+							},
+							"response": [
+								{
+									"name": "Show Order",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "api-key",
+												"value": "{{api-key}}"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{api-domain}}/api/v2/order/{{order-id}}",
+											"host": [
+												"{{api-domain}}"
+											],
+											"path": [
+												"api",
+												"v2",
+												"order",
+												"{{order-id}}"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 18 Dec 2020 18:33:40 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "nginx/1.15.6"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "250"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "219"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": ""
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "laravel_session=eyJpdiI6IjlYT2RiMG1zb25ZV3paNkh4dUFkRWc9PSIsInZhbHVlIjoiSzE0MGJJbVNGd3RmbTdVOHlIdHpvUTFLekRmeVN3MUwycVFubUVqTVloMzVaN3FxTW9xYkJoS0FFdEUwbjRPNCIsIm1hYyI6ImNmZDQ3Mjc5YTdlZTk5ZTYxMmViYTA4ZjhmZGVkNzkzYWY5MTZlYmVjOGY3YTg0MGRkM2YyZWUwYjUxNjNmNWEifQ%3D%3D; expires=Fri, 18-Dec-2020 20:33:40 GMT; Max-Age=7200; path=/; httponly"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "X-Cache",
+											"value": "Miss from cloudfront"
+										},
+										{
+											"key": "Via",
+											"value": "1.1 76f9985b0c929a023355db8e462592f0.cloudfront.net (CloudFront)"
+										},
+										{
+											"key": "X-Amz-Cf-Pop",
+											"value": "MIA3-C2"
+										},
+										{
+											"key": "X-Amz-Cf-Id",
+											"value": "ytLTrEyLyVl_R7Dx6UgbymefvjtrPaB-EKHI1WGHRa4UbK8WevcfUQ=="
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"dimona_id\": \"123-123-123\",\n    \"seller_id\": \"abcd\",\n    \"status\": \"Aguardando Imagens\",\n    \"shipping_cost\": 17.99,\n    \"shipping_method_name\": \"Correios Sedex\",\n    \"total_value\": 67.99,\n    \"status_id\": 18,\n    \"created_at\": \"01/01/2000\",\n    \"tracking_url\": \"http://status.ondeestameupedido.com/tracking/1168/123123123\",\n    \"tracking_code\": null\n}"
+								}
+							]
+						},
+						{
+							"name": "Show Order Tracking",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "api-key",
+										"value": "{{api-key}}"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{api-domain}}/api/v2/order/{{order-id}}/tracking",
+									"host": [
+										"{{api-domain}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"order",
+										"{{order-id}}",
+										"tracking"
+									]
+								},
+								"description": "Get tracking History of an Order"
+							},
+							"response": [
+								{
+									"name": "Show Order Tracking",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "api-key",
+												"value": "{{api-key}}"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{api-domain}}/api/v2/order/630-250-215/tracking",
+											"host": [
+												"{{api-domain}}"
+											],
+											"path": [
+												"api",
+												"v2",
+												"order",
+												"630-250-215",
+												"tracking"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private",
+											"name": "Cache-Control",
+											"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 25 Sep 2018 19:54:02 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "Server",
+											"value": "nginx/1.11.9",
+											"name": "Server",
+											"description": "A name for the server"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "laravel_session=eyJpdiI6IldrUzg0dUNjMlNybnU3SU5VZGYwblE9PSIsInZhbHVlIjoidEpqaW5MYUJFS0VGdjk1Y2kyQW84akE4dWhaQk5QYW1XXC9YZG1PclUrY2RjQ0Z6NnlUd3NTeHY3c0NmZms0RzhuNVVTc1ZZY0dpU09HT3F2ejNPNXN3PT0iLCJtYWMiOiJiOTVmNzAyYmJiZDRjYTQyMjExY2JkNDQ5YWU4MTg0Y2U2NGU1N2IzMGVhYmFiOTRjMTZjZWIxZDNmMzMzMzAzIn0%3D; expires=Tue, 25-Sep-2018 21:54:02 GMT; Max-Age=7197; path=/; httponly",
+											"name": "Set-Cookie",
+											"description": "an HTTP cookie"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked",
+											"name": "Transfer-Encoding",
+											"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60",
+											"name": "X-RateLimit-Limit",
+											"description": "Custom header"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "59",
+											"name": "X-RateLimit-Remaining",
+											"description": "Custom header"
+										},
+										{
+											"key": "phpdebugbar-id",
+											"value": "X931a8f4a8600a489675338a27fa10eff",
+											"name": "phpdebugbar-id",
+											"description": "Custom header"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"httpOnly": true,
+											"domain": "dimona.site",
+											"path": "/",
+											"secure": false,
+											"value": "eyJpdiI6IldrUzg0dUNjMlNybnU3SU5VZGYwblE9PSIsInZhbHVlIjoidEpqaW5MYUJFS0VGdjk1Y2kyQW84akE4dWhaQk5QYW1XXC9YZG1PclUrY2RjQ0Z6NnlUd3NTeHY3c0NmZms0RzhuNVVTc1ZZY0dpU09HT3F2ejNPNXN3PT0iLCJtYWMiOiJiOTVmNzAyYmJiZDRjYTQyMjExY2JkNDQ5YWU4MTg0Y2U2NGU1N2IzMGVhYmFiOTRjMTZjZWIxZDNmMzMzMzAzIn0%3D",
+											"key": "laravel_session"
+										}
+									],
+									"body": "[{\"status_name\":\"Entregue\",\"micro_status_name\":\"ENTREGUE NO LOCAL DE RETIRADA\",\"micro_status_description\":\"A carga est\\u00e1 em processo de transfer\\u00eancia entre filiais.\",\"message\":\"FL RIO DE JANEIRO\",\"event_date\":{\"date\":\"2018-08-08 17:54:00.000000\",\"timezone_type\":3,\"timezone\":\"America\\/Sao_Paulo\"},\"created_at\":\"2018-08-09 14:33:57\"}]"
+								}
+							]
+						},
+						{
+							"name": "Show Order Timeline",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "api-key",
+										"value": "{{api-key}}"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{api-domain}}/api/v2/order/{{order-id}}/timeline",
+									"host": [
+										"{{api-domain}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"order",
+										"{{order-id}}",
+										"timeline"
+									]
+								},
+								"description": "Get timeline history of an order. There are 4 different types of events:\n- Order status update. In production, shipped, delivered, etc.\n- Order item status update. Picked, packed, quality control, etc. Independent updates for each order item.\n- Automatic actions. Invoice created, shipping label created, etc.\n- Transaction. Order paid, boleto issued, etc\n- Tracking updates. Carrier updates."
+							},
+							"response": [
+								{
+									"name": "Show Order Timeline",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "api-key",
+												"value": "{{api-key}}"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{api-domain}}/api/v2/order/{{order-id}}/timeline",
+											"host": [
+												"{{api-domain}}"
+											],
+											"path": [
+												"api",
+												"v2",
+												"order",
+												"{{order-id}}",
+												"timeline"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx/1.15.8"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 26 May 2020 00:41:26 GMT"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "59"
+										},
+										{
+											"key": "phpdebugbar-id",
+											"value": "X1de5a8b095a82bc3baff39b1c914b734"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "laravel_session=eyJpdiI6IjFudFBaQ3BVOVwvQkJNRWhKOEJcL3FrZz09IiwidmFsdWUiOiJMckNhRGNNYnZVbVNFRFc3cXVPQUU5TWYwUUxac0hnMUhKQ1pTSUc1ZFBcL1VTcnd0OUZZWUFuSDh4REgwdG0rTiIsIm1hYyI6ImVhN2VlODZkZDRjZWU3YjlmYWUwM2MyOTE2OGNhYTNmYzc4MWQxMTJhZmUyMWFlNjdlMTAxOGJjMTFmYTU5OWMifQ%3D%3D; expires=Tue, 26-May-2020 02:41:26 GMT; Max-Age=7200; path=/; httponly"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"icon\": \"glyphicon-check\",\n        \"title\": \"Alteração de Status\",\n        \"text\": \"Status alterado de Pagamento Aprovado para Cancelado\",\n        \"color\": \"warning\",\n        \"timestamp\": \"17/09/19 13:50:32\"\n    },\n    {\n        \"icon\": \"glyphicon-circle-arrow-right\",\n        \"title\": \"Produção\",\n        \"text\": \"Status da etiqueta 123456 alterado de Etiqueta Criada para Cancelada\",\n        \"color\": \"danger\",\n        \"timestamp\": \"17/09/19 13:50:32\"\n    },\n    {\n        \"icon\": \"glyphicon-circle-arrow-right\",\n        \"title\": \"Produção\",\n        \"text\": \"Status da etiqueta 123457 alterado de Etiqueta Criada para Cancelada\",\n        \"color\": \"danger\",\n        \"timestamp\": \"17/09/19 13:50:32\"\n    },\n    {\n        \"icon\": \"glyphicon-circle-arrow-right\",\n        \"title\": \"Produção\",\n        \"text\": \"Etiqueta 123456 criada.\",\n        \"color\": \"danger\",\n        \"timestamp\": \"17/09/19 13:49:56\"\n    },\n    {\n        \"icon\": \"glyphicon-check\",\n        \"title\": \"Alteração de Status\",\n        \"text\": \"Status alterado de Pagamento Pendente para Pagamento Aprovado\",\n        \"color\": \"warning\",\n        \"timestamp\": \"17/09/19 13:49:55\"\n    },\n    {\n        \"icon\": \"glyphicon-circle-arrow-right\",\n        \"title\": \"Produção\",\n        \"text\": \"Etiqueta 123457 criada.\",\n        \"color\": \"danger\",\n        \"timestamp\": \"17/09/19 13:49:55\"\n    }\n]"
+								}
+							]
+						},
+						{
+							"name": "Show Order Items",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "api-key",
+										"value": "{{api-key}}"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{api-domain}}/api/v2/order/{{order-id}}/items",
+									"host": [
+										"{{api-domain}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"order",
+										"{{order-id}}",
+										"items"
+									]
+								},
+								"description": "Get timeline history of an order. There are 4 different types of events:\n- Order status update. In production, shipped, delivered, etc.\n- Order item status update. Picked, packed, quality control, etc. Independent updates for each order item.\n- Automatic actions. Invoice created, shipping label created, etc.\n- Transaction. Order paid, boleto issued, etc\n- Tracking updates. Carrier updates."
+							},
+							"response": [
+								{
+									"name": "Show Order Timeline",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "api-key",
+												"value": "{{api-key}}"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{api-domain}}/api/v2/order/{{order-id}}/timeline",
+											"host": [
+												"{{api-domain}}"
+											],
+											"path": [
+												"api",
+												"v2",
+												"order",
+												"{{order-id}}",
+												"timeline"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx/1.15.8"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 26 May 2020 00:41:26 GMT"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "59"
+										},
+										{
+											"key": "phpdebugbar-id",
+											"value": "X1de5a8b095a82bc3baff39b1c914b734"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "laravel_session=eyJpdiI6IjFudFBaQ3BVOVwvQkJNRWhKOEJcL3FrZz09IiwidmFsdWUiOiJMckNhRGNNYnZVbVNFRFc3cXVPQUU5TWYwUUxac0hnMUhKQ1pTSUc1ZFBcL1VTcnd0OUZZWUFuSDh4REgwdG0rTiIsIm1hYyI6ImVhN2VlODZkZDRjZWU3YjlmYWUwM2MyOTE2OGNhYTNmYzc4MWQxMTJhZmUyMWFlNjdlMTAxOGJjMTFmYTU5OWMifQ%3D%3D; expires=Tue, 26-May-2020 02:41:26 GMT; Max-Age=7200; path=/; httponly"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"icon\": \"glyphicon-check\",\n        \"title\": \"Alteração de Status\",\n        \"text\": \"Status alterado de Pagamento Aprovado para Cancelado\",\n        \"color\": \"warning\",\n        \"timestamp\": \"17/09/19 13:50:32\"\n    },\n    {\n        \"icon\": \"glyphicon-circle-arrow-right\",\n        \"title\": \"Produção\",\n        \"text\": \"Status da etiqueta 123456 alterado de Etiqueta Criada para Cancelada\",\n        \"color\": \"danger\",\n        \"timestamp\": \"17/09/19 13:50:32\"\n    },\n    {\n        \"icon\": \"glyphicon-circle-arrow-right\",\n        \"title\": \"Produção\",\n        \"text\": \"Status da etiqueta 123457 alterado de Etiqueta Criada para Cancelada\",\n        \"color\": \"danger\",\n        \"timestamp\": \"17/09/19 13:50:32\"\n    },\n    {\n        \"icon\": \"glyphicon-circle-arrow-right\",\n        \"title\": \"Produção\",\n        \"text\": \"Etiqueta 123456 criada.\",\n        \"color\": \"danger\",\n        \"timestamp\": \"17/09/19 13:49:56\"\n    },\n    {\n        \"icon\": \"glyphicon-check\",\n        \"title\": \"Alteração de Status\",\n        \"text\": \"Status alterado de Pagamento Pendente para Pagamento Aprovado\",\n        \"color\": \"warning\",\n        \"timestamp\": \"17/09/19 13:49:55\"\n    },\n    {\n        \"icon\": \"glyphicon-circle-arrow-right\",\n        \"title\": \"Produção\",\n        \"text\": \"Etiqueta 123457 criada.\",\n        \"color\": \"danger\",\n        \"timestamp\": \"17/09/19 13:49:55\"\n    }\n]"
+								}
+							]
+						},
+						{
+							"name": "Add NFE to Order",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "api-key",
+										"value": "{{api-key}}"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"chave\": \"33180513570097000110550010000166321270551123\",\n    \"serie\": \"1\",\n    \"numero\": \"1234\",\n    \"link\": \"https://link-para-pdf-danfe.com.br\"\n}"
+								},
+								"url": {
+									"raw": "{{api-domain}}/api/v2/order/{{order-id}}/nfe",
+									"host": [
+										"{{api-domain}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"order",
+										"{{order-id}}",
+										"nfe"
+									]
+								},
+								"description": "**Attention:**<br/>\nBefore using this endpoint send an email to api@dimona.com.br"
+							},
+							"response": []
+						},
+						{
+							"name": "Add Shipping Label to Order",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "api-key",
+										"value": "{{api-key}}"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"link\": \"link-to-label\"\n}"
+								},
+								"url": {
+									"raw": "{{api-domain}}/api/v2/order/{{order-id}}/shippingLabel",
+									"host": [
+										"{{api-domain}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"order",
+										"{{order-id}}",
+										"shippingLabel"
+									]
+								},
+								"description": "**Attention:**<br/>\nBefore using this endpoint send an email to api@dimona.com.br"
+							},
+							"response": []
+						},
+						{
+							"name": "Add Shipping Label and NFE to Order",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "api-key",
+										"value": "{{api-key}}"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nfe\": \"https://s3-eu-west-1.amazonaws.com/printcloud.storage/edi/dev/edi/p5846776585_Invoice.pdf\",\n    \"label\": \"https://s3-eu-west-1.amazonaws.com/printcloud.storage/edi/dev/edi/p5846776585_DHLExpressBrazil.pdf\"\n}"
+								},
+								"url": {
+									"raw": "{{api-domain}}/api/v2/order/5846776585/shippingDocuments",
+									"host": [
+										"{{api-domain}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"order",
+										"5846776585",
+										"shippingDocuments"
+									]
+								},
+								"description": "**Attention:**<br/>\nBefore using this endpoint send an email to api@dimona.com.br"
+							},
+							"response": []
+						},
+						{
+							"name": "Create Order - Named Attributes on Design",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "api-key",
+										"value": "{{api-key}}"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"shipping_speed\": \"pac\",\n    \"delivery_method_id\": \"177\",\n    \"order_id\": \"asdusahdksjah18y321831ad\",\n    \"customer_name\": \"Fulano da Silva\",\n    \"customer_document\": \"123.456.789-13\",\n    \"customer_email\": \"exemplo@gmail.com\",\n    \"items\": [\n        {\n            \"name\": \"Camisa Polo M Branca\",\n            \"sku\": \"12346\",\n            \"qty\": 2,\n            \"dimona_sku_id\": \"010603110109\",\n            \"designs\": {\n                \"front\": \"https://url-to-front\",\n                \"back\": \"https://url-to-back\",\n                \"left_sleeve\": \"https://url-to-left-sleeve\",\n                \"right_sleeve\": \"https://url-to-right-sleeve\",\n                \"inner_label\": \"https://url-to-inner-label\",\n                \"outer_label\": \"https://url-to-outer-label\"\n            },\n            \"mocks\": {\n                \"front\": \"https://url-to-front-mock\",\n                \"back\": \"https://url-to-back-mock\",\n                \"left_sleeve\": \"https://url-to-left-sleeve-mock\",\n                \"right_sleeve\": \"https://url-to-right-sleeve-mock\",\n                \"inner_label\": \"https://url-to-inner-label-mock\",\n                \"outer_label\": \"https://url-to-outer-label-mock\"\n            }\n        }\n    ],\n    \"nfe\": { \n        \"chave\": \"chave_com_44_digitos\",\n        \"serie\": \"1\",\n        \"numero\": \"1234\",\n        \"link\": \"https://link_para_nfe\"\n    },\n    \"address\": {\n        \"street\": \"Rua Buenos Aires\",\n        \"number\": \"334\",\n        \"complement\": \"Loja\",\n        \"city\": \"Rio de Janeiro\",\n        \"state\": \"RJ\",\n        \"zipcode\": \"20061000\",\n        \"neighborhood\": \"Centro\",\n        \"phone\": \"21 21093661\",\n        \"country\": \"BR\"\n    }\n}"
+								},
+								"url": {
+									"raw": "{{api-domain}}/api/v3/order",
+									"host": [
+										"{{api-domain}}"
+									],
+									"path": [
+										"api",
+										"v3",
+										"order"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Pedido Criado com Sucesso",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "api-key",
+												"value": "{{api-key}}"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"shipping_speed\": \"sedex\",\n    \"order_id\": \"{{$timestamp}}\",\n    \"customer_name\": \"Fulano da Silva\",\n    \"items\": [\n            {\"name\":\"Camisa P Amarela\", \"sku\":\"12345\", \"qty\":2},\n            {\"name\":\"Camisa M Verde\", \"sku\":\"12346\", \"qty\":1},\n            {\"name\":\"Camisa G Vermelha\", \"sku\":\"12347\", \"qty\":1}\n        ],\n\t\"address\":\n\t\t{\n\t\t\t\"street\":\"Rua Buenos Aires\", \n\t\t\t\"number\":\"334\",\n\t\t\t\"complement\":\"Loja\", \n\t\t\t\"city\":\"Rio de Janeiro\",\n\t\t\t\"state\":\"RJ\",\n\t\t\t\"zipcode\":\"20061001\",\n\t\t\t\"neighborhood\":\"Centro\"\n\t\t}\n}"
+										},
+										"url": {
+											"raw": "{{api-domain}}/api/v2/order",
+											"host": [
+												"{{api-domain}}"
+											],
+											"path": [
+												"api",
+												"v2",
+												"order"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "CF-RAY",
+											"value": "408e7717e9af4afd-GRU",
+											"name": "CF-RAY",
+											"description": "Custom header"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private",
+											"name": "Cache-Control",
+											"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip",
+											"name": "Content-Encoding",
+											"description": "The type of encoding used on the data."
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 09 Apr 2018 16:49:09 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "Expect-CT",
+											"value": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+											"name": "Expect-CT",
+											"description": "Custom header"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare",
+											"name": "Server",
+											"description": "A name for the server"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "laravel_session=eyJpdiI6IklOWGFVVjJTV0Q1YVRPcFdZUEU1Y3c9PSIsInZhbHVlIjoibjZqVGNNM2VPekJHTFwvMGtGQWFhUG8zejhFdk9yaVhJeWo3XC9kdDA3Zm91SElVaXV4SnlQNStMVjJOd2tnc1doaEowcGc2QzlkSENzMDRCeDBNQ2dxZz09IiwibWFjIjoiNDYwZTRiYjQ4Mjk2ZGVjOWFmYTM4MzVmMGY3MmQ2YmI2MmNiMmJlYjgyYWMwZThiNzQ3M2IwMjNkM2VhNWM4NCJ9; expires=Mon, 09-Apr-2018 18:49:08 GMT; Max-Age=7200; path=/; HttpOnly",
+											"name": "Set-Cookie",
+											"description": "an HTTP cookie"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked",
+											"name": "Transfer-Encoding",
+											"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding",
+											"name": "Vary",
+											"description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff",
+											"name": "X-Content-Type-Options",
+											"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN",
+											"name": "X-Frame-Options",
+											"description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60",
+											"name": "X-RateLimit-Limit",
+											"description": "Custom header"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "59",
+											"name": "X-RateLimit-Remaining",
+											"description": "Custom header"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block",
+											"name": "X-XSS-Protection",
+											"description": "Cross-site scripting (XSS) filter"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"httpOnly": true,
+											"domain": "camisadimona.com.br",
+											"path": "/",
+											"secure": false,
+											"value": "d6f1a22752a6159c9468ca3bd41273d7a1511818280",
+											"key": "__cfduid"
+										},
+										{
+											"expires": "Invalid Date",
+											"httpOnly": true,
+											"domain": "camisadimona.com.br",
+											"path": "/",
+											"secure": false,
+											"value": "eyJpdiI6IklOWGFVVjJTV0Q1YVRPcFdZUEU1Y3c9PSIsInZhbHVlIjoibjZqVGNNM2VPekJHTFwvMGtGQWFhUG8zejhFdk9yaVhJeWo3XC9kdDA3Zm91SElVaXV4SnlQNStMVjJOd2tnc1doaEowcGc2QzlkSENzMDRCeDBNQ2dxZz09IiwibWFjIjoiNDYwZTRiYjQ4Mjk2ZGVjOWFmYTM4MzVmMGY3MmQ2YmI2MmNiMmJlYjgyYWMwZThiNzQ3M2IwMjNkM2VhNWM4NCJ9",
+											"key": "laravel_session"
+										}
+									],
+									"body": "{\"order\":\"064-435-556\"}"
+								},
+								{
+									"name": "Erro: Pedido já existe",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "api-key",
+												"value": "{{api-key}}"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"shipping_speed\": \"sedex\",\n    \"order_id\": \"1234\",\n    \"customer_name\": \"Fulano da Silva\",\n    \"items\": [\n            {\"name\":\"Camisa P Amarela\", \"sku\":\"12345\", \"qty\":2},\n            {\"name\":\"Camisa M Verde\", \"sku\":\"12346\", \"qty\":1},\n            {\"name\":\"Camisa G Vermelha\", \"sku\":\"12347\", \"qty\":1}\n        ],\n\t\"address\":\n\t\t{\n\t\t\t\"street\":\"Rua Buenos Aires\", \n\t\t\t\"number\":\"334\",\n\t\t\t\"complement\":\"Loja\", \n\t\t\t\"city\":\"Rio de Janeiro\",\n\t\t\t\"state\":\"RJ\",\n\t\t\t\"zipcode\":\"20061001\",\n\t\t\t\"neighborhood\":\"Centro\"\n\t\t}\n}"
+										},
+										"url": {
+											"raw": "{{api-domain}}/api/v2/order",
+											"host": [
+												"{{api-domain}}"
+											],
+											"path": [
+												"api",
+												"v2",
+												"order"
+											]
+										}
+									},
+									"status": "Unprocessable Entity",
+									"code": 422,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "CF-RAY",
+											"value": "408e7be3ef084afd-GRU",
+											"name": "CF-RAY",
+											"description": "Custom header"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private",
+											"name": "Cache-Control",
+											"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 09 Apr 2018 16:52:25 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "Expect-CT",
+											"value": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+											"name": "Expect-CT",
+											"description": "Custom header"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare",
+											"name": "Server",
+											"description": "A name for the server"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "laravel_session=eyJpdiI6IjhtblZEUmhZc3hpVDBndW9BMHZVc0E9PSIsInZhbHVlIjoiQ0xoNVZWZEtxaTBpTlZNZ045WE1zN3A2QWxlTEE4UUg1NWZ0YmlrTTdzNmhFSWlBSDRlaFZ0T3NhSVNOQVZaK3lLZTcrMDVzK3hDY0RVNk5IYjJxb0E9PSIsIm1hYyI6IjQwOTAxYzQ5ZDk2YmZhYTI2MTAwNDU1YjE2NzVkNmQxYWUzMzM1MWE4MjdjNGE0OWI0OTlhNDhjZmUyYzg4OWEifQ%3D%3D; expires=Mon, 09-Apr-2018 18:52:25 GMT; Max-Age=7200; path=/; HttpOnly",
+											"name": "Set-Cookie",
+											"description": "an HTTP cookie"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked",
+											"name": "Transfer-Encoding",
+											"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60",
+											"name": "X-RateLimit-Limit",
+											"description": "Custom header"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "59",
+											"name": "X-RateLimit-Remaining",
+											"description": "Custom header"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"httpOnly": true,
+											"domain": "camisadimona.com.br",
+											"path": "/",
+											"secure": false,
+											"value": "d6f1a22752a6159c9468ca3bd41273d7a1511818280",
+											"key": "__cfduid"
+										},
+										{
+											"expires": "Invalid Date",
+											"httpOnly": true,
+											"domain": "camisadimona.com.br",
+											"path": "/",
+											"secure": false,
+											"value": "eyJpdiI6IjhtblZEUmhZc3hpVDBndW9BMHZVc0E9PSIsInZhbHVlIjoiQ0xoNVZWZEtxaTBpTlZNZ045WE1zN3A2QWxlTEE4UUg1NWZ0YmlrTTdzNmhFSWlBSDRlaFZ0T3NhSVNOQVZaK3lLZTcrMDVzK3hDY0RVNk5IYjJxb0E9PSIsIm1hYyI6IjQwOTAxYzQ5ZDk2YmZhYTI2MTAwNDU1YjE2NzVkNmQxYWUzMzM1MWE4MjdjNGE0OWI0OTlhNDhjZmUyYzg4OWEifQ%3D%3D",
+											"key": "laravel_session"
+										}
+									],
+									"body": "\"O pedido 1234 j\\u00e1 existe\""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Availability",
+					"item": [
+						{
+							"name": "Check Availability by Reference",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "api-key",
+										"value": "{{api-key}}"
+									}
+								],
+								"url": {
+									"raw": "{{api-domain}}/api/v2/sku/{{sku_reference}}/availability",
+									"host": [
+										"{{api-domain}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"sku",
+										"{{sku_reference}}",
+										"availability"
+									]
+								},
+								"description": "Expects a product ID. Returns an object {idCor: {idTamanho1: qty,idTamanho2:qty}}"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Shipping",
+					"item": [
+						{
+							"name": "Quote Shipping",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "api-key",
+										"value": "{{api-key}}"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"zipcode\": \"20061001\",\n    \"quantity\": \"1\"\n}"
+								},
+								"url": {
+									"raw": "{{api-domain}}/api/v2/shipping",
+									"host": [
+										"{{api-domain}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"shipping"
+									]
+								},
+								"description": "Create an Order"
+							},
+							"response": [
+								{
+									"name": "Quote Result: Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "api-key",
+												"value": "{{api-key}}"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"zipcode\": \"20061001\",\n    \"quantity\": \"1\"\n}"
+										},
+										"url": {
+											"raw": "{{api-domain}}/api/v2/shipping",
+											"host": [
+												"{{api-domain}}"
+											],
+											"path": [
+												"api",
+												"v2",
+												"shipping"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private",
+											"name": "Cache-Control",
+											"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 13 Apr 2018 19:29:09 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "Server",
+											"value": "nginx/1.11.9",
+											"name": "Server",
+											"description": "A name for the server"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "laravel_session=eyJpdiI6ImRJOVhnd1dvNnV5UWx5ZDBXdWVZR3c9PSIsInZhbHVlIjoibTI5VlhERU9nM05wT0dsaXJhdjVNXC9nckNpOU5ON2NHMUxBajdLd1FpcWNXVmxVelR6OVdFYU9LbWtxREVFeW1WbmhUYWZKMEl1TlJnUHpSNXVVeUtRPT0iLCJtYWMiOiI4ZmE1NDMyMDNiNGM2YzdhNzAzZDdjYjcwNzEwNzE1YWIxYzlkZDZkMjA4OTMxMzg3MDRiNmVlNGE0MDExZGNiIn0%3D; expires=Fri, 13-Apr-2018 21:29:09 GMT; Max-Age=7200; path=/; HttpOnly",
+											"name": "Set-Cookie",
+											"description": "an HTTP cookie"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked",
+											"name": "Transfer-Encoding",
+											"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60",
+											"name": "X-RateLimit-Limit",
+											"description": "Custom header"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "59",
+											"name": "X-RateLimit-Remaining",
+											"description": "Custom header"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"httpOnly": true,
+											"domain": "dimona.site",
+											"path": "/",
+											"secure": false,
+											"value": "eyJpdiI6ImRJOVhnd1dvNnV5UWx5ZDBXdWVZR3c9PSIsInZhbHVlIjoibTI5VlhERU9nM05wT0dsaXJhdjVNXC9nckNpOU5ON2NHMUxBajdLd1FpcWNXVmxVelR6OVdFYU9LbWtxREVFeW1WbmhUYWZKMEl1TlJnUHpSNXVVeUtRPT0iLCJtYWMiOiI4ZmE1NDMyMDNiNGM2YzdhNzAzZDdjYjcwNzEwNzE1YWIxYzlkZDZkMjA4OTMxMzg3MDRiNmVlNGE0MDExZGNiIn0%3D",
+											"key": "laravel_session"
+										}
+									],
+									"body": "[{\"name\":\"Correios Sedex\",\"value\":10.34,\"business_days\":6,\"delivery_method_id\":2},{\"name\":\"Jadlog Econ\\u00f4mica\",\"value\":15.35,\"business_days\":10,\"delivery_method_id\":177},{\"name\":\"Jadlog Express\",\"value\":15.57,\"business_days\":9,\"delivery_method_id\":176},{\"name\":\"Buslog\",\"value\":24.32,\"business_days\":5,\"delivery_method_id\":780}]"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Webhook",
+			"item": [],
+			"description": "Send a POST Request in every Status Update\n------\n\nYou can setup your URL in www.camisadimona.com.br/loja/conta/avancado<br>\nWhen defined, we will send a POST request to this URL with the following BODY:<br>\n```javascript\n{\n\t\"api_key\":\"YOUR_API_KEY\",\n\t\"dimona_id\":\"462-424-866\",\n\t\"status_id\":13,\n\t\"name\":\"Faturado\",\n\t\"seller_id\":\"1524594756\",\n\t\"tracking_url\":\"http:\\/\\/status.ondeestameupedido.com\\/tracking\\/1168\\/462424866\"\n}\n```",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
