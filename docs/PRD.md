@@ -42,6 +42,7 @@
 | **Imagens** | Cloudinary | CDN de imagens, transformações on-the-fly, WebP/AVIF automático |
 | **Linter/Formatter** | Biome 2 | Substitui ESLint + Prettier — config em `biome.json` |
 | **Pagamento** | MercadoPago SDK | PIX, cartão de crédito, boleto — foco no mercado brasileiro |
+| **Autenticação** | Clerk | Login social (Google, email), gestão de sessão, middleware de proteção de rotas |
 | **Deploy** | Vercel | Edge functions, preview deploys, otimização automática |
 
 ### 2.2 Backend (workspace separado — referência)
@@ -143,12 +144,13 @@
 │              FRONTEND (Next.js 16) — Este Workspace  │
 │  App Router / RSC / Client Components / Server Actions│
 │  Tailwind CSS v4 / Mobile First / Biome 2            │
+│  Clerk (autenticação)                                │
 └──────────────────────┬──────────────────────────────┘
                        │ REST API (fetch / Server Components)
                        │
 ┌──────────────────────▼──────────────────────────────┐
 │          BACKEND (NestJS 11) — Outro Workspace       │
-│  Auth / Catalog / Orders / Shipping / Payments       │
+│  Catalog / Orders / Shipping / Payments              │
 │  (contratos da API em definição)                     │
 └──────────────────────┬──────────────────────────────┘
                        │
@@ -174,8 +176,8 @@ src/
       checkout/page.tsx       # Checkout
       order-success/page.tsx  # Confirmação
     (account)/
-      login/page.tsx
-      register/page.tsx
+      sign-in/[[...sign-in]]/page.tsx   # Clerk sign-in
+      sign-up/[[...sign-up]]/page.tsx   # Clerk sign-up
       profile/page.tsx
       orders/page.tsx         # Histórico
       orders/[id]/page.tsx    # Detalhe do pedido
@@ -342,7 +344,7 @@ O cálculo de frete é feito pelo backend (integração com Correios/Jadlog/Melh
 - [ ] Páginas institucionais (sobre, contato, FAQ, termos, privacidade)
 
 ### Fase 3 — Conta do Usuário (Semanas 8-10)
-- [ ] Login e registro (email + Google OAuth)
+- [ ] Autenticação via Clerk (email, Google OAuth, social logins)
 - [ ] Área "Minha Conta" (perfil, endereços)
 - [ ] Histórico de pedidos com rastreamento
 - [ ] Lista de desejos (wishlist)

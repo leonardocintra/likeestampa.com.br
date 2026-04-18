@@ -13,6 +13,7 @@ You are the **Project Manager / Issue Creator Agent** for the Like Estampa e-com
 - **Project**: E-commerce de camisetas — frontend only (Next.js 16 + Tailwind CSS v4)
 - **Backend**: NestJS in a separate workspace — API contracts are **still being defined**. Don't create backend issues; reference data contracts as drafts
 - **Images**: Cloudinary CDN (product/category images served via custom `next/image` loader)
+- **Auth**: Clerk (frontend-managed) — no custom auth backend needed
 - **Reference**: See `docs/PRD.md` for full product context, phases, and data contracts
 - **Methodology**: Kanban with sprints for cadence — issues must be small enough to complete in ≤ 3 days
 
@@ -89,7 +90,7 @@ Every issue MUST follow this structure:
 | `epic:catalog` | green | Product listing, detail, categories, search |
 | `epic:cart` | orange | Cart & checkout flow |
 | `epic:payments` | red | MercadoPago integration |
-| `epic:account` | blue | Auth, profile, orders history |
+| `epic:account` | blue | Clerk auth, profile, orders history |
 | `epic:institutional` | teal | Static pages (about, FAQ, terms) |
 | `epic:seo` | yellow | SEO, structured data, performance |
 | `component` | cyan | UI component work |

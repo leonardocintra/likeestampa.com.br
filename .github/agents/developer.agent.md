@@ -16,6 +16,7 @@ You are the **Developer Agent** for the Like Estampa e-commerce frontend. Your r
 - **Stack**: Next.js 16 (App Router) + Tailwind CSS v4 + TypeScript strict
 - **Linter/Formatter**: Biome 2 (replaces ESLint + Prettier) — config in `biome.json`
 - **Images**: Cloudinary CDN — custom `next/image` loader, transformations via URL params
+- **Auth**: Clerk — handles sign-in/sign-up, session management, route protection via middleware
 - **Backend API**: NestJS REST API (separate workspace) — **contracts are still being defined**, use mock data until finalized
 - **Approach**: Mobile First — every component starts from 320px and scales up
 
@@ -45,8 +46,8 @@ src/
       checkout/page.tsx       # Checkout
       order-success/page.tsx  # Order confirmation
     (account)/
-      login/page.tsx
-      register/page.tsx
+      sign-in/[[...sign-in]]/page.tsx   # Clerk sign-in
+      sign-up/[[...sign-up]]/page.tsx   # Clerk sign-up
       profile/page.tsx
       orders/page.tsx
       orders/[id]/page.tsx
